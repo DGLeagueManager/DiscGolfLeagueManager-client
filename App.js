@@ -10,7 +10,7 @@ export default class App extends Component {
     return (
       <View style={styles.container}>
       <Icon size={42} name='disc' type="simple-line-icon" />
-      <Text style={{fontWeight: 'bold', fontSize: "35", marginBottom: 50, }}>D.G. League Manager</Text>
+      <Text style={{fontWeight: 'bold', fontSize: 35, marginBottom: 50, }}>D.G. League Manager</Text>
        <View style={styles.formView}>
         <Text style={styles.paragraph}>
           Complete form to get started
@@ -35,7 +35,7 @@ export default class App extends Component {
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    float: 'center',
+    margin: 'auto',
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
@@ -44,7 +44,6 @@ const styles = StyleSheet.create({
   },
   paragraph: {
     margin: 24,
-    fontSize: 18,
     fontWeight: 'bold',
     textAlign: 'center',
     color: '#34495e',
