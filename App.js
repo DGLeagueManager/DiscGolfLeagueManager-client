@@ -1,13 +1,32 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { Component } from 'react';
+import { Text, View, StyleSheet } from 'react-native';
+import { Constants } from 'expo';
+import {FormLabel, FormInput, Button, Icon} from 'react-native-elements'; // 0.17.0
 
-export default class App extends React.Component {
+import "@expo/vector-icons"; // 5.2.0
+
+export default class App extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
+      <Icon size={42} name='disc' type="simple-line-icon" />
+      <Text style={{fontWeight: 'bold', fontSize: "35", marginBottom: 50, }}>D.G. League Manager</Text>
+       <View style={styles.formView}>
+        <Text style={styles.paragraph}>
+          Complete form to get started
+        </Text>
+
+          <FormLabel>First Name</FormLabel>
+          <FormInput style={styles.input} />
+
+          <FormLabel>Last Name</FormLabel>
+          <FormInput style={styles.input}/>
+          <FormLabel>Password</FormLabel>
+          <FormInput style={styles.input}/>
+          <FormLabel>Score</FormLabel>
+          <FormInput style={styles.input}/>
+          <Button raised title="Submit" icon={{name: 'check', type: ''}} style={{marginTop: 10, marginBottom: 20}}/>
+        </View>
       </View>
     );
   }
@@ -15,9 +34,25 @@ export default class App extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
+    width: '100%',
+    float: 'center',
     flex: 1,
-    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    paddingTop: Constants.statusBarHeight,
+    backgroundColor: '#ecf0f1',
   },
+  paragraph: {
+    margin: 24,
+    fontSize: 18,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: '#34495e',
+  },
+  input: {
+    width: 250
+  },
+  formView: {
+    backgroundColor: '#fefefe'
+  }
 });
