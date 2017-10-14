@@ -16,7 +16,7 @@ class TestFormButton extends React.Component {
 
   render() {
     return (
-      <Button 
+      <Button
         onPress={ () => this.props.navigation.navigate('TestForm') }
         title="Go to Test Form"
       />
@@ -34,7 +34,7 @@ class ScoringButton extends React.Component {
 
   render() {
     return (
-      <Button 
+      <Button
         onPress={ () => this.props.navigation.navigate('Scoring') }
         title="Enter Scores"
       />
