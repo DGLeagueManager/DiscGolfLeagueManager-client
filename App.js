@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import TestForm from './components/TestForm'
-import BottomNav from './components/BottomNav';
+import MainNav from './components/MainNav';
 
 export default class App extends Component {
   constructor(props) {
@@ -11,7 +11,7 @@ export default class App extends Component {
   }
   render() {
     return (
-      <BottomNav />
+      <MainNav />
     );
   }
 }
