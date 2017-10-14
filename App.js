@@ -1,15 +1,20 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
-import TestForm from './components/TestForm';
-import store from './store.js'
+import store from './store';
+import TestForm from './components/TestForm'
+import MainNav from './components/MainNav';
 
- 
-
-class App extends Component {
+export default class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoggedIn: false
+    }
+  }
   render() {
     return (
       <Provider store={store}>
-        <TestForm />
+        <MainNav />
       </Provider>
     );
   }
