@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
-import TestForm from './components/TestForm'
+import { Provider } from 'react-redux';
+import TestForm from './components/TestForm';
+import store from './store.js'
 
-export default class App extends Component {
+ 
+
+class App extends Component {
   render() {
     return (
-      <TestForm />
+      <Provider store={store}>
+        <TestForm />
+      </Provider>
     );
   }
 }
