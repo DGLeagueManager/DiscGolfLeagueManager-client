@@ -10,14 +10,14 @@ const MainNav = TabNavigator({
     screen: Scoring,
     navigationOptions: {
       tabBarLabel: 'Scoring',
-      tabBarIcon: ({ tintColor }) => <Icon name="pencil" type="entypo" />
+      tabBarIcon: ({ tintColor }) => <Icon name="pencil" type="entypo" color="white" />
     }
   },
   TestForm: {
     screen: TestForm,
     navigationOptions: {
       tabBarLabel: 'TestForm',
-      tabBarIcon: ({ tintColor }) => <Icon name="pencil" type="entypo" />
+      tabBarIcon: ({ tintColor }) => <Icon name="pencil" type="entypo" color="white" />
     }
   }
 }, {

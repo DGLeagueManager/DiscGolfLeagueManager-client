@@ -16,9 +16,5 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center'
-
-
-    // adds top margin to deal with iOS & Android status bars
-    // should probably use a container view so we only have to set this once
   }
 })

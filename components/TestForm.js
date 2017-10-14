@@ -51,7 +51,6 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-
 const styles = StyleSheet.create({
   container: {
     width: '100%',
