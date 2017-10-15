@@ -71,30 +71,6 @@ class TestForm extends Component {
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-    margin: 'auto',
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingTop: Constants.statusBarHeight,
-    backgroundColor: '#ecf0f1',
-    paddingBottom: '20%'
-  },
-  paragraph: {
-    margin: 24,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    color: '#34495e',
-  },
-  input: {
-    width: 250
-  },
-  formView: {
-    backgroundColor: '#fefefe'
-  }
-});
 function mapStateToProps(state) {
   return { count: state.testFormCounter }
 }
@@ -131,4 +107,3 @@ const styles = StyleSheet.create({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TestForm);
-

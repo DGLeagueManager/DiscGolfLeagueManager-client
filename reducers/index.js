@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux';
-import MainNavReducer from './MainNavReducer';
 
 function testFormCounter(state = 0, action) {
     console.log(state)
@@ -13,5 +12,5 @@ function testFormCounter(state = 0, action) {
     return state;
 }
 
-const rootReducer = combineReducers({ testFormCounter, MainNavReducer });
+const rootReducer = combineReducers({ testFormCounter });
 export default rootReducer;

@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 import { TabNavigator } from 'react-navigation';
 import { Text, View, Button, Image } from 'react-native';
-import Scoring from './Scoring';
-import TestForm from './TestForm';
 import { Icon } from 'react-native-elements';
+
+import TestForm from './TestForm';
+
+import Scoring from './scoringTab/Scoring';
+import League from './leagueTab/League';
+import Results from './resultsTab/Results';
 
 const MainNav = TabNavigator({
   Scoring: {
@@ -19,6 +23,18 @@ const MainNav = TabNavigator({
       tabBarLabel: 'TestForm',
       tabBarIcon: ({ tintColor }) => <Icon name="pencil" type="entypo" color="white" />
     }
+  },
+  League: {
+    screen: League,
+    navigationOptions: {
+      tabBarLabel: 'League'
+    }
+  },
+  Results : {
+    screen: Results,
+    navigationOptions: {
+      tabBarLabel: 'Results'
+    }
   }
 }, {
   tabBarPosition: 'bottom',
@@ -26,7 +42,7 @@ const MainNav = TabNavigator({
   tabBarOptions: {
     activeTintColor: 'white',
     showIcon: true,
-    showLabel: false
+    showLabel: true
   }
 });
 
