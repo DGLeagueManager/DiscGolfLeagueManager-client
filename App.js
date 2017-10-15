@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { Provider } from 'react-redux';
-import store from './store';
 import TestForm from './components/TestForm'
 import MainNav from './components/MainNav';
 import AdminRoundConfigStart from './components/AdminRoundConfigStart'
@@ -14,11 +12,7 @@ export default class App extends Component {
   }
   render() {
     return (
-      <Provider store={store}>
-        <MainNav />
-        <AdminRoundConfigStart />
-      </Provider>
-
+      <AdminRoundConfigStart />
     );
   }
 }

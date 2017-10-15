@@ -3,9 +3,8 @@ import { Text, View, StyleSheet, ScrollView, Alert } from 'react-native';
 import { FormLabel, FormInput, Button, Icon } from 'react-native-elements'; // 0.17.0
 import { Constants } from "expo";
 import { connect } from 'react-redux';
-import { incrementCount } from '../actions'; 
 
-class TestForm extends Component {
+export default class TestForm extends Component {
   constructor(props) {
     super(props);
 
@@ -95,40 +94,3 @@ const styles = StyleSheet.create({
     backgroundColor: '#fefefe'
   }
 });
-function mapStateToProps(state) {
-  return { count: state.testFormCounter }
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    onButtonPress: () => dispatch(incrementCount())
-  }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-    margin: 'auto',
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingTop: Constants.statusBarHeight,
-    backgroundColor: '#ecf0f1',
-    paddingBottom: '20%'
-  },
-  paragraph: {
-    margin: 24,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    color: '#34495e',
-  },
-  input: {
-    width: 250
-  },
-  formView: {
-    backgroundColor: '#fefefe'
-  }
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(TestForm);
-
