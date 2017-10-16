@@ -9,8 +9,7 @@ export default function reducer(state = defaultState, action) {
     case 'LOGIN':
       return Object.assign({}, state, {
         isLoggedIn: true,
-        username: action.username,
-        password: action.password
+        user: action.payload
       });
     case 'LOGOUT':
       return Object.assign({}, state, {
@@ -22,3 +21,15 @@ export default function reducer(state = defaultState, action) {
       return state;
   }
 }
+
+
+// axios.post('http://ec2-54-165-58-14.compute-1.amazonaws.com:3000/api/addPlayer', {
+//   firstName: 'Fred',
+//   lastName: 'Flintstone'
+// })
+//   .then(function (response) {
+//     console.log(response);
+//   })
+//   .catch(function (response) {
+//     console.log(response);
+//   });
