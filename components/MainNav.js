@@ -1,32 +1,51 @@
 import React, { Component } from 'react';
-import { TabNavigator } from 'react-navigation';
+import { TabNavigator, TabBarBottom } from 'react-navigation';
 import { Text, View, Button, Image } from 'react-native';
-import Scoring from './Scoring';
-import TestForm from './TestForm';
 import { Icon } from 'react-native-elements';
 
+import TestForm from './TestForm';
+import AdminRoundConfigStart from './adminTab/AdminRoundConfigStart';
+import Scoring from './scoringTab/Scoring';
+import League from './leagueTab/League';
+import Results from './resultsTab/Results';
+
 const MainNav = TabNavigator({
-  Scoring: {
-    screen: Scoring,
+  Admin: {
+    screen: AdminRoundConfigStart,
     navigationOptions: {
-      tabBarLabel: 'Scoring',
-      tabBarIcon: ({ tintColor }) => <Icon name="pencil" type="entypo" color="white" />
+      tabBarLabel: 'Admin',
+      tabBarIcon: <Icon name="person" />
     }
   },
   TestForm: {
     screen: TestForm,
     navigationOptions: {
-      tabBarLabel: 'TestForm',
-      tabBarIcon: ({ tintColor }) => <Icon name="pencil" type="entypo" color="white" />
+      tabBarLabel: 'Scoring',
+      tabBarIcon: <Icon name="create" />
+    }
+  },
+  League: {
+    screen: League,
+    navigationOptions: {
+      tabBarLabel: 'League',
+      tabBarIcon: <Icon name="stars" />
+    }
+  },
+  Results : {
+    screen: Results,
+    navigationOptions: {
+      tabBarLabel: 'Results',
+      tabBarIcon: <Icon name="md-trophy" type="ionicon" />
     }
   }
 }, {
+  tabBarComponent: TabBarBottom,
   tabBarPosition: 'bottom',
   swipeEnabled: true,
   tabBarOptions: {
-    activeTintColor: 'white',
+    activeTintColor: 'turquoise',
     showIcon: true,
-    showLabel: false
+    showLabel: true
   }
 });
 
