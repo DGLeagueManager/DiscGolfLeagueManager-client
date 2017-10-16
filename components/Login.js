@@ -3,7 +3,6 @@ import { Text, View, StyleSheet, ScrollView, Alert } from 'react-native';
 import { FormLabel, FormInput, Button, Icon } from 'react-native-elements'; // 0.17.0
 import { Constants } from "expo";
 import { connect } from 'react-redux';
-import { incrementCount } from '../actions'; 
 import { login } from '../actions/auth';
 
 class Login extends Component {
