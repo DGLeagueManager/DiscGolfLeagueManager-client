@@ -13,13 +13,9 @@ export default class App extends Component {
   }
   render() {
     return (
-<<<<<<< HEAD
       <Provider store={store}>
         <Secured />
       </Provider>
-=======
-      < />
->>>>>>> attempting rebase
     );
   }
 }
