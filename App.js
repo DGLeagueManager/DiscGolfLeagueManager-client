@@ -15,16 +15,8 @@ export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <View>
-          <View >
-            <AppHeader />
-          </View>
-          <View>
-            <MainNav />
-          </View>
-        </View>
+        <MainNav />
       </Provider>
-
     );
   }
 }
