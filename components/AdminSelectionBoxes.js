@@ -6,6 +6,9 @@ export default class AdminSelectionBoxes extends React.Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      test: false
+    };
     this.getColor = () => {
       return '#' + Math.floor(Math.random() * 16777215).toString(16);
     }
