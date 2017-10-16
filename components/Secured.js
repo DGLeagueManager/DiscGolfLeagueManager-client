@@ -32,7 +32,7 @@ const Secured = TabNavigator({
 }, {
   tabBarComponent: TabBarBottom,
   tabBarPosition: 'bottom',
-  swipeEnabled: true,
+  swipeEnabled: false,
   tabBarOptions: {
     activeTintColor: 'turquoise',
     showIcon: true,
