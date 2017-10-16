@@ -1,19 +1,19 @@
 import React, { Component } from "react";
 import { Text, StyleSheet, View } from "react-native";
 
-module.exports.WeekOne = () => (
+const WeekOne = () => (
   <View style={styles.view}>
     <Text>Week One Results Go Here</Text>
   </View>
 );
 
-module.exports.WeekTwo = () => (
+const WeekTwo = () => (
   <View style={styles.view}>
     <Text>Week Two Results Go Here</Text>
   </View>
 );
 
-module.exports.WeekThree = () => (
+const WeekThree = () => (
   <View style={styles.view}>
     <Text>Week Three Results Go Here</Text>
   </View>
@@ -27,3 +27,5 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   }
 });
+
+module.exports = { WeekOne, WeekTwo, WeekThree }

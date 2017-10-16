@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import { View } from 'react-native';
 import store from './store';
-import AppHeader from './components/AppHeader';
-import Application from './components/Application'
+import Secured from './components/Secured';
 
 export default class App extends Component {
   constructor(props) {
@@ -15,7 +14,7 @@ export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <Application />
+        <Secured />
       </Provider>
     );
   }
