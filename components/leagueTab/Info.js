@@ -1,15 +1,14 @@
 import React, { Component } from "react";
-import { Text, StyleSheet, View  } from "react-native";
+import { Text, StyleSheet, View } from "react-native";
 
-export default class Standings extends Component {
-
+export default class Info extends Component {
   render() {
     return (
       <View style={styles.view}>
-        <Text>Standings Page</Text>
-        <Text>These are the current standings for the current league season</Text>
+        <Text>General League Info Goes Here</Text>
+        <Text>About Us Blurb, contact info, etc.</Text>
       </View>
-    )
+    );
   }
 }
 
