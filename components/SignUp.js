@@ -10,15 +10,15 @@ class SignUp extends Component {
     super(props);
 
     this.state = {
-      firstName: '',
-      lastName: '',
+      first_name: '',
+      last_name: '',
       email: '',
       password: ''
     };    
   }
       
   userSignUp(e) {
-    this.props.onSignUp(this.state.firstName, this.state.lastName, this.state.email, this.state.password);
+    this.props.onSignUp(this.state.first_name, this.state.last_name, this.state.email, this.state.password);
     e.preventDefault();
   }
 
@@ -36,18 +36,18 @@ class SignUp extends Component {
               autoCapitalize='none'
               autoCorrect={false}
               autoFocus={true}
-              value={this.state.firstName}
+              value={this.state.first_name}
               style={styles.input}
-              onChangeText={(text) => this.setState({ firstName: text })} />
+              onChangeText={(text) => this.setState({ first_name: text })} />
 
             <FormLabel>Last Name: </FormLabel>
             <FormInput 
               autoCapitalize='none'
               autoCorrect={false}
               autoFocus={true}
-              value={this.state.lastName}
+              value={this.state.last_name}
               style={styles.input}
-              onChangeText={(text) => this.setState({ lastName: text })}/>
+              onChangeText={(text) => this.setState({ last_name: text })}/>
 
             <FormLabel>Email: </FormLabel>
             <FormInput 
@@ -114,7 +114,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onSignUp: (firstName, lastName, email, password) => { dispatch(signUp(firstName, lastName, email, password)); }
+    onSignUp: (first_name, last_name, email, password) => { dispatch(signUp(first_name, last_name, email, password)); }
   }
 }
 
