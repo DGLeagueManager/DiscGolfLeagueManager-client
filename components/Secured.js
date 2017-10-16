@@ -22,7 +22,14 @@ const Secured = TabNavigator({
       tabBarIcon: <Icon name="stars" />
     }
   },
-  Results : {
+  Scoring: {
+    screen: Scoring,
+    navigationOptions: {
+      tabBarLabel: 'Scoring',
+      tabBarIcon: <Icon name="create" />
+    }
+  },
+  Results: {
     screen: Results,
     navigationOptions: {
       tabBarLabel: 'Results',

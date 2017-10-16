@@ -7,11 +7,9 @@ import Standings from './Standings';
 
 export default class League extends Component {
   /** We can declare nagivationOptions here on the object instead of on the MainNav component like this:
-
     static navigationOptions = {
       tabBarIcon: <Icon name="pencil" type="entypo" />
     }
-
   */
   render() {
     return (
@@ -38,7 +36,6 @@ const Tabs = TabNavigator({
   tabBarPosition: 'top',
   swipeEnabled: true,
   tabBarOptions: {
-    activeTintColor: 'turquoise',
     showLabel: true,
     style: {
       paddingTop: 24
