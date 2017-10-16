@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import { View } from 'react-native';
 import store from './store';
-import MainNav from './components/MainNav';
 import AppHeader from './components/AppHeader';
+import Application from './components/Application'
 
 export default class App extends Component {
   constructor(props) {
@@ -15,7 +15,7 @@ export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <MainNav />
+        <Application />
       </Provider>
     );
   }
