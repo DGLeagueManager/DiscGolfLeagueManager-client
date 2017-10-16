@@ -14,6 +14,23 @@ export default class Results extends Component {
   }
 }
 
+const Tabs = TabNavigator({
+  WeekOne: {
+    screen: WeekOne,
+    navigationOptions: {
+      tabBarLabel: 'Week 1'
+    }
+  },
+  WeekTwo: {
+    screen: WeekTwo,
+    navigationOptions: {
+      tabBarLabel: 'Week 2'
+    }
+  }
+})
+
+
+
 const styles = StyleSheet.create({
   view: {
     flex: 1,
