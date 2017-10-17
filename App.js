@@ -16,9 +16,7 @@ export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <View style={{ flex: 1 }} >
-          <Secured />
-        </View>
+        <Secured />
       </Provider>
     );
   }

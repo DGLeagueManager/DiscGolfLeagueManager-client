@@ -1,16 +1,58 @@
 import React, { Component } from 'react';
-import { StackNavigator } from 'react-navigation';
-import BottomNav from './navigators/BottomNav';
+import { TabNavigator, TabBarBottom } from 'react-navigation';
+import { Icon } from "react-native-elements";
+import AdminRoundConfigStart from "./adminTab/AdminRoundConfigStart";
+import League from "./leagueTab/League";
+import Scoring from "./scoringTab/Scoring";
+import Results from "./resultsTab/Results";
 
-export const Root = StackNavigator({
-  Home: {
-    screen: BottomNav
+export const Secured = () => (
+  <BottomNav />
+)
+
+const BottomNav = TabNavigator(
+  {
+    Admin: {
+      screen: AdminRoundConfigStart,
+      navigationOptions: {
+        tabBarLabel: "Admin",
+        tabBarIcon: <Icon name="person" />
+      }
+    },
+    League: {
+      screen: League,
+      navigationOptions: {
+        tabBarLabel: "League",
+        tabBarIcon: <Icon name="stars" />,
+        headerTitle: "Kenny Rules"
+      }
+    },
+    Scoring: {
+      screen: Scoring,
+      navigationOptions: {
+        tabBarLabel: "Scoring",
+        tabBarIcon: <Icon name="create" />
+      }
+    },
+    Results: {
+      screen: Results,
+      navigationOptions: {
+        tabBarLabel: "Results",
+        tabBarIcon: <Icon name="md-trophy" type="ionicon" />
+      }
+    }
+  },
+  {
+    tabBarComponent: TabBarBottom,
+    tabBarPosition: "bottom",
+    swipeEnabled: false,
+    tabBarOptions: {
+      activeTintColor: "turquoise",
+      showIcon: true,
+      showLabel: true
+    }
   }
-}, {
-  navigationOptions: {
-    title: 'App Title'
-  }
-})
+);
 
 
 
