@@ -31,23 +31,25 @@ export default class ScoreCounter extends Component {
     return (
       <View>
         <Grid>
-        {this.props.isOpen ?         <Icon
-                  containerStyle={{height: 40, width: 40}}
-                  onPress={ ()=>{this.decrement()} }
-                  raised
-                  type='evilicon'
-                  name='minus' /> : null}
+        {this.props.isOpen ?         
+            <Icon
+              containerStyle={{height: 40, width: 40}}
+              onPress={ ()=>{this.decrement()} }
+              raised
+              type='evilicon'
+              name='minus' /> : null}
             <Badge
               containerStyle={{marginTop: 6, height: 40, width: 40}}
               value={this.state.score}
               textStyle={{ color: 'orange' }}
             />
-          {this.props.isOpen ?           <Icon
-                    containerStyle={{height: 40, width: 40}}
-                    onPress={ ()=>{this.increment()} }
-                    raised
-                    type='evilicon'
-                    name='plus' /> : null}
+          {this.props.isOpen ?           
+            <Icon
+              containerStyle={{height: 40, width: 40}}
+              onPress={ ()=>{this.increment()} }
+              raised
+              type='evilicon'
+              name='plus' /> : null}
         </Grid>
       </View>
     );
