@@ -4,7 +4,7 @@ import { View } from 'react-native';
 import store from './store';
 import Application from './components/Application'
 import Secured from './components/Secured';
-import Scoring from './components/scoringTab/Scoring'
+import Result from './components/result'
 
 export default class App extends Component {
   constructor(props) {
@@ -16,7 +16,7 @@ export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <Application />
+        <Result />
       </Provider>
     );
   }

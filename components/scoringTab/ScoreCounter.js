@@ -19,6 +19,9 @@ export default class ScoreCounter extends Component {
     }
     this.decrement = () =>  {
       var temp = this.state.score-1;
+      if (temp < 1) {
+        temp = 1;
+      }
       this.setState({ score: temp })
     }
 
@@ -28,23 +31,23 @@ export default class ScoreCounter extends Component {
     return (
       <View>
         <Grid>
-        <Icon
-          containerStyle={{height: 40, width: 40}}
-          onPress={ ()=>{this.decrement()} }
-          raised
-          type='evilicon'
-          name='minus' />
+        {this.props.isOpen ?         <Icon
+                  containerStyle={{height: 40, width: 40}}
+                  onPress={ ()=>{this.decrement()} }
+                  raised
+                  type='evilicon'
+                  name='minus' /> : null}
             <Badge
               containerStyle={{marginTop: 6, height: 40, width: 40}}
               value={this.state.score}
               textStyle={{ color: 'orange' }}
             />
-          <Icon
-          containerStyle={{height: 40, width: 40}}
-          onPress={ ()=>{this.increment()} }
-          raised
-          type='evilicon'
-          name='plus' />
+          {this.props.isOpen ?           <Icon
+                    containerStyle={{height: 40, width: 40}}
+                    onPress={ ()=>{this.increment()} }
+                    raised
+                    type='evilicon'
+                    name='plus' /> : null}
         </Grid>
       </View>
     );
