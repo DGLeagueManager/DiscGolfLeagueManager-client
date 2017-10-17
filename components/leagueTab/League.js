@@ -36,10 +36,9 @@ const Tabs = TabNavigator({
   tabBarPosition: 'top',
   tabBarOptions: {
     swipeEnabled: true,
-    scrollEnabled: true,
     showLabel: true,
     style: {
-      paddingTop: 24
+      marginTop: 70,
     }
   }
 })

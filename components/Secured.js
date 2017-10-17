@@ -1,50 +1,17 @@
 import React, { Component } from 'react';
-import { TabNavigator, TabBarBottom } from 'react-navigation';
-import { Text, View, Button, Image } from 'react-native';
-import { Icon } from 'react-native-elements';
-import AdminRoundConfigStart from './adminTab/AdminRoundConfigStart';
-import Scoring from './scoringTab/Scoring';
-import League from './leagueTab/League';
-import Results from './resultsTab/Results';
+import { StackNavigator } from 'react-navigation';
+import BottomNav from './navigators/BottomNav';
 
-const Secured = TabNavigator({
-  Admin: {
-    screen: AdminRoundConfigStart,
-    navigationOptions: {
-      tabBarLabel: 'Admin',
-      tabBarIcon: <Icon name="person" />
-    }
-  },
-  League: {
-    screen: League,
-    navigationOptions: {
-      tabBarLabel: 'League',
-      tabBarIcon: <Icon name="stars" />
-    }
-  },
-  Scoring: {
-    screen: Scoring,
-    navigationOptions: {
-      tabBarLabel: 'Scoring',
-      tabBarIcon: <Icon name="create" />
-    }
-  },
-  Results: {
-    screen: Results,
-    navigationOptions: {
-      tabBarLabel: 'Results',
-      tabBarIcon: <Icon name="md-trophy" type="ionicon" />
-    }
+export const Root = StackNavigator({
+  Home: {
+    screen: BottomNav
   }
 }, {
-  tabBarComponent: TabBarBottom,
-  tabBarPosition: 'bottom',
-  swipeEnabled: false,
-  tabBarOptions: {
-    activeTintColor: 'turquoise',
-    showIcon: true,
-    showLabel: true
+  navigationOptions: {
+    title: 'App Title'
   }
-});
+})
 
-export default Secured;
+
+
+// marginTop: StatusBar.currentHeight ??
