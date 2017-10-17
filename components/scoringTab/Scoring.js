@@ -24,7 +24,28 @@ class Scoring extends Component {
       card: list
     };
 
-  }
+
+    this.handleAmTap = (index) => {
+      this.state.list[index].proChecked=false;
+      this.state.list[index].amChecked = !this.state.list[index].amChecked;
+      if (this.state.list[index].subHeader === 'Amateur') {
+        this.state.list[index].subHeader = ''
+      } else {
+        this.state.list[index].subHeader = 'Amateur'
+      }
+      this.setState({checked: !this.state.checked})
+    }
+
+    this.handleProTap = (i) => {
+      this.state.list[i].amChecked=false;
+      this.state.list[i].proChecked = !this.state.list[i].proChecked;
+      if (this.state.list[i].subHeader === 'Pro') {
+        this.state.list[i].subHeader = ''
+      } else {
+        this.state.list[i].subHeader = 'Pro'
+      }
+      this.setState({checked: !this.state.checked})
+    }
 
   addScores(e) {
     console.log(this.props)

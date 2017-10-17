@@ -56,4 +56,4 @@ const BottomNav = TabNavigator(
 
 
 
-// marginTop: StatusBar.currentHeight ??
+export default Secured;
