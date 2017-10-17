@@ -58,9 +58,9 @@ export default class Result extends Component {
         <View style={styles.container}>
         <Grid>
           <Col size={45} ><Text style={{marginLeft: 15, fontWeight: 'bold', fontSize: 20}}>Name</Text></Col>
-          <Col size={15} ><Text style={{fontSize: 20}}>Par</Text></Col>
-          <Col size={20} ><Text style={{fontSize: 20}}>Total</Text></Col>
-          <Col size={20} ><Text style={{fontSize: 20}}>Holes Played</Text></Col>
+          <Col size={15} ><Text style={{fontSize: 12}}>Par</Text></Col>
+          <Col size={20} ><Text style={{fontSize: 12}}>Total</Text></Col>
+          <Col size={20} ><Text style={{fontSize: 12}}>Holes Played</Text></Col>
         </Grid>
         <View style={{width: '100%'}}>
         <Divider style={{ backgroundColor: 'silver' }} />
