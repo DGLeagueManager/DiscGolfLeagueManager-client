@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { ScrollView, Text, StyleSheet, View } from 'react-native';
 import { connect } from 'react-redux';
-import { Button, Icon, List, ListItem, CheckBox, Header, Grid, Col, Divider } from 'react-native-elements'; // 0.17.0
+import { FormLabel, FormInput, Button, Icon, List, ListItem, CheckBox, Header, Grid, Col, Divider } from 'react-native-elements'; // 0.17.0
 import { Constants } from 'expo';
 import ScoreCounter from './ScoreCounter';
 import { postScores } from '../../actions/scoreCounterActions';
@@ -21,7 +21,7 @@ class Scoring extends Component {
         par: 3,
         feet: 382
       },
-      card: list
+      players: list
     };
 
 
@@ -47,13 +47,31 @@ class Scoring extends Component {
       this.setState({checked: !this.state.checked})
     }
 
+  increment(id) {
+    let player = Object.assign({}, this.state.players[id])
+    player.score++;
+    this.setState({ players: { ...this.state.players, [id]: player } })
+  }
+
+  decrement(id) {
+    let player = Object.assign({}, this.state.players[id])
+    player.score--;
+    this.setState({ players: { ...this.state.players, [id]: player } })
+  }
+
   addScores(e) {
     console.log(this.props)
     this.setState({ isOpen: !this.state.isOpen })
+
     let scores = {
-      hole: 4,
-      player_score: [{1:2}, {2:3}, {3:3}, {4:8}]
-    } 
+      hole: 2,
+      player_score: [
+      {[this.state.players[1].player_id]: this.state.players[1].score},
+      {[this.state.players[2].player_id]: this.state.players[2].score},
+      {[this.state.players[3].player_id]: this.state.players[3].score}
+      ]
+    }
+
     this.props.onPostScores(scores);
     e.preventDefault();
   }
@@ -76,25 +94,28 @@ class Scoring extends Component {
 
           <List style={{marginBottom: 20}}>
             {
-              this.state.card.map((ele, i) => (
-              <View>
-                <ListItem
-                  roundAvatar
-                  avatar={{uri:ele.avatar_url}}
-                  key={i}
-                  subtitle={ele.subHeader}
-                  title={ele.name}
-                  rightTitleStyle={styles.listItem}
-                  containerStyle={{height: 70}}
-                  label={
-                   <ScoreCounter  isOpen={this.state.isOpen} score={ele.score}/>
-                  }
-                  hideChevron
+              Object.keys(this.state.players).map((id, i) => {
+                var ele = this.state.players[id]
+                return (
+                  <View>
+                    <ListItem
+                      roundAvatar
+                      avatar={{ uri: ele.avatar_url }}
+                      key={i}
+                      subtitle={ele.subHeader}
+                      title={ele.name}
+                      rightTitleStyle={styles.listItem}
+                      containerStyle={{ height: 70 }}
+                      label={
+                        <ScoreCounter id={i} increment={() => this.increment(id)} decrement={() => this.decrement(id)} player={this.state.players[id]} isOpen={this.state.isOpen} score={ele.score} />
+                      }
+                      hideChevron
 
-                />
+                    />
 
-              </View>
-              ))
+                  </View>
+                )
+              })
             }
          </List>
         {this.state.isOpen ?  
@@ -155,7 +176,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onPostScores: (scores) => { dispatch(postScores(scores))}
+    onPostScores: (scores) => { dispatch(postScores(scores)) }
   }
 }
 
