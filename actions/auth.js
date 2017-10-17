@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 export const signUp = (first_name, last_name, email, password) => {
+	
 	return (dispatch) => {
 		dispatch({ type: 'REQUEST_STARTED' });
 

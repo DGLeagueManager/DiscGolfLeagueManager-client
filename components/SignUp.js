@@ -68,9 +68,7 @@ class SignUp extends Component {
               onChangeText={(text) => this.setState({ password: text })} />
 
             <Button onPress={(e) => this.userSignUp(e)} raised title="Submit" icon={{name: 'check', type: ''}} style={{marginTop: 10, marginBottom: 20}}/>
-            {this.props.error ? 
-            <Text>Error</Text> : null
-            }
+            { this.props.error ?  <Text>Email or Password not valid</Text> : null }
           </View>
         </View>
       </ScrollView>

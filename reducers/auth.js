@@ -12,7 +12,8 @@ export default function reducer(state = defaultState, action) {
     case 'REQUEST_SUCCEEDED':
       return Object.assign({}, state, {
         isLoggedIn: true,
-        user: action.payload
+        user: action.payload.player,
+        token: action.payload.token
       });
     case 'REQUEST_FAILED':
       console.log('request failed')
