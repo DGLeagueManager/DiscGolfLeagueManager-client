@@ -1,35 +1,27 @@
 const defaultState = {
-  isLoggedIn: false,
-  username: '',
-  password: ''
+  isLoggedIn: false
 };
 
 export default function reducer(state = defaultState, action) {
   switch (action.type) {
-    case 'LOGIN':
-      return Object.assign({}, state, {
-        isLoggedIn: true,
-        user: action.payload
-      });
-    case 'LOGOUT':
+    case 'REQUEST_STARTED':
+      console.log('request started')
       return Object.assign({}, state, {
         isLoggedIn: false,
-        username: '',
-        password: ''
+      });
+    case 'REQUEST_SUCCEEDED':
+      return Object.assign({}, state, {
+        isLoggedIn: true,
+        user: action.payload.player,
+        token: action.payload.token
+      });
+    case 'REQUEST_FAILED':
+      console.log('request failed')
+      return Object.assign({}, state, {
+        isLoggedIn: false,
+        error: action.error
       });
     default:
       return state;
   }
 }
-
-
-// axios.post('http://ec2-54-165-58-14.compute-1.amazonaws.com:3000/api/addPlayer', {
-//   firstName: 'Fred',
-//   lastName: 'Flintstone'
-// })
-//   .then(function (response) {
-//     console.log(response);
-//   })
-//   .catch(function (response) {
-//     console.log(response);
-//   });

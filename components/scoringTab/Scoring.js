@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import { ScrollView, Text, StyleSheet, View } from 'react-native';
+import { connect } from 'react-redux';
 import { Button, Icon, List, ListItem, CheckBox, Header, Grid, Col, Divider } from 'react-native-elements'; // 0.17.0
 import { Constants } from 'expo';
 import ScoreCounter from './ScoreCounter';
+import { postScores } from '../../actions/scoreCounterActions';
+import list from './dummyData';
 
 import "@expo/vector-icons"; // 5.2.0
 
-export default class Scoring extends Component {
+class Scoring extends Component {
   constructor(props) {
     super(props);
 
@@ -18,58 +21,22 @@ export default class Scoring extends Component {
         par: 3,
         feet: 382
       },
-      list: [
-        {
-          name: 'Tristyn Leos',
-          avatar_url: 'https://photos.zillowstatic.com/h_g/ISli46xcfvya590000000000.jpg',
-          subHeader: '-2',
-          score: 1
-        },
-        {
-          name: 'Pete Givens',
-          avatar_url: "https://media.licdn.com/mpr/mpr/shrinknp_200_200/p/4/005/021/138/35df1b0.jpg",
-          subHeader: '-2',
-          score: 1
-        },
-        {
-          name: 'Robert Hunter',
-          avatar_url: "http://jscraftcamp.org/img/nophoto.png",
-          subHeader: '-2',
-          score: 1
-        },
-        {
-          name: 'A.J. Caporicci',
-          avatar_url: "http://www.connallyband.com/uploads/8/5/3/4/85347626/img-8114_1.jpg",
-          subHeader: '-2',
-          score: 1
-        },
-      ]
+      card: list
     };
 
-
-    this.handleAmTap = (index) => {
-      this.state.list[index].proChecked=false;
-      this.state.list[index].amChecked = !this.state.list[index].amChecked;
-      if (this.state.list[index].subHeader === 'Amateur') {
-        this.state.list[index].subHeader = ''
-      } else {
-        this.state.list[index].subHeader = 'Amateur'
-      }
-      this.setState({checked: !this.state.checked})
-    }
-
-    this.handleProTap = (i) => {
-      this.state.list[i].amChecked=false;
-      this.state.list[i].proChecked = !this.state.list[i].proChecked;
-      if (this.state.list[i].subHeader === 'Pro') {
-        this.state.list[i].subHeader = ''
-      } else {
-        this.state.list[i].subHeader = 'Pro'
-      }
-      this.setState({checked: !this.state.checked})
-    }
-
   }
+
+  addScores(e) {
+    console.log(this.props)
+    this.setState({ isOpen: !this.state.isOpen })
+    let scores = {
+      hole: 4,
+      player_score: [{1:2}, {2:3}, {3:3}, {4:8}]
+    } 
+    this.props.onPostScores(scores);
+    e.preventDefault();
+  }
+
   render() {
     return (
       <View>
@@ -88,7 +55,7 @@ export default class Scoring extends Component {
 
           <List style={{marginBottom: 20}}>
             {
-              this.state.list.map((ele, i) => (
+              this.state.card.map((ele, i) => (
               <View>
                 <ListItem
                   roundAvatar
@@ -99,7 +66,7 @@ export default class Scoring extends Component {
                   rightTitleStyle={styles.listItem}
                   containerStyle={{height: 70}}
                   label={
-                   <ScoreCounter  isOpen={this.state.isOpen} score = {ele.score}/>
+                   <ScoreCounter  isOpen={this.state.isOpen} score={ele.score}/>
                   }
                   hideChevron
 
@@ -109,7 +76,11 @@ export default class Scoring extends Component {
               ))
             }
          </List>
-         {this.state.isOpen ?  <Button onPress={ ()=>{ this.setState({ isOpen: !this.state.isOpen }) } } color='black' backgroundColor="#dbdbdb"  title="Submit"/> : <Button onPress={ ()=>{ this.setState({ isOpen: !this.state.isOpen }) } } color='white' backgroundColor="black"  title="Update"/>}
+        {this.state.isOpen ?  
+          <Button onPress={ (e)=>{ this.addScores(e) } } color='black' backgroundColor="#dbdbdb"  title="Submit"/> 
+        : 
+          <Button onPress={ ()=>{ this.setState({ isOpen: !this.state.isOpen }) } } color='white' backgroundColor="black"  title="Update"/>
+        }
         </View>
         </View>
       </ScrollView>
@@ -153,3 +124,18 @@ const styles = StyleSheet.create({
 
   }
 });
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    scores: state.scoreCounterReducer.scores
+  };
+}
+
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onPostScores: (scores) => { dispatch(postScores(scores))}
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Scoring);

@@ -3,23 +3,22 @@ import { Text, View, StyleSheet, ScrollView, Alert } from 'react-native';
 import { FormLabel, FormInput, Button, Icon } from 'react-native-elements'; // 0.17.0
 import { Constants } from "expo";
 import { connect } from 'react-redux';
-import { login } from '../actions/auth';
+import { signUp } from '../actions/auth';
 
-class Login extends Component {
+class SignUp extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      route: 'Login',
-      firstName: '',
-      lastName: '',
+      first_name: '',
+      last_name: '',
       email: '',
       password: ''
     };    
   }
       
-  userLogin(e) {
-    this.props.onLogin(this.state.firstName, this.state.lastName, this.state.email, this.state.password);
+  userSignUp(e) {
+    this.props.onSignUp(this.state.first_name, this.state.last_name, this.state.email, this.state.password);
     e.preventDefault();
   }
 
@@ -37,18 +36,18 @@ class Login extends Component {
               autoCapitalize='none'
               autoCorrect={false}
               autoFocus={true}
-              value={this.state.firstName}
+              value={this.state.first_name}
               style={styles.input}
-              onChangeText={(text) => this.setState({ firstName: text })} />
+              onChangeText={(text) => this.setState({ first_name: text })} />
 
             <FormLabel>Last Name: </FormLabel>
             <FormInput 
               autoCapitalize='none'
               autoCorrect={false}
               autoFocus={true}
-              value={this.state.lastName}
+              value={this.state.last_name}
               style={styles.input}
-              onChangeText={(text) => this.setState({ lastName: text })}/>
+              onChangeText={(text) => this.setState({ last_name: text })}/>
 
             <FormLabel>Email: </FormLabel>
             <FormInput 
@@ -68,7 +67,8 @@ class Login extends Component {
               style={styles.input}
               onChangeText={(text) => this.setState({ password: text })} />
 
-            <Button onPress={(e) => this.userLogin(e)} raised title="Submit" icon={{name: 'check', type: ''}} style={{marginTop: 10, marginBottom: 20}}/>
+            <Button onPress={(e) => this.userSignUp(e)} raised title="Submit" icon={{name: 'check', type: ''}} style={{marginTop: 10, marginBottom: 20}}/>
+            { this.props.error ?  <Text>Email or Password not valid</Text> : null }
           </View>
         </View>
       </ScrollView>
@@ -103,7 +103,8 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    isLoggedIn: state.auth.isLoggedIn
+    isLoggedIn: state.auth.isLoggedIn,
+    error: state.auth.error
   };
 }
 
@@ -111,8 +112,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onLogin: (firstName, lastName, email, password) => { dispatch(login(firstName, lastName, email, password)); }
+    onSignUp: (first_name, last_name, email, password) => { dispatch(signUp(first_name, last_name, email, password)); }
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);

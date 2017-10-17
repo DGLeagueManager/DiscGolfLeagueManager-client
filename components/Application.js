@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Login from './Login';
+import SignUp from './SignUp';
 import Secured from './Secured';
  
 class Application extends Component {
@@ -8,7 +8,7 @@ class Application extends Component {
         if (this.props.isLoggedIn) {
             return <Secured />;
         } else {
-            return <Login />;
+            return <SignUp />;
         }
     }
 }
