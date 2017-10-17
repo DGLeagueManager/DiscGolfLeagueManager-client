@@ -76,7 +76,6 @@ export default class Result extends Component {
                   <Col size={20} ><Text style={{fontSize: 15}}>{ele.total}</Text></Col>
                   <Col size={15} ><Text style={{fontSize: 15}}>{ele.holesPlayed}</Text></Col>
                 </Grid>
-                <Divider style={{ backgroundColor: 'silver' }} />
               </View>
               ))
             }
