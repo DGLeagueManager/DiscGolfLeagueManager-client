@@ -46,6 +46,7 @@ export default class Scoring extends Component {
       ]
     };
 
+
     this.handleAmTap = (index) => {
       this.state.list[index].proChecked=false;
       this.state.list[index].amChecked = !this.state.list[index].amChecked;
