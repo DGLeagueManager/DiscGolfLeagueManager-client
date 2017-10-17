@@ -4,6 +4,7 @@ import { View } from 'react-native';
 import store from './store';
 import Application from './components/Application'
 import Secured from './components/Secured';
+import Result from './components/result'
 
 export default class App extends Component {
   constructor(props) {
