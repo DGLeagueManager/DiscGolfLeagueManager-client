@@ -4,10 +4,13 @@ import { View } from 'react-native';
 import store from './store';
 import Application from './components/Application'
 import Secured from './components/Secured';
-import Result from './components/result'
-import NewRound from './components/NewRound'
+import AdminRoundConfigStart from './components/adminTab/AdminRoundConfigStart';
+import NewRound from './components/NewRound';
 import LeagueRoundInProgress from './components/LeagueRoundInProgress';
-import ScoreKeeperCard from './components/ScoreKeeperCard'
+import Standings from './components/Standings';
+import Result from './components/result';
+import ScoreKeeperSelection from'./components/ScoreKeeperSelection';
+import HoleSelection from './components/HoleSelection'
 
 export default class App extends Component {
 
@@ -21,9 +24,9 @@ export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <ScoreKeeperCard />
+        <HoleSelection />
       </Provider>
     );
   }
-  
+
 }

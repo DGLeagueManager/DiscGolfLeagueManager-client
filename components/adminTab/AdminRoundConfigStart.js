@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { ScrollView, Text, StyleSheet, View } from 'react-native';
 import { Button, Icon, List, ListItem, CheckBox, Header } from 'react-native-elements'; // 0.17.0
-import { Constants } from "expo";
+import { Constants } from 'expo';
 import AdminSelectionBoxes from './AdminSelectionBoxes';
 
 import "@expo/vector-icons"; // 5.2.0
@@ -123,18 +123,6 @@ const styles = StyleSheet.create({
     paddingTop: Constants.statusBarHeight,
     backgroundColor: '#ecf0f1',
     paddingBottom: '20%'
-  },
-  paragraph: {
-    margin: 24,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    color: '#34495e',
-  },
-  input: {
-    width: 250
-  },
-  formView: {
-    backgroundColor: '#fefefe'
   },
   listItem: {
     color: 'black'
