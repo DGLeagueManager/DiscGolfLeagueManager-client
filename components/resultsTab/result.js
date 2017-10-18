@@ -57,10 +57,10 @@ export default class Result extends Component {
 
         <View style={styles.container}>
         <Grid>
-          <Col size={45} ><Text style={{marginLeft: 15, fontWeight: 'bold', fontSize: 20}}>Name</Text></Col>
-          <Col size={15} ><Text style={{fontSize: 20}}>Par</Text></Col>
-          <Col size={20} ><Text style={{fontSize: 20}}>Total</Text></Col>
-          <Col size={20} ><Text style={{fontSize: 20}}>Holes Played</Text></Col>
+          <Col size={45} ><Text style={styles.header}>Name</Text></Col>
+          <Col size={15} ><Text style={styles.col}>Par</Text></Col>
+          <Col size={20} ><Text style={styles.col}>Total</Text></Col>
+          <Col size={20} ><Text style={styles.col}>Holes Played</Text></Col>
         </Grid>
         <View style={{width: '100%'}}>
         <Divider style={{ backgroundColor: 'silver' }} />
@@ -72,9 +72,9 @@ export default class Result extends Component {
 
                 <Grid containerStyle={{height: 40}}>
                   <Col size={45} ><Text style={{marginLeft: 20,fontSize: 15}}>{ele.name}</Text></Col>
-                  <Col size={20} ><Text style={{fontSize: 15}}>{ele.par}</Text></Col>
-                  <Col size={20} ><Text style={{fontSize: 15}}>{ele.total}</Text></Col>
-                  <Col size={15} ><Text style={{fontSize: 15}}>{ele.holesPlayed}</Text></Col>
+                  <Col size={20} ><Text style={styles.colText}>{ele.par}</Text></Col>
+                  <Col size={20} ><Text style={styles.colText}>{ele.total}</Text></Col>
+                  <Col size={15} ><Text style={styles.colText}>{ele.holesPlayed}</Text></Col>
                 </Grid>
               </View>
               ))
@@ -99,28 +99,18 @@ const styles = StyleSheet.create({
     paddingTop: Constants.statusBarHeight,
     backgroundColor: '#ecf0f1',
     paddingBottom: '20%',
+    flex: 1
   },
-  paragraph: {
-    margin: 24,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    color: '#34495e',
+  colText: {
+    fontSize: 15,
+    flex: 1
   },
-  input: {
-    width: 250
-  },
-  formView: {
-    backgroundColor: '#fefefe'
-  },
-  listItem: {
-    color: 'black'
+  col: {
+    fontSize: 20
   },
   header: {
-    fontSize: 20,
-    backgroundColor: '#dbdbdb',
-    width: '100%',
-    textAlign: 'center',
-    padding: 10,
-
-  }
+    marginLeft: 15,
+    fontWeight: 'bold',
+    fontSize: 20
+  },
 });

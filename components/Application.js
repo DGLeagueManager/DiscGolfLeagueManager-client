@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import SignUp from './SignUp';
 import Secured from './Secured';
- 
+
 class Application extends Component {
   render() {
       if (this.props.isLoggedIn) {
@@ -13,11 +13,9 @@ class Application extends Component {
   }
 }
 
-
 const mapStateToProps = (state, ownProps) => {
     return {
         isLoggedIn: state.auth.isLoggedIn
     };
 }
- 
 export default connect(mapStateToProps)(Application);

@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
+<<<<<<< HEAD
+=======
+import PropTypes from 'prop-types'
+>>>>>>> 60a69ca292db858e920990c39b2ce161a4f9303e
 import list from './dummyData';
 
 
@@ -8,6 +12,7 @@ class ScoringContainer extends Component {
   constructor(props) {
     super(props)
 
+<<<<<<< HEAD
     /** I guess we won't use any local state when we move to redux completely? */
     this.state = {
       card: list, /** this.props.card */
@@ -92,3 +97,31 @@ const calculateHolesCompleted = function(startingHole, thruHole, totalHoles) {
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(ScoringContainer);
+=======
+  }
+
+  render() {
+    if (this.props.currentCard === null) {
+      return (
+        <View style={{ flex: 1, alignItems: 'center' }} >
+        <Text> You are not currently in a game </Text>
+        </View>
+      )
+    } else {
+      return <ScoreCard card={this.props.currentCard} />
+    }
+  }
+}
+
+ScoringContainer.PropTypes = {
+  currentCard: PropTypes.object
+}
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    currentCard: state.currentUser.currentCard
+  }
+}
+
+export default connect(mapStateToProps)(ScoringContainer);
+>>>>>>> 60a69ca292db858e920990c39b2ce161a4f9303e
