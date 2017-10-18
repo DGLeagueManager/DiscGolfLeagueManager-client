@@ -37,18 +37,21 @@ export default class ScoreKeeperSelection extends Component {
           subHeader: ''
         },
       ],
-
+      selected: 1
     }
+  }
+  fun() {
+    this.setState({ selected: 0 })
   }
   render() {
     return (
       <View style={styles.view}>
       <ScrollView contentContainerStyle={styles.container}>
         <Text style={styles.header}>Select A Score Keeper</Text>
-        <ScoreKeeperCard holes='1' />
-        <ScoreKeeperCard holes='2' />
-        <ScoreKeeperCard holes='3' />
-        <ScoreKeeperCard holes='4' />
+        <ScoreKeeperCard fun={ ()=>{this.props.fun()} } selected={this.state.selected} holes='1' />
+        <ScoreKeeperCard fun={ ()=>{this.props.fun()} } selected={this.state.selected} holes='2' />
+        <ScoreKeeperCard fun={ ()=>{this.props.fun()} } selected={this.state.selected} holes='3' />
+        <ScoreKeeperCard fun={ ()=>{this.props.fun()} } selected={this.state.selected} holes='4' />
       </ScrollView>
      </View>
     )
