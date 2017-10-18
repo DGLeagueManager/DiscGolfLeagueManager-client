@@ -9,10 +9,6 @@ export default class ScoreCounter extends Component {
   constructor(props) {
     super(props);
 
-    this.state={
-      score: this.props.score
-    };
-
   }
 
   render() {
