@@ -21,30 +21,26 @@ export default class Result extends Component {
         {
           name: 'Tristyn Leos',
           avatar_url: 'https://photos.zillowstatic.com/h_g/ISli46xcfvya590000000000.jpg',
-          total: 23,
-          par: -2,
-          holesPlayed: 18
+          weeksPlayed: 4,
+          points: 117
         },
         {
           name: 'Pete Givens',
           avatar_url: "https://media.licdn.com/mpr/mpr/shrinknp_200_200/p/4/005/021/138/35df1b0.jpg",
-          total: 27,
-          par: -3,
-          holesPlayed: 18
+          weeksPlayed: 5,
+          points: 165
         },
         {
           name: 'Robert Hunter',
           avatar_url: "http://jscraftcamp.org/img/nophoto.png",
-          total: 31,
-          par: -1,
-          holesPlayed: 18
+          weeksPlayed: 5,
+          points: 214
         },
         {
           name: 'A.J. Caporicci',
           avatar_url: "http://www.connallyband.com/uploads/8/5/3/4/85347626/img-8114_1.jpg",
-          total: 87,
-          par: -4,
-          holesPlayed: 18
+          weeksPlayed: 5,
+          points: 641
         },
       ]
     };
@@ -57,37 +53,28 @@ export default class Result extends Component {
 
         <View style={styles.container}>
         <Grid>
-<<<<<<< HEAD
-          <Col size={45} ><Text style={{marginLeft: 15, fontWeight: 'bold', fontSize: 20}}>Name</Text></Col>
-          <Col size={15} ><Text style={{fontSize: 12}}>Par</Text></Col>
-          <Col size={20} ><Text style={{fontSize: 12}}>Total</Text></Col>
-          <Col size={20} ><Text style={{fontSize: 12}}>Holes Played</Text></Col>
-=======
           <Col size={45} ><Text style={styles.header}>Name</Text></Col>
-          <Col size={15} ><Text style={styles.col}>Par</Text></Col>
-          <Col size={20} ><Text style={styles.col}>Total</Text></Col>
-          <Col size={20} ><Text style={styles.col}>Holes Played</Text></Col>
->>>>>>> 4adb5e4e48ee8d7d32aca292068514a5d591b9c5
+          <Col size={20} ><Text style={styles.col}>Weeks Played</Text></Col>
+          <Col size={20} ><Text style={styles.col}>Points</Text></Col>
         </Grid>
         <View style={{width: '100%'}}>
-        <Divider style={{ backgroundColor: 'silver' }} />
+        <Divider style={styles.divider} />
 
-          <List style={{marginBottom: 20}}>
+          <List style={styles.listStyle}>
             {
               this.state.list.map((ele, i) => (
               <View key={'view' + i}>
 
                 <Grid containerStyle={{height: 40}}>
+                  <Col style={{marginLeft: 10}} size={2}><Text>{(i+1)}</Text></Col>
                   <Col size={45} ><Text style={{marginLeft: 20,fontSize: 15}}>{ele.name}</Text></Col>
-                  <Col size={20} ><Text style={styles.colText}>{ele.par}</Text></Col>
-                  <Col size={20} ><Text style={styles.colText}>{ele.total}</Text></Col>
-                  <Col size={15} ><Text style={styles.colText}>{ele.holesPlayed}</Text></Col>
+                  <Col size={20} ><Text style={styles.colText}>{ele.weeksPlayed}</Text></Col>
+                  <Col size={15} ><Text style={styles.colText}>{ele.points}</Text></Col>
                 </Grid>
               </View>
               ))
             }
          </List>
-         {this.state.isOpen ?  <Button onPress={ ()=>{ this.setState({ isOpen: !this.state.isOpen }) } } color='black' backgroundColor="#dbdbdb"  title="Submit"/> : <Button onPress={ ()=>{ this.setState({ isOpen: !this.state.isOpen }) } } color='white' backgroundColor="black"  title="Update"/>}
         </View>
         </View>
       </ScrollView>
@@ -107,15 +94,21 @@ const styles = StyleSheet.create({
     backgroundColor: '#ecf0f1',
     paddingBottom: '20%',
   },
-  colText: {
-    fontSize: 15
+  divider: {
+    backgroundColor: 'silver'
   },
   col: {
     fontSize: 20
   },
   header: {
-    marginLeft: 15,
-    fontWeight: 'bold',
-    fontSize: 20
+    marginLeft: 20,
+     fontWeight: 'bold',
+      fontSize: 20
+  },
+  listStyle: {
+    marginBottom: 20
+  },
+  colText: {
+    fontSize: 15
   },
 });

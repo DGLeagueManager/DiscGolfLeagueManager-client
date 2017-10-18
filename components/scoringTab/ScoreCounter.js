@@ -13,40 +13,29 @@ export default class ScoreCounter extends Component {
       score: this.props.score
     };
 
-    this.increment = () =>  {
-      var temp = this.state.score+1;
-      this.setState({ score: temp })
-    }
-    this.decrement = () =>  {
-      var temp = this.state.score-1;
-      if (temp < 1) {
-        temp = 1;
-      }
-      this.setState({ score: temp })
-    }
-
   }
 
   render() {
+    console.log(this)
     return (
       <View>
         <Grid>
         {this.props.isOpen ?         
             <Icon
               containerStyle={{height: 40, width: 40}}
-              onPress={ ()=>{this.decrement()} }
+              onPress={ this.props.decrement }
               raised
               type='evilicon'
               name='minus' /> : null}
             <Badge
               containerStyle={{marginTop: 6, height: 40, width: 40}}
-              value={this.state.score}
+              value={this.props.player.score}
               textStyle={{ color: 'orange' }}
             />
           {this.props.isOpen ?           
             <Icon
               containerStyle={{height: 40, width: 40}}
-              onPress={ ()=>{this.increment()} }
+              onPress={ this.props.increment }
               raised
               type='evilicon'
               name='plus' /> : null}
@@ -88,7 +77,6 @@ const styles = StyleSheet.create({
     width: '100%',
     textAlign: 'center',
     padding: 10,
-
   }
 });
 
