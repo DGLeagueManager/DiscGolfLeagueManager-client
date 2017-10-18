@@ -24,8 +24,6 @@ class Scoring extends Component {
       players: list
     };
 
-<<<<<<< HEAD
-
     this.handleAmTap = (index) => {
       this.state.list[index].proChecked=false;
       this.state.list[index].amChecked = !this.state.list[index].amChecked;
@@ -35,34 +33,6 @@ class Scoring extends Component {
         this.state.list[index].subHeader = 'Amateur'
       }
       this.setState({checked: !this.state.checked})
-    }
-=======
-  }
-
-  increment(id) {
-    let player = Object.assign({}, this.state.players[id])
-    player.score++;
-    this.setState({ players: { ...this.state.players, [id]: player } })
-  }
->>>>>>> 60a69ca292db858e920990c39b2ce161a4f9303e
-
-  decrement(id) {
-    let player = Object.assign({}, this.state.players[id])
-    player.score--;
-    this.setState({ players: { ...this.state.players, [id]: player } })
-  }
-
-  addScores(e) {
-    console.log(this.props)
-    this.setState({ isOpen: !this.state.isOpen })
-
-    let scores = {
-      hole: 2,
-      player_score: [
-      {[this.state.players[1].player_id]: this.state.players[1].score},
-      {[this.state.players[2].player_id]: this.state.players[2].score},
-      {[this.state.players[3].player_id]: this.state.players[3].score}
-      ]
     }
   }
 
