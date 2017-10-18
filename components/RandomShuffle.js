@@ -42,7 +42,7 @@ export default class ScoreKeeperSelection extends Component {
   }
   render() {
     return (
-      <View style={styles.view}>
+      <View style={{paddingTop: 20}}>
       <ScrollView contentContainerStyle={styles.container}>
         <Text style={styles.header}>Select A Score Keeper</Text>
         <ScoreKeeperCard holes='1' />
@@ -68,8 +68,5 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: 5
-  },
-  view: {
-    paddingTop: 20
-  },
+  }
 });

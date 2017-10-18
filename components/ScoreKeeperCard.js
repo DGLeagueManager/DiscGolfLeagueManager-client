@@ -2,57 +2,28 @@ import React, { Component } from 'react';
 import { Text, ScrollView, View, StyleSheet } from 'react-native';
 import { Card, Button, Divider } from 'react-native-elements'
 
-export default class ScoreKeeperSelection extends Component {
+export default class ScoreKeeperCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      list: [
-        {
-          name: 'Tristyn Leos',
-          avatar_url: 'https://photos.zillowstatic.com/h_g/ISli46xcfvya590000000000.jpg',
-          amChecked: false,
-          proChecked: false,
-          subHeader: ''
-        }
-      ],
+      list: ['A.J.', 'Tristyn', 'Robert', 'Pete'],
       open: null,
     }
   }
   render() {
     return (
-    <View style={{paddingTop: 20}}>
-    <Card containerStyle={{width: '100%'}} title={"Starting Hole: 1"}>
+    <View style={styles.viewStyle}>
+    <Card containerStyle={{width: '100%'}} title={"Starting Hole: " + this.props.holes}>
       <View>
-        <Button
-        raised
-        backgroundColor={this.state.open === 0 ? 'black' : 'grey'}
-        onPress={ ()=>{ this.setState({open: 0}) } }
-        title="test"
-        />
-
-        <Button
-        raised
-        backgroundColor={this.state.open === 1 ? 'black' : 'grey'}
-        onPress={ ()=>{ this.setState({open: 1}) } }
-        style={styles.button}
-        title="test"
-        />
-
-        <Button
-        raised
-        backgroundColor={this.state.open === 2 ? 'black' : 'grey'}
-        onPress={ ()=>{ this.setState({open: 2}) } }
-        style={styles.button}
-        title="test"
-        />
-
-        <Button
-        raised
-        backgroundColor={this.state.open === 3 ? 'black' : 'grey'}
-        onPress={ ()=>{ this.setState({open: 3}) } }
-        style={styles.button}
-        title="test"
-        />
+        {this.state.list.map((ele, i)=>(
+          <Button
+          raised
+          style={{marginBottom: 5}}
+          backgroundColor={this.state.open === i ? 'black' : 'grey'}
+          onPress={ ()=>{ this.setState({open: i}) } }
+          title={ele}
+          />
+        ))}
 
       </View>
     </Card>
@@ -74,5 +45,10 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: 5
-  }
+  },
+  viewStyle: {paddingTop: 20,
+    width: '90%',
+    marginRight: '9%',
+    marginLeft: '1%',
+  },
 });
