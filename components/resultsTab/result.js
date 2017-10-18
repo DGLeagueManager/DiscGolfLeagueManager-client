@@ -106,9 +106,11 @@ const styles = StyleSheet.create({
     paddingTop: Constants.statusBarHeight,
     backgroundColor: '#ecf0f1',
     paddingBottom: '20%',
+    flex: 1
   },
   colText: {
-    fontSize: 15
+    fontSize: 15,
+    flex: 1
   },
   col: {
     fontSize: 20

@@ -5,12 +5,12 @@ import store from './store';
 import Application from './components/Application'
 import Secured from './components/Secured';
 import AdminRoundConfigStart from './components/adminTab/AdminRoundConfigStart';
-import NewRound from './components/NewRound';
-import LeagueRoundInProgress from './components/LeagueRoundInProgress';
-import Standings from './components/Standings';
-import Result from './components/result';
-import ScoreKeeperSelection from'./components/ScoreKeeperSelection';
-import HoleSelection from './components/HoleSelection'
+import NewRound from './components/adminTab/NewRound';
+import LeagueRoundInProgress from './components/leagueTab/LeagueRoundInProgress';
+import Standings from './components/leagueTab/Standings';
+import Result from './components/resultsTab/result';
+import ScoreKeeperSelection from'./components/scoringTab/ScoreKeeperSelection';
+import HoleSelection from './components/adminTab/HoleSelection'
 
 export default class App extends Component {
 
@@ -24,11 +24,7 @@ export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
-<<<<<<< HEAD
         <Application />
-=======
-        <HoleSelection />
->>>>>>> 4adb5e4e48ee8d7d32aca292068514a5d591b9c5
       </Provider>
     );
   }
