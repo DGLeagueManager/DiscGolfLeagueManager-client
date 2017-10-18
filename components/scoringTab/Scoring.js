@@ -46,6 +46,7 @@ class Scoring extends Component {
       }
       this.setState({checked: !this.state.checked})
     }
+  }
 
   increment(id) {
     let player = Object.assign({}, this.state.players[id])
