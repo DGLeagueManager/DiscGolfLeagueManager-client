@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { ScrollView, Text, StyleSheet, View } from 'react-native';
-import { Button, Icon, List, ListItem, CheckBox, Header, Grid, Col, Divider } from 'react-native-elements'; // 0.17.0
+import { Button, Icon, List, ListItem, CheckBox, Header, Divider } from 'react-native-elements'; // 0.17.0
 import { Constants } from 'expo';
 
 import "@expo/vector-icons"; // 5.2.0
@@ -56,12 +56,12 @@ export default class Result extends Component {
       <ScrollView style={{marginTop: 20, paddingTop: 0}}>
 
         <View style={styles.container}>
-        <Grid>
-          <Col size={45} ><Text style={styles.header}>Name</Text></Col>
-          <Col size={15} ><Text style={styles.col}>Par</Text></Col>
-          <Col size={20} ><Text style={styles.col}>Total</Text></Col>
-          <Col size={20} ><Text style={styles.col}>Holes Played</Text></Col>
-        </Grid>
+        <View style={{flex: 1, flexDirection: 'row'}}>
+          <Text style={styles.header}>Name</Text>
+          <Text style={styles.col}>Par</Text>
+          <Text style={styles.col}>Total</Text>
+          <Text style={styles.col}>Holes Played</Text>
+        </View>
         <View style={{width: '100%'}}>
         <Divider style={{ backgroundColor: 'silver' }} />
 
@@ -70,12 +70,12 @@ export default class Result extends Component {
               this.state.list.map((ele, i) => (
               <View key={'view' + i}>
 
-                <Grid containerStyle={{height: 40}}>
-                  <Col size={45} ><Text style={{marginLeft: 20,fontSize: 15}}>{ele.name}</Text></Col>
-                  <Col size={20} ><Text style={styles.colText}>{ele.par}</Text></Col>
-                  <Col size={20} ><Text style={styles.colText}>{ele.total}</Text></Col>
-                  <Col size={15} ><Text style={styles.colText}>{ele.holesPlayed}</Text></Col>
-                </Grid>
+                <View style={{height: 40, flexDirection: 'row', flex: 1}}>
+                  <Text style={{marginLeft: 20,fontSize: 15, flex: 2}}>{ele.name}</Text>
+                  <Text style={styles.colText}>{ele.par}</Text>
+                  <Text style={styles.colText}>{ele.total}</Text>
+                  <Text style={styles.colText}>{ele.holesPlayed}</Text>
+                </View>
               </View>
               ))
             }
@@ -103,12 +103,14 @@ const styles = StyleSheet.create({
   },
   colText: {
     fontSize: 15,
-    flex: 1
+    flex:1
   },
   col: {
-    fontSize: 20
+    fontSize: 20,
+    flex: 1
   },
   header: {
+    flex: 2,
     marginLeft: 15,
     fontWeight: 'bold',
     fontSize: 20
