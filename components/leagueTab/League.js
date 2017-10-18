@@ -34,8 +34,8 @@ const Tabs = TabNavigator({
 }, {
   tabBarComponent: TabBarTop,
   tabBarPosition: 'top',
-  swipeEnabled: true,
   tabBarOptions: {
+    swipeEnabled: true,
     showLabel: true,
     style: {
       paddingTop: 24

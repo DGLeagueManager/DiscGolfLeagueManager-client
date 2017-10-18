@@ -5,7 +5,6 @@ const defaultState = {
 export default function reducer(state = defaultState, action) {
   switch (action.type) {
     case 'REQUEST_STARTED':
-      console.log('request started')
       return Object.assign({}, state, {
         isLoggedIn: false,
       });
