@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { TabNavigator, StackNavigator, TabBarBottom } from 'react-navigation';
 import { Text, View, Button, Image } from 'react-native';
 import { Icon } from 'react-native-elements';
-import AdminRoundConfigStart from './adminTab/AdminRoundConfigStart';
+import Round from './adminTab/Round';
 import Scoring from './scoringTab/Scoring';
 import League from './leagueTab/League';
 import Results from './resultsTab/Results';
