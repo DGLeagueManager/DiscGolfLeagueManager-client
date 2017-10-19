@@ -28,7 +28,15 @@ const Tab = TabNavigator({
       tabBarLabel: 'Scoring',
       tabBarIcon: <Icon name="create" />
     }
-  }, {
+  }, 
+  Results: {
+    screen: Results,
+    navigationOptions: {
+      tabBarLabel: 'Results',
+      tabBarIcon: <Icon name="md-trophy" type="ionicon" />
+    }  
+  }
+}, {
     tabBarComponent: TabBarBottom,
     tabBarPosition: 'bottom',
     swipeEnabled: false,
