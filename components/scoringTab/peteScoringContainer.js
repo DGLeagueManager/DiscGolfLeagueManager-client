@@ -15,7 +15,7 @@ class ScoringContainer extends Component {
     if (this.props.currentCard === null) {
       return (
         <View style={{ flex: 1, alignItems: 'center' }} >
-        <Text> You are not currently in a game </Text>
+          <Text> You are not currently in a game </Text>
         </View>
       )
     } else {

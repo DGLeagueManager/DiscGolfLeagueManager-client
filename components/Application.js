@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import SignUp from './SignUp';
 import Secured from './Secured';
+import Authenticate from './Authenticate';
 
 class Application extends Component {
-    render() {
-        if (this.props.isLoggedIn) {
-            return <Secured />;
-        } else {
-            return <SignUp />;
-        }
-    }
+  render() {
+      if (this.props.isLoggedIn) {
+          return <Secured />;
+      } else {
+          return <Authenticate />;
+      }
+  }
 }
 
 const mapStateToProps = (state, ownProps) => {
@@ -18,5 +18,4 @@ const mapStateToProps = (state, ownProps) => {
         isLoggedIn: state.auth.isLoggedIn
     };
 }
-
 export default connect(mapStateToProps)(Application);

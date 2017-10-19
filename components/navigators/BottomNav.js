@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { TabNavigator, TabBarBottom } from 'react-navigation';
-import { Icon } from "react-native-elements";
-import AdminRoundConfigStart from "./adminTab/AdminRoundConfigStart";
-import League from "./leagueTab/League";
-import Scoring from "./scoringTab/Scoring";
-import Results from "./resultsTab/Results";
+import { Icon } from 'react-native-elements';
+import AdminRoundConfigStart from '../adminTab/AdminRoundConfigStart';
+import League from '../leagueTab/League';
+import Scoring from '../scoringTab/Scoring';
+import Results from '../resultsTab/Results';
 
-export const Secured = () => (
-  <BottomNav />
+export const BottomNav = () => (
+  <Tabs />
 )
 
-const BottomNav = TabNavigator(
+const Tabs = TabNavigator(
   {
     Admin: {
       screen: AdminRoundConfigStart,
@@ -53,7 +53,3 @@ const BottomNav = TabNavigator(
     }
   }
 );
-
-
-
-export default Secured;
