@@ -52,6 +52,7 @@ export default class ScoreKeeperSelection extends Component {
         <ScoreKeeperCard fun={ ()=>{this.props.fun()} } selected={this.state.selected} holes='2' />
         <ScoreKeeperCard fun={ ()=>{this.props.fun()} } selected={this.state.selected} holes='3' />
         <ScoreKeeperCard fun={ ()=>{this.props.fun()} } selected={this.state.selected} holes='4' />
+        <Button color='black' backgroundColor="#dbdbdb" title='Next' />
       </ScrollView>
      </View>
     )

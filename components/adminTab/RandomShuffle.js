@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Text, ScrollView, View, StyleSheet } from 'react-native';
 import { Card, Button, Divider } from 'react-native-elements';
-import ScoreKeeperCard from './ScoreKeeperCard'
+import ScoreKeeperCard from './ScoreKeeperCard';
+import AdminStack from './AdminStack'
 
-export default class ScoreKeeperSelection extends Component {
+export default class RandomShuffle extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -40,6 +41,7 @@ export default class ScoreKeeperSelection extends Component {
 
     }
   }
+
   render() {
     return (
       <View style={{paddingTop: 20}}>
@@ -49,6 +51,7 @@ export default class ScoreKeeperSelection extends Component {
         <ScoreKeeperCard holes='2' />
         <ScoreKeeperCard holes='3' />
         <ScoreKeeperCard holes='4' />
+        <Button onPress={() => this.props.navigation.navigate('PlayerSelection')} color='black' backgroundColor="#dbdbdb" title='Next' />
       </ScrollView>
      </View>
     )

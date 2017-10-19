@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import { ScrollView, Text, StyleSheet, View } from 'react-native';
-import { Button, Icon, List, ListItem, CheckBox, Header } from 'react-native-elements'; // 0.17.0
+import { Button, Icon, List, ListItem, CheckBox, Header } from 'react-native-elements';
 import { Constants } from 'expo';
 import AdminSelectionBoxes from './AdminSelectionBoxes';
 
 import "@expo/vector-icons"; // 5.2.0
 
-export default class AdminRoundConfigStart extends Component {
+
+export default class Round extends Component {
   constructor(props) {
     super(props);
 
-    this.state={
+    this.state = {
       checked: false,
       list: [
         {
@@ -45,25 +46,25 @@ export default class AdminRoundConfigStart extends Component {
     };
 
     this.handleAmTap = (index) => {
-      this.state.list[index].proChecked=false;
+      this.state.list[index].proChecked = false;
       this.state.list[index].amChecked = !this.state.list[index].amChecked;
       if (this.state.list[index].subHeader === 'Amateur') {
         this.state.list[index].subHeader = ''
       } else {
         this.state.list[index].subHeader = 'Amateur'
       }
-      this.setState({checked: !this.state.checked})
+      this.setState({ checked: !this.state.checked })
     }
 
     this.handleProTap = (i) => {
-      this.state.list[i].amChecked=false;
+      this.state.list[i].amChecked = false;
       this.state.list[i].proChecked = !this.state.list[i].proChecked;
       if (this.state.list[i].subHeader === 'Pro') {
         this.state.list[i].subHeader = ''
       } else {
         this.state.list[i].subHeader = 'Pro'
       }
-      this.setState({checked: !this.state.checked})
+      this.setState({ checked: !this.state.checked })
     }
 
   }
@@ -71,43 +72,43 @@ export default class AdminRoundConfigStart extends Component {
     return (
       <View>
 
-      <ScrollView style={{marginTop: 20, paddingTop: 0}}>
+        <ScrollView style={{ marginTop: 20, paddingTop: 0 }}>
 
-        <View style={styles.container}>
-        <Text style={styles.header}>Select Participants</Text>
-        <View style={{width: '100%'}}>
-          <List style={{marginBottom: 20}}>
-            {
-              this.state.list.map((ele, i) => (
-              <View>
-                <ListItem
-                  roundAvatar
-                  avatar={{uri:ele.avatar_url}}
-                  key={i}
-                  subtitle={ele.subHeader}
-                  title={ele.name}
-                  rightTitleStyle={styles.listItem}
-                  label={
-                    <AdminSelectionBoxes
-                      handleProTap={this.handleProTap}
-                      handleAmTap={this.handleAmTap}
-                      i={i}
-                      amChecked={ele.amChecked}
-                      proChecked={ele.proChecked}
-                    />
-                  }
-                  hideChevron
+          <View style={styles.container}>
+            <Text style={styles.header}>Select Participants</Text>
+            <View style={{ width: '100%' }}>
+              <List style={{ marginBottom: 20 }}>
+                {
+                  this.state.list.map((ele, i) => (
+                    <View>
+                      <ListItem
+                        roundAvatar
+                        avatar={{ uri: ele.avatar_url }}
+                        key={i}
+                        subtitle={ele.subHeader}
+                        title={ele.name}
+                        rightTitleStyle={styles.listItem}
+                        label={
+                          <AdminSelectionBoxes
+                            handleProTap={this.handleProTap}
+                            handleAmTap={this.handleAmTap}
+                            i={i}
+                            amChecked={ele.amChecked}
+                            proChecked={ele.proChecked}
+                          />
+                        }
+                        hideChevron
 
-                />
+                      />
 
-              </View>
-              ))
-            }
-         </List>
-         <Button color='black' backgroundColor="#dbdbdb" title='Next'/>
-        </View>
-        </View>
-      </ScrollView>
+                    </View>
+                  ))
+                }
+              </List>
+              <Button onPress={() => this.props.navigation.navigate('PlayerSelection')} color='black' backgroundColor="#dbdbdb" title='Next' />
+            </View>
+          </View>
+        </ScrollView>
       </View>
     );
   }
@@ -136,3 +137,6 @@ const styles = StyleSheet.create({
 
   }
 });
+
+
+

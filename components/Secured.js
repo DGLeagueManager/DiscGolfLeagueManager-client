@@ -1,59 +1,47 @@
 import React, { Component } from 'react';
-import { TabNavigator, TabBarBottom } from 'react-navigation';
-import { Icon } from "react-native-elements";
-import AdminRoundConfigStart from "./adminTab/AdminRoundConfigStart";
-import League from "./leagueTab/League";
-import Scoring from "./scoringTab/Scoring";
-import Results from "./resultsTab/Results";
+import { TabNavigator, StackNavigator, TabBarBottom } from 'react-navigation';
+import { Text, View, Button, Image } from 'react-native';
+import { Icon } from 'react-native-elements';
+import Scoring from './scoringTab/Scoring';
+import League from './leagueTab/League';
+import Results from './resultsTab/Results';
+import AdminStack from './adminTab/AdminStack';
 
-export const Secured = () => (
-  <BottomNav />
-)
-
-const BottomNav = TabNavigator(
-  {
-    Admin: {
-      screen: AdminRoundConfigStart,
-      navigationOptions: {
-        tabBarLabel: "Admin",
-        tabBarIcon: <Icon name="person" />
-      }
-    },
-    League: {
-      screen: League,
-      navigationOptions: {
-        tabBarLabel: "League",
-        tabBarIcon: <Icon name="stars" />,
-        headerTitle: "Kenny Rules"
-      }
-    },
-    Scoring: {
-      screen: Scoring,
-      navigationOptions: {
-        tabBarLabel: "Scoring",
-        tabBarIcon: <Icon name="create" />
-      }
-    },
-    Results: {
-      screen: Results,
-      navigationOptions: {
-        tabBarLabel: "Results",
-        tabBarIcon: <Icon name="md-trophy" type="ionicon" />
-      }
+const Tab = TabNavigator({
+  AdminStack: {
+    screen: AdminStack,
+    navigationOptions: {
+      tabBarLabel: 'Admin',
+      tabBarIcon: <Icon name="person" />
     }
   },
-  {
+  League: {
+    screen: League,
+    navigationOptions: {
+      tabBarLabel: 'League',
+      tabBarIcon: <Icon name="stars" />
+    }
+  },
+  Scoring: {
+    screen: Scoring,
+    navigationOptions: {
+      tabBarLabel: 'Scoring',
+      tabBarIcon: <Icon name="create" />
+    }
+  }, {
     tabBarComponent: TabBarBottom,
-    tabBarPosition: "bottom",
+    tabBarPosition: 'bottom',
     swipeEnabled: false,
     tabBarOptions: {
-      activeTintColor: "turquoise",
+      activeTintColor: 'turquoise',
       showIcon: true,
       showLabel: true
     }
-  }
-);
+  });
 
-
+  const Secured = StackNavigator({
+    Home: { screen: Tab },
+    AdminStack: { screen: AdminStack }
+  })
 
 export default Secured;
