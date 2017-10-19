@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { View, ScrollView, Text, Picker, Modal, TouchableHighlight } from 'react-native';
 import { Button, Divider } from 'react-native-elements';
 import ScoreKeeperCard from './ScoreKeeperCard';
-import AdminStack from './AdminStack'
 
 export default class PlayerSelection extends Component {
   constructor(props) {

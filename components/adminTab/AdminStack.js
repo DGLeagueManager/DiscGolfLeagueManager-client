@@ -3,14 +3,13 @@ import { StackNavigator } from 'react-navigation';
 import { Text, View, Button, Image } from 'react-native';
 import { Icon } from 'react-native-elements';
 import NewRound from './NewRound';
-import Round from './Round';
+import AdminRoundConfigStart from './AdminRoundConfigStart';
 import PlayerSelection from './PlayerSelection';
 import ScoreKeeperSelection from './ScoreKeeperSelection'
 
-console.log(Round)
 const AdminStack = StackNavigator({
   NewRound: { screen: NewRound },
-  Round: { screen: Round },
+  AdminRoundConfigStart: { screen: AdminRoundConfigStart },
   PlayerSelection: { screen: PlayerSelection },
   ScoreKeeperSelection: { screen: ScoreKeeperSelection },
 });

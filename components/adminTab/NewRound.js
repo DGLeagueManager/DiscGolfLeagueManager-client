@@ -14,7 +14,7 @@ export default class NewRound extends Component {
       <View style={{marginTop: '60%'}}>
         <Button
           buttonStyle={styles.button}
-          onPress={() => this.props.navigation.navigate('Round')}
+          onPress={() => this.props.navigation.navigate('AdminRoundConfigStart')}
           raised
           title="New Round"
           textStyle={{fontSize: 30}}
