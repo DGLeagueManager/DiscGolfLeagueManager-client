@@ -24,6 +24,16 @@ class Scoring extends Component {
       players: list
     };
 
+    this.handleAmTap = (index) => {
+      this.state.list[index].proChecked=false;
+      this.state.list[index].amChecked = !this.state.list[index].amChecked;
+      if (this.state.list[index].subHeader === 'Amateur') {
+        this.state.list[index].subHeader = ''
+      } else {
+        this.state.list[index].subHeader = 'Amateur'
+      }
+      this.setState({checked: !this.state.checked})
+    }
   }
 
   increment(id) {
