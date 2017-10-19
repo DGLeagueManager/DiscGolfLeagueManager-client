@@ -67,7 +67,14 @@ class SignUp extends Component {
               style={styles.input}
               onChangeText={(text) => this.setState({ password: text })} />
 
-            <Button onPress={(e) => this.userSignUp(e)} raised title="Submit" icon={{name: 'check', type: ''}} style={{marginTop: 10, marginBottom: 20}}/>
+            <Button 
+              onPress={(e) => this.userSignUp(e)} 
+              raised 
+              title="Submit" 
+              icon={{name: 'check', type: ''}} 
+              style={{marginTop: 10, marginBottom: 20}}
+              disabled={true}
+            />
             { this.props.error ?  <Text>Email or Password not valid</Text> : null }
           </View>
         </View>
