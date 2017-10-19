@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Text, ScrollView, View, StyleSheet } from 'react-native';
 import { Card, Button, Divider } from 'react-native-elements';
-import ScoreKeeperCard from './ScoreKeeperCard'
+//import ScoreKeeperCard from './ScoreKeeperCard';
+import AdminStack from './AdminStack';
 
 export default class ScoreKeeperSelection extends Component {
   constructor(props) {

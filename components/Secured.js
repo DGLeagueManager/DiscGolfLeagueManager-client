@@ -6,10 +6,11 @@ import AdminRoundConfigStart from './adminTab/AdminRoundConfigStart';
 import Scoring from './scoringTab/Scoring';
 import League from './leagueTab/League';
 import Results from './resultsTab/Results';
+import Admin from './adminTab/AdminStack';
 
 const Secured = TabNavigator({
   Admin: {
-    screen: AdminRoundConfigStart,
+    screen: Admin,
     navigationOptions: {
       tabBarLabel: 'Admin',
       tabBarIcon: <Icon name="person" />
@@ -37,14 +38,14 @@ const Secured = TabNavigator({
     }
   }
 }, {
-  tabBarComponent: TabBarBottom,
-  tabBarPosition: 'bottom',
-  swipeEnabled: false,
-  tabBarOptions: {
-    activeTintColor: 'turquoise',
-    showIcon: true,
-    showLabel: true
-  }
-});
+    tabBarComponent: TabBarBottom,
+    tabBarPosition: 'bottom',
+    swipeEnabled: false,
+    tabBarOptions: {
+      activeTintColor: 'turquoise',
+      showIcon: true,
+      showLabel: true
+    }
+  });
 
 export default Secured;
