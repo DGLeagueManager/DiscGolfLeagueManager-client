@@ -15,19 +15,21 @@ export default class ScoreKeeperSelection extends Component {
           subHeader: ''
         }
       ],
-      open: null,
+      open: this.props.selected,
     }
   }
   render() {
     return (
     <View style={{paddingTop: 20}}>
-    <Card containerStyle={{width: '100%'}} title={"Starting Hole: 1"}>
+    <Card containerStyle={{width: '100%'}}>
       <View>
+      <Button buttonStyle={{marginBottom: 20, width: 150, height: 35}} raised title={'Starting hole: '+this.props.hole} iconRight={{name:"triangle-down", type:'entypo'}} onPress={() => {this.setModalVisible(true)}} />
+
         <Button
         raised
         backgroundColor={this.state.open === 0 ? 'black' : 'grey'}
         onPress={ ()=>{ this.setState({open: 0}) } }
-        title="test"
+        title='Select Player...'
         />
 
         <Button
@@ -35,7 +37,7 @@ export default class ScoreKeeperSelection extends Component {
         backgroundColor={this.state.open === 1 ? 'black' : 'grey'}
         onPress={ ()=>{ this.setState({open: 1}) } }
         style={styles.button}
-        title="test"
+        title='Select Player...'
         />
 
         <Button
@@ -43,7 +45,7 @@ export default class ScoreKeeperSelection extends Component {
         backgroundColor={this.state.open === 2 ? 'black' : 'grey'}
         onPress={ ()=>{ this.setState({open: 2}) } }
         style={styles.button}
-        title="test"
+        title='Select Player...'
         />
 
         <Button
@@ -51,7 +53,7 @@ export default class ScoreKeeperSelection extends Component {
         backgroundColor={this.state.open === 3 ? 'black' : 'grey'}
         onPress={ ()=>{ this.setState({open: 3}) } }
         style={styles.button}
-        title="test"
+        title='Select Player...'
         />
 
       </View>
