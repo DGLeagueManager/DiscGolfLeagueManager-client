@@ -6,11 +6,11 @@ import AdminRoundConfigStart from './adminTab/AdminRoundConfigStart';
 import Scoring from './scoringTab/Scoring';
 import League from './leagueTab/League';
 import Results from './resultsTab/Results';
-import Admin from './adminTab/AdminStack';
+import AdminStack from './adminTab/AdminStack';
 
 const Secured = TabNavigator({
-  Admin: {
-    screen: Admin,
+  AdminStack: {
+    screen: AdminStack,
     navigationOptions: {
       tabBarLabel: 'Admin',
       tabBarIcon: <Icon name="person" />

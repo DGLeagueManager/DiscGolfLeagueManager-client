@@ -109,7 +109,7 @@ export default class AdminRoundConfigStart extends Component {
               ))
             }
          </List>
-         <Button onPress={this.props.navigation.navigate('HoleSelection')}color='black' backgroundColor="#dbdbdb" title='Next'/>
+         <Button onPress={this.props.navigation.navigate('HoleSelection', {screen: 'HoleSelection'})} color='black' backgroundColor="#dbdbdb" title='Next'/>
         </View>
         </View>
       </ScrollView>

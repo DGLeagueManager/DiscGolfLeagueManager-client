@@ -16,11 +16,11 @@ const AdminStack = StackNavigator({
   RandomShuffle: { screen: RandomShuffle }
 });
 
-class Admin extends Component {
-  render() {
-    return <AdminStack screenProps={this.props.screenProps} />
-  }
-}
+// class Admin extends Component {
+//   render() {
+//     return <AdminStack screenProps={this.props.screenProps} />
+//   }
+// }
 
 
-export default Admin;
+export default AdminStack;
