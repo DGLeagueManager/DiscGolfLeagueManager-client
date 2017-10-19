@@ -2,25 +2,17 @@ import React, { Component } from 'react';
 import { StackNavigator } from 'react-navigation';
 import { Text, View, Button, Image } from 'react-native';
 import { Icon } from 'react-native-elements';
-import AdminRoundConfigStart from './AdminRoundConfigStart';
-import AdminSelectionBoxes from './AdminSelectionBoxes';
-import HoleSelection from './HoleSelection';
 import NewRound from './NewRound';
-import RandomShuffle from './RandomShuffle';
+import AdminRoundConfigStart from './AdminRoundConfigStart';
+import PlayerSelection from './PlayerSelection';
+import ScoreKeeperSelection from './ScoreKeeperSelection'
 
 
 const AdminStack = StackNavigator({
-  AdminRoundConfigStart: { screen: AdminRoundConfigStart },
-  HoleSelection: { screen: HoleSelection },
   NewRound: { screen: NewRound },
-  RandomShuffle: { screen: RandomShuffle }
+  //AdminRoundConfigStart: { screen: AdminRoundConfigStart },
+  PlayerSelection: { screen: PlayerSelection },
+  ScoreKeeperSelection: { screen: ScoreKeeperSelection },
 });
-
-// class Admin extends Component {
-//   render() {
-//     return <AdminStack screenProps={this.props.screenProps} />
-//   }
-// }
-
 
 export default AdminStack;

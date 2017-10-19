@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TabNavigator, TabBarBottom } from 'react-navigation';
+import { TabNavigator, StackNavigator, TabBarBottom } from 'react-navigation';
 import { Text, View, Button, Image } from 'react-native';
 import { Icon } from 'react-native-elements';
 import AdminRoundConfigStart from './adminTab/AdminRoundConfigStart';
@@ -8,7 +8,7 @@ import League from './leagueTab/League';
 import Results from './resultsTab/Results';
 import AdminStack from './adminTab/AdminStack';
 
-const Secured = TabNavigator({
+const Tab = TabNavigator({
   AdminStack: {
     screen: AdminStack,
     navigationOptions: {
@@ -47,5 +47,10 @@ const Secured = TabNavigator({
       showLabel: true
     }
   });
+
+  const Secured = StackNavigator({
+    Home: { screen: Tab },
+    AdminStack: { screen: AdminStack }
+  })
 
 export default Secured;

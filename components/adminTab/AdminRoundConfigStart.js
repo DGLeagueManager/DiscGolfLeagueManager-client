@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { ScrollView, Text, StyleSheet, View } from 'react-native';
 import { Button, Icon, List, ListItem, CheckBox, Header } from 'react-native-elements'; // 0.17.0
 import { Constants } from 'expo';
-import AdminStack from './AdminStack'
-import HoleSelection from './HoleSelection'
+import AdminStack from './AdminStack';
 import AdminSelectionBoxes from './AdminSelectionBoxes';
 
 import "@expo/vector-icons"; // 5.2.0
@@ -70,9 +69,6 @@ export default class AdminRoundConfigStart extends Component {
 
   }
   render() {
-    const navigationOptions = {
-      title: 'HoleSelection'
-    }
     return (
       <View>
 
@@ -109,7 +105,7 @@ export default class AdminRoundConfigStart extends Component {
               ))
             }
          </List>
-         <Button onPress={this.props.navigation.navigate('HoleSelection', {screen: 'HoleSelection'})} color='black' backgroundColor="#dbdbdb" title='Next'/>
+         <Button onPress={this.props.navigation.navigate('HoleSelection')} color='black' backgroundColor="#dbdbdb" title='Next'/>
         </View>
         </View>
       </ScrollView>

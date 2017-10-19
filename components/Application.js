@@ -6,6 +6,7 @@ import Secured from './Secured';
 class Application extends Component {
 	render() {
 		if (this.props.isLoggedIn) {
+			console.log(this.props)
 			return <Secured />;
 		} else {
 			return <SignUp />;
