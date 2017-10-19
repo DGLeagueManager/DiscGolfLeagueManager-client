@@ -6,15 +6,15 @@ import ScoreKeeperBoxes from '../../components/scoringTab/ScoreKeeperCard';
 export default class HoleSelection extends Component {
   constructor(props) {
     super(props);
-    this.state={
+    this.state = {
       language: '1',
       enabled: false,
       modalVisible: false,
     }
   }
   setModalVisible(visible) {
-  this.setState({modalVisible: visible});
-}
+    this.setState({ modalVisible: visible });
+  }
   render() {
     return (
       <View style={{backgroundColor: 'white', height: '100%'}}>

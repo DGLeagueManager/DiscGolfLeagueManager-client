@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Button } from 'react-native-elements';
 import { Constants } from "expo";
+import AdminStack from './AdminStack'
 
 export default class NewRound extends Component {
   constructor(props) {
