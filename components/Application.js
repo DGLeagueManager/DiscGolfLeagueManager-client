@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import SignUp from './SignUp';
+import Authenticate from './Authenticate';
 import Secured from './Secured';
 
 class Application extends Component {
@@ -9,7 +9,7 @@ class Application extends Component {
 			console.log(this.props)
 			return <Secured />;
 		} else {
-			return <SignUp />;
+			return <Authenticate />;
 		}
 	}
 }
