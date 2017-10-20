@@ -18,7 +18,7 @@ export default class PlayerSelection extends Component {
   render() {
     return (
       <View style={{ backgroundColor: 'white', height: '100%' }}>
-        <Button raised style={{ marginTop: 20 }} backgroundColor="#bc1600" title='Randomize All' />
+        <Button onPress={this.handleRandom} raised style={{ marginTop: 20 }} backgroundColor="#bc1600" title='Randomize All' />
         <ScrollView style={{ width: '80%', marginRight: '14%', marginLeft: '6%' }}>
           <Divider style={{ backgroundColor: 'blue' }} />
           <View style={{ marginTop: 22 }}>
