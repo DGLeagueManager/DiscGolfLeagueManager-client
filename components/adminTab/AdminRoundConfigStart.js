@@ -3,11 +3,12 @@ import { ScrollView, Text, StyleSheet, View } from 'react-native';
 import { Button, Icon, List, ListItem, CheckBox, Header } from 'react-native-elements';
 import { Constants } from 'expo';
 import AdminSelectionBoxes from './AdminSelectionBoxes';
+import { connect } from 'react-redux';
 
 import "@expo/vector-icons"; // 5.2.0
 
 
-export default class Round extends Component {
+class AdminRoundConfigStart extends Component {
   constructor(props) {
     super(props);
 
@@ -68,6 +69,7 @@ export default class Round extends Component {
     }
 
   }
+
   render() {
     return (
       <View>
@@ -137,6 +139,19 @@ const styles = StyleSheet.create({
 
   }
 });
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    leaguePlayers: true // should be array of all league players. will iterate thru array to populate list
+  }
+};
+
+export default connect(mapStateToProps)(AdminRoundConfigStart);
+
+
+
+
+
 
 
 
