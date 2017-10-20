@@ -98,12 +98,4 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapDispatchToProps = dispatch => {
-  return {
-    onSignUp: (first_name, last_name, email, password) => {
-      dispatch(signUp(first_name, last_name, email, password));
-    }
-  };
-};
-
-export default connect(mapDispatchToProps)(SignUp);
+export default SignUp;
