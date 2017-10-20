@@ -7,6 +7,12 @@ import League from './leagueTab/League';
 import Results from './resultsTab/Results';
 import AdminStack from './adminTab/AdminStack';
 
+class Secured extends Component {
+  render() {
+    return Stack;
+  }
+}
+
 const Tab = TabNavigator({
   AdminStack: {
     screen: AdminStack,
@@ -37,34 +43,19 @@ const Tab = TabNavigator({
     }  
   }
 }, {
-    tabBarComponent: TabBarBottom,
-    tabBarPosition: 'bottom',
-    swipeEnabled: false,
-    tabBarOptions: {
-      activeTintColor: 'turquoise',
-      showIcon: true,
-      showLabel: true
-    }
-  });
-
-class Secured extends Component {
-  constructor(props) {
-    super(props) 
+  tabBarComponent: TabBarBottom,
+  tabBarPosition: 'bottom',
+  swipeEnabled: false,
+  tabBarOptions: {
+    activeTintColor: 'turquoise',
+    showIcon: true,
+    showLabel: true
   }
+});
 
-  componentWillMount() {
-    console.log('Secured component mounted')
-    // fetch league data
-  }
-
-  render() {
-    return (
-      StackNavigator({
-        Home: { screen: Tab },
-        AdminStack: { screen: AdminStack }
-      })
-    )
-  }
-}
+const Stack = StackNavigator({
+  Home: { screen: Tab },
+  AdminStack: { screen: AdminStack }
+})
 
 export default Secured;
