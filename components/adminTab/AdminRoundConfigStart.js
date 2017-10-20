@@ -82,7 +82,7 @@ class AdminRoundConfigStart extends Component {
               <List style={{ marginBottom: 20 }}>
                 {
                   this.state.list.map((ele, i) => (
-                    <View>
+                    <View key={'list'+i}>
                       <ListItem
                         roundAvatar
                         avatar={{ uri: ele.avatar_url }}
@@ -147,11 +147,3 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 export default connect(mapStateToProps)(AdminRoundConfigStart);
-
-
-
-
-
-
-
-

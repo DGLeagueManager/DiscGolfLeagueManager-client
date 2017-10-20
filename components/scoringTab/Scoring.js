@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { ScrollView, Text, StyleSheet, View } from 'react-native';
 import { connect } from 'react-redux';
-import { FormLabel, FormInput, Button, Icon, List, ListItem, CheckBox, Header, Grid, Col, Divider } from 'react-native-elements'; // 0.17.0
+import { FormLabel, FormInput, Button, Icon, List, ListItem, CheckBox, Header, Divider } from 'react-native-elements'; // 0.17.0
 import { Constants } from 'expo';
 import ScoreCounter from './ScoreCounter';
 import { postScores } from '../../actions/scoreCounterActions';
@@ -72,12 +72,7 @@ class Scoring extends Component {
       <ScrollView style={{marginTop: 20, paddingTop: 0}}>
 
         <View style={styles.container}>
-          <Grid>
-            <Col size={20} ><Text style={{fontWeight: 'bold', fontSize: 20}}>Hole {this.state.holeData.holeNumber}</Text></Col>
-            <Col size={65} ><Text style={{fontSize: 20}}>{this.state.holeData.feet} ft.</Text></Col>
-            <Col size={15} ><Text style={{fontSize: 20}}>Par: {this.state.holeData.par}</Text></Col>
 
-          </Grid>
         <View style={{width: '100%'}}>
         <Divider style={{ backgroundColor: 'silver' }} />
 
@@ -107,9 +102,9 @@ class Scoring extends Component {
               })
             }
          </List>
-        {this.state.isOpen ?  
-          <Button onPress={ (e)=>{ this.addScores(e) } } color='black' backgroundColor="#dbdbdb"  title="Submit"/> 
-        : 
+        {this.state.isOpen ?
+          <Button onPress={ (e)=>{ this.addScores(e) } } color='black' backgroundColor="#dbdbdb"  title="Submit"/>
+        :
           <Button onPress={ ()=>{ this.setState({ isOpen: !this.state.isOpen }) } } color='white' backgroundColor="black"  title="Update"/>
         }
         </View>
@@ -130,6 +125,7 @@ const styles = StyleSheet.create({
     paddingTop: Constants.statusBarHeight,
     backgroundColor: '#ecf0f1',
     paddingBottom: '20%',
+    flexDirection: 'row'
   },
   paragraph: {
     margin: 24,

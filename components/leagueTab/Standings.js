@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { ScrollView, Text, StyleSheet, View } from 'react-native';
-import { Button, Icon, List, ListItem, CheckBox, Header, Divider, Grid, Col } from 'react-native-elements'; // 0.17.0
+import { Button, Icon, List, ListItem, CheckBox, Header, Divider } from 'react-native-elements'; // 0.17.0
 import { Constants } from 'expo';
 
 import "@expo/vector-icons"; // 5.2.0
@@ -15,7 +15,7 @@ export default class Result extends Component {
       holeData: {
         holeNumber: 1,
         par: 3,
-        feet: 382
+        feet: 382,
       },
       list: [
         {
@@ -50,37 +50,29 @@ export default class Result extends Component {
   render() {
     return (
       <ScrollView style={{marginTop: 20, paddingTop: 0}}>
-
-        <View style={styles.container}>
-        <Grid>
-          <Col size={45} ><Text style={styles.header}>Name</Text></Col>
-          <Col size={20} ><Text style={styles.col}>Weeks Played</Text></Col>
-          <Col size={20} ><Text style={styles.col}>Points</Text></Col>
-        </Grid>
+        <View style={{flex: 1, flexDirection: 'row'}}>
+          <Text style={styles.header}>Name</Text>
+          <Text style={styles.col} style={{flex: 2}}>Weeks Played</Text>
+          <Text style={styles.col} style={{flex: 1}}>Points</Text>
+        </View>
         <View style={{width: '100%'}}>
         <Divider style={styles.divider} />
-
           <List style={styles.listStyle}>
             {
               this.state.list.map((ele, i) => (
-              <View key={'view' + i}>
-
-                <Grid containerStyle={{height: 40}}>
-                  <Col style={{marginLeft: 10}} size={2}><Text>{(i+1)}</Text></Col>
-                  <Col size={45} ><Text style={{marginLeft: 20,fontSize: 15}}>{ele.name}</Text></Col>
-                  <Col size={20} ><Text style={styles.colText}>{ele.weeksPlayed}</Text></Col>
-                  <Col size={15} ><Text style={styles.colText}>{ele.points}</Text></Col>
-                </Grid>
-              </View>
+                <View style={{height: 40, flex: 1, flexDirection: 'row'}}>
+                  <Text key={'text1' + i} style={{marginLeft: 15}}>{(i+1)}</Text>
+                  <Text key={'text2' + i} style={{marginLeft: 20,fontSize: 15, flex: 3}}>{ele.name}</Text>
+                  <Text key={'text3' + i} style={{flex: 2}}>{ele.weeksPlayed}</Text>
+                  <Text key={'text4' + i} style={{flex: 1}}>{ele.points}</Text>
+                </View>
               ))
             }
          </List>
         </View>
-        </View>
       </ScrollView>
     );
   }
-
 }
 
 const styles = StyleSheet.create({
@@ -101,9 +93,10 @@ const styles = StyleSheet.create({
     fontSize: 20
   },
   header: {
-    marginLeft: 20,
-     fontWeight: 'bold',
-      fontSize: 20
+    marginLeft: 43,
+    fontWeight: 'bold',
+    fontSize: 20,
+    flex: 2
   },
   listStyle: {
     marginBottom: 20

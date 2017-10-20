@@ -14,9 +14,8 @@ export default class ScoreCounter extends Component {
   render() {
     console.log(this)
     return (
-      <View>
-        <Grid>
-        {this.props.isOpen ?         
+      <View style={{flex: 1, flexDirection: 'row'}}>
+        {this.props.isOpen ?
             <Icon
               containerStyle={{height: 40, width: 40}}
               onPress={ this.props.decrement }
@@ -28,14 +27,13 @@ export default class ScoreCounter extends Component {
               value={this.props.player.score}
               textStyle={{ color: 'orange' }}
             />
-          {this.props.isOpen ?           
+          {this.props.isOpen ?
             <Icon
               containerStyle={{height: 40, width: 40}}
               onPress={ this.props.increment }
               raised
               type='evilicon'
               name='plus' /> : null}
-        </Grid>
       </View>
     );
   }
@@ -75,4 +73,3 @@ const styles = StyleSheet.create({
     padding: 10,
   }
 });
-
