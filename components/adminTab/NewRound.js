@@ -10,10 +10,6 @@ export default class NewRound extends Component {
     }
   }
   
-  componentWillMount() {
-    // fetch all league data and add to redux store
-  }
-
   render() {
     return (
       <View style={{marginTop: '60%'}}>

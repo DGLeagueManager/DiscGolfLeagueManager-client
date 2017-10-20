@@ -47,9 +47,24 @@ const Tab = TabNavigator({
     }
   });
 
-  const Secured = StackNavigator({
-    Home: { screen: Tab },
-    AdminStack: { screen: AdminStack }
-  })
+class Secured extends Component {
+  constructor(props) {
+    super(props) 
+  }
+
+  componentWillMount() {
+    console.log('Secured component mounted')
+    // fetch league data
+  }
+
+  render() {
+    return (
+      StackNavigator({
+        Home: { screen: Tab },
+        AdminStack: { screen: AdminStack }
+      })
+    )
+  }
+}
 
 export default Secured;
