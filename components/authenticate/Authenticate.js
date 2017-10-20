@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import SignUp from "./SignUp";
 import Login from "./Login";
 import { connect } from "react-redux";
-import { signUp, login } from '../actions/auth';
+import { signUp, login } from '../../actions/auth';
 
 class Authenticate extends Component {
   constructor(props) {

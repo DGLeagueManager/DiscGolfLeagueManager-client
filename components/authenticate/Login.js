@@ -2,13 +2,11 @@ import React, { Component } from "react";
 import { Text, View, StyleSheet, ScrollView, Alert } from "react-native";
 import { FormLabel, FormInput, Button, Icon } from "react-native-elements"; // 0.17.0
 import { Constants } from "expo";
-import { connect } from "react-redux";
-import { login } from "../actions/auth";
 
 const Login = (props) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.paragraph}> Create an account </Text>
+      <Text style={styles.paragraph}> LOGIN </Text>
       <View style={styles.formView}>
 
         <FormLabel>Email: </FormLabel>
@@ -80,13 +78,4 @@ const styles = StyleSheet.create({
   }
 });
 
-
-const mapDispatchToProps = dispatch => {
-  return {
-    onSignUp: (first_name, last_name, email, password) => {
-      dispatch(signUp(first_name, last_name, email, password));
-    }
-  };
-};
-
-export default connect(mapDispatchToProps)(Login);
+export default Login;
