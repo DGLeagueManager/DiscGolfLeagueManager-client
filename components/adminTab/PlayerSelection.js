@@ -53,3 +53,30 @@ export default class PlayerSelection extends Component {
     )
   }
 }
+
+/*
+Create SelectPlayerFunction:
+  should show a scroll view of all available players
+  user should be able to select player for card, followed by removal from list
+  each card should only have four slots and choose from the playerArray
+
+Create RandomFunction to map Array:
+  map should auto populate cards with same division
+  no card should have only one player
+
+  Map state to props:
+  -players array:
+    -playerFirstName
+    -playerLastName
+    -playerDivision
+    -playerID
+
+Map Dispatch to props:
+  -onSubmit Function:
+    -dispatch new list of cards:
+      -players present 
+      -players division 
+      -players contact info
+      -what card players belong too
+    -point to next screen in stack
+*/

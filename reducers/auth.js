@@ -35,7 +35,6 @@ export default function reducer(state = defaultState, action) {
         token: action.payload.token
       });
     case 'LOGIN_FAILED':
-      console.log('login failed')
       return Object.assign({}, state, {
         isLoggedIn: false,
         error: action.error

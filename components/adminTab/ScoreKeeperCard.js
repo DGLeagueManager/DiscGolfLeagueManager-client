@@ -79,3 +79,26 @@ const styles = StyleSheet.create({
     marginTop: 5
   }
 });
+
+
+/*
+
+Map Card Array to render complete cards with a selection button for the score keeper.
+
+Map state to props:
+  -Card Array:
+    -playerFirstName
+    -playerLastName
+    -playerDivision
+    -playerID
+
+Map Dispatch to props:
+  -onSubmit Function:
+    -dispatch new list comprised of:
+      -cards with score keeper id selected
+      -hole start info
+      -send cards to database
+    -point to next screen in stack
+      -Implement Round in Progress screen?  Set up logic for the start round screen?
+      -If round in progress, no option for going through stack?
+*/

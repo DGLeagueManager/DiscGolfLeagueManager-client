@@ -116,3 +116,45 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 export default connect(mapStateToProps)(AdminRoundConfigStart);
+
+
+
+
+
+
+
+// const mapStateToProps = (state, ownProps) => {
+//   return {
+//     leaguePlayers: state.auth.leaguePlayers
+//   };
+// };
+
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     onSubmitPlayers: (playerArray) => {
+//       dispatch(configureRound(playerArray));
+//     }
+//   };
+// };
+
+// export default connect( mapStateToProps, mapDispatchToProps)(SignUp);
+
+/*
+On component will mount? 
+
+Map state to props:
+  -players array:
+    -playerFirstName
+    -playerLastName
+    -playerPreviousDevision?
+    -playerEmail
+    -playerID
+
+Map Dispatch to props:
+  -onSubmit Function:
+    -dispatch new list comprised of:
+      -players present 
+      -players division 
+      -players contact info
+    -point to next screen in stack
+*/
