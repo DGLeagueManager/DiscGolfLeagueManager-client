@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 import { View } from 'react-native';
 import store from './store';
 import Root from './components/Root'
+import Scoring from './components/scoringTab/Scoring'
 
 export default class App extends Component {
 
@@ -16,7 +17,7 @@ export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <Root />
+        <Scoring />
       </Provider>
     );
   }

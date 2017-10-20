@@ -3,13 +3,16 @@ import { View, Text, StyleSheet } from 'react-native';
 import { Button } from 'react-native-elements';
 
 export default class NewRound extends Component {
+  static navigationOptions = {
+    header: null,
+  }
   constructor(props) {
     super(props);
     this.state = {
 
     }
   }
-  
+
   render() {
     return (
       <View style={{marginTop: '60%'}}>
