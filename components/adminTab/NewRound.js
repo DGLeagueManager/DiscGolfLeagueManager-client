@@ -9,6 +9,7 @@ export default class NewRound extends Component {
 
     }
   }
+  
   render() {
     return (
       <View style={{marginTop: '60%'}}>

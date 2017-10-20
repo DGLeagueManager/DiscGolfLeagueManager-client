@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import { View } from 'react-native';
 import store from './store';
-import Application from './components/Application'
+import Root from './components/Root'
 
 export default class App extends Component {
 
@@ -16,7 +16,7 @@ export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <Application />
+        <Root />
       </Provider>
     );
   }
