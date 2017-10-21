@@ -81,8 +81,8 @@ class Authenticate extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    isLoggedIn: state.auth.isLoggedIn,
-    error: state.auth.error
+    // isLoggedIn: state.auth.isLoggedIn,
+    error: state.auth.error,
   };
 };
 
