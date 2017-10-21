@@ -59,11 +59,11 @@ const Tab = TabNavigator({
 
 const Stack = StackNavigator({
   Home: { screen: Tab },
-  AdminStack: { screen: AdminStack }
+  AdminStack: { 
+    screen: AdminStack
+   }
 }, {
-  navigationOptions: {
-
-  }
+  headerMode: 'none'
 })
 
 const mapDispatchToProps = dispatch => {
