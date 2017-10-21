@@ -111,13 +111,32 @@ class AdminRoundConfigStart extends Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    leaguePlayers: true // should be array of all league players. will iterate thru array to populate list
-  }
-};
+const styles = StyleSheet.create({
+  container: {
+    width: '100%',
+    margin: 'auto',
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingTop: Constants.statusBarHeight,
+    backgroundColor: '#ecf0f1',
+    paddingBottom: '20%'
+  },
+  listItem: {
+    color: 'black'
+  },
+  header: {
+    fontSize: 20,
+    backgroundColor: '#dbdbdb',
+    width: '100%',
+    textAlign: 'center',
+    padding: 10,
 
-export default connect(mapStateToProps)(AdminRoundConfigStart);
+  }
+});
+
+  
+export default AdminRoundConfigStart
 
 
 
@@ -139,7 +158,7 @@ export default connect(mapStateToProps)(AdminRoundConfigStart);
 //   };
 // };
 
-// export default connect( mapStateToProps, mapDispatchToProps)(SignUp);
+// export default connect( mapStateToProps, mapDispatchToProps )(SignUp);
 
 /*
 On component will mount? 

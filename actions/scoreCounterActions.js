@@ -10,5 +10,3 @@ export const postScores = (scores) => {
 			.catch(error => dispatch({ type: 'SCORES_POST_FAILED', error: error }))    
 	};
 }
-
-//add headers

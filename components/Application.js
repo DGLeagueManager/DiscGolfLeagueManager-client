@@ -8,10 +8,14 @@ import Scoring from './scoringTab/Scoring';
 import League from './leagueTab/League';
 import Results from './resultsTab/Results';
 import AdminStack from './adminTab/AdminStack';
+import { getLeagueData } from '../actions/applicationActions'
 
 class Application extends Component {
   componentWillMount() {
-  }
+    this.props.onGetLeagueData(this.props.token)
+    
+	}
+
   render() {
     return <Stack />;
   }
@@ -91,12 +95,20 @@ const Stack = StackNavigator({
   }
 })
 
+const mapStateToProps = (state, ownProps) => {
+	return {
+		//leagueData: state.applicationReducer.leagueData,
+    token: state.auth.token,
+    error: state.applicationReducer.error
+	}
+} 
+
 const mapDispatchToProps = dispatch => {
   return {
-    getLeagueData: () => {
-      displatch(getLeagueData());
+    onGetLeagueData: (user_id) => {
+      dispatch(getLeagueData(user_id));
     }
   }
 }
 
-export default connect(mapDispatchToProps)(Application);
+export default connect(mapStateToProps, mapDispatchToProps)(Application);
