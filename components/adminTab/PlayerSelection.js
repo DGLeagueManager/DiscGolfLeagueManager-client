@@ -17,9 +17,19 @@ class PlayerSelection extends Component {
     this.setState({ modalVisible: visible });
   }
 
-  // componentWillMount() {
-  //   console.log('FUCKING PROPS HELL YEA: ', this.props)
-  // }
+  generateEmptyCards() {
+    playersTotal = this.props.amPlayers.length + this.props.proPlayers.length
+    numberOfCards = Math.ceil(playersTotal / 4);
+    let cards = [];
+    for (let i = 1; i <= numberOfCards; i++) {
+      cards.push(<ScoreKeeperCard hole={i} /> )
+    }
+    return cards;
+  }
+
+  componentWillMount() {
+    this.generateEmptyCards()
+  }
   render() {
     return (
       <View style={{ backgroundColor: 'white', height: '100%' }}>
@@ -28,10 +38,7 @@ class PlayerSelection extends Component {
           <Divider style={{ backgroundColor: 'blue' }} />
           <View style={{ marginTop: 22 }}>
           </View>
-          <ScoreKeeperCard fun={this.setModalVisible.bind(this)} hole={this.state.language} />
-          <ScoreKeeperCard fun={this.setModalVisible.bind(this)} hole={this.state.language} />
-          <ScoreKeeperCard fun={this.setModalVisible.bind(this)} hole={this.state.language} />
-          <ScoreKeeperCard fun={this.setModalVisible.bind(this)} hole={this.state.language} />
+          {this.generateEmptyCards().map( card => card)}
           <Modal
             animationType="slide"
             transparent={false}
@@ -61,7 +68,7 @@ class PlayerSelection extends Component {
 
 
 const mapStateToProps = (state, ownProps) => {
-  console.log('THIS IS THE PROPS COMING FROM STATE: ', state.adminRoundConfigStartReducer)
+  //console.log('THIS IS THE PROPS COMING FROM STATE: ', state.adminRoundConfigStartReducer)
   return {
     amPlayers: state.adminRoundConfigStartReducer.amPlayers,
     proPlayers: state.adminRoundConfigStartReducer.proPlayers
