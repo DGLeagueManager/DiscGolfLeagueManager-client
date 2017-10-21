@@ -1,39 +1,25 @@
 const defaultState = {
-  isLoggedIn: false
+  // isLoggedIn: false
 };
 
-export default function reducer(state = defaultState, action) {
+export default function auth(state = defaultState, action) {
   switch (action.type) {
-    case 'SIGNUP_STARTED':
-      console.log('signup started')
-      return Object.assign({}, state, {
-        isLoggedIn: false,
-      });
-    case 'SIGNUP_SUCCEEDED':
-      console.log('signup succeeded')
-      return Object.assign({}, state, {
-        isLoggedIn: true,
-        user: action.payload.player,
-        token: action.payload.token
-      });
-    case 'SIGNUP_FAILED':
-      console.log('signup failed')
-      return Object.assign({}, state, {
-        isLoggedIn: false,
-        error: action.error
-      });
+
     case 'LOGIN_STARTED':
       console.log('login started')
       return Object.assign({}, state, {
-        isLoggedIn: false,
+        // isLoggedIn: false,
       });
     case 'LOGIN_SUCCEEDED':
-      console.log('login successful')
+      console.log('login successful');
+      console.log('here is payload', action.payload);
       return Object.assign({}, state, {
-        isLoggedIn: true,
-        user: action.payload.player,
-        token: action.payload.token
+        isLoggedIn: (true),
+        user: action.payload.data.player,
+        token: action.payload.data.token,
+        message: 'hello'
       });
+      break;
     case 'LOGIN_FAILED':
       console.log('login failed')
       return Object.assign({}, state, {

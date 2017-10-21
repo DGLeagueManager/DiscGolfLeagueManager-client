@@ -6,23 +6,34 @@ module.exports.signUp = (first_name, last_name, email, password) => {
 		dispatch({ type: 'SIGNUP_STARTED' });
 
 		axios.post('http://ec2-54-165-58-14.compute-1.amazonaws.com:3000/addPlayer', { first_name, last_name, email, password })
-			.then(response => dispatch({ type: 'SIGNUP_SUCCEEDED', payload: response }))
-			.catch(error => dispatch({ type: 'SIGNUP_FAILED', error: error }))    
+			.then((response) => {dispatch(loginSuccess(response))},
+			(error) => dispatch(loginFailed(error)))
 	};
+}
+
+const loginSuccess = function(payload) {
+	return({
+		type: 'LOGIN_SUCCEEDED',
+		payload: payload
+	});
+}
+
+const loginFailed = function(err) {
+	return({
+		type: 'LOGIN_FAILED',
+		payload: err
+	});
 }
 
 module.exports.login = (email, password) => {
-	
+
 	return (dispatch) => {
 		dispatch({ type: 'LOGIN_STARTED' });
-
-		axios.post('http://ec2-54-165-58-14.compute-1.amazonaws.com:3000/login', { email, password })
-			.then(response => dispatch({ type: 'LOGIN_SUCCEEDED', payload: response }))
-			.catch(error => dispatch({ type: 'LOGIN_FAILED', error: error }))    
+		return axios.post('http://ec2-54-165-58-14.compute-1.amazonaws.com:3000/login', { email, password })
+			.then((response) => {dispatch(loginSuccess(response))},
+			(error) => {
+				console.log(error);
+				dispatch(loginFailed(error));
+			})
 	};
 }
-
-
-
-
-
