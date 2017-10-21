@@ -67,78 +67,47 @@ class AdminRoundConfigStart extends Component {
       }
       this.setState({ checked: !this.state.checked })
     }
-
   }
 
   render() {
     return (
-      <View>
-
-        <ScrollView style={{ marginTop: 20, paddingTop: 0 }}>
-
-          <View style={styles.container}>
-            <Text style={styles.header}>Select Participants</Text>
-            <View style={{ width: '100%' }}>
-              <List style={{ marginBottom: 20 }}>
-                {
-                  this.state.list.map((ele, i) => (
-                    <View key={'list'+i}>
-                      <ListItem
-                        roundAvatar
-                        avatar={{ uri: ele.avatar_url }}
-                        key={i}
-                        subtitle={ele.subHeader}
-                        title={ele.name}
-                        rightTitleStyle={styles.listItem}
-                        label={
-                          <AdminSelectionBoxes
-                            handleProTap={this.handleProTap}
-                            handleAmTap={this.handleAmTap}
-                            i={i}
-                            amChecked={ele.amChecked}
-                            proChecked={ele.proChecked}
-                          />
-                        }
-                        hideChevron
-
-                      />
-
-                    </View>
-                  ))
-                }
-              </List>
-              <Button onPress={() => this.props.navigation.navigate('PlayerSelection')} color='black' backgroundColor="#dbdbdb" title='Next' />
-            </View>
-          </View>
-        </ScrollView>
-      </View>
+      <ScrollView style={{ marginTop: 20, paddingTop: 0 }}>
+        <List style={{ marginBottom: 20 }}>
+          {
+            this.state.list.map((ele, i) => (
+              <View key={'list'+i}>
+                <ListItem
+                  roundAvatar
+                  avatar={{ uri: ele.avatar_url }}
+                  key={i}
+                  subtitle={ele.subHeader}
+                  title={ele.name}
+                  rightTitleStyle={null}
+                  label={
+                    <AdminSelectionBoxes
+                      handleProTap={this.handleProTap}
+                      handleAmTap={this.handleAmTap}
+                      i={i}
+                      amChecked={ele.amChecked}
+                      proChecked={ele.proChecked}
+                    />
+                  }
+                  hideChevron
+                />
+              </View>
+            ))
+          }
+        </List>
+        <Button 
+          onPress={ () => this.props.navigation.navigate('PlayerSelection')} 
+          color='black'
+          backgroundColor="#dbdbdb" 
+          title='Next' 
+        />
+      </ScrollView>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-    margin: 'auto',
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingTop: Constants.statusBarHeight,
-    backgroundColor: '#ecf0f1',
-    paddingBottom: '20%'
-  },
-  listItem: {
-    color: 'black'
-  },
-  header: {
-    fontSize: 20,
-    backgroundColor: '#dbdbdb',
-    width: '100%',
-    textAlign: 'center',
-    padding: 10,
-
-  }
-});
 
 const mapStateToProps = (state, ownProps) => {
   return {

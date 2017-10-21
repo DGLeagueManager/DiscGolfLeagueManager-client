@@ -38,7 +38,7 @@ const Tabs = TabNavigator({
     swipeEnabled: true,
     showLabel: true,
     style: {
-      paddingTop: 24,
+      backgroundColor: 'red'
     }
   }
 })

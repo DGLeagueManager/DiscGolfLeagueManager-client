@@ -14,7 +14,6 @@ const AdminStack = StackNavigator({
     navigationOptions: {
       headerTitle: 'New Round',
       headerStyle: {
-        marginTop: Constants.statusBarHeight,
         backgroundColor: 'red'
       }
     }  
@@ -23,30 +22,18 @@ const AdminStack = StackNavigator({
     screen: AdminRoundConfigStart,
     navigationOptions: {
       headerTitle: 'Choose Participants',
-      headerStyle: {
-        marginTop: Constants.statusBarHeight
-      },
-      headerTitleStyle: {
-        padding: 24
-      }
     }
    },
   PlayerSelection: { 
     screen: PlayerSelection,
     navigationOptions: {
       headerTitle: 'Assign Cards',
-      headerStyle: {
-        marginTop: Constants.statusBarHeight
-      }
     } 
   },
   ScoreKeeperSelection: { 
     screen: ScoreKeeperSelection,
     navigationOptions: {
       headerTitle: 'Select a Scorekeeper',
-      headerStyle: {
-        marginTop: Constants.statusBarHeight
-      }
     }
   }
 });

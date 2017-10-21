@@ -39,7 +39,7 @@ const Tabs = TabNavigator({
     scrollEnabled: true,
     showLabel: true,
     style: {
-      paddingTop: 24
+      backgroundColor: 'red'
     }
   }
 })
