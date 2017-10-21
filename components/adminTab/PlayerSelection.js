@@ -3,28 +3,17 @@ import { View, ScrollView, Text, Picker, Modal, TouchableHighlight } from 'react
 import { Button, Divider } from 'react-native-elements';
 import PlayerSelectionCard from './PlayerSelectionCard';
 import { connect } from 'react-redux'
+import { addPlayerToCard } from '../../actions/playerSelectionActions';
 
 class PlayerSelection extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      language: '1',
-      enabled: false,
-      modalVisible: false,
+ 
     }
   }
   setModalVisible(visible) {
     this.setState({ modalVisible: visible });
-  }
-
-  generateEmptyCards() {
-    playersTotal = this.props.amPlayers.length + this.props.proPlayers.length
-    numberOfCards = Math.ceil(playersTotal / 4);
-    let cards = [];
-    for (let i = 1; i <= numberOfCards; i++) {
-      cards.push(<PlayerSelectionCard hole={i} numberOfCards={numberOfCards} /> )
-    }
-    return cards;
   }
 
   componentWillMount() {
@@ -43,18 +32,33 @@ class PlayerSelection extends Component {
 
         {this.generateEmptyCards().map( card => card)}
         
-        <Button raised onPress={() => this.props.navigation.navigate('ScoreKeeperSelection')} title='Next' />
+        <Button 
+          backgroundColor="red"
+          buttonStyle={{ 
+            marginTop: 20,
+            marginBottom: 20
+          }} 
+          onPress={() => this.props.navigation.navigate('ScoreKeeperSelection')} 
+          title='Next' />
       </ScrollView>
     )
   }
 }
 
+const mapDispatchToProps = dispatch => {
+  return { 
+    onPlayerSelect: (player, cardIndex) => {
+      dispatch(addPlayerToCard(player, cardIndex));
+    }
+  }
+}
 
 const mapStateToProps = (state, ownProps) => {
   //console.log('THIS IS THE PROPS COMING FROM STATE: ', state.adminRoundConfigStartReducer)
   return {
     amPlayers: state.adminRoundConfigStartReducer.amPlayers,
-    proPlayers: state.adminRoundConfigStartReducer.proPlayers
+    proPlayers: state.adminRoundConfigStartReducer.proPlayers,
+    cards: state.adminRoundConfigStartReducer.cards
   };
 };
 

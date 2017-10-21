@@ -9,7 +9,6 @@ export default class PlayerSelectionCard extends Component {
     this.state = {
       
     }
-
   }
 
   generateHolePickerItems() {
@@ -21,20 +20,20 @@ export default class PlayerSelectionCard extends Component {
   }
 
   render() {
-    const holePickList = () => {
-
-    }
     return (
       <Card>
-        <Text style={{ flex: 3 }}> Starting Hole: </Text>
-        <Picker 
-          selectedValue={this.props.hole} 
-          onValueChange={() => console.log("Hole switched")}
-        >
-        
-          {this.generateHolePickerItems().map( (item) => item)}
-        
-        </Picker>
+        <View style={{ flexDirection: 'row' }}>
+          <Text style={{ flex: 3 }}> Starting Hole: </Text>
+          <Picker 
+            style={{ flex: 1 }}
+            selectedValue={this.props.hole} 
+            onValueChange={() => console.log("Hole switched")}
+          >
+          
+            {this.generateHolePickerItems().map( (item) => item)}
+          
+          </Picker>
+        </View>
         <Button buttonStyle={{ marginTop: 20 }} backgroundColor={this.state.open === 0 ? "black" : "grey"} onPress={() => {
              this.setState({ open: 0 });
          }} title="Select Player..." />
