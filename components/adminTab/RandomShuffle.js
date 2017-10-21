@@ -42,6 +42,10 @@ export default class RandomShuffle extends Component {
     }
   }
 
+  handleRandom() {
+    
+  }
+
   render() {
     return (
       <View style={{paddingTop: 20}}>

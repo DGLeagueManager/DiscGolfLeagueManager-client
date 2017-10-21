@@ -5,7 +5,10 @@ import { Button, Icon, List, ListItem, CheckBox, Header } from 'react-native-ele
 export default class AdminSelectionBoxes extends React.Component {
   constructor(props) {
     super(props);
-
+    this.state = {
+      amChecked: false,
+      proChecked: false
+    }
     this.getColor = () => {
       return '#' + Math.floor(Math.random() * 16777215).toString(16);
     }
@@ -16,14 +19,20 @@ export default class AdminSelectionBoxes extends React.Component {
       <CheckBox style={{backgroundColor:"#ecf0f1"}}
         title='AM'
         checkedColor= {this.getColor()}
-        checked={this.props.amChecked}
-        onPress={ ()=>{this.props.handleAmTap(this.props.i)} }
+        checked={this.state.amChecked}
+        onPress={ ()=>{ 
+          this.props.handleAmDivisionSelect(this.props.i);
+          this.setState({ amChecked: !this.state.amChecked})
+          } }
       />
       <CheckBox style={{backgroundColor:"#ecf0f1"}}
         title='PRO'
         checkedColor= {this.getColor()}
-        checked={this.props.proChecked}
-        onPress={ ()=>{this.props.handleProTap(this.props.i)} }
+        checked={this.state.proChecked}
+        onPress={ ()=>{
+          this.props.handleProDivisionSelect(this.props.i);
+          this.setState({proChecked: !this.state.proChecked})
+       } }
       />
     </View>
     )

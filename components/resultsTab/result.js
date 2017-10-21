@@ -68,7 +68,7 @@ export default class Result extends Component {
           <List style={{marginBottom: 20}}>
             {
               this.state.list.map((ele, i) => (
-              <View key={'view' + i}>
+              <View key={i}>
 
                 <View style={{height: 40, flexDirection: 'row', flex: 1}}>
                   <Text style={{marginLeft: 20,fontSize: 15, flex: 2}}>{ele.name}</Text>
