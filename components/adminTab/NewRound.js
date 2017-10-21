@@ -12,7 +12,7 @@ export default class NewRound extends Component {
 
   render() {
     return (
-      <View style={{marginTop: '60%'}}>
+      <View style={{marginTop: 50}}>
         <Button
           buttonStyle={styles.button}
           onPress={() => this.props.navigation.navigate('AdminRoundConfigStart')}
@@ -30,7 +30,6 @@ const styles = StyleSheet.create({
     paddingTop: 75,
     paddingBottom: 75,
     width: '80%',
-    marginLeft: '10%',
-    marginRight: '10%'
+    margin: '10%'
   },
 });
