@@ -10,6 +10,7 @@ export default function reducer(state = defaultState, action) {
         isLoggedIn: false,
       });
     case 'SIGNUP_SUCCEEDED':
+      console.log('signup succeeded')
       return Object.assign({}, state, {
         isLoggedIn: true,
         user: action.payload.player,
@@ -22,6 +23,7 @@ export default function reducer(state = defaultState, action) {
         error: action.error
       });
     case 'LOGIN_STARTED':
+      console.log('login started')
       return Object.assign({}, state, {
         isLoggedIn: false,
       });
