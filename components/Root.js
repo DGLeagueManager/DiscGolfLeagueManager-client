@@ -16,19 +16,13 @@ class Root extends Component {
 
   componentWillUpdate() {
     console.log('receiving');
-    // this.render();
+
   }
   render() {
     console.log('These are the props at root', this.props);
     if (this.props.isLoggedIn) {
-        // return <Application />;
-        return (<View>
-          <Text>Hello We made it</Text>
-          <Text>Hello We made it</Text>
-          <Text>Hello We made it</Text>
-          <Text>Hello We made it</Text>
-          <Text>Hello We made it</Text>
-          </View>)
+        return <Application />;
+
     } else {
         return <Authenticate />;
     }
@@ -40,9 +34,7 @@ const mapStateToProps = function(state, ownProps){
 	return ({
 		isLoggedIn: (state.auth.isLoggedIn || false),
     token: state.auth.token,
-    user: state.auth.user,
-    message: state.auth.message,
-    isIn: state.auth.isIn
+    user: state.auth.user
 	});
 }
 export default connect(mapStateToProps)(Root);

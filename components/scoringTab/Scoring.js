@@ -84,11 +84,11 @@ class Scoring extends Component {
                   <View>
                     <ListItem
                       roundAvatar
-                      avatar={{ uri: ele.avatar_url }}
+                      avatar={{ uri: ele.avatar_url || null }}
                       key={i}
-                      subtitle={ele.subHeader}
-                      title={ele.name}
-                      rightTitleStyle={styles.listItem}
+                      subtitle={ele.subHeader || null}
+                      title={ele.name || null}
+                      rightTitleStyle={styles.listItem || null}
                       containerStyle={{ height: 70 }}
                       label={
                         <ScoreCounter id={i} increment={() => this.increment(id)} decrement={() => this.decrement(id)} player={this.state.players[id]} isOpen={this.state.isOpen} score={ele.score} />

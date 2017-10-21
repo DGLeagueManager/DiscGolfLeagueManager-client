@@ -19,7 +19,11 @@ class Application extends Component {
 
   render() {
     return <Stack />;
+    // return (<Text>OOOOOOOOOOO</Text>);
   }
+}
+const TestScreen = () => {
+  return (<Text>OOOOOOOOOOO</Text>);
 }
 
 const Tab = TabNavigator({
@@ -49,7 +53,7 @@ const Tab = TabNavigator({
         <Icon name="create" color={tintColor} />
       ),
     }
-  }, 
+  },
   Results: {
     screen: Results,
     navigationOptions: {
@@ -72,12 +76,13 @@ const Tab = TabNavigator({
     }
   },
   navigationOptions: {
+    lazy: true,
     headerLeft: (<Icon name="menu" color='#fff' />),
     headerTitle: 'DISC GOLF LEAGUE MANAGER',
     headerTitleStyle: {
       color: '#fff',
       //TODO: make these work
-      // fontFamily: 'Roboto' 
+      // fontFamily: 'Roboto'
       // justifyContent: 'center',
       // alignItems: 'center'
     },
@@ -91,7 +96,7 @@ const Tab = TabNavigator({
 
 const Stack = StackNavigator({
   Home: { screen: Tab },
-  AdminStack: { 
+  AdminStack: {
     screen: AdminStack
   }
 })
@@ -114,3 +119,4 @@ const mapDispatchToProps = dispatch => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Application);
+

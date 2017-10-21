@@ -7,6 +7,7 @@ export default class Results extends Component {
 
   render() {
     return (
+      // <Text>Hmmmmmmmm....results</Text>
       <Tabs />
     )
   }
@@ -43,4 +44,3 @@ const Tabs = TabNavigator({
     }
   }
 })
-

@@ -12,7 +12,6 @@ export default class ScoreCounter extends Component {
   }
 
   render() {
-    //console.log(this)
     return (
       <View style={{flex: 1, flexDirection: 'row'}}>
         {this.props.isOpen ?
