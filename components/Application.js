@@ -12,7 +12,7 @@ import { getLeagueData } from '../actions/applicationActions'
 
 class Application extends Component {
   componentWillMount() {
-    this.props.onGetLeagueData(this.props.token)
+    this.props.onGetLeagueData(this.props.id)
     
 	}
 
@@ -99,14 +99,15 @@ const mapStateToProps = (state, ownProps) => {
 	return {
 		//leagueData: state.applicationReducer.leagueData,
     token: state.auth.token,
-    error: state.applicationReducer.error
+    error: state.applicationReducer.error,
+    id: state.auth.id
 	}
 } 
 
 const mapDispatchToProps = dispatch => {
   return {
-    onGetLeagueData: (user_id) => {
-      dispatch(getLeagueData(user_id));
+    onGetLeagueData: (id) => {
+      dispatch(getLeagueData(id));
     }
   }
 }
