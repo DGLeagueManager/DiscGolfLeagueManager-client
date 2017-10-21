@@ -14,6 +14,7 @@ export default function reducer(state = defaultState, action) {
       return Object.assign({}, state, {
         isLoggedIn: true,
         user: action.payload.player,
+        id: action.payload.player._id,
         token: action.payload.token
       });
     case 'SIGNUP_FAILED':
@@ -32,6 +33,7 @@ export default function reducer(state = defaultState, action) {
       return Object.assign({}, state, {
         isLoggedIn: true,
         user: action.payload.player,
+        id: action.payload.player._id,
         token: action.payload.token
       });
     case 'LOGIN_FAILED':
