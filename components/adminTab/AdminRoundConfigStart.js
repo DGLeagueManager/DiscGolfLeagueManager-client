@@ -30,8 +30,22 @@ class AdminRoundConfigStart extends Component {
   }
 
   handleSubmit = () => {
-    this.props.onSubmitPlayers(this.state.amateurPlayers, this.state.proPlayers)
+    let emptyCards = this.generateEmptyCards();
+
+    this.props.onSubmitPlayers(this.state.amateurPlayers, this.state.proPlayers, emptyCards)
     this.props.navigation.navigate('PlayerSelection')
+  }
+
+  generateEmptyCards() {
+    playersTotal = this.state.amateurPlayers.length + this.state.proPlayers.length
+    numberOfCards = Math.ceil(playersTotal / 4);
+    let cards = [];
+
+    for (let i = 1; i <= numberOfCards; i++) {
+      cards.push({startingHole: i, players: []})
+    }
+    console.log(cards)
+    return cards;
   }
 
   render() {
@@ -93,7 +107,6 @@ const styles = StyleSheet.create({
     width: '100%',
     textAlign: 'center',
     padding: 10,
-
   }
 });
 
@@ -105,8 +118,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onSubmitPlayers: (amPlayers, proPlayers) => {
-      dispatch(addPlayersToRound(amPlayers, proPlayers));
+    onSubmitPlayers: (amPlayers, proPlayers, emptyCards) => {
+      dispatch(addPlayersToRound(amPlayers, proPlayers, emptyCards));
     }
   };
 };
