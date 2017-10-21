@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Constants } from 'expo';
 import { StackNavigator } from 'react-navigation';
 import { Text, View, Button, Image } from 'react-native';
 import { Icon } from 'react-native-elements';
@@ -13,7 +14,7 @@ const AdminStack = StackNavigator({
     navigationOptions: {
       headerTitle: 'New Round',
       headerStyle: {
-        marginTop: 24,
+        marginTop: Constants.statusBarHeight,
         backgroundColor: 'red'
       }
     }  
@@ -23,15 +24,31 @@ const AdminStack = StackNavigator({
     navigationOptions: {
       headerTitle: 'Choose Participants',
       headerStyle: {
-        paddingTop: 24,
+        marginTop: Constants.statusBarHeight
       },
       headerTitleStyle: {
         padding: 24
       }
     }
    },
-  PlayerSelection: { screen: PlayerSelection },
-  ScoreKeeperSelection: { screen: ScoreKeeperSelection }
+  PlayerSelection: { 
+    screen: PlayerSelection,
+    navigationOptions: {
+      headerTitle: 'Assign Cards',
+      headerStyle: {
+        marginTop: Constants.statusBarHeight
+      }
+    } 
+  },
+  ScoreKeeperSelection: { 
+    screen: ScoreKeeperSelection,
+    navigationOptions: {
+      headerTitle: 'Select a Scorekeeper',
+      headerStyle: {
+        marginTop: Constants.statusBarHeight
+      }
+    }
+  }
 });
 
 export default AdminStack;
