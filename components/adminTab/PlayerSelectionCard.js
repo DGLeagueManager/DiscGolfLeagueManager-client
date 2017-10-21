@@ -30,7 +30,7 @@ export default class PlayerSelectionCard extends Component {
             onValueChange={() => console.log("Hole switched")}
           >
           
-            {this.generateHolePickerItems().map( (item) => item)}
+            {this.generateHolePickerItems().map((item) => item)}
           
           </Picker>
         </View>

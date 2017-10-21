@@ -17,7 +17,7 @@ class PlayerSelection extends Component {
   }
 
   componentWillMount() {
-    this.generateEmptyCards()
+    console.log('player selection screen props: ', this.props)
   }
   render() {
     return (
@@ -30,8 +30,7 @@ class PlayerSelection extends Component {
           title='Randomize All' 
         />
 
-        {this.generateEmptyCards().map( card => card)}
-        
+        {this.props.cards.map(card => <PlayerSelectionCard />) }        
         <Button 
           backgroundColor="red"
           buttonStyle={{ 
