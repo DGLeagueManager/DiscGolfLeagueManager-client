@@ -16,19 +16,13 @@ class Root extends Component {
 
   componentWillUpdate() {
     console.log('receiving');
-    // this.render();
+
   }
   render() {
     console.log('These are the props at root', this.props);
-    if (!this.props.isLoggedIn) {
+    if (this.props.isLoggedIn) {
         return <Application />;
-        // return (<View>
-        //   <Text>Hello We made it</Text>
-        //   <Text>Hello We made it</Text>
-        //   <Text>Hello We made it</Text>
-        //   <Text>Hello We made it</Text>
-        //   <Text>Hello We made it</Text>
-        //   </View>)
+
     } else {
         return <Authenticate />;
     }
