@@ -3,20 +3,38 @@ import { Text, ScrollView, View, StyleSheet, Picker } from 'react-native';
 import { Card, Button, Divider } from 'react-native-elements';
 import AdminStack from './AdminStack'
 
-export default class ScoreKeeperCard extends Component {
+export default class PlayerSelectionCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
       
     }
+
+  }
+
+  generateHolePickerItems() {
+    const items = [];
+    for (let i = 1; i < 19; i++) {
+      items.push(<Picker.Item label={i.toString()} value={i} />)
+    }
+    return items;
   }
 
   render() {
+    const holePickList = () => {
+
+    }
     return (
       <Card>
         <Text style={{ flex: 3 }}> Starting Hole: </Text>
-        <Picker style={{ flex: 1 }} selectedValue={this.props.hole} onValueChange={() => console.log("Hole switched")} />
-
+        <Picker 
+          selectedValue={this.props.hole} 
+          onValueChange={() => console.log("Hole switched")}
+        >
+        
+          {this.generateHolePickerItems().map( (item) => item)}
+        
+        </Picker>
         <Button buttonStyle={{ marginTop: 20 }} backgroundColor={this.state.open === 0 ? "black" : "grey"} onPress={() => {
              this.setState({ open: 0 });
          }} title="Select Player..." />
