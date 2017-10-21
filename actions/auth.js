@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 module.exports.signUp = (first_name, last_name, email, password) => {
-	console.log('signUp method invoked')
+
 	return (dispatch) => {
 		dispatch({ type: 'SIGNUP_STARTED' });
 
