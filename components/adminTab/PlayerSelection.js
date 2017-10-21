@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { View, ScrollView, Text, Picker, Modal, TouchableHighlight } from 'react-native';
 import { Button, Divider } from 'react-native-elements';
 import ScoreKeeperCard from './ScoreKeeperCard';
+import { connect } from 'react-redux'
 
-export default class PlayerSelection extends Component {
+class PlayerSelection extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -15,6 +16,10 @@ export default class PlayerSelection extends Component {
   setModalVisible(visible) {
     this.setState({ modalVisible: visible });
   }
+
+  // componentWillMount() {
+  //   console.log('FUCKING PROPS HELL YEA: ', this.props)
+  // }
   render() {
     return (
       <View style={{ backgroundColor: 'white', height: '100%' }}>
@@ -54,6 +59,16 @@ export default class PlayerSelection extends Component {
   }
 }
 
+
+const mapStateToProps = (state, ownProps) => {
+  console.log('THIS IS THE PROPS COMING FROM STATE: ', state.adminRoundConfigStartReducer)
+  return {
+    amPlayers: state.adminRoundConfigStartReducer.amPlayers,
+    proPlayers: state.adminRoundConfigStartReducer.proPlayers
+  };
+};
+
+export default connect(mapStateToProps)(PlayerSelection)
 /*
 Create SelectPlayerFunction:
   should show a scroll view of all available players

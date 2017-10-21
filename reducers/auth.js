@@ -10,12 +10,11 @@ export default function reducer(state = defaultState, action) {
         isLoggedIn: false,
       });
     case 'SIGNUP_SUCCEEDED':
-      console.log('signup succeeded')
       return Object.assign({}, state, {
         isLoggedIn: true,
-        user: action.payload.player,
-        id: action.payload.player._id,
-        token: action.payload.token
+        user: action.payload.data.player,
+        id: action.payload.data.player._id,
+        token: action.payload.data.token
       });
     case 'SIGNUP_FAILED':
       console.log('signup failed')
@@ -32,9 +31,9 @@ export default function reducer(state = defaultState, action) {
       console.log('login successful')
       return Object.assign({}, state, {
         isLoggedIn: true,
-        user: action.payload.player,
-        id: action.payload.player._id,
-        token: action.payload.token
+        user: action.payload.data.player,
+        id: action.payload.data.player._id,
+        token: action.payload.data.token
       });
     case 'LOGIN_FAILED':
       return Object.assign({}, state, {

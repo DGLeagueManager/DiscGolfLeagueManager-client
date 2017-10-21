@@ -12,6 +12,7 @@ import { getLeagueData } from '../actions/applicationActions'
 
 class Application extends Component {
   componentWillMount() {
+    console.log(this.props)
     this.props.onGetLeagueData(this.props.id)
     
 	}

@@ -6,9 +6,10 @@ export default function reducer(state = {}, action) {
         leagueData: null
       });
     case 'GET_LEAGUE_DATA_SUCCEEDED':
-      console.log('LEAGUE DATA! :', action.payload)
+      console.log('LEAGUE DATA! :', action.payload.data.seasons[0].players)
       return Object.assign({}, state, {
-        leagueData: action.payload
+        leagueData: action.payload.data,
+        leaguePlayers: action.payload.data.seasons[0].players
       });
     case 'GET_LEAGUE_DATA_FAILED':
       return Object.assign({}, state, {
