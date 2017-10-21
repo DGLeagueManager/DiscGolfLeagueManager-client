@@ -8,10 +8,30 @@ import PlayerSelection from './PlayerSelection';
 import ScoreKeeperSelection from './ScoreKeeperSelection'
 
 const AdminStack = StackNavigator({
-  NewRound: { screen: NewRound },
-  AdminRoundConfigStart: { screen: AdminRoundConfigStart },
+  NewRound: { 
+    screen: NewRound,
+    navigationOptions: {
+      headerTitle: 'New Round',
+      headerStyle: {
+        marginTop: 24,
+        backgroundColor: 'red'
+      }
+    }  
+  },
+  AdminRoundConfigStart: { 
+    screen: AdminRoundConfigStart,
+    navigationOptions: {
+      headerTitle: 'Choose Participants',
+      headerStyle: {
+        paddingTop: 24,
+      },
+      headerTitleStyle: {
+        padding: 24
+      }
+    }
+   },
   PlayerSelection: { screen: PlayerSelection },
-  ScoreKeeperSelection: { screen: ScoreKeeperSelection },
+  ScoreKeeperSelection: { screen: ScoreKeeperSelection }
 });
 
 export default AdminStack;
