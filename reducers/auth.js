@@ -4,6 +4,24 @@ const defaultState = {
 
 export default function auth(state = defaultState, action) {
   switch (action.type) {
+    case 'SIGNUP_STARTED':
+      console.log('signup started')
+      return Object.assign({}, state, {
+        isLoggedIn: false,
+      });
+    case 'SIGNUP_SUCCEEDED':
+      return Object.assign({}, state, {
+        isLoggedIn: true,
+        user: action.payload.data.player,
+        id: action.payload.data.player._id,
+        token: action.payload.data.token
+      });
+    case 'SIGNUP_FAILED':
+      console.log('signup failed')
+      return Object.assign({}, state, {
+        isLoggedIn: false,
+        error: action.error
+      });
 
     case 'LOGIN_STARTED':
       console.log('login started')
@@ -14,14 +32,13 @@ export default function auth(state = defaultState, action) {
       console.log('login successful');
       console.log('here is payload', action.payload);
       return Object.assign({}, state, {
-        isLoggedIn: (true),
+        isLoggedIn: true,
         user: action.payload.data.player,
-        token: action.payload.data.token,
-        message: 'hello'
+        id: action.payload.data.player._id,
+        token: action.payload.data.token
       });
       break;
     case 'LOGIN_FAILED':
-      console.log('login failed')
       return Object.assign({}, state, {
         isLoggedIn: false,
         error: action.error
