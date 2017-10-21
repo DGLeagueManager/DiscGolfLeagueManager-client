@@ -16,8 +16,7 @@ export default function auth(state = defaultState, action) {
       return Object.assign({}, state, {
         isLoggedIn: (true),
         user: action.payload.data.player,
-        token: action.payload.data.token,
-        message: 'hello'
+        token: action.payload.data.token
       });
       break;
     case 'LOGIN_FAILED':
