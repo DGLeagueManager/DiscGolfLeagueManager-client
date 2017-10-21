@@ -5,13 +5,11 @@ import Authenticate from './authenticate/Authenticate';
 
 class Root extends Component {
   render() {
-      return <Application />
-
-    //   if (this.props.isLoggedIn) {
-    //       return <Application />;
-    //   } else {
-    //       return <Authenticate />;
-    //   }
+    if (this.props.isLoggedIn) {
+        return <Application />;
+    } else {
+        return <Authenticate />;
+    }
   }
 }
 
