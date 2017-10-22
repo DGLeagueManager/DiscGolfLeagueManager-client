@@ -3,7 +3,8 @@ export default function reducer(state = {}, action) {
     case "ADD_PLAYER_TO_CARD":
       let i = action.payload.cardIndex;
       return Object.assign({}, state, {
-        cards[i]: action.payload.player
+        // TODO: debug the below error
+        // cards[i].players: [...cards[i].players, action.payload.player]
       });
     default:
       return state;
