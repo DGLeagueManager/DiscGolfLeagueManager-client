@@ -14,7 +14,7 @@ const AdminStack = StackNavigator({
     navigationOptions: {
       headerTitle: 'New Round',
       headerStyle: {
-        backgroundColor: 'red'
+        // backgroundColor: 'red'
       }
     }  
   },

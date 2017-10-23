@@ -4,3 +4,10 @@ module.exports.addPlayerToCard = (player, cardIndex) => {
     payload: { player: player, cardIndex: cardIndex }
   }
 }
+
+module.exports.changeStartingHole = (card, hole) => {
+  return {
+    type: 'CHANGE_STARTING_HOLE',
+    payload: {card: card, newStartingHole: hole}
+  }
+}

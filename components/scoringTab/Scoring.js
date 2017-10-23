@@ -67,90 +67,58 @@ class Scoring extends Component {
 
   render() {
     return (
-      <View>
-
-      <ScrollView style={{marginTop: 20, paddingTop: 0}}>
-
-        <View style={styles.container}>
-
-        <View style={{width: '100%'}}>
-        <Divider style={{ backgroundColor: 'silver' }} />
-
-          <List style={{marginBottom: 20}}>
-            {
-              Object.keys(this.state.players).map((id, i) => {
-                var ele = this.state.players[id]
-                return (
-                  <View>
-                    <ListItem
-                      roundAvatar
-                      avatar={{ uri: ele.avatar_url || null }}
-                      key={i}
-                      subtitle={ele.subHeader || null}
-                      title={ele.name || null}
-                      rightTitleStyle={styles.listItem || null}
-                      containerStyle={{ height: 70 }}
-                      label={
-                        <ScoreCounter id={i} increment={() => this.increment(id)} decrement={() => this.decrement(id)} player={this.state.players[id]} isOpen={this.state.isOpen} score={ele.score} />
-                      }
-                      hideChevron
-
+      <ScrollView>
+        <List>
+          {
+            Object.keys(this.state.players).map((id, i) => {
+              var ele = this.state.players[id]
+              return (
+                <ListItem
+                  roundAvatar
+                  avatar={{ uri: ele.avatar_url || null }}
+                  key={i}
+                  subtitle={ele.subHeader || null}
+                  title={ele.name || null}
+                  containerStyle={{ height: 80 }}
+                  hideChevron
+                  label={
+                    <ScoreCounter 
+                      style={{ flex: 1 }}
+                      id={i} 
+                      increment={() => this.increment(id)} 
+                      decrement={() => this.decrement(id)} 
+                      player={this.state.players[id]} 
+                      isOpen={this.state.isOpen} 
+                      score={ele.score} 
                     />
+                  }
+                />
+              )
+            })
+          }
+        </List>
 
-                  </View>
-                )
-              })
-            }
-         </List>
         {this.state.isOpen ?
-          <Button onPress={ (e)=>{ this.addScores(e) } } color='black' backgroundColor="#dbdbdb"  title="Submit"/>
+          <Button 
+            onPress={ (e)=>{ this.addScores(e) } } 
+            color='black' 
+            backgroundColor="red"  
+            title="Submit"
+            buttonStyle={{ marginVertical: 20 }}
+          />
         :
-          <Button onPress={ ()=>{ this.setState({ isOpen: !this.state.isOpen }) } } color='white' backgroundColor="black"  title="Update"/>
+          <Button 
+            onPress={ ()=>{ this.setState({ isOpen: !this.state.isOpen }) } } 
+            color='white' 
+            backgroundColor="orange"  
+            title="Update"
+            buttonStyle={{ marginVertical: 20 }}
+          />
         }
-        </View>
-        </View>
       </ScrollView>
-      </View>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-    margin: 'auto',
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingTop: Constants.statusBarHeight,
-    backgroundColor: '#ecf0f1',
-    paddingBottom: '20%',
-    flexDirection: 'row'
-  },
-  paragraph: {
-    margin: 24,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    color: '#34495e',
-  },
-  input: {
-    width: 250
-  },
-  formView: {
-    backgroundColor: '#fefefe'
-  },
-  listItem: {
-    color: 'black'
-  },
-  header: {
-    fontSize: 20,
-    backgroundColor: '#dbdbdb',
-    width: '100%',
-    textAlign: 'center',
-    padding: 10,
-
-  }
-});
 
 const mapStateToProps = (state, ownProps) => {
   return {

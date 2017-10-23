@@ -1,19 +1,24 @@
 import React, { Component } from 'react';
 import { Text, ScrollView, View, StyleSheet, Picker } from 'react-native';
 import { Card, Button, Divider } from 'react-native-elements';
-import AdminStack from './AdminStack'
+import { connect } from 'react-redux';
+import AdminStack from './AdminStack';
+import { addPlayerToCard, changeStartingHole } from '../../actions/playerSelectionActions';
 
-export default class PlayerSelectionCard extends Component {
+class PlayerSelectionCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      
+      i: this.props.key,
+      card: this.props.card,
+      startingHole: this.props.startingHole,
+
     }
   }
 
   generateHolePickerItems() {
     const items = [];
-    for (let i = 1; i < 19; i++) {
+    for (let i = 1; i <= 18; i++) {
       items.push(<Picker.Item label={i.toString()} value={i} />)
     }
     return items;
@@ -23,10 +28,10 @@ export default class PlayerSelectionCard extends Component {
     return (
       <Card>
         <View style={{ flexDirection: 'row' }}>
-          <Text style={{ flex: 3 }}> Starting Hole: </Text>
+          <Text style={{ flex: 3, fontSize: 20, marginTop: 10 }}> Starting Hole: </Text>
           <Picker 
             style={{ flex: 1 }}
-            selectedValue={this.props.hole} 
+            selectedValue={this.props.startingHole} 
             onValueChange={() => console.log("Hole switched")}
           >
           
@@ -71,6 +76,15 @@ const styles = StyleSheet.create({
   }
 });
 
+const mapDispatchToProps = dispatch => {
+  return { 
+    onPlayerSelect: (player, cardIndex) => {
+      dispatch(addPlayerToCard(player, cardIndex));
+    }
+  }
+}
+
+export default connect(mapDispatchToProps)(PlayerSelectionCard)
 
 /*
 

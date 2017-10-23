@@ -14,10 +14,6 @@ class Root extends Component {
     };
   }
 
-  componentWillUpdate() {
-    console.log('receiving');
-
-  }
   render() {
     console.log('These are the props at root', this.props);
     if (this.props.isLoggedIn) {
