@@ -14,6 +14,7 @@ class Scoring extends Component {
     super(props);
 
     this.state={
+      card: {isScorekeeper: false},
       isOpen: true,
       checked: false,
       holeData: {
@@ -24,16 +25,6 @@ class Scoring extends Component {
       players: list
     };
 
-    this.handleAmTap = (index) => {
-      this.state.list[index].proChecked=false;
-      this.state.list[index].amChecked = !this.state.list[index].amChecked;
-      if (this.state.list[index].subHeader === 'Amateur') {
-        this.state.list[index].subHeader = ''
-      } else {
-        this.state.list[index].subHeader = 'Amateur'
-      }
-      this.setState({checked: !this.state.checked})
-    }
   }
 
   increment(id) {
@@ -82,14 +73,14 @@ class Scoring extends Component {
                   containerStyle={{ height: 80 }}
                   hideChevron
                   label={
-                    <ScoreCounter 
+                    <ScoreCounter
                       style={{ flex: 1 }}
-                      id={i} 
-                      increment={() => this.increment(id)} 
-                      decrement={() => this.decrement(id)} 
-                      player={this.state.players[id]} 
-                      isOpen={this.state.isOpen} 
-                      score={ele.score} 
+                      id={i}
+                      increment={() => this.increment(id)}
+                      decrement={() => this.decrement(id)}
+                      player={this.state.players[id]}
+                      isOpen={this.state.card.isScorekeeper}
+                      score={ele.score}
                     />
                   }
                 />
@@ -97,23 +88,25 @@ class Scoring extends Component {
             })
           }
         </List>
-
-        {this.state.isOpen ?
-          <Button 
-            onPress={ (e)=>{ this.addScores(e) } } 
-            color='black' 
-            backgroundColor="red"  
-            title="Submit"
-            buttonStyle={{ marginVertical: 20 }}
-          />
-        :
-          <Button 
-            onPress={ ()=>{ this.setState({ isOpen: !this.state.isOpen }) } } 
-            color='white' 
-            backgroundColor="orange"  
-            title="Update"
-            buttonStyle={{ marginVertical: 20 }}
-          />
+        {
+          this.state.card.isScorekeeper ? (
+                  this.state.isOpen ?
+                    <Button
+                      onPress={ (e)=>{ this.addScores(e) } }
+                      color='black'
+                      backgroundColor="red"
+                      title="Submit"
+                      buttonStyle={{ marginVertical: 20 }}
+                    />
+                  :
+                    <Button
+                      onPress={ ()=>{ this.setState({ isOpen: !this.state.isOpen }) } }
+                      color='white'
+                      backgroundColor="orange"
+                      title="Update"
+                      buttonStyle={{ marginVertical: 20 }}
+                    />
+                  ) : null
         }
       </ScrollView>
     );
