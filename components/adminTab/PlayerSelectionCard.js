@@ -9,11 +9,18 @@ class PlayerSelectionCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      i: this.props.key,
-      card: this.props.card,
-      startingHole: this.props.startingHole,
-
+      i: 0,
+      card: {},
+      startingHole: 1,
     }
+  }
+
+  componentWillMount() {
+    this.setState = { 
+      i: this.props.key, 
+      card: this.props.card, 
+      startingHole: this.props.startingHole 
+    };
   }
 
   generateHolePickerItems() {
@@ -25,38 +32,38 @@ class PlayerSelectionCard extends Component {
   }
 
   render() {
-    return (
-      <Card>
-        <View style={{ flexDirection: 'row' }}>
-          <Text style={{ flex: 3, fontSize: 20, marginTop: 10 }}> Starting Hole: </Text>
-          <Picker 
-            style={{ flex: 1 }}
+    const { card, i } = this.state;
+    return <Card>
+        <View style={{ flexDirection: "row" }}>
+          <Text style={{ flex: 3, fontSize: 20, marginTop: 10 }}>
+            {" "}
+            Starting Hole:{" "}
+          </Text>
+          <Picker style={{ flex: 1 }} 
             selectedValue={this.props.startingHole} 
-            onValueChange={() => console.log("Hole switched")}
+            onValueChange={(value) => {
+              this.props.onHoleSelect(i, value)
+            }}
           >
-          
-            {this.generateHolePickerItems().map((item) => item)}
-          
+            {this.generateHolePickerItems().map(item => item)}
           </Picker>
         </View>
         <Button buttonStyle={{ marginTop: 20 }} backgroundColor={this.state.open === 0 ? "black" : "grey"} onPress={() => {
-             this.setState({ open: 0 });
-         }} title="Select Player..." />
+            this.setState({ open: 0 });
+          }} title="Select Player..." />
 
         <Button raised backgroundColor={this.state.open === 1 ? "black" : "grey"} onPress={() => {
-             this.setState({ open: 1 });
-           }} style={styles.button} title="Select Player..." />
+            this.setState({ open: 1 });
+          }} style={styles.button} title="Select Player..." />
 
         <Button raised backgroundColor={this.state.open === 2 ? "black" : "grey"} onPress={() => {
-             this.setState({ open: 2 });
-           }} style={styles.button} title="Select Player..." />
+            this.setState({ open: 2 });
+          }} style={styles.button} title="Select Player..." />
 
         <Button raised backgroundColor={this.state.open === 3 ? "black" : "grey"} onPress={() => {
-             this.setState({ open: 3 });
-           }} style={styles.button} title="Select Player..." />
-
-      </Card>
-    )
+            this.setState({ open: 3 });
+          }} style={styles.button} title="Select Player..." />
+      </Card>;
   }
 }
 
@@ -80,11 +87,14 @@ const mapDispatchToProps = dispatch => {
   return { 
     onPlayerSelect: (player, cardIndex) => {
       dispatch(addPlayerToCard(player, cardIndex));
+    },
+    onHoleSelect: (cardIndex, hole) => {
+      dispatch(changeStartingHole(cardIndex, hole));
     }
   }
 }
 
-export default connect(mapDispatchToProps)(PlayerSelectionCard)
+export default connect(null, mapDispatchToProps)(PlayerSelectionCard)
 
 /*
 

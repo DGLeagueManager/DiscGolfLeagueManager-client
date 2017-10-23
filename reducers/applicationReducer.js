@@ -6,8 +6,14 @@ export default function reducer(state = {}, action) {
         leagueData: null
       });
     case 'GET_LEAGUE_DATA_SUCCEEDED':
-      console.log('LEAGUE DATA! :', action.payload.data.seasons[0].players)
+      console.log('LEAGUE DATA! :', action.payload.data)
+      const currentRound = action.payload.data.seasons[0].rounds.forEach( round => {
+        if (!round.completed) {
+          return round.round_number
+        }
+      })
       return Object.assign({}, state, {
+        currentSeason: action.payload.data.seasons[0],
         leagueData: action.payload.data,
         leaguePlayers: action.payload.data.seasons[0].players
       });
