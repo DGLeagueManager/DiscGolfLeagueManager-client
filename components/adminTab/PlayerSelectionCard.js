@@ -1,28 +1,13 @@
 import React, { Component } from 'react';
-import { Text, ScrollView, View, StyleSheet, Picker } from 'react-native';
+import { Text, ScrollView, View, StyleSheet, Picker, FlatList, TouchableHighlight, } from 'react-native';
 import { Card, Button, Divider } from 'react-native-elements';
 import { connect } from 'react-redux';
 import AdminStack from './AdminStack';
 import { addPlayerToCard, changeStartingHole } from '../../actions/playerSelectionActions';
 import PlayerPicker from './PlayerPicker';
+import Modal from 'react-native-modal'
 
 class PlayerSelectionCard extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      i: 0,
-      card: {},
-      startingHole: 1,
-    }
-  }
-
-  componentWillMount() {
-    this.setState({
-      i: this.props.key, 
-      card: this.props.card, 
-      startingHole: this.props.startingHole 
-    });
-  }
 
   generateHolePickerItems() {
     const items = [];
@@ -31,13 +16,8 @@ class PlayerSelectionCard extends Component {
     }
     return items;
   }
-  
-  selectPlayer(player) {
-    
-  }
 
   render() {
-    const { card, i } = this.state;
     return <Card>
         <View style={{ flexDirection: "row" }}>
           <Text style={{ flex: 3, fontSize: 20, marginTop: 10 }}>
@@ -54,9 +34,44 @@ class PlayerSelectionCard extends Component {
           </Picker>
         </View>
 
-        <PlayerPicker toggleModal={this.props.toggleModal} />
+        <PlayerPicker player={this.props.card.players[0]} toggleModal={this.props.toggleModal} />
+        <PlayerPicker player={this.props.card.players[1]} toggleModal={this.props.toggleModal} />
+        <PlayerPicker player={this.props.card.players[2]} toggleModal={this.props.toggleModal} />
+        <PlayerPicker player={this.props.card.players[3]} toggleModal={this.props.toggleModal} />
 
-        <Button buttonStyle={{ marginTop: 20 }} backgroundColor={this.state.open === 0 ? "black" : "grey"} onPress={() => {
+          <Modal
+            isVisible={this.props.modalVisible}
+            onRequestClose={() => {
+              console.log("");
+            }}
+          >
+            <View style={styles.modalContent}>
+              <FlatList
+                data={this.props.unassignedPlayers}
+                renderItem={({ item, index }) => (
+                  <TouchableHighlight
+                    onPress={(value) => {
+                      console.log(value)
+                      this.props.handleSelectPlayer(this.props.unassignedPlayers.indexOf(item), this.props.card);
+                    }}
+                    key={index}
+                  >
+                    <View style={styles.listItem}>
+                      <Text>
+                        {item.first_name + " " + item.last_name}
+                      </Text>
+                    </View>
+                  </TouchableHighlight>
+                )}
+              />
+              <Button
+                onPress={this.props.toggleModal}
+                title='Close'
+              />
+            </View>
+          </Modal>
+
+        {/* <Button buttonStyle={{ marginTop: 20 }} backgroundColor={this.state.open === 0 ? "black" : "grey"} onPress={() => {
             this.setState({ open: 0 });
           }} title="Select Player..." />
 
@@ -70,7 +85,7 @@ class PlayerSelectionCard extends Component {
 
         <Button raised backgroundColor={this.state.open === 3 ? "black" : "grey"} onPress={() => {
             this.setState({ open: 3 });
-          }} style={styles.button} title="Select Player..." />
+          }} style={styles.button} title="Select Player..." /> */}
       </Card>;
   }
 }
@@ -88,7 +103,15 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: 5
-  }
+  },
+  modalContent: {
+    backgroundColor: 'white',
+    padding: 22,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 4,
+    borderColor: 'rgba(0, 0, 0, 0.1)',
+  },
 });
 
 const mapDispatchToProps = dispatch => {

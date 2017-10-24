@@ -9,7 +9,7 @@ const PlayerPicker = (props) => {
     <Button
       onPress={props.toggleModal}
       buttonStyle={{ marginTop: 20 }}
-      backgroundColor="red"
+      backgroundColor="grey"
       title="Select Player..."
     />
   );
