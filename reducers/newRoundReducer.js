@@ -25,7 +25,7 @@ export default function reducer(state = {}, action) {
       });
     case "ADD_PLAYER_TO_CARD":
     //TODO: make sure this works lol
-      let card = action.payload.card;
+      const card = action.payload.card;
       card.players.push(action.payload.player);
       return Object.assign({}, state, {
           newRound: {

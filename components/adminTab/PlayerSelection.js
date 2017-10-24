@@ -11,6 +11,7 @@ import { Button, Divider } from "react-native-elements";
 import PlayerSelectionCard from "./PlayerSelectionCard";
 import { connect } from "react-redux";
 import { addPlayerToCard } from "../../actions/playerSelectionActions";
+import PlayerPickerModal from './PlayerPickerModal';
 
 class PlayerSelection extends Component {
   constructor(props) {
@@ -18,7 +19,8 @@ class PlayerSelection extends Component {
     console.log("player selection props:", props);
     this.state = {
       unassignedPlayers: [],
-      modalVisible: false
+      modalVisible: false,
+      activeCard: null,
     };
   }
 
@@ -30,23 +32,32 @@ class PlayerSelection extends Component {
     this.setState({ unassignedPlayers: arr });
   }
 
-  handleSelectPlayer(i, card) {
+  handleSelectPlayer(i, cardKey) {
+    let card = this.props.cards[cardKey];
     let selectedPlayer = this.state.unassignedPlayers[i];
     let unassignedPlayers = this.state.unassignedPlayers;
+
     unassignedPlayers.splice(i, 1);
     this.props.updateCard(selectedPlayer, card);
     this.setState({ unassignedPlayers: unassignedPlayers });
-    console.log("handleSelectPlayer invoked...");
+
   }
 
-  toggleModal() {
-    this.setState({ modalVisible: !this.state.modalVisible });
+  toggleModal(key) {
+    this.setState({ modalVisible: !this.state.modalVisible, activeCard: key });
+    console.log('toggle Modal invoked...active Card:', key);
   }
 
   render() {
     return (
       <View>
-
+      <PlayerPickerModal 
+        isVisible={this.state.modalVisible} 
+        activeCard={this.state.activeCard} 
+        unassignedPlayers={this.state.unassignedPlayers}
+        handleSelectPlayer={this.handleSelectPlayer.bind(this)}
+        toggleModal={this.toggleModal.bind(this)}
+      />
         <ScrollView>
           <Text style={{ marginTop: 20, marginLeft: 20, fontSize: 20 }}>
             Unassigned Players: {this.state.unassignedPlayers.length}
@@ -61,12 +72,11 @@ class PlayerSelection extends Component {
 
           {Object.keys(this.props.cards).map(key => {
             let card = this.props.cards[key];
-            console.log('card: ', card);
             return (
               <View>
-
                 <PlayerSelectionCard
                   key={key}
+                  cardKey={key}
                   startingHole={card.startingHole}
                   card={card}
                   unassignedPlayers={this.state.unassignedPlayers}
@@ -118,13 +128,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center"
   },
-  listItem: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    fontSize: 30,
-    padding: 5,
-  }
 });
 
 /*
