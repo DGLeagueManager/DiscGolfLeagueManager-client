@@ -4,6 +4,7 @@ import { Card, Button, Divider } from 'react-native-elements';
 import { connect } from 'react-redux';
 import AdminStack from './AdminStack';
 import { addPlayerToCard, changeStartingHole } from '../../actions/playerSelectionActions';
+import PlayerPicker from './PlayerPicker';
 
 class PlayerSelectionCard extends Component {
   constructor(props) {
@@ -16,11 +17,11 @@ class PlayerSelectionCard extends Component {
   }
 
   componentWillMount() {
-    this.setState = { 
+    this.setState({
       i: this.props.key, 
       card: this.props.card, 
       startingHole: this.props.startingHole 
-    };
+    });
   }
 
   generateHolePickerItems() {
@@ -29,6 +30,10 @@ class PlayerSelectionCard extends Component {
       items.push(<Picker.Item label={i.toString()} value={i} />)
     }
     return items;
+  }
+  
+  selectPlayer(player) {
+    
   }
 
   render() {
@@ -49,27 +54,7 @@ class PlayerSelectionCard extends Component {
           </Picker>
         </View>
 
-
-        <Picker 
-          style={{ flex: 1}}
-            
-          onValueChange={ (value) => {
-            this.props.handleSelectPlayer(value, this.props.card)
-            console.log("unassigned players: ", this.props.unassignedPlayers)
-            }
-          }
-        > 
-          {this.props.unassignedPlayers.map( (player, i) => {
-            return (
-              <Picker.Item 
-                label={player.first_name + " " + player.last_name}
-                value={i}
-              />
-            )
-            })
-          }
-        </Picker>
-
+        <PlayerPicker toggleModal={this.props.toggleModal} />
 
         <Button buttonStyle={{ marginTop: 20 }} backgroundColor={this.state.open === 0 ? "black" : "grey"} onPress={() => {
             this.setState({ open: 0 });
@@ -118,25 +103,3 @@ const mapDispatchToProps = dispatch => {
 }
 
 export default connect(null, mapDispatchToProps)(PlayerSelectionCard)
-
-/*
-
-Map Card Array to render complete cards with a selection button for the score keeper.
-
-Map state to props:
-  -Card Array:
-    -playerFirstName
-    -playerLastName
-    -playerDivision
-    -playerID
-
-Map Dispatch to props:
-  -onSubmit Function:
-    -dispatch new list comprised of:
-      -cards with score keeper id selected
-      -hole start info
-      -send cards to database
-    -point to next screen in stack
-      -Implement Round in Progress screen?  Set up logic for the start round screen?
-      -If round in progress, no option for going through stack?
-*/

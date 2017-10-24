@@ -147,23 +147,3 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect( mapStateToProps, mapDispatchToProps )(AdminRoundConfigStart);
-
-/*
-On component will mount? 
-
-Map state to props:
-  -players array:
-    -playerFirstName
-    -playerLastName
-    -playerPreviousDevision?
-    -playerEmail
-    -playerID
-
-Map Dispatch to props:
-  -onSubmit Function:
-    -dispatch new list comprised of:
-      -players present 
-      -players division 
-      -players contact info
-    -point to next screen in stack
-*/

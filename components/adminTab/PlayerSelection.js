@@ -1,25 +1,34 @@
-import React, { Component } from 'react';
-import { View, ScrollView, Text, Modal, TouchableHighlight } from 'react-native';
-import { Button, Divider } from 'react-native-elements';
-import PlayerSelectionCard from './PlayerSelectionCard';
-import { connect } from 'react-redux'
-import { addPlayerToCard } from '../../actions/playerSelectionActions';
+import React, { Component } from "react";
+import {
+  View,
+  ScrollView,
+  Text,
+  Modal,
+  TouchableHighlight,
+  FlatList,
+  StyleSheet
+} from "react-native";
+import { Button, Divider } from "react-native-elements";
+import PlayerSelectionCard from "./PlayerSelectionCard";
+import { connect } from "react-redux";
+import { addPlayerToCard } from "../../actions/playerSelectionActions";
 
 class PlayerSelection extends Component {
   constructor(props) {
     super(props);
-    console.log('player selection props:', props)
+    console.log("player selection props:", props);
     this.state = {
-      unassignedPlayers: []
-    }
+      unassignedPlayers: [],
+      modalVisible: false
+    };
   }
 
   componentWillMount() {
     let arr = [];
     for (var key in this.props.playersPresent) {
-      arr.push(this.props.playersPresent[key])
+      arr.push(this.props.playersPresent[key]);
     }
-    this.setState({ unassignedPlayers: arr })
+    this.setState({ unassignedPlayers: arr });
   }
 
   handleSelectPlayer(i, card) {
@@ -27,60 +36,97 @@ class PlayerSelection extends Component {
     let unassignedPlayers = this.state.unassignedPlayers;
     unassignedPlayers.splice(i, 1);
     this.props.updateCard(selectedPlayer, card);
-    this.setState({ unassignedPlayers: unassignedPlayers })
-    console.log('handleSelectPlayer invoked...')
+    this.setState({ unassignedPlayers: unassignedPlayers });
+    console.log("handleSelectPlayer invoked...");
+  }
+
+  toggleModal() {
+    this.setState({ modalVisible: !this.state.modalVisible });
   }
 
   render() {
     return (
-      <ScrollView >
-        <Text style={{marginTop: 20, marginLeft: 20, fontSize: 20}}>
-          Unassigned Players: {this.state.unassignedPlayers.length}
-        </Text>
- 
-        <Button 
-          onPress={this.handleRandom} 
-          buttonStyle={{ marginTop: 20 }}
-          backgroundColor="red" 
-          title='Randomize All' 
-        />
+      <View>
+        <Modal
+          visible={this.state.modalVisible}
+          onRequestClose={() => {
+            console.log("");
+          }}
+        >
+          <View contentContainerStyle={styles.container}>
+            <FlatList
+              data={this.state.unassignedPlayers}
+              renderItem={({ item, i }) => (
+                <TouchableHighlight
+                  onPress={() => {
+                    alert("hi");
+                  }}
+                  key={i}
+                >
+                  <View style={styles.listItem}>
+                    <Text>
+                      {item.first_name + " " + item.last_name}
+                    </Text>
+                  </View>
+                </TouchableHighlight>
+              )}
+            />
+            <Button 
+              onPress={this.toggleModal.bind(this)}
+              title='Close' 
+            />
+          </View>
+        </Modal>
 
-          { Object.keys(this.props.cards).map((key) => {
-              let card = this.props.cards[key];
-              return (
-                <PlayerSelectionCard 
-                  key={key} 
-                  startingHole={card.startingHole}
-                  card={card}
-                  unassignedPlayers={this.state.unassignedPlayers}
-                  handleSelectPlayer={this.handleSelectPlayer.bind(this)}
-                />
-              ) 
-            })  
-          }
+        <ScrollView>
+          <Text style={{ marginTop: 20, marginLeft: 20, fontSize: 20 }}>
+            Unassigned Players: {this.state.unassignedPlayers.length}
+          </Text>
 
-        <Button 
-          backgroundColor="red"
-          buttonStyle={{ 
-            marginTop: 20,
-            marginBottom: 20
-          }} 
-          onPress={() => this.props.navigation.navigate('ScoreKeeperSelection')} 
-          title='Next' 
-        />
-      </ScrollView>
-    )
+          <Button
+            onPress={this.handleRandom}
+            buttonStyle={{ marginTop: 20 }}
+            backgroundColor="red"
+            title="Randomize All"
+          />
+
+          {Object.keys(this.props.cards).map(key => {
+            let card = this.props.cards[key];
+            return (
+              <PlayerSelectionCard
+                key={key}
+                startingHole={card.startingHole}
+                card={card}
+                unassignedPlayers={this.state.unassignedPlayers}
+                handleSelectPlayer={this.handleSelectPlayer.bind(this)}
+                toggleModal={this.toggleModal.bind(this)}
+              />
+            );
+          })}
+
+          <Button
+            backgroundColor="red"
+            buttonStyle={{
+              marginTop: 20,
+              marginBottom: 20
+            }}
+            onPress={() =>
+              this.props.navigation.navigate("ScoreKeeperSelection")}
+            title="Next"
+          />
+        </ScrollView>
+      </View>
+    );
   }
 }
-
 
 const mapDispatchToProps = dispatch => {
   return {
     updateCard: (player, card) => {
-      dispatch(addPlayerToCard(player, card))
+      dispatch(addPlayerToCard(player, card));
     }
-  }
-}
+  };
+};
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -90,7 +136,23 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(PlayerSelection)
+export default connect(mapStateToProps, mapDispatchToProps)(PlayerSelection);
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  listItem: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    fontSize: 20,
+    padding: 5,
+  }
+});
+
 /*
 Create SelectPlayerFunction:
   should show a scroll view of all available players
