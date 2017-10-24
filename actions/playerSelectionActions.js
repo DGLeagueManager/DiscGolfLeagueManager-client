@@ -1,9 +1,9 @@
-module.exports.addPlayerToCard = (player, cardIndex) => {
+module.exports.addPlayerToCard = (player, card) => {
   return {
     type: 'ADD_PLAYER_TO_CARD',
     payload: { 
       player: player, 
-      cardIndex: cardIndex 
+      card: card 
     }
   }
 }

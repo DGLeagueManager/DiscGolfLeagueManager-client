@@ -21,7 +21,7 @@ export default class AdminSelectionBoxes extends React.Component {
         checkedColor= {this.getColor()}
         checked={this.state.amChecked}
         onPress={ ()=>{ 
-          this.props.handleAmDivisionSelect(this.props.i);
+          this.props.handleAmDivisionSelect(this.props.value);
           this.setState({ amChecked: !this.state.amChecked})
           } }
       />
@@ -30,7 +30,7 @@ export default class AdminSelectionBoxes extends React.Component {
         checkedColor= {this.getColor()}
         checked={this.state.proChecked}
         onPress={ ()=>{
-          this.props.handleProDivisionSelect(this.props.i);
+          this.props.handleProDivisionSelect(this.props.value);
           this.setState({proChecked: !this.state.proChecked})
        } }
       />

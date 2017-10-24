@@ -12,13 +12,6 @@ export default function reducer(state = {}, action) {
         })
       });
 
-
-    case "ADD_PLAYER_TO_CARD":
-      console.log("payload: ", payload);
-      return Object.assign({}, state, {
-        // TODO: debug the below error
-        // cards[action.payload.cardIndes].players: [...cards[i].players, action.payload.player]});
-      });
     default:
       return state;
   }
