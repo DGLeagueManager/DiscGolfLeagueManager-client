@@ -3,12 +3,12 @@ import {
   View,
   ScrollView,
   Text,
-  Modal,
   TouchableHighlight,
   FlatList,
   StyleSheet
 } from "react-native";
 import { Button, Divider } from "react-native-elements";
+import Modal from 'react-native-modal'
 import PlayerSelectionCard from "./PlayerSelectionCard";
 import { connect } from "react-redux";
 import { addPlayerToCard } from "../../actions/playerSelectionActions";
@@ -48,18 +48,18 @@ class PlayerSelection extends Component {
     return (
       <View>
         <Modal
-          visible={this.state.modalVisible}
+          isVisible={this.state.modalVisible}
           onRequestClose={() => {
             console.log("");
           }}
         >
-          <View contentContainerStyle={styles.container}>
+          <View style={styles.modalContent}>
             <FlatList
               data={this.state.unassignedPlayers}
               renderItem={({ item, i }) => (
                 <TouchableHighlight
-                  onPress={() => {
-                    alert("hi");
+                  onPress={(value) => {
+                    alert( item.first_name);
                   }}
                   key={i}
                 >
@@ -148,9 +148,17 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    fontSize: 20,
+    fontSize: 30,
     padding: 5,
-  }
+  },
+  modalContent: {
+    backgroundColor: 'white',
+    padding: 22,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 4,
+    borderColor: 'rgba(0, 0, 0, 0.1)',
+  },
 });
 
 /*
