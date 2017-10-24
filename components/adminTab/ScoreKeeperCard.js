@@ -14,24 +14,27 @@ export default class ScoreKeeperCard extends Component {
   render() {
     return (
       <Card>
-        <Text style={{ flex: 3 }}> Starting Hole: </Text>
-        <Picker style={{ flex: 1 }} selectedValue={this.props.hole} onValueChange={() => console.log("Hole switched")} />
+        <Text style={{ flex: 3 }}> Starting Hole: {this.props.index}</Text>
 
-        <Button buttonStyle={{ marginTop: 20 }} backgroundColor={this.state.open === 0 ? "black" : "grey"} onPress={() => {
+        <Button buttonStyle={{ marginTop: 20 }} backgroundColor={this.state.open === 0 ? "red" : "grey"} onPress={() => {
              this.setState({ open: 0 });
-         }} title="Select Player..." />
+             this.props.changeScoreKeeper(this.props.players[0], this.props.index)
+         }} title={this.props.players[0]} />
 
-        <Button raised backgroundColor={this.state.open === 1 ? "black" : "grey"} onPress={() => {
+        <Button raised backgroundColor={this.state.open === 1 ? "red" : "grey"} onPress={() => {
              this.setState({ open: 1 });
-           }} style={styles.button} title="Select Player..." />
+             this.props.changeScoreKeeper(this.props.players[1], this.props.index)
+           }} style={styles.button} title={this.props.players[1]} />
 
-        <Button raised backgroundColor={this.state.open === 2 ? "black" : "grey"} onPress={() => {
+        <Button raised backgroundColor={this.state.open === 2 ? "red" : "grey"} onPress={() => {
              this.setState({ open: 2 });
-           }} style={styles.button} title="Select Player..." />
+             this.props.changeScoreKeeper(this.props.players[2], this.props.index)
+           }} style={styles.button} title={this.props.players[2]} />
 
-        <Button raised backgroundColor={this.state.open === 3 ? "black" : "grey"} onPress={() => {
+        <Button raised backgroundColor={this.state.open === 3 ? "red" : "grey"} onPress={() => {
              this.setState({ open: 3 });
-           }} style={styles.button} title="Select Player..." />
+             this.props.changeScoreKeeper(this.props.players[3], this.props.index)
+           }} style={styles.button} title={this.props.players[3]} />
 
       </Card>
     )

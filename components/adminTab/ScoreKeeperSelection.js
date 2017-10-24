@@ -1,60 +1,81 @@
 import React, { Component } from 'react';
 import { Text, ScrollView, View, StyleSheet } from 'react-native';
 import { Card, Button, Divider } from 'react-native-elements';
-import ScoreKeeperCard from './ScoreKeeperCard'
+import ScoreKeeperCard from './ScoreKeeperCard';
+import { connect } from 'react-redux';
+import { postNewRound } from '../../actions/scoreKeeperSelectionActions'
 
-export default class ScoreKeeperSelection extends Component {
+class ScoreKeeperSelection extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      list: [
-        {
-          name: 'Tristyn Leos',
-          avatar_url: 'https://photos.zillowstatic.com/h_g/ISli46xcfvya590000000000.jpg',
-          amChecked: false,
-          proChecked: false,
-          subHeader: ''
-        },
-        {
-          name: 'Pete Givens',
-          avatar_url: "https://media.licdn.com/mpr/mpr/shrinknp_200_200/p/4/005/021/138/35df1b0.jpg",
-          amChecked: false,
-          proChecked: false,
-          subHeader: ''
-        },
-        {
-          name: 'Robert Hunter',
-          avatar_url: "http://jscraftcamp.org/img/nophoto.png",
-          amChecked: false,
-          proChecked: false,
-          subHeader: ''
-        },
-        {
-          name: 'A.J. Caporicci',
-          avatar_url: "http://www.connallyband.com/uploads/8/5/3/4/85347626/img-8114_1.jpg",
-          amChecked: false,
-          proChecked: false,
-          subHeader: ''
-        },
-      ],
-      selected: 1
+      selected: 1,
+      scoreKeepers: {},
+      finalCards: []
     }
   }
+
+  componentWillMount() {
+    //console.log(this.props)
+    //this.generatePopulatedCards()
+  }
+
   fun() {
     this.setState({ selected: 0 })
   }
+
+  changeScoreKeeper (player, index) {
+    this.setState(prevState => ({
+      scoreKeepers: {
+        ...prevState.scoreKeepers,
+        [index]: player
+      }
+    }))
+  }
+
+  generatePopulatedCards() {
+    populatedCards = [
+      { players: ['aj', 'pete', 'rob', 'tristyn'] },
+      { players: ['aj', 'pete', 'rob', 'tristyn'] },
+      { players: ['aj', 'pete', 'rob', 'tristyn'] }
+    ]
+
+    //populatedCards = this.props.cards;
+
+    let cards = [];
+    for (let i = 0; i <= populatedCards.length-1; i++) {
+      console.log(populatedCards[i])
+      cards.push(<ScoreKeeperCard players={populatedCards[i].players} index={i} fun={() => { this.props.fun() }} changeScoreKeeper={this.changeScoreKeeper.bind(this)} selected={this.state.selected} hole={i} />)
+    }
+    return cards;
+  }
+
+  handleSubmit() {
+    //Get round ID for round obj to send on submit  
+    
+    let newRound = {
+      round_id: this.props.round_id,
+      season: this.props.season,
+      players_present: this.props.players_present,
+      cards: this.state.finalCards
+    }
+    this.props.onSubmitNewRound(newRound)
+  }
+
   render() {
     return (
-      <View style={styles.view}>
-      <ScrollView contentContainerStyle={styles.container}>
-        <Text style={styles.header}>Select A Score Keeper</Text>
-        <ScoreKeeperCard fun={ ()=>{this.props.fun()} } selected={this.state.selected} holes='1' />
-        <ScoreKeeperCard fun={ ()=>{this.props.fun()} } selected={this.state.selected} holes='2' />
-        <ScoreKeeperCard fun={ ()=>{this.props.fun()} } selected={this.state.selected} holes='3' />
-        <ScoreKeeperCard fun={ ()=>{this.props.fun()} } selected={this.state.selected} holes='4' />
-        <Button color='black' backgroundColor="#dbdbdb" title='Next' />
-      </ScrollView>
-     </View>
+        <ScrollView>
+          {this.generatePopulatedCards().map(card => card)}
+          <Button 
+            backgroundColor="red"
+            buttonStyle={{
+            marginTop: 20,
+            marginBottom: 20
+            }}  
+            title='Start Round!' 
+            onPress={this.handleSubmit} 
+          />
+        </ScrollView>
     )
   }
 }
@@ -77,3 +98,22 @@ const styles = StyleSheet.create({
     paddingTop: 20
   },
 });
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    cards: state.playerSelectionReducer.cards,
+    round_id: state.auth.round_id,
+    season: state.auth.season,
+    players_present: state.adminRoundConfigStartReducer.amPlayers.concat(state.adminRoundConfigStartReducer.proPlayers)
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onSubmitNewRound: (newRound) => {
+      dispatch(postNewRound(newRound));
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ScoreKeeperSelection);

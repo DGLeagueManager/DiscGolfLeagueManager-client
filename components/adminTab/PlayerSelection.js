@@ -8,7 +8,6 @@ import {
   StyleSheet
 } from "react-native";
 import { Button, Divider } from "react-native-elements";
-import Modal from 'react-native-modal'
 import PlayerSelectionCard from "./PlayerSelectionCard";
 import { connect } from "react-redux";
 import { addPlayerToCard } from "../../actions/playerSelectionActions";
@@ -47,36 +46,6 @@ class PlayerSelection extends Component {
   render() {
     return (
       <View>
-        <Modal
-          isVisible={this.state.modalVisible}
-          onRequestClose={() => {
-            console.log("");
-          }}
-        >
-          <View style={styles.modalContent}>
-            <FlatList
-              data={this.state.unassignedPlayers}
-              renderItem={({ item, i }) => (
-                <TouchableHighlight
-                  onPress={(value) => {
-                    alert( item.first_name);
-                  }}
-                  key={i}
-                >
-                  <View style={styles.listItem}>
-                    <Text>
-                      {item.first_name + " " + item.last_name}
-                    </Text>
-                  </View>
-                </TouchableHighlight>
-              )}
-            />
-            <Button 
-              onPress={this.toggleModal.bind(this)}
-              title='Close' 
-            />
-          </View>
-        </Modal>
 
         <ScrollView>
           <Text style={{ marginTop: 20, marginLeft: 20, fontSize: 20 }}>
@@ -92,15 +61,20 @@ class PlayerSelection extends Component {
 
           {Object.keys(this.props.cards).map(key => {
             let card = this.props.cards[key];
+            console.log('card: ', card);
             return (
-              <PlayerSelectionCard
-                key={key}
-                startingHole={card.startingHole}
-                card={card}
-                unassignedPlayers={this.state.unassignedPlayers}
-                handleSelectPlayer={this.handleSelectPlayer.bind(this)}
-                toggleModal={this.toggleModal.bind(this)}
-              />
+              <View>
+
+                <PlayerSelectionCard
+                  key={key}
+                  startingHole={card.startingHole}
+                  card={card}
+                  unassignedPlayers={this.state.unassignedPlayers}
+                  handleSelectPlayer={this.handleSelectPlayer.bind(this)}
+                  toggleModal={this.toggleModal.bind(this)}
+                  modalVisible={this.state.modalVisible}
+                />
+              </View>
             );
           })}
 
@@ -150,15 +124,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     fontSize: 30,
     padding: 5,
-  },
-  modalContent: {
-    backgroundColor: 'white',
-    padding: 22,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 4,
-    borderColor: 'rgba(0, 0, 0, 0.1)',
-  },
+  }
 });
 
 /*
