@@ -1,7 +1,6 @@
 export default function reducer(state = {}, action) {
   switch (action.type) {
     case "SCORES_GETTING_POSTED":
-      console.log("SCORES REDUCER");
       return Object.assign({}, state, {});
     case "SCORES_POST_SUCCEEDED":
       return Object.assign({}, state, {

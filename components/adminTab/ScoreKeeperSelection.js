@@ -44,7 +44,6 @@ class ScoreKeeperSelection extends Component {
 
     let cards = [];
     for (let i = 0; i <= populatedCards.length-1; i++) {
-      console.log(populatedCards[i])
       cards.push(<ScoreKeeperCard players={populatedCards[i].players} index={i} fun={() => { this.props.fun() }} changeScoreKeeper={this.changeScoreKeeper.bind(this)} selected={this.state.selected} hole={i} />)
     }
     return cards;
@@ -56,7 +55,7 @@ class ScoreKeeperSelection extends Component {
     let newRound = {
       round_id: this.props.round_id,
       season: this.props.season,
-      players_present: this.props.players_present,
+      playersPresent: this.props.playersPresent,
       cards: this.state.finalCards
     }
     this.props.onSubmitNewRound(newRound)
@@ -101,10 +100,10 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    cards: state.playerSelectionReducer.cards,
     round_id: state.auth.round_id,
     season: state.auth.season,
-    players_present: state.adminRoundConfigStartReducer.amPlayers.concat(state.adminRoundConfigStartReducer.proPlayers)
+    cards: state.newRoundReducer.newRound.cards,
+    playersPresent: state.newRoundReducer.newRound.playersPresent
   };
 };
 

@@ -18,7 +18,7 @@ export default class AdminSelectionBoxes extends React.Component {
     <View style={{flex: 1, flexDirection: 'row'}}>
       <CheckBox style={{backgroundColor:"#ecf0f1"}}
         title='AM'
-        checkedColor= {this.getColor()}
+        checkedColor= {"red"}
         checked={this.state.amChecked}
         onPress={ ()=>{ 
           this.props.handleAmDivisionSelect(this.props.value);
@@ -27,7 +27,7 @@ export default class AdminSelectionBoxes extends React.Component {
       />
       <CheckBox style={{backgroundColor:"#ecf0f1"}}
         title='PRO'
-        checkedColor= {this.getColor()}
+        checkedColor= {"red"}
         checked={this.state.proChecked}
         onPress={ ()=>{
           this.props.handleProDivisionSelect(this.props.value);

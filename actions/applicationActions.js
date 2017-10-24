@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 module.exports.getLeagueData = (id) => {
-  console.log('get league data started')
   return (dispatch) => {
     dispatch({ type: 'GET_LEAGUE_DATA_STARTED' });
 

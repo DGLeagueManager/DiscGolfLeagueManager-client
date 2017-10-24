@@ -1,7 +1,6 @@
 export default function reducer(state = {}, action) {
   switch (action.type) {
     case "CHANGE_STARTING_HOLE":
-    console.log(state)
       return Object.assign({}, state, {
         cards: state.currentRound.cards.map((card, index) => {
           if (index===action.payload.cardIndex) {
