@@ -1,31 +1,43 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Text, Picker, Modal, TouchableHighlight } from 'react-native';
+import { View, ScrollView, Text, Modal, TouchableHighlight } from 'react-native';
 import { Button, Divider } from 'react-native-elements';
 import PlayerSelectionCard from './PlayerSelectionCard';
 import { connect } from 'react-redux'
+import { addPlayerToCard } from '../../actions/playerSelectionActions';
 
 class PlayerSelection extends Component {
   constructor(props) {
     super(props);
+    console.log('player selection props:', props)
     this.state = {
-      unassignedPlayers: [],
-
+      unassignedPlayers: []
     }
   }
 
   componentWillMount() {
-    console.log('player selection screen props: ', this.props)
-    this.setState({
-      unassignedPlayers: [...this.props.amPlayers, ...this.props.proPlayers],
-      cards: this.props.cards
-    })
+    let arr = [];
+    for (var key in this.props.playersPresent) {
+      arr.push(this.props.playersPresent[key])
+    }
+    this.setState({ unassignedPlayers: arr })
   }
+
+  handleSelectPlayer(i, card) {
+    let selectedPlayer = this.state.unassignedPlayers[i];
+    let unassignedPlayers = this.state.unassignedPlayers;
+    unassignedPlayers.splice(i, 1);
+    this.props.updateCard(selectedPlayer, card);
+    this.setState({ unassignedPlayers: unassignedPlayers })
+    console.log('handleSelectPlayer invoked...')
+  }
+
   render() {
     return (
       <ScrollView >
         <Text style={{marginTop: 20, marginLeft: 20, fontSize: 20}}>
           Unassigned Players: {this.state.unassignedPlayers.length}
         </Text>
+ 
         <Button 
           onPress={this.handleRandom} 
           buttonStyle={{ marginTop: 20 }}
@@ -33,12 +45,19 @@ class PlayerSelection extends Component {
           title='Randomize All' 
         />
 
-        {this.props.cards.map((card, i) => (
-          <PlayerSelectionCard 
-            key={i} 
-            startingHole={card.startingHole}
-            card={card}
-          />)) }     
+          { Object.keys(this.props.cards).map((key) => {
+              let card = this.props.cards[key];
+              return (
+                <PlayerSelectionCard 
+                  key={key} 
+                  startingHole={card.startingHole}
+                  card={card}
+                  unassignedPlayers={this.state.unassignedPlayers}
+                  handleSelectPlayer={this.handleSelectPlayer.bind(this)}
+                />
+              ) 
+            })  
+          }
 
         <Button 
           backgroundColor="red"
@@ -55,17 +74,23 @@ class PlayerSelection extends Component {
 }
 
 
+const mapDispatchToProps = dispatch => {
+  return {
+    updateCard: (player, card) => {
+      dispatch(addPlayerToCard(player, card))
+    }
+  }
+}
 
 const mapStateToProps = (state, ownProps) => {
-  //console.log('THIS IS THE PROPS COMING FROM STATE: ', state.adminRoundConfigStartReducer)
   return {
-    amPlayers: state.adminRoundConfigStartReducer.amPlayers,
-    proPlayers: state.adminRoundConfigStartReducer.proPlayers,
-    cards: state.adminRoundConfigStartReducer.cards
+    newRound: state.newRoundReducer.newRound,
+    cards: state.newRoundReducer.newRound.cards,
+    playersPresent: state.newRoundReducer.newRound.playersPresent
   };
 };
 
-export default connect(mapStateToProps)(PlayerSelection)
+export default connect(mapStateToProps, mapDispatchToProps)(PlayerSelection)
 /*
 Create SelectPlayerFunction:
   should show a scroll view of all available players

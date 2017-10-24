@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { connect } from 'react-redux';
 import { Button } from 'react-native-elements';
+import { createNewRound } from '../../actions/NewRoundActions';
 
-export default class NewRound extends Component {
+class NewRound extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -15,7 +17,11 @@ export default class NewRound extends Component {
       <View style={{marginTop: 50}}>
         <Button
           buttonStyle={styles.button}
-          onPress={() => this.props.navigation.navigate('AdminRoundConfigStart')}
+          onPress={ () => {
+              this.props.createRound();
+              this.props.navigation.navigate('AdminRoundConfigStart')
+            }
+          }
           raised={false}
           title="New Round"
           textStyle={{fontSize: 30}}
@@ -33,3 +39,13 @@ const styles = StyleSheet.create({
     margin: '10%'
   },
 });
+
+const mapDispatchToProps = dispatch => {
+  return {
+    createRound: () => {
+      dispatch(createNewRound())
+    }
+  }
+}
+
+export default connect(null, mapDispatchToProps)(NewRound);

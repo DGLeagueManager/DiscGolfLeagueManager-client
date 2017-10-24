@@ -4,51 +4,64 @@ import { Button, Icon, List, ListItem, CheckBox, Header } from 'react-native-ele
 import { Constants } from 'expo';
 import AdminSelectionBoxes from './AdminSelectionBoxes';
 import { connect } from 'react-redux';
-import { addPlayersToRound }from '../../actions/adminRoundConfigStartActions'
+import { addPlayersToRound, addPlayerToRound, addEmptyCards } from '../../actions/adminRoundConfigStartActions'
 
 import "@expo/vector-icons"; // 5.2.0
 
 
 class AdminRoundConfigStart extends Component {
   constructor(props) {
+    console.log('AdminRoundConfigStart props: ', props)
     super(props);
 
-    this.state = {
-      amateurPlayers: [],
-      proPlayers: []
-    };
   }
 
-  handleAmDivisionSelect = (index) => {
+  handleAmDivisionSelect = ( playerid ) => {
+    function idMatches( player ) {
+      return player._id === playerid
+    }
+    let player = this.props.leaguePlayers.find(idMatches);
+    player.division = 'AM';
 
-   this.setState({ amateurPlayers : [...this.state.amateurPlayers, this.props.leaguePlayers[index]] })
+    this.props.onAddPlayer(player)
   }
+  
+  handleProDivisionSelect = ( playerid ) => {
+    function idMatches(player) {
+      return player._id === playerid;
+    }
+    
+    let player = this.props.leaguePlayers.find(idMatches);
+    player.division = "PRO";
+    this.props.onAddPlayer(player)
 
-  handleProDivisionSelect = (index) => {
-
-    this.setState({ proPlayers: [...this.state.proPlayers, this.props.leaguePlayers[index]] })
   }
 
   handleSubmit = () => {
     let emptyCards = this.generateEmptyCards();
-
-    this.props.onSubmitPlayers(this.state.amateurPlayers, this.state.proPlayers, emptyCards)
+    this.props.onSubmit(emptyCards)
     this.props.navigation.navigate('PlayerSelection')
   }
 
   generateEmptyCards() {
-    playersTotal = this.state.amateurPlayers.length + this.state.proPlayers.length
-    numberOfCards = Math.ceil(playersTotal / 4);
-    let cards = [];
+    let playersTotal = Object.keys(this.props.playersPresent).length;
+    let numberOfCards = Math.ceil(playersTotal / 4);
+    let cards = {};
 
     for (let i = 1; i <= numberOfCards; i++) {
-      cards.push({startingHole: i, players: []})
+      cards[i] = {
+        startingHole: i, 
+        players: []
+      }
     }
-    console.log(cards)
+
+    console.log("result of generateEmptyCards: ", cards);
+
     return cards;
   }
 
   render() {
+    console.log('Admin round config start props: ', this.props)
     return (
       <ScrollView style={{ marginTop: 20, paddingTop: 0 }}>
         <List style={{ marginBottom: 20 }}>
@@ -65,6 +78,7 @@ class AdminRoundConfigStart extends Component {
                   label={
                     <AdminSelectionBoxes
                       key={i}
+                      value={ele._id}
                       handleAmDivisionSelect={this.handleAmDivisionSelect.bind(this)}
                       handleProDivisionSelect={this.handleProDivisionSelect.bind(this)}
                       i={i}
@@ -112,14 +126,22 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    leaguePlayers: state.applicationReducer.leaguePlayers
+    newRound: state.newRoundReducer.newRound,
+    leaguePlayers: state.applicationReducer.leaguePlayers,
+    playersPresent: state.newRoundReducer.newRound.playersPresent
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     onSubmitPlayers: (amPlayers, proPlayers, emptyCards) => {
-      dispatch(addPlayersToRound(amPlayers, proPlayers, emptyCards));
+      dispatch(addPlayersToRound(emptyCards));
+    },
+    onAddPlayer: (player) => {
+      dispatch(addPlayerToRound(player))
+    },
+    onSubmit: (cards) => {
+      dispatch(addEmptyCards(cards))
     }
   };
 };

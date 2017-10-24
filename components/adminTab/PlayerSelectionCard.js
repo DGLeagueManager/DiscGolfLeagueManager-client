@@ -48,6 +48,29 @@ class PlayerSelectionCard extends Component {
             {this.generateHolePickerItems().map(item => item)}
           </Picker>
         </View>
+
+
+        <Picker 
+          style={{ flex: 1}}
+            
+          onValueChange={ (value) => {
+            this.props.handleSelectPlayer(value, this.props.card)
+            console.log("unassigned players: ", this.props.unassignedPlayers)
+            }
+          }
+        > 
+          {this.props.unassignedPlayers.map( (player, i) => {
+            return (
+              <Picker.Item 
+                label={player.first_name + " " + player.last_name}
+                value={i}
+              />
+            )
+            })
+          }
+        </Picker>
+
+
         <Button buttonStyle={{ marginTop: 20 }} backgroundColor={this.state.open === 0 ? "black" : "grey"} onPress={() => {
             this.setState({ open: 0 });
           }} title="Select Player..." />
