@@ -79,7 +79,8 @@ class Scoring extends Component {
                       increment={() => this.increment(id)}
                       decrement={() => this.decrement(id)}
                       player={this.state.players[id]}
-                      isOpen={this.state.card.isScorekeeper}
+                      isOpen={this.state.isOpen}
+                      isScorekeeper = {this.state.card.isScorekeeper}
                       score={ele.score}
                     />
                   }

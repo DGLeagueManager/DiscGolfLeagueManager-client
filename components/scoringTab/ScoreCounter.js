@@ -14,7 +14,7 @@ export default class ScoreCounter extends Component {
   render() {
     return (
       <View style={{flex: 1, flexDirection: 'row'}}>
-        {this.props.isOpen ?
+        {(this.props.isOpen && this.props.isScorekeeper) ?
             <Icon
               containerStyle={{height: 40, width: 40}}
               onPress={ this.props.decrement }
@@ -26,7 +26,7 @@ export default class ScoreCounter extends Component {
               value={this.props.player.score}
               textStyle={{ color: 'orange' }}
             />
-          {this.props.isOpen ?
+          {(this.props.isOpen && this.props.isScorekeeper) ?
             <Icon
               containerStyle={{height: 40, width: 40}}
               onPress={ this.props.increment }
