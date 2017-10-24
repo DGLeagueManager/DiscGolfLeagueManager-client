@@ -1,7 +1,6 @@
 export default function reducer(state = {}, action) {
   switch (action.type) {
     case "CREATE_NEW_ROUND":
-      console.log("creating new round object in redux store");
       return Object.assign({}, state, {
         newRound: {
           playersPresent: {}
@@ -28,7 +27,6 @@ export default function reducer(state = {}, action) {
     //TODO: make sure this works lol
       const card = action.payload.card;
       card.players.push(action.payload.player);
-      console.log(' in teh reducer, here is card starting hole: ', card.startingHole)
       return Object.assign({}, state, {
           newRound: {
             ...state.newRound,
