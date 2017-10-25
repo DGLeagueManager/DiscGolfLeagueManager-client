@@ -8,55 +8,28 @@ import PlayerPicker from './PlayerPicker';
 import Modal from 'react-native-modal'
 
 class PlayerSelectionCard extends Component {
-
-  generateHolePickerItems() {
-    const items = [];
-    for (let i = 1; i <= 18; i++) {
-      items.push(<Picker.Item label={i.toString()} value={i} />)
+  componentWillMount() {
+    if (this.props.card.players.length >= 4) {
+      this.props.toggleModal(null)
     }
-    return items;
   }
 
   render() {
-    let {card, handleSelectPlayer, unassignedPlayers} = this.props
-
     return <Card>
-        <View style={{ flexDirection: "row" }}>
-          <Text style={{ flex: 3, fontSize: 20, marginTop: 10 }}>
-            {" "}
-            Starting Hole:{" "}
+        <View style={{ flexDirection: "row", justifyContent: "space-between", marginBottom: 20 }}>
+          <Text style={{ flex: 1, fontSize: 20}}>
+            Starting Hole:
           </Text>
-          <Picker style={{ flex: 1 }} 
-            selectedValue={this.props.startingHole} 
-            onValueChange={(value) => {
-              this.props.onHoleSelect(i, value)
-            }}
-          >
-            {this.generateHolePickerItems().map(item => item)}
-          </Picker>
+          <Text style={{ fontSize: 25}}>
+            {this.props.startingHole}
+          </Text>
         </View>
 
         <PlayerPicker player={this.props.card.players[0]} toggleModal={this.props.toggleModal} cardKey={this.props.cardKey} />
         <PlayerPicker player={this.props.card.players[1]} toggleModal={this.props.toggleModal} cardKey={this.props.cardKey} />
         <PlayerPicker player={this.props.card.players[2]} toggleModal={this.props.toggleModal} cardKey={this.props.cardKey}/>
         <PlayerPicker player={this.props.card.players[3]} toggleModal={this.props.toggleModal} cardKey={this.props.cardKey} />
-          
-          
-        {/* <Button buttonStyle={{ marginTop: 20 }} backgroundColor={this.state.open === 0 ? "black" : "grey"} onPress={() => {
-            this.setState({ open: 0 });
-          }} title="Select Player..." />
 
-        <Button raised backgroundColor={this.state.open === 1 ? "black" : "grey"} onPress={() => {
-            this.setState({ open: 1 });
-          }} style={styles.button} title="Select Player..." />
-
-        <Button raised backgroundColor={this.state.open === 2 ? "black" : "grey"} onPress={() => {
-            this.setState({ open: 2 });
-          }} style={styles.button} title="Select Player..." />
-
-        <Button raised backgroundColor={this.state.open === 3 ? "black" : "grey"} onPress={() => {
-            this.setState({ open: 3 });
-          }} style={styles.button} title="Select Player..." /> */}
       </Card>;
   }
 }

@@ -41,6 +41,10 @@ class PlayerSelection extends Component {
     this.props.updateCard(selectedPlayer, card);
     this.setState({ unassignedPlayers: unassignedPlayers });
 
+    if (card.players.length >= 4 || unassignedPlayers.length === 0) {
+      this.setState({ modalVisible: false, activeCard: null })
+    }
+
   }
 
   toggleModal(key) {
@@ -89,6 +93,7 @@ class PlayerSelection extends Component {
 
           <Button
             backgroundColor="red"
+            disabled={this.state.unassignedPlayers.length !== 0}
             buttonStyle={{
               marginTop: 20,
               marginBottom: 20
