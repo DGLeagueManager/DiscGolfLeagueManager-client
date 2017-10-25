@@ -40,7 +40,6 @@ class Scoring extends Component {
   }
 
   addScores(e) {
-    console.log(this.props)
     this.setState({ isOpen: !this.state.isOpen })
 
     let scores = {
@@ -74,7 +73,6 @@ class Scoring extends Component {
                   hideChevron
                   label={
                     <ScoreCounter
-                      style={{ flex: 1 }}
                       id={i}
                       increment={() => this.increment(id)}
                       decrement={() => this.decrement(id)}

@@ -58,7 +58,7 @@ class ScoreKeeperSelection extends Component {
     let cards = this.props.cards;
 
     Object.keys(cards).forEach( key => {
-      if (!cards[key].scoreKeeper) {
+      if (cards[key].scoreKeeper) {
         result = false;
       }
     })
@@ -110,7 +110,8 @@ const mapStateToProps = (state, ownProps) => {
     currentSeason: state.applicationReducer.currentSeason,
     cards: state.newRoundReducer.newRound.cards,
     playersPresent: state.newRoundReducer.newRound.playersPresent,
-    newRound: state.newRoundReducer.newRound
+    newRound: state.newRoundReducer.newRound,
+    currentCourse: state.applicationReducer.currentCourse
   };
 };
 

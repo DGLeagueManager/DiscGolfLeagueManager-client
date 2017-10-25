@@ -3,6 +3,7 @@ export default function reducer(state = {}, action) {
     case "CREATE_NEW_ROUND":
       return Object.assign({}, state, {
         newRound: {
+          course: action.payload,
           playersPresent: {}
         }
       });
@@ -10,6 +11,7 @@ export default function reducer(state = {}, action) {
       let player = action.payload
       return Object.assign({}, state, {
         newRound: {
+          ...state.newRound,
           playersPresent: {
             ...state.newRound.playersPresent,
             [player._id]: player
