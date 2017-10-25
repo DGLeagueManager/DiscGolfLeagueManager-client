@@ -9,27 +9,27 @@ export default class AdminSelectionBoxes extends React.Component {
       amChecked: false,
       proChecked: false
     }
-    this.getColor = () => {
-      return '#' + Math.floor(Math.random() * 16777215).toString(16);
-    }
+
   }
   render() {
     return (
     <View style={{flex: 1, flexDirection: 'row'}}>
       <CheckBox style={{backgroundColor:"#ecf0f1"}}
         title='AM'
-        checkedColor= {this.getColor()}
+        checkedColor= {'red'}
         checked={this.state.amChecked}
-        onPress={ ()=>{ 
+        onPress={ ()=>{
+          this.setState({ proChecked: false})
           this.props.handleAmDivisionSelect(this.props.value);
           this.setState({ amChecked: !this.state.amChecked})
           } }
       />
       <CheckBox style={{backgroundColor:"#ecf0f1"}}
         title='PRO'
-        checkedColor= {this.getColor()}
+        checkedColor= {'red'}
         checked={this.state.proChecked}
         onPress={ ()=>{
+          this.setState({amChecked: false})
           this.props.handleProDivisionSelect(this.props.value);
           this.setState({proChecked: !this.state.proChecked})
        } }

@@ -71,9 +71,9 @@ class PlayerSelection extends Component {
                 </TouchableHighlight>
               )}
             />
-            <Button 
+            <Button
               onPress={this.toggleModal.bind(this)}
-              title='Close' 
+              title='Close'
             />
           </View>
         </Modal>
@@ -90,11 +90,11 @@ class PlayerSelection extends Component {
             title="Randomize All"
           />
 
-          {Object.keys(this.props.cards).map(key => {
+          {Object.keys(this.props.cards).map((key, i) => {
             let card = this.props.cards[key];
             return (
               <PlayerSelectionCard
-                key={key}
+                key={'test' +  i}
                 startingHole={card.startingHole}
                 card={card}
                 unassignedPlayers={this.state.unassignedPlayers}
@@ -181,8 +181,8 @@ Create RandomFunction to map Array:
 Map Dispatch to props:
   -onSubmit Function:
     -dispatch new list of cards:
-      -players present 
-      -players division 
+      -players present
+      -players division
       -players contact info
       -what card players belong too
     -point to next screen in stack

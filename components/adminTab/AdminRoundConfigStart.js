@@ -25,12 +25,12 @@ class AdminRoundConfigStart extends Component {
 
     this.props.onAddPlayer(player)
   }
-  
+
   handleProDivisionSelect = ( playerid ) => {
     function idMatches(player) {
       return player._id === playerid;
     }
-    
+
     let player = this.props.leaguePlayers.find(idMatches);
     player.division = "PRO";
     this.props.onAddPlayer(player)
@@ -50,7 +50,7 @@ class AdminRoundConfigStart extends Component {
 
     for (let i = 1; i <= numberOfCards; i++) {
       cards[i] = {
-        startingHole: i, 
+        startingHole: i,
         players: []
       }
     }
@@ -67,10 +67,10 @@ class AdminRoundConfigStart extends Component {
         <List style={{ marginBottom: 20 }}>
           {
             this.props.leaguePlayers.map((ele, i) => (
-              <View>
+              <View key={'view'+i}>
                 <ListItem
                   roundAvatar
-                  /* avatar={{ uri: ele.avatar_url }} */  
+                  /* avatar={{ uri: ele.avatar_url }} */
                   key={i}
                   subtitle={-2}
                   title={ele.first_name + ' ' + ele.last_name}
@@ -90,11 +90,11 @@ class AdminRoundConfigStart extends Component {
             ))
           }
         </List>
-        <Button 
-          onPress={this.handleSubmit} 
+        <Button
+          onPress={this.handleSubmit}
           color='black'
-          backgroundColor="#dbdbdb" 
-          title='Next' 
+          backgroundColor="#dbdbdb"
+          title='Next'
         />
       </ScrollView>
     );

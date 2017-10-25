@@ -60,7 +60,7 @@ export default class Result extends Component {
           <List style={styles.listStyle}>
             {
               this.state.list.map((ele, i) => (
-                <View style={{height: 40, flex: 1, flexDirection: 'row'}}>
+                <View key={'view'+i} style={{height: 40, flex: 1, flexDirection: 'row'}}>
                   <Text key={'text1' + i} style={{marginLeft: 15}}>{(i+1)}</Text>
                   <Text key={'text2' + i} style={{marginLeft: 20,fontSize: 15, flex: 3}}>{ele.name}</Text>
                   <Text key={'text3' + i} style={{flex: 2}}>{ele.weeksPlayed}</Text>

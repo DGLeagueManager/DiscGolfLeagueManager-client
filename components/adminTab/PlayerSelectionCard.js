@@ -18,22 +18,22 @@ class PlayerSelectionCard extends Component {
 
   componentWillMount() {
     this.setState({
-      i: this.props.key, 
-      card: this.props.card, 
-      startingHole: this.props.startingHole 
+      i: this.props.key,
+      card: this.props.card,
+      startingHole: this.props.startingHole
     });
   }
 
   generateHolePickerItems() {
     const items = [];
     for (let i = 1; i <= 18; i++) {
-      items.push(<Picker.Item label={i.toString()} value={i} />)
+      items.push(<Picker.Item label={i.toString()} key={'hole'+i} value={i} />)
     }
     return items;
   }
-  
+
   selectPlayer(player) {
-    
+
   }
 
   render() {
@@ -44,8 +44,8 @@ class PlayerSelectionCard extends Component {
             {" "}
             Starting Hole:{" "}
           </Text>
-          <Picker style={{ flex: 1 }} 
-            selectedValue={this.props.startingHole} 
+          <Picker style={{ flex: 1 }}
+            selectedValue={this.props.startingHole}
             onValueChange={(value) => {
               this.props.onHoleSelect(i, value)
             }}
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
 });
 
 const mapDispatchToProps = dispatch => {
-  return { 
+  return {
     onPlayerSelect: (player, cardIndex) => {
       dispatch(addPlayerToCard(player, cardIndex));
     },
