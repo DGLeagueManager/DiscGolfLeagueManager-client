@@ -17,7 +17,7 @@ export default class ScoreKeeperCard extends Component {
       <Card>
         <Text style={{ flex: 3 }}> Starting Hole: {this.props.hole}</Text>
 
-        {/* TODO: refactor this component to only render if there is a this.props.players[0] */}
+        {/*    */}
     
         <Button buttonStyle={{ marginTop: 20 }} backgroundColor={this.state.open === 0 ? "red" : "grey"} onPress={() => {
             this.setState({ open: 0 });
