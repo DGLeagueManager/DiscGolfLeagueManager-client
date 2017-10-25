@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Card, Icon } from 'react-native-elements';
+import { connect } from 'react-redux';
 
 export default class LeagueRoundInProgress extends Component {
 
   render() {
     return (
-
       <View style={{marginTop: '50%'}}>
         <Card title="League Round In Progress">
 
@@ -20,7 +20,7 @@ export default class LeagueRoundInProgress extends Component {
           </View>
         </Card>
       </View>
-    )
+    ) 
   }
 }
 
@@ -30,3 +30,6 @@ const styles = StyleSheet.create({
    width: '60%'
  },
 });
+
+
+

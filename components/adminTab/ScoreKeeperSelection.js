@@ -12,7 +12,8 @@ import axios from 'axios';
 class ScoreKeeperSelection extends Component {
   constructor(props) {
     super(props);
-
+    
+    console.log(this.props)
     this.state = {
       selected: 1
     };
@@ -46,10 +47,12 @@ class ScoreKeeperSelection extends Component {
   }
 
   handleSubmit() {
-     axios.post("http://ec2-54-165-58-14.compute-1.amazonaws.com:3000/createRound", this.props.newRound)
-     .catch( (err) => {
-       console.log(err)
-     })
+    let newRound = this.props.newRound;
+  
+    newRound.current_season = this.props.currentSeason;
+    newRound.current_round = this.props.currentRound;
+  
+    this.props.onSubmitNewRound(this.props.newRound)
   }
 
   allCardsHaveScorekeepers() {
