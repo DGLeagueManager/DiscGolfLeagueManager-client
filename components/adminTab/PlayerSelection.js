@@ -45,7 +45,6 @@ class PlayerSelection extends Component {
 
   toggleModal(key) {
     this.setState({ modalVisible: !this.state.modalVisible, activeCard: key });
-    console.log('toggle Modal invoked...active Card:', key);
   }
 
   render() {
