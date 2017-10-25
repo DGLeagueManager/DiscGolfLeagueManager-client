@@ -18,10 +18,6 @@ class ScoreKeeperSelection extends Component {
     };
   }
 
-  fun() {
-    this.setState({ selected: 0 });
-  }
-
   generatePopulatedCards() {
     populatedCards = this.props.cards;
     let cards = [];
@@ -35,9 +31,6 @@ class ScoreKeeperSelection extends Component {
         <ScoreKeeperCard
           players={players}
           index={index}
-          fun={() => {
-            this.props.fun();
-          }}
           selected={this.state.selected}
           hole={hole}
           handleSelectScoreKeeper={this.handleScoreKeeperSelection.bind(this)}
@@ -53,21 +46,33 @@ class ScoreKeeperSelection extends Component {
   }
 
   handleSubmit() {
-    console.log('this: ', this) 
      axios.post("http://ec2-54-165-58-14.compute-1.amazonaws.com:3000/createRound", this.props.newRound)
      .catch( (err) => {
        console.log(err)
      })
-    // this.props.onSubmitNewRound(this.props.newRound);
+  }
+
+  allCardsHaveScorekeepers() {
+    // TODO: this isn't working, i think becuase the component does not re-render when a scorekeeper is selected?
+    var result = true;
+    let cards = this.props.cards;
+
+    Object.keys(cards).forEach( key => {
+      if (!cards[key].scoreKeeper) {
+        result = false;
+      }
+    })
+    return result;
   }
 
   render() {
-    console.log(this.props);
+
     return (
       <ScrollView>
         {this.generatePopulatedCards().map(card => card)}
         <Button
           backgroundColor="red"
+          disabled={this.allCardsHaveScorekeepers()}
           buttonStyle={{
             marginTop: 20,
             marginBottom: 20
