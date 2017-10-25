@@ -2,7 +2,8 @@ export default function reducer(state = {}, action) {
   switch (action.type) {
     case 'GET_LEAGUE_DATA_STARTED':
       return Object.assign({}, state, {
-        leagueData: null
+        leagueData: null,
+        currentRound: {completed: null}
       });
     case 'GET_LEAGUE_DATA_SUCCEEDED':
       const leagueData = action.payload.data;
