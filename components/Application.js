@@ -9,7 +9,7 @@ import League from './leagueTab/League';
 import Results from './resultsTab/Results';
 import AdminStack from './adminTab/AdminStack';
 import { getLeagueData } from '../actions/applicationActions'
-
+import HoleNavigator from './scoringTab/HoleNavigator';
 
 class Application extends Component {
   componentWillMount() {
@@ -41,7 +41,7 @@ const Tab = TabNavigator({
     }
   },
   Scoring: {
-    screen: Scoring,
+    screen: HoleNavigator,
     navigationOptions: {
       tabBarLabel: 'Scoring',
       tabBarIcon: ({ tintColor }) => (

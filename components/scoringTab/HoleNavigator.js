@@ -1,31 +1,30 @@
 import React from 'react';
 import { TabNavigator, TabBarTop } from "react-navigation";
 import Scoring from './Scoring';
+import { Text, View } from 'react-native';
 import { holeDetails } from './dummyData';
 
 const SampleComponent = ({ hole }) => (
   <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-    <Text> Par: {hole.par}</Text>
-    <Text> Length: {hole.length} ft</Text>
+    <Text> Par: {hole.par} </Text>
+    <Text> Length: {hole.length} </Text>
   </View>
 );
 
-const generateScreen = (hole) => (
-  <SampleComponent hole={hole}/> 
-)
+const GenerateScreen = hole => <SampleComponent hole={hole} />;
 
-const generateTabs = (holeDetails) => {
-  Object.keys(holeDetails).reduce((result, key) => {
+const generateTabs = holeDetails => {
+  return Object.keys(holeDetails).reduce((result, key) => {
     let hole = holeDetails[key];
     result[key] = {
-      screen: hole => <Scoring hole={hole}/>,
+      screen: GenerateScreen.bind(null, hole),
       navigationOptions: {
-        tabBarLabel: 'Hole ' + key
+        tabBarLabel: "Hole" + key
       }
-    }
+    };
     return result;
-  }, {})
-}
+  }, {});
+};
 
 const HoleNavigator = TabNavigator(
   generateTabs(holeDetails),

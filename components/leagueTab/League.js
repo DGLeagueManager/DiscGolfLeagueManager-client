@@ -30,6 +30,7 @@ const Tabs = TabNavigator({
 }, {
   tabBarComponent: TabBarTop,
   tabBarPosition: 'top',
+  lazy: true,
   tabBarOptions: {
     swipeEnabled: true,
     showLabel: true,
