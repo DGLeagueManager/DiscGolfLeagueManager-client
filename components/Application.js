@@ -4,11 +4,12 @@ import { TabNavigator, StackNavigator, TabBarBottom } from 'react-navigation';
 import { Text, View, Button, Image } from 'react-native';
 import { Constants } from 'expo';
 import { Icon } from 'react-native-elements';
-import Scoring from './scoringTab/Scoring';
+import ScoringContainer from './scoringTab/ScoringContainer';
 import League from './leagueTab/League';
 import Results from './resultsTab/Results';
 import AdminStack from './adminTab/AdminStack';
 import { getLeagueData } from '../actions/applicationActions'
+import HoleNavigator from './scoringTab/HoleNavigator';
 
 class Application extends Component {
   componentWillMount() {
@@ -39,8 +40,8 @@ const Tab = TabNavigator({
       ),
     }
   },
-  Scoring: {
-    screen: Scoring,
+  ScoringContainer: {
+    screen: ScoringContainer,
     navigationOptions: {
       tabBarLabel: 'Scoring',
       tabBarIcon: ({ tintColor }) => (
@@ -75,10 +76,6 @@ const Tab = TabNavigator({
     headerTitle: 'DISC GOLF LEAGUE MANAGER',
     headerTitleStyle: {
       color: '#fff',
-      //TODO: make these work
-      // fontFamily: 'Roboto'
-      // justifyContent: 'center',
-      // alignItems: 'center'
     },
     headerStyle: {
       backgroundColor: "#2196f3",

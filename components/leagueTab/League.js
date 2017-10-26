@@ -6,11 +6,7 @@ import Info from './Info';
 import Standings from './Standings';
 
 export default class League extends Component {
-  /** We can declare nagivationOptions here on the object instead of on the MainNav component like this:
-    static navigationOptions = {
-      tabBarIcon: <Icon name="pencil" type="entypo" />
-    }
-  */
+
   render() {
     return (
       <Tabs />
@@ -34,6 +30,7 @@ const Tabs = TabNavigator({
 }, {
   tabBarComponent: TabBarTop,
   tabBarPosition: 'top',
+  lazy: true,
   tabBarOptions: {
     swipeEnabled: true,
     showLabel: true,
