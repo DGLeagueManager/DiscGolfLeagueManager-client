@@ -6,6 +6,7 @@ import adminRoundConfigStartReducer from './adminRoundConfigStartReducer';
 import playerSelectionReducer from './playerSelectionReducer';
 import newRoundReducer from './newRoundReducer';
 import scoreKeeperSelectionReducer from './scoreKeeperSelectionReducer';
+import getCurrentRoundDataReducer from './getCurrentRoundDataReducer';
 
 const rootReducer = combineReducers({ 
   auth, 
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
   adminRoundConfigStartReducer,
   playerSelectionReducer,
   newRoundReducer,
-  scoreKeeperSelectionReducer
+  scoreKeeperSelectionReducer,
+  getCurrentRoundDataReducer
 });
 
 export default rootReducer;

@@ -49,9 +49,9 @@ class ScoreKeeperSelection extends Component {
   handleSubmit() {
     let newRound = this.props.newRound;
   
-    newRound.current_season = this.props.currentSeason;
-    newRound.current_round = this.props.currentRound;
-  
+    newRound.current_season = this.props.currentSeason._id;
+    newRound.id = this.props.currentRound._id;
+    console.log(newRound)
     this.props.onSubmitNewRound(this.props.newRound)
   }
 

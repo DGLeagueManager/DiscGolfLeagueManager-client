@@ -4,7 +4,7 @@ import { TabNavigator, StackNavigator, TabBarBottom } from 'react-navigation';
 import { Text, View, Button, Image } from 'react-native';
 import { Constants } from 'expo';
 import { Icon } from 'react-native-elements';
-import Scoring from './scoringTab/Scoring';
+import ScoringContainer from './scoringTab/ScoringContainer';
 import League from './leagueTab/League';
 import Results from './resultsTab/Results';
 import AdminStack from './adminTab/AdminStack';
@@ -40,8 +40,13 @@ const Tab = TabNavigator({
       ),
     }
   },
+<<<<<<< HEAD
   Scoring: {
     screen: HoleNavigator,
+=======
+  ScoringContainer: {
+    screen: ScoringContainer,
+>>>>>>> working on get for current Round Data
     navigationOptions: {
       tabBarLabel: 'Scoring',
       tabBarIcon: ({ tintColor }) => (
