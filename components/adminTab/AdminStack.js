@@ -43,6 +43,7 @@ const NewRoundAdminStack = StackNavigator({
 class AdminStack extends Component {
 
   render() {
+    console.log('ADMIN STACK PROPS AFTER POST: ', this.props)
     if (this.props.roundInProgress) {
       return (<LeagueRoundInProgress />);
     } else {

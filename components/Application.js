@@ -4,7 +4,7 @@ import { TabNavigator, StackNavigator, TabBarBottom } from 'react-navigation';
 import { Text, View, Button, Image } from 'react-native';
 import { Constants } from 'expo';
 import { Icon } from 'react-native-elements';
-import Scoring from './scoringTab/Scoring';
+import ScoringContainer from './scoringTab/ScoringContainer';
 import League from './leagueTab/League';
 import Results from './resultsTab/Results';
 import AdminStack from './adminTab/AdminStack';
@@ -39,8 +39,8 @@ const Tab = TabNavigator({
       ),
     }
   },
-  Scoring: {
-    screen: Scoring,
+  ScoringContainer: {
+    screen: ScoringContainer,
     navigationOptions: {
       tabBarLabel: 'Scoring',
       tabBarIcon: ({ tintColor }) => (

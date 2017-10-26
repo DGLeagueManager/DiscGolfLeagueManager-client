@@ -25,7 +25,6 @@ class Root extends Component {
 }
 
 const mapStateToProps = function(state, ownProps){
-  console.log('LOGIN OBJECT@@@@@@@@@@@@@@@@@@@: ', state)
 	return ({
 		isLoggedIn: (state.auth.isLoggedIn || false),
     token: state.auth.token,
