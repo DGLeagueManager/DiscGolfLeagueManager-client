@@ -11,9 +11,8 @@ class ScoringContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      
-    }
 
+    }
   }
 
   componentWillMount() {
