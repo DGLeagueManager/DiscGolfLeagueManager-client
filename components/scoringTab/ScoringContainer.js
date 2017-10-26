@@ -11,9 +11,8 @@ class ScoringContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      
+    
     }
-
   }
 
   componentWillMount() {
@@ -24,6 +23,7 @@ class ScoringContainer extends Component {
       setInterval(() => {        
         this.props.onGetCurrentRound(this.props.currentRoundId, this.props.playerId)}, 10000)
     }
+    
     
   }
 
@@ -42,6 +42,7 @@ class ScoringContainer extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
+  console.log("aj: ", state.getCurrentRoundDataReducer.currentRound);
   return {
     currentRound: state.getCurrentRoundDataReducer.currentRound,
     playerId: state.auth.id,
