@@ -17,20 +17,19 @@ class ScoringContainer extends Component {
   }
 
   componentWillMount() {
-    //map state to props needs to include:
-      //playerId
-      //roundId
-      //currentCard
-    currentRoundId = this.props.currentRound
-
-
-    this.props.onGetCurrentRound(this.props.playerId, currentRoundId)
+  
+    if(this.props.currentRoundId) {
+      onGetCurrentRound(this.props.currentRoundId, this.props.playerId)
+    } else {
+      setInterval(() => {        
+        this.props.onGetCurrentRound(this.props.currentRoundId, this.props.playerId)}, 10000)
+    }
     
   }
 
   render() {
     console.log('CURRENT ROUND PROPS: ', this.props)
-    if (!this.props.currentCard) {
+    if (!this.props.currentRound) {
       return (
         <View style={{ flex: 1, alignItems: 'center' }} >
           <Text> You are not currently in a game </Text>
@@ -46,7 +45,7 @@ const mapStateToProps = (state, ownProps) => {
   return {
     currentRound: state.getCurrentRoundDataReducer.currentRound,
     playerId: state.auth.id,
-    currentRound: state.applicationReducer.currentRound
+    currentRoundId: state.applicationReducer.currentRoundId
   }
 }
 
