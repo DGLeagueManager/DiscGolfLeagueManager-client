@@ -1,18 +1,9 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types'
-import list from './dummyData';
-
+import HoleNavigator from './HoleNavigator';
 
 class ScoringContainer extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      
-    }
-
-  }
 
   render() {
     if (this.props.currentCard === null) {
@@ -22,13 +13,9 @@ class ScoringContainer extends Component {
         </View>
       )
     } else {
-      return <ScoreCard card={this.props.currentCard} />
+      return <HoleNavigator card={this.props.currentCard}/>
     }
   }
-}
-
-ScoringContainer.PropTypes = {
-  currentCard: PropTypes.object
 }
 
 const mapStateToProps = (state, ownProps) => {

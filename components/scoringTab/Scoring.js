@@ -10,24 +10,6 @@ import list from './dummyData';
 import "@expo/vector-icons"; // 5.2.0
 
 class Scoring extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state={
-      card: {},
-      isScorekeeper: false,
-      isOpen: true,
-      checked: false,
-      holeData: {
-        holeNumber: 1,
-        par: 3,
-        feet: 382
-      },
-      players: list,
-      score: 0,
-    };
-
-  }
 
   increment(id) {
     let player = Object.assign({}, this.state.players[id])
@@ -52,7 +34,6 @@ class Scoring extends Component {
       {[this.state.players[3].player_id]: this.state.players[3].score}
       ]
     }
-
     this.props.onPostScores(scores);
     e.preventDefault();
   }
