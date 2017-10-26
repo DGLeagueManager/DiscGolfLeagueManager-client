@@ -6,9 +6,11 @@ import { Icon } from 'react-native-elements';
 import NewRound from './NewRound';
 import AdminRoundConfigStart from './AdminRoundConfigStart';
 import PlayerSelection from './PlayerSelection';
-import ScoreKeeperSelection from './ScoreKeeperSelection'
+import ScoreKeeperSelection from './ScoreKeeperSelection';
+import LeagueRoundInProgress from './LeagueRoundInProgress';
+import { connect } from 'react-redux'
 
-const AdminStack = StackNavigator({
+const NewRoundAdminStack = StackNavigator({
   NewRound: { 
     screen: NewRound,
     navigationOptions: {
@@ -38,4 +40,26 @@ const AdminStack = StackNavigator({
   }
 });
 
-export default AdminStack;
+class AdminStack extends Component {
+
+  render() {
+    console.log('ADMIN STACK PROPS AFTER POST: ', this.props)
+    if (this.props.roundInProgress) {
+      return (<LeagueRoundInProgress />);
+    } else {
+      return (<NewRoundAdminStack />);
+    }
+  }
+}
+
+
+
+const mapStateToProps = (state, ownProps) => {
+  //TODO: Round in progress should be dependant on response from server after post new round or timed interval from get currentRound
+  return {
+    roundInProgress: state.scoreKeeperSelectionReducer.roundInProgress
+  };
+};
+
+export default connect(mapStateToProps)(AdminStack);
+

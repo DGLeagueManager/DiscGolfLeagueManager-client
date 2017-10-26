@@ -2,19 +2,24 @@ export default function reducer(state = {}, action) {
   switch (action.type) {
     case 'GET_LEAGUE_DATA_STARTED':
       return Object.assign({}, state, {
-        leagueData: null
+        leagueData: null,
+        currentRound: {completed: null}
       });
     case 'GET_LEAGUE_DATA_SUCCEEDED':
       const leagueData = action.payload.data;
       const currentRound = leagueData.seasons[0].rounds.find( (round) => {
         return round.completed === false;
       })
+
+      console.log('CURRENT ROUND INFO FROM REDUCER: ', currentRound)
+      
       return Object.assign({}, state, {
         currentSeason: leagueData.seasons[0],
         leagueData: leagueData,
         leaguePlayers: leagueData.seasons[0].players,
         currentRound: currentRound,
-        currentCourse: currentRound.course
+        currentCourse: currentRound.course,
+        currentRoundId: currentRound._id
       });
     case 'GET_LEAGUE_DATA_FAILED':
       return Object.assign({}, state, {
