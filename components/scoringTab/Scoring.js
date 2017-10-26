@@ -14,7 +14,8 @@ class Scoring extends Component {
     super(props);
 
     this.state={
-      card: {isScorekeeper: false},
+      card: {},
+      isScorekeeper: false,
       isOpen: true,
       checked: false,
       holeData: {
@@ -22,7 +23,8 @@ class Scoring extends Component {
         par: 3,
         feet: 382
       },
-      players: list
+      players: list,
+      score: 0,
     };
 
   }
@@ -40,7 +42,6 @@ class Scoring extends Component {
   }
 
   addScores(e) {
-    console.log(this.props)
     this.setState({ isOpen: !this.state.isOpen })
 
     let scores = {
@@ -56,6 +57,42 @@ class Scoring extends Component {
     e.preventDefault();
   }
 
+
+    componentWillMount() {
+      fetch('http://ec2-54-165-58-14.compute-1.amazonaws.com:3000/getPlayerCard', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          player_id: this.props.current_player._id,
+          round_id: "59ea986dfb55674bbf2af12f"
+        })
+      })
+      .then((res)=>{
+        return res.json(res)
+      })
+      .then((card)=>{
+        this.setState({ card: card })
+        console.log(this.state.card.score_keeper ===this.props.current_player._id)
+      })
+      .then(()=>{
+        this.getCard();
+      })
+      .then(()=>{
+        this.getPlayerList();
+      })
+    }
+
+    getPlayerList() {
+      this.setState({ players: this.state.card.players })
+    }
+
+    getCard() {
+      this.setState({ isScorekeeper: this.props.current_player._id === this.state.card.score_keeper })
+    }
+
   render() {
     return (
       <ScrollView>
@@ -66,23 +103,23 @@ class Scoring extends Component {
               return (
                 <ListItem
                   roundAvatar
-                  avatar={{ uri: ele.avatar_url || null }}
+                  // avatar={{ uri: ele.avatar_url || null }}
                   key={i}
                   subtitle={ele.subHeader || null}
-                  title={ele.name || null}
+                  title={ele.first_name+' '+ele.last_name || null}
                   containerStyle={{ height: 80 }}
                   hideChevron
                   label={
-                    <ScoreCounter
-                      style={{ flex: 1 }}
-                      id={i}
-                      increment={() => this.increment(id)}
-                      decrement={() => this.decrement(id)}
-                      player={this.state.players[id]}
-                      isOpen={this.state.isOpen}
-                      isScorekeeper = {this.state.card.isScorekeeper}
-                      score={ele.score}
-                    />
+                  <ScoreCounter
+                    style={{ flex: 1 }}
+                    id={i}
+                    increment={() => this.increment(id)}
+                    decrement={() => this.decrement(id)}
+                    player={this.state.players[id]}
+                    isScorekeeper={this.state.isScorekeeper}
+                    isOpen={this.state.isOpen}
+                    score={this.state.score}
+                  />
                   }
                 />
               )
@@ -90,24 +127,24 @@ class Scoring extends Component {
           }
         </List>
         {
-          this.state.card.isScorekeeper ? (
-                  this.state.isOpen ?
-                    <Button
-                      onPress={ (e)=>{ this.addScores(e) } }
-                      color='black'
-                      backgroundColor="red"
-                      title="Submit"
-                      buttonStyle={{ marginVertical: 20 }}
-                    />
-                  :
-                    <Button
-                      onPress={ ()=>{ this.setState({ isOpen: !this.state.isOpen }) } }
-                      color='white'
-                      backgroundColor="orange"
-                      title="Update"
-                      buttonStyle={{ marginVertical: 20 }}
-                    />
-                  ) : null
+          this.state.isScorekeeper ? (
+            this.state.isOpen ?
+              <Button
+                onPress={ (e)=>{ this.addScores(e) } }
+                color='black'
+                backgroundColor="red"
+                title="Submit"
+                buttonStyle={{ marginVertical: 20 }}
+              />
+            :
+            <Button
+              onPress={ ()=>{ this.setState({ isOpen: !this.state.isOpen }) } }
+              color='white'
+              backgroundColor="orange"
+              title="Update"
+              buttonStyle={{ marginVertical: 20 }}
+            />
+          ) : null
         }
       </ScrollView>
     );
@@ -116,7 +153,8 @@ class Scoring extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    scores: state.scoreCounterReducer.scores
+    scores: state.scoreCounterReducer.scores,
+    current_player: state.auth.user,
   };
 }
 

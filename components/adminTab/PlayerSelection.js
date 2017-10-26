@@ -41,11 +41,14 @@ class PlayerSelection extends Component {
     this.props.updateCard(selectedPlayer, card);
     this.setState({ unassignedPlayers: unassignedPlayers });
 
+    if (card.players.length >= 4 || unassignedPlayers.length === 0) {
+      this.setState({ modalVisible: false, activeCard: null })
+    }
+
   }
 
   toggleModal(key) {
     this.setState({ modalVisible: !this.state.modalVisible, activeCard: key });
-    console.log('toggle Modal invoked...active Card:', key);
   }
 
   render() {
@@ -70,7 +73,7 @@ class PlayerSelection extends Component {
             title="Randomize All"
           />
 
-          {Object.keys(this.props.cards).map(key => {
+          {Object.keys(this.props.cards).map((key, i) => {
             let card = this.props.cards[key];
             return (
               <View>
@@ -90,6 +93,7 @@ class PlayerSelection extends Component {
 
           <Button
             backgroundColor="red"
+            disabled={this.state.unassignedPlayers.length !== 0}
             buttonStyle={{
               marginTop: 20,
               marginBottom: 20
@@ -129,30 +133,3 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
 });
-
-/*
-Create SelectPlayerFunction:
-  should show a scroll view of all available players
-  user should be able to select player for card, followed by removal from list
-  each card should only have four slots and choose from the playerArray
-
-Create RandomFunction to map Array:
-  map should auto populate cards with same division
-  no card should have only one player
-
-  Map state to props:
-  -players array:
-    -playerFirstName
-    -playerLastName
-    -playerDivision
-    -playerID
-
-Map Dispatch to props:
-  -onSubmit Function:
-    -dispatch new list of cards:
-      -players present 
-      -players division 
-      -players contact info
-      -what card players belong too
-    -point to next screen in stack
-*/

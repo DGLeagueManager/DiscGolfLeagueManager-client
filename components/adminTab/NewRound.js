@@ -6,19 +6,20 @@ import { createNewRound } from '../../actions/NewRoundActions';
 
 class NewRound extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
-
+      
     }
   }
-
+  
   render() {
+    console.log('new round course is:', this.props.currentCourse)
     return (
       <View style={{marginTop: 50}}>
         <Button
           buttonStyle={styles.button}
           onPress={ () => {
-              this.props.createRound();
+              this.props.createRound(this.props.currentCourse);
               this.props.navigation.navigate('AdminRoundConfigStart')
             }
           }
@@ -40,12 +41,18 @@ const styles = StyleSheet.create({
   },
 });
 
+const mapStateToProps = (state, ownProps) => {
+  return {
+    currentCourse: state.applicationReducer.currentCourse
+  }
+}
+
 const mapDispatchToProps = dispatch => {
   return {
-    createRound: () => {
-      dispatch(createNewRound())
+    createRound: (course) => {
+      dispatch(createNewRound(course))
     }
   }
 }
 
-export default connect(null, mapDispatchToProps)(NewRound);
+export default connect(mapStateToProps, mapDispatchToProps)(NewRound);
