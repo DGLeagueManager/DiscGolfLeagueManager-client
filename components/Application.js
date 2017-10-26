@@ -10,6 +10,7 @@ import Results from './resultsTab/Results';
 import AdminStack from './adminTab/AdminStack';
 import { getLeagueData } from '../actions/applicationActions'
 
+
 class Application extends Component {
   componentWillMount() {
     this.props.onGetLeagueData(this.props.id)
@@ -75,10 +76,6 @@ const Tab = TabNavigator({
     headerTitle: 'DISC GOLF LEAGUE MANAGER',
     headerTitleStyle: {
       color: '#fff',
-      //TODO: make these work
-      // fontFamily: 'Roboto'
-      // justifyContent: 'center',
-      // alignItems: 'center'
     },
     headerStyle: {
       backgroundColor: "#2196f3",

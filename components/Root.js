@@ -4,7 +4,6 @@ import Application from './Application';
 import Authenticate from './authenticate/Authenticate';
 import { Text, StyleSheet, View } from "react-native";
 
-
 class Root extends Component {
 
   constructor(props) {
@@ -16,10 +15,9 @@ class Root extends Component {
 
   render() {
     if (this.props.isLoggedIn) {
-        return <Application />;
-
+      return <Application />;
     } else {
-        return <Authenticate />;
+      return <Authenticate />;
     }
   }
 }
