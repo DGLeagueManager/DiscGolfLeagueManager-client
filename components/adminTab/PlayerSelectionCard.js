@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
 });
 
 const mapDispatchToProps = dispatch => {
-  return { 
+  return {
     onPlayerSelect: (player, cardIndex) => {
       dispatch(addPlayerToCard(player, cardIndex));
     },
