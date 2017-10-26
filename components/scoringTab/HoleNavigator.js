@@ -26,8 +26,8 @@ const generateTabs = holeDetails => {
   }, {});
 };
 
-const Tabs = TabNavigator(
-  generateTabs(),
+const HoleNavigator = TabNavigator(
+  generateTabs(holeDetails),
   {
     tabBarComponent: TabBarTop,
     tabBarPosition: "top",
