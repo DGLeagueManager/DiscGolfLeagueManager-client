@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-module.exports.getCurrentRoundData = (playerId, roundId) => {
+module.exports.getCurrentRoundData = (roundId, playerId) => {
   //TODO fix roundId
   return (dispatch) => {
     dispatch({ type: 'GET_CURRENT_ROUND_STARTED' });

@@ -5,8 +5,9 @@ export default function reducer(state = {}, action) {
         currentRound: null
       });
     case 'GET_CURRENT_ROUND_SUCCEEDED':
+      console.log('current round info in reducer: ', action.payload)
       return Object.assign({}, state, {
-        currentRound: action.payload.data
+        currentRound: action.payload
       });
     case 'GET_CURRENT_ROUND_FAILED':
       return Object.assign({}, state, {
