@@ -7,17 +7,16 @@ const PlayerPicker = (props) => {
   if (!player) {
   return (
     <Button
-      onPress={props.toggleModal}
+      onPress={() => props.toggleModal(props.cardKey)}
       buttonStyle={{ marginTop: 20 }}
-      backgroundColor="red"
+      backgroundColor="grey"
       title="Select Player..."
     />
   );
   } else {
     return (
       <View>
-        <Text>{player.first_name}</Text>
-        <Text>{player.last_name}</Text>
+        <Text>{player.first_name + " " + player.last_name}</Text>
       </View>
     )
   }

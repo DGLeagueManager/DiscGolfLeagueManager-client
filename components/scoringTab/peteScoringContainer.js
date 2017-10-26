@@ -8,6 +8,9 @@ import list from './dummyData';
 class ScoringContainer extends Component {
   constructor(props) {
     super(props)
+    this.state = {
+      
+    }
 
   }
 

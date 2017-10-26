@@ -32,7 +32,6 @@ module.exports.login = (email, password) => {
 		return axios.post('http://ec2-54-165-58-14.compute-1.amazonaws.com:3000/login', { email, password })
 			.then((response) => {dispatch(loginSuccess(response))},
 			(error) => {
-				console.log(error);
 				dispatch(loginFailed(error));
 			})
 	};

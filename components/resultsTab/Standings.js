@@ -22,25 +22,29 @@ export default class Result extends Component {
           name: 'Tristyn Leos',
           avatar_url: 'https://photos.zillowstatic.com/h_g/ISli46xcfvya590000000000.jpg',
           weeksPlayed: 4,
-          points: 117
+          points: 117,
+          id: 1
         },
         {
           name: 'Pete Givens',
           avatar_url: "https://media.licdn.com/mpr/mpr/shrinknp_200_200/p/4/005/021/138/35df1b0.jpg",
           weeksPlayed: 5,
-          points: 165
+          points: 165,
+          id: 2
         },
         {
           name: 'Robert Hunter',
           avatar_url: "http://jscraftcamp.org/img/nophoto.png",
           weeksPlayed: 5,
-          points: 214
+          points: 214,
+          id: 3
         },
         {
           name: 'A.J. Caporicci',
           avatar_url: "http://www.connallyband.com/uploads/8/5/3/4/85347626/img-8114_1.jpg",
           weeksPlayed: 5,
-          points: 641
+          points: 641,
+          id: 4
         },
       ]
     };
@@ -56,22 +60,22 @@ export default class Result extends Component {
           <Text style={styles.col} style={{flex: 1}}>Points</Text>
         </View>
         <View style={{width: '100%'}}>
-        <Divider style={styles.divider} />
+        <Divider key={1} style={styles.divider} />
           <List style={styles.listStyle}>
             {
-              this.state.list.map((ele, i) => (
-                <View style={{height: 40, flex: 1, flexDirection: 'row'}}>
-                  <Text key={'text1' + i} style={{marginLeft: 15}}>{(i+1)}</Text>
-                  <Text key={'text2' + i} style={{marginLeft: 20,fontSize: 15, flex: 3}}>{ele.name}</Text>
-                  <Text key={'text3' + i} style={{flex: 2}}>{ele.weeksPlayed}</Text>
-                  <Text key={'text4' + i} style={{flex: 1}}>{ele.points}</Text>
+              this.state.list.map((ele, index) => (
+                <View key={ele.id} style={{height: 40, flex: 1, flexDirection: 'row'}}>
+                  <Text key={ele.id} style={{marginLeft: 20,fontSize: 15, flex: 3}}>{ele.name}</Text>
+                  <Text key={ele.id} style={{marginLeft: 15}}>{(i+1)}</Text>
+                  <Text key={ele.id} style={{flex: 2}}>{ele.weeksPlayed}</Text>
+                  <Text key={ele.id} style={{flex: 1}}>{ele.points}</Text>
                 </View>
               ))
             }
          </List>
         </View>
       </ScrollView>
-    );
+    )
   }
 }
 

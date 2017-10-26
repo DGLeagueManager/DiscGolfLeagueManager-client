@@ -1,9 +1,9 @@
 export default function reducer(state = {}, action) {
   switch (action.type) {
     case "CREATE_NEW_ROUND":
-      console.log("creating new round object in redux store");
       return Object.assign({}, state, {
         newRound: {
+          course: action.payload,
           playersPresent: {}
         }
       });
@@ -11,6 +11,7 @@ export default function reducer(state = {}, action) {
       let player = action.payload
       return Object.assign({}, state, {
         newRound: {
+          ...state.newRound,
           playersPresent: {
             ...state.newRound.playersPresent,
             [player._id]: player
@@ -25,11 +26,25 @@ export default function reducer(state = {}, action) {
         }
       });
     case "ADD_PLAYER_TO_CARD":
-    //TODO: make sure this works lol
-      let card = action.payload.card;
+      const card = action.payload.card;
       card.players.push(action.payload.player);
-
       return Object.assign({}, state, {
+          newRound: {
+            ...state.newRound,
+            cards: {
+              ...state.newRound.cards,
+              [card.startingHole]: card
+            }
+          }
+        })
+      case "ADD_SCOREKEEPER_TO_CARD":
+        card = action.payload.card
+        const playerId = action.payload.player._id
+
+        // add playerId to card object as scorekeeper
+        card.scoreKeeper = playerId;
+
+        return Object.assign({}, state, {
           newRound: {
             ...state.newRound,
             cards: {

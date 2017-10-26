@@ -1,12 +1,12 @@
 export default function reducer(state = {}, action) {
   switch (action.type) {
-    case "SCORES_GETTING_POSTED":
+    case "POST_NEW_ROUND_STARTED":
       return Object.assign({}, state, {});
-    case "SCORES_POST_SUCCEEDED":
+    case "POST_NEW_ROUND_SUCCEEDED":
       return Object.assign({}, state, {
-        scores: action.payload
+        newRoundResponse: action.payload
       });
-    case "SCORES_POST_FAILED":
+    case "POST_NEW_ROUND_FAILED":
       return Object.assign({}, state, {
         error: action.error
       });

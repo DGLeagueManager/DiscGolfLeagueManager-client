@@ -12,18 +12,12 @@ import { getLeagueData } from '../actions/applicationActions'
 
 class Application extends Component {
   componentWillMount() {
-    console.log(this.props)
     this.props.onGetLeagueData(this.props.id)
-    
 	}
 
   render() {
     return <Stack />;
-    // return (<Text>OOOOOOOOOOO</Text>);
   }
-}
-const TestScreen = () => {
-  return (<Text>OOOOOOOOOOO</Text>);
 }
 
 const Tab = TabNavigator({
@@ -103,7 +97,6 @@ const Stack = StackNavigator({
 
 const mapStateToProps = (state, ownProps) => {
 	return {
-		//leagueData: state.applicationReducer.leagueData,
     token: state.auth.token,
     error: state.applicationReducer.error,
     id: state.auth.id

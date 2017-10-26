@@ -42,7 +42,6 @@ class Scoring extends Component {
   }
 
   addScores(e) {
-    console.log(this.props)
     this.setState({ isOpen: !this.state.isOpen })
 
     let scores = {

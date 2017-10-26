@@ -8,10 +8,10 @@ import {
   StyleSheet
 } from "react-native";
 import { Button, Divider } from "react-native-elements";
-import Modal from 'react-native-modal'
 import PlayerSelectionCard from "./PlayerSelectionCard";
 import { connect } from "react-redux";
 import { addPlayerToCard } from "../../actions/playerSelectionActions";
+import PlayerPickerModal from './PlayerPickerModal';
 
 class PlayerSelection extends Component {
   constructor(props) {
@@ -19,7 +19,8 @@ class PlayerSelection extends Component {
     console.log("player selection props:", props);
     this.state = {
       unassignedPlayers: [],
-      modalVisible: false
+      modalVisible: false,
+      activeCard: null,
     };
   }
 
@@ -31,53 +32,35 @@ class PlayerSelection extends Component {
     this.setState({ unassignedPlayers: arr });
   }
 
-  handleSelectPlayer(i, card) {
+  handleSelectPlayer(i, cardKey) {
+    let card = this.props.cards[cardKey];
     let selectedPlayer = this.state.unassignedPlayers[i];
     let unassignedPlayers = this.state.unassignedPlayers;
+
     unassignedPlayers.splice(i, 1);
     this.props.updateCard(selectedPlayer, card);
     this.setState({ unassignedPlayers: unassignedPlayers });
-    console.log("handleSelectPlayer invoked...");
+
+    if (card.players.length >= 4 || unassignedPlayers.length === 0) {
+      this.setState({ modalVisible: false, activeCard: null })
+    }
+
   }
 
-  toggleModal() {
-    this.setState({ modalVisible: !this.state.modalVisible });
+  toggleModal(key) {
+    this.setState({ modalVisible: !this.state.modalVisible, activeCard: key });
   }
 
   render() {
     return (
       <View>
-        <Modal
-          isVisible={this.state.modalVisible}
-          onRequestClose={() => {
-            console.log("");
-          }}
-        >
-          <View style={styles.modalContent}>
-            <FlatList
-              data={this.state.unassignedPlayers}
-              renderItem={({ item, i }) => (
-                <TouchableHighlight
-                  onPress={(value) => {
-                    alert( item.first_name);
-                  }}
-                  key={i}
-                >
-                  <View style={styles.listItem}>
-                    <Text>
-                      {item.first_name + " " + item.last_name}
-                    </Text>
-                  </View>
-                </TouchableHighlight>
-              )}
-            />
-            <Button
-              onPress={this.toggleModal.bind(this)}
-              title='Close'
-            />
-          </View>
-        </Modal>
-
+      <PlayerPickerModal 
+        isVisible={this.state.modalVisible} 
+        activeCard={this.state.activeCard} 
+        unassignedPlayers={this.state.unassignedPlayers}
+        handleSelectPlayer={this.handleSelectPlayer.bind(this)}
+        toggleModal={this.toggleModal.bind(this)}
+      />
         <ScrollView>
           <Text style={{ marginTop: 20, marginLeft: 20, fontSize: 20 }}>
             Unassigned Players: {this.state.unassignedPlayers.length}
@@ -93,19 +76,24 @@ class PlayerSelection extends Component {
           {Object.keys(this.props.cards).map((key, i) => {
             let card = this.props.cards[key];
             return (
-              <PlayerSelectionCard
-                key={'test' +  i}
-                startingHole={card.startingHole}
-                card={card}
-                unassignedPlayers={this.state.unassignedPlayers}
-                handleSelectPlayer={this.handleSelectPlayer.bind(this)}
-                toggleModal={this.toggleModal.bind(this)}
-              />
+              <View>
+                <PlayerSelectionCard
+                  key={key}
+                  cardKey={key}
+                  startingHole={card.startingHole}
+                  card={card}
+                  unassignedPlayers={this.state.unassignedPlayers}
+                  handleSelectPlayer={this.handleSelectPlayer.bind(this)}
+                  toggleModal={this.toggleModal.bind(this)}
+                  modalVisible={this.state.modalVisible}
+                />
+              </View>
             );
           })}
 
           <Button
             backgroundColor="red"
+            disabled={this.state.unassignedPlayers.length !== 0}
             buttonStyle={{
               marginTop: 20,
               marginBottom: 20
@@ -144,46 +132,4 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center"
   },
-  listItem: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    fontSize: 30,
-    padding: 5,
-  },
-  modalContent: {
-    backgroundColor: 'white',
-    padding: 22,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 4,
-    borderColor: 'rgba(0, 0, 0, 0.1)',
-  },
 });
-
-/*
-Create SelectPlayerFunction:
-  should show a scroll view of all available players
-  user should be able to select player for card, followed by removal from list
-  each card should only have four slots and choose from the playerArray
-
-Create RandomFunction to map Array:
-  map should auto populate cards with same division
-  no card should have only one player
-
-  Map state to props:
-  -players array:
-    -playerFirstName
-    -playerLastName
-    -playerDivision
-    -playerID
-
-Map Dispatch to props:
-  -onSubmit Function:
-    -dispatch new list of cards:
-      -players present
-      -players division
-      -players contact info
-      -what card players belong too
-    -point to next screen in stack
-*/

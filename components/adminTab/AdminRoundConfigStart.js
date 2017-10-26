@@ -11,7 +11,6 @@ import "@expo/vector-icons"; // 5.2.0
 
 class AdminRoundConfigStart extends Component {
   constructor(props) {
-    console.log('AdminRoundConfigStart props: ', props)
     super(props);
 
   }
@@ -55,13 +54,11 @@ class AdminRoundConfigStart extends Component {
       }
     }
 
-    console.log("result of generateEmptyCards: ", cards);
 
     return cards;
   }
 
   render() {
-    console.log('Admin round config start props: ', this.props)
     return (
       <ScrollView style={{ marginTop: 20, paddingTop: 0 }}>
         <List style={{ marginBottom: 20 }}>
@@ -77,7 +74,7 @@ class AdminRoundConfigStart extends Component {
                   rightTitleStyle={null}
                   label={
                     <AdminSelectionBoxes
-                      key={i}
+                      key={ele._id}
                       value={ele._id}
                       handleAmDivisionSelect={this.handleAmDivisionSelect.bind(this)}
                       handleProDivisionSelect={this.handleProDivisionSelect.bind(this)}

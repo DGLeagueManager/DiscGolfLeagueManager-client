@@ -1,70 +1,96 @@
-import React, { Component } from 'react';
-import { Text, ScrollView, View, StyleSheet } from 'react-native';
-import { Card, Button, Divider } from 'react-native-elements';
-import ScoreKeeperCard from './ScoreKeeperCard'
+import React, { Component } from "react";
+import { Text, ScrollView, View, StyleSheet } from "react-native";
+import { Card, Button, Divider } from "react-native-elements";
+import ScoreKeeperCard from "./ScoreKeeperCard";
+import { connect } from "react-redux";
+import {
+  postNewRound,
+  addScoreKeeper
+} from "../../actions/scoreKeeperSelectionActions";
+import axios from 'axios';
 
-export default class ScoreKeeperSelection extends Component {
+class ScoreKeeperSelection extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
-      list: [
-        {
-          name: 'Tristyn Leos',
-          avatar_url: 'https://photos.zillowstatic.com/h_g/ISli46xcfvya590000000000.jpg',
-          amChecked: false,
-          proChecked: false,
-          subHeader: ''
-        },
-        {
-          name: 'Pete Givens',
-          avatar_url: "https://media.licdn.com/mpr/mpr/shrinknp_200_200/p/4/005/021/138/35df1b0.jpg",
-          amChecked: false,
-          proChecked: false,
-          subHeader: ''
-        },
-        {
-          name: 'Robert Hunter',
-          avatar_url: "http://jscraftcamp.org/img/nophoto.png",
-          amChecked: false,
-          proChecked: false,
-          subHeader: ''
-        },
-        {
-          name: 'A.J. Caporicci',
-          avatar_url: "http://www.connallyband.com/uploads/8/5/3/4/85347626/img-8114_1.jpg",
-          amChecked: false,
-          proChecked: false,
-          subHeader: ''
-        },
-      ],
       selected: 1
-    }
+    };
   }
-  fun() {
-    this.setState({ selected: 0 })
+
+  generatePopulatedCards() {
+    populatedCards = this.props.cards;
+    let cards = [];
+
+    Object.keys(populatedCards).forEach((key, index) => {
+      let players = populatedCards[key].players;
+      let hole = populatedCards[key].startingHole;
+      let card = populatedCards[key];
+
+      cards.push(
+        <ScoreKeeperCard
+          players={players}
+          index={index}
+          selected={this.state.selected}
+          hole={hole}
+          handleSelectScoreKeeper={this.handleScoreKeeperSelection.bind(this)}
+          card={card}
+        />
+      );
+    });
+    return cards;
   }
+
+  handleScoreKeeperSelection(player, card) {
+    this.props.onSelectScoreKeeper(player, card);
+  }
+
+  handleSubmit() {
+     axios.post("http://ec2-54-165-58-14.compute-1.amazonaws.com:3000/createRound", this.props.newRound)
+     .catch( (err) => {
+       console.log(err)
+     })
+  }
+
+  allCardsHaveScorekeepers() {
+    // TODO: this isn't working, i think becuase the component does not re-render when a scorekeeper is selected?
+    var result = true;
+    let cards = this.props.cards;
+
+    Object.keys(cards).forEach( key => {
+      if (cards[key].scoreKeeper) {
+        result = false;
+      }
+    })
+    return result;
+  }
+
   render() {
+
     return (
-      <View style={styles.view}>
-      <ScrollView contentContainerStyle={styles.container}>
-        <Text style={styles.header}>Select A Score Keeper</Text>
-        <ScoreKeeperCard fun={ ()=>{this.props.fun()} } selected={this.state.selected} holes='1' />
-        <ScoreKeeperCard fun={ ()=>{this.props.fun()} } selected={this.state.selected} holes='2' />
-        <ScoreKeeperCard fun={ ()=>{this.props.fun()} } selected={this.state.selected} holes='3' />
-        <ScoreKeeperCard fun={ ()=>{this.props.fun()} } selected={this.state.selected} holes='4' />
-        <Button color='black' backgroundColor="#dbdbdb" title='Next' />
+      <ScrollView>
+        {this.generatePopulatedCards().map(card => card)}
+        <Button
+          backgroundColor="red"
+          disabled={this.allCardsHaveScorekeepers()}
+          buttonStyle={{
+            marginTop: 20,
+            marginBottom: 20
+          }}
+          title="Start Round!"
+          onPress={ () => {this.handleSubmit()} }
+        />
       </ScrollView>
-     </View>
-    )
+    );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#ecf0f1',
+    width: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#ecf0f1",
     padding: 20
   },
   header: {
@@ -75,5 +101,31 @@ const styles = StyleSheet.create({
   },
   view: {
     paddingTop: 20
-  },
+  }
 });
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    currentRound: state.applicationReducer.currentRound,
+    currentSeason: state.applicationReducer.currentSeason,
+    cards: state.newRoundReducer.newRound.cards,
+    playersPresent: state.newRoundReducer.newRound.playersPresent,
+    newRound: state.newRoundReducer.newRound,
+    currentCourse: state.applicationReducer.currentCourse
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onSubmitNewRound: (newRound) => {
+      dispatch(postNewRound(newRound));
+    },
+    onSelectScoreKeeper: (player, card) => {
+      dispatch(addScoreKeeper(player, card));
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(
+  ScoreKeeperSelection
+);

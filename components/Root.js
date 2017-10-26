@@ -15,7 +15,6 @@ class Root extends Component {
   }
 
   render() {
-    console.log('These are the props at root', this.props);
     if (this.props.isLoggedIn) {
         return <Application />;
 
@@ -26,7 +25,6 @@ class Root extends Component {
 }
 
 const mapStateToProps = function(state, ownProps){
-  console.log('Mapping');
 	return ({
 		isLoggedIn: (state.auth.isLoggedIn || false),
     token: state.auth.token,
