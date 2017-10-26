@@ -40,13 +40,8 @@ const Tab = TabNavigator({
       ),
     }
   },
-<<<<<<< HEAD
-  Scoring: {
-    screen: HoleNavigator,
-=======
   ScoringContainer: {
     screen: ScoringContainer,
->>>>>>> working on get for current Round Data
     navigationOptions: {
       tabBarLabel: 'Scoring',
       tabBarIcon: ({ tintColor }) => (
