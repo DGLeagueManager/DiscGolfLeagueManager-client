@@ -4,7 +4,9 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import list from './dummyData';
 import Scoring from './Scoring';
-import { getCurrentRoundData } from '../../actions/getCurrentRoundDataActions'
+import { getCurrentRoundData } from '../../actions/getCurrentRoundDataActions';
+import FinalizeScore from './FinalizeScore';
+import HoleNavigator from './HoleNavigator';
 
 
 class ScoringContainer extends Component {
@@ -26,7 +28,6 @@ class ScoringContainer extends Component {
   }
 
   render() {
-    console.log('CURRENT ROUND PROPS: ', this.props)
     if (!this.props.currentRound) {
       return (
         <View style={{ flex: 1, alignItems: 'center' }} >
@@ -35,7 +36,6 @@ class ScoringContainer extends Component {
       )
     } else {
       return <HoleNavigator card={this.props.currentCard}/>
-      // return <Scoring />
     }
   }
 }

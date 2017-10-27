@@ -3,6 +3,7 @@ import { TabNavigator, TabBarTop } from "react-navigation";
 import Scoring from './Scoring';
 import { Text, View } from 'react-native';
 import { holeDetails } from './dummyData';
+import FinalizeScore from './FinalizeScore';
 
 const SampleComponent = ({ hole }) => (
   <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
@@ -26,8 +27,17 @@ const generateTabs = holeDetails => {
   }, {});
 };
 
+const FinalizeScoreTab = {
+  FinalizeScore: {
+    screen: FinalizeScore,
+    navigationOptions: {
+      tabBarLabel: 'FinalizeScore'
+    }
+  }
+}
+
 const HoleNavigator = TabNavigator(
-  generateTabs(holeDetails),
+  Object.assign(generateTabs(holeDetails), FinalizeScoreTab),
   {
     tabBarComponent: TabBarTop,
     tabBarPosition: "top",
