@@ -10,8 +10,6 @@ export default function reducer(state = {}, action) {
       const currentRound = leagueData.seasons[0].rounds.find( (round) => {
         return round.completed === false;
       })
-
-      console.log('CURRENT ROUND INFO FROM REDUCER: ', currentRound)
       
       return Object.assign({}, state, {
         currentSeason: leagueData.seasons[0],

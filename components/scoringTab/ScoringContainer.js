@@ -23,7 +23,6 @@ class ScoringContainer extends Component {
       setInterval(() => {        
         this.props.onGetCurrentRound(this.props.currentRoundId, this.props.playerId)}, 10000)
     }
-    
   }
 
   render() {
@@ -35,7 +34,8 @@ class ScoringContainer extends Component {
         </View>
       )
     } else {
-      return <Scoring />
+      return <HoleNavigator card={this.props.currentCard}/>
+      // return <Scoring />
     }
   }
 }
@@ -44,7 +44,8 @@ const mapStateToProps = (state, ownProps) => {
   return {
     currentRound: state.getCurrentRoundDataReducer.currentRound,
     playerId: state.auth.id,
-    currentRoundId: state.applicationReducer.currentRoundId
+    currentRoundId: state.applicationReducer.currentRoundId,
+    currentCard: state.getCurrentRoundDataReducer.currentCard
   }
 }
 

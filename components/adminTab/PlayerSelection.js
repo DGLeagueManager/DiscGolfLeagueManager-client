@@ -16,7 +16,6 @@ import PlayerPickerModal from './PlayerPickerModal';
 class PlayerSelection extends Component {
   constructor(props) {
     super(props);
-    console.log("player selection props:", props);
     this.state = {
       unassignedPlayers: [],
       modalVisible: false,

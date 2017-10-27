@@ -13,7 +13,6 @@ class NewRound extends Component {
   }
   
   render() {
-    console.log('new round course is:', this.props.currentCourse)
     return (
       <View style={{marginTop: 50}}>
         <Button
