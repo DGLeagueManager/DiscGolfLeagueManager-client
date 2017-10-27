@@ -1,11 +1,12 @@
-import React, { Component } from "react";
-import { View, Text } from "react-native";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import list from "./dummyData";
-import Scoring from "./Scoring";
-import { getCurrentRoundData } from "../../actions/getCurrentRoundDataActions";
-import HoleNavigator from "./HoleNavigator";
+import React, { Component } from 'react';
+import { View, Text } from 'react-native';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import list from './dummyData';
+import Scoring from './Scoring';
+import { getCurrentRoundData } from '../../actions/getCurrentRoundDataActions';
+import FinalizeScore from './FinalizeScore';
+import HoleNavigator from './HoleNavigator';
 
 class ScoringContainer extends Component {
   constructor(props) {
@@ -34,7 +35,8 @@ class ScoringContainer extends Component {
         </View>
       );
     } else {
-      return <HoleNavigator card={this.props.currentCard} />;
+
+      return <HoleNavigator card={this.props.currentCard}/>
     }
   }
 }

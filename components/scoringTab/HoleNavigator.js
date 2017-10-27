@@ -32,17 +32,26 @@ class HoleNavigator extends Component {
     }, {});
   }
 
-  render() {
-    const TabNav = TabNavigator(this.generateTabs(holeDetails), {
-      tabBarComponent: TabBarTop,
-      tabBarPosition: "top",
-      tabBarOptions: {
-        scrollEnabled: true,
-        swipeEnabled: true,
-        showLabel: true,
-        style: {
-          backgroundColor: "red"
-        }
+const FinalizeScoreTab = {
+  FinalizeScore: {
+    screen: FinalizeScore,
+    navigationOptions: {
+      tabBarLabel: 'FinalizeScore'
+    }
+  }
+}
+
+const HoleNavigator = TabNavigator(
+  Object.assign(generateTabs(holeDetails), FinalizeScoreTab),
+  {
+    tabBarComponent: TabBarTop,
+    tabBarPosition: "top",
+    tabBarOptions: {
+      scrollEnabled: true,
+      swipeEnabled: true,
+      showLabel: true,
+      style: {
+        backgroundColor: "red"
       }
     });
     return <TabNav />;

@@ -8,8 +8,8 @@ export default function reducer(state = {}, action) {
       let playerId = action.payload.playerId;
       let cardArray = action.payload.response.data.cards;
 
-      let myCard = cardArray.find( ( card ) => {
-        return card.players.find( (player) => {
+      let myCard = cardArray.find((card) => {
+        return card.players.find((player) => {
           return player._id === playerId
         });
       });
@@ -17,7 +17,7 @@ export default function reducer(state = {}, action) {
       let isScoreKeeper = myCard.score_keeper === playerId;
 
       console.log('current round: ', action.payload.response.data, 'current card: ', myCard, 'am I scorekeeper? ', isScoreKeeper)
-      
+
       return Object.assign({}, state, {
         currentRound: action.payload.response.data,
         currentCard: myCard,
