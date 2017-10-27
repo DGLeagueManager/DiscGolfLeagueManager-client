@@ -13,7 +13,6 @@ class ScoreKeeperSelection extends Component {
   constructor(props) {
     super(props);
     
-    console.log(this.props)
     this.state = {
       selected: 1
     };
@@ -51,7 +50,6 @@ class ScoreKeeperSelection extends Component {
   
     newRound.current_season = this.props.currentSeason._id;
     newRound.id = this.props.currentRound._id;
-    console.log(newRound)
     this.props.onSubmitNewRound(this.props.newRound)
   }
 

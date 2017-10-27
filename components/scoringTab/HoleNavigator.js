@@ -11,13 +11,13 @@ const SampleComponent = ({ hole }) => (
   </View>
 );
 
-const GenerateScreen = hole => <SampleComponent hole={hole} />;
+const generateScreen = hole => <SampleComponent hole={hole} />;
 
 const generateTabs = holeDetails => {
   return Object.keys(holeDetails).reduce((result, key) => {
     let hole = holeDetails[key];
     result[key] = {
-      screen: GenerateScreen.bind(null, hole),
+      screen: generateScreen.bind(null, hole),
       navigationOptions: {
         tabBarLabel: "Hole" + key
       }
