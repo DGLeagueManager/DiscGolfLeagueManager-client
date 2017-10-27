@@ -8,33 +8,34 @@ import { getCurrentRoundData } from '../../actions/getCurrentRoundDataActions';
 import FinalizeScore from './FinalizeScore';
 import HoleNavigator from './HoleNavigator';
 
-
 class ScoringContainer extends Component {
   constructor(props) {
-    super(props)
-    this.state = {
-
-    }
+    super(props);
+    this.state = {};
   }
 
   componentWillMount() {
-  
-    if(this.props.currentRoundId) {
-      onGetCurrentRound(this.props.currentRoundId, this.props.playerId)
+    if (this.props.currentRoundId) {
+      onGetCurrentRound(this.props.currentRoundId, this.props.playerId);
     } else {
-      setInterval(() => {        
-        this.props.onGetCurrentRound(this.props.currentRoundId, this.props.playerId)}, 10000)
+      setInterval(() => {
+        this.props.onGetCurrentRound(
+          this.props.currentRoundId,
+          this.props.playerId
+        );
+      }, 10000);
     }
   }
 
   render() {
     if (!this.props.currentRound) {
       return (
-        <View style={{ flex: 1, alignItems: 'center' }} >
+        <View style={{ flex: 1, alignItems: "center" }}>
           <Text> You are not currently in a game </Text>
         </View>
-      )
+      );
     } else {
+
       return <HoleNavigator card={this.props.currentCard}/>
     }
   }
@@ -46,15 +47,15 @@ const mapStateToProps = (state, ownProps) => {
     playerId: state.auth.id,
     currentRoundId: state.applicationReducer.currentRoundId,
     currentCard: state.getCurrentRoundDataReducer.currentCard
-  }
-}
+  };
+};
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
     onGetCurrentRound: (playerId, roundId) => {
       dispatch(getCurrentRoundData(playerId, roundId));
     }
-  }
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ScoringContainer);

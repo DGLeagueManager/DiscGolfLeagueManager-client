@@ -14,9 +14,14 @@ export default function reducer(state = {}, action) {
         });
       });
 
+      let isScoreKeeper = myCard.score_keeper === playerId;
+
+      console.log('current round: ', action.payload.response.data, 'current card: ', myCard, 'am I scorekeeper? ', isScoreKeeper)
+
       return Object.assign({}, state, {
         currentRound: action.payload.response.data,
-        currentCard: myCard
+        currentCard: myCard,
+        isScoreKeeper: isScoreKeeper
       });
     case 'GET_CURRENT_ROUND_FAILED':
       return Object.assign({}, state, {
