@@ -66,38 +66,6 @@ class Scoring extends Component {
     e.preventDefault();
   }
 
-  // componentWillMount() {
-  //   fetch(
-  //     "http://ec2-54-165-58-14.compute-1.amazonaws.com:3000/getPlayerCard",
-  //     {
-  //       method: "POST",
-  //       headers: {
-  //         Accept: "application/json",
-  //         "Content-Type": "application/json"
-  //       },
-  //       body: JSON.stringify({
-  //         player_id: this.props.current_player._id,
-  //         round_id: "59ea986dfb55674bbf2af12f"
-  //       })
-  //     }
-  //   )
-  //     .then(res => {
-  //       return res.json(res);
-  //     })
-  //     .then(card => {
-  //       this.setState({ card: card });
-  //       console.log(
-  //         this.state.card.score_keeper === this.props.current_player._id
-  //       );
-  //     })
-  //     .then(() => {
-  //       this.getCard();
-  //     })
-  //     .then(() => {
-  //       this.getPlayerList();
-  //     });
-  // }
-
   getPlayerList() {
     this.setState({ players: this.state.card.players });
   }
