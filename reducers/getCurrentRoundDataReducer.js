@@ -9,7 +9,9 @@ export default function reducer(state = {}, action) {
       let cardArray = action.payload.response.data.cards;
 
       let myCard = cardArray.find( ( card ) => {
-        return card.players.includes(playerId);
+        return card.players.find( (player) => {
+          return player._id === playerId
+        });
       });
       
       return Object.assign({}, state, {
