@@ -6,10 +6,10 @@ import { Constants } from 'expo';
 import { Icon } from 'react-native-elements';
 import ScoringContainer from './scoringTab/ScoringContainer';
 import League from './leagueTab/League';
-import Results from './resultsTab/Results';
 import AdminStack from './adminTab/AdminStack';
 import { getLeagueData } from '../actions/applicationActions'
 import HoleNavigator from './scoringTab/HoleNavigator';
+import ResultsNavigator from './resultsTab/ResultsNavigator';
 
 class Application extends Component {
   constructor(props){
@@ -61,7 +61,7 @@ const Tab = TabNavigator({
     }
   },
   Results: {
-    screen: Results,
+    screen: ResultsNavigator,
     navigationOptions: {
       tabBarLabel: 'Results',
       tabBarIcon: ({ tintColor }) => (
@@ -116,7 +116,7 @@ const adminTab = TabNavigator({
     }
   },
   Results: {
-    screen: Results,
+    screen: ResultsNavigator,
     navigationOptions: {
       tabBarLabel: 'Results',
       tabBarIcon: ({ tintColor }) => (
