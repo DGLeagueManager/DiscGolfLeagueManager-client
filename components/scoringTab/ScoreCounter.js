@@ -30,28 +30,6 @@ const ScoreCounter = (props) => (
 );
 
 
-{/* <View style={{ flex: 1, flexDirection: 'row' }}>
-  {!this.props.scoresLocked && this.props.isScoreKeeper ?
-    <Icon
-      containerStyle={{ height: 40, width: 40 }}
-      onPress={this.props.decrement}
-      raised
-      type='evilicon'
-      name='minus' /> : null}
-  <Badge
-    containerStyle={{ marginTop: 6, height: 40, width: 40 }}
-    value={this.props.score}
-    textStyle={{ color: 'orange' }}
-  />
-  {!this.props.scoresLocked && this.props.isScoreKeeper ?
-    <Icon
-      containerStyle={{ height: 40, width: 40 }}
-      onPress={this.props.increment}
-      raised
-      type='evilicon'
-      name='plus' /> : null}
-</View> */}
-
 const styles = StyleSheet.create({
   container: {
     width: '100%',

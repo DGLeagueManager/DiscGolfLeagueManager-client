@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { Button, Icon, List, ListItem } from "react-native-elements"; // 0.17.0
 import { Constants } from "expo";
 import ScoreCounter from "./ScoreCounter";
-import { postScores, incrementPlayerScore } from "../../actions/scoreCounterActions";
+import { postScores, incrementPlayerScore, decrementPlayerScore } from "../../actions/scoreCounterActions";
 import "@expo/vector-icons"; // 5.2.0
 
 class Scoring extends Component {
@@ -25,8 +25,7 @@ class Scoring extends Component {
   }
 
   render() {
-    console.log(this.props);
-    return(
+    return (
       <ScrollView>
         <List>
           {this.props.card.players.map((player, i) => {
@@ -43,18 +42,48 @@ class Scoring extends Component {
                   <ScoreCounter
                     style={{ flex: 1 }}
                     id={i}
-                    increment={() => this.increment(player._id)}
-                    decrement={() => this.decrement(player._id)}
+                    increment={() => {
+                      this.props.incrementPlayerScore(player._id, this.props.hole.hole_number)
+                    }
+                    }
+                    decrement={() => {
+                      this.props.decrementPlayerScore(player._id, this.props.hole.hole_number)
+                    }
+                    }
                     player={player}
                     isScoreKeeper={this.props.isScoreKeeper}
                     scoresLocked={this.state.scoresLocked}
                     score={this.props.scores[player._id][this.props.hole.hole_number]}
                   />
-                } 
+                }
               />
             );
           })}
         </List>
+        {this.props.isScoreKeeper ? (
+          !this.state.scoresLocked ? (
+            <Button
+              onPress={e => {
+                this.setState({ scoresLocked: !this.state.scoresLocked });
+                this.props.onPostScores(this.props.currentRound)
+              }}
+              color="black"
+              backgroundColor="red"
+              title="Submit"
+              buttonStyle={{ marginVertical: 20 }}
+            />
+          ) : (
+              <Button
+                onPress={() => {
+                  this.setState({ scoresLocked: !this.state.scoresLocked });
+                }}
+                color="white"
+                backgroundColor="orange"
+                title="Update"
+                buttonStyle={{ marginVertical: 20 }}
+              />
+            )
+        ) : null}
 
       </ScrollView>
     )
@@ -78,8 +107,8 @@ const mapDispatchToProps = dispatch => {
     decrementPlayerScore: (playerId, holeNum) => {
       dispatch(decrementPlayerScore(playerId, holeNum))
     },
-    onPostScores: scores => {
-      dispatch(postScores(scores));
+    onPostScores: currentRound => {
+      dispatch(postScores(currentRound));
     }
   };
 };

@@ -26,34 +26,46 @@ export default function reducer(state = {}, action) {
       });    
     case 'INCREMENT_PLAYER_SCORE':
       
-      let newScores = Object.assign({}, state.currentRound.scores)
+      let incrementScores = Object.assign({}, state.currentRound.scores)
       
-      for (var key in newScores) {
+      for (var key in incrementScores) {
         if (key === action.payload.playerId) {
-          newScores[key][action.payload.holeNum]++
+          incrementScores[key][action.payload.holeNum]++
         }
       }
 
       return Object.assign({}, state, {
         currentRound: {
           ...state.currentRound,
-          scores: newScores
+          scores: incrementScores
         }
       });
     case 'DECREMENT_PLAYER_SCORE':
       
+      let decrementScores = Object.assign({}, state.currentRound.scores)
       
-      for (var key in newScores) {
+      for (var key in decrementScores) {
         if (key === action.payload.playerId) {
-          newScores[key][action.payload.holeNum]--
+          decrementScores[key][action.payload.holeNum]--
         }
       }
 
       return Object.assign({}, state, {
         currentRound: {
           ...state.currentRound,
-          scores: newScores
+          scores: decrementScores
         }
+      });
+    case "SCORES_GETTING_POSTED":
+      console.log('Scores Getting Posted: *******', action.payload)
+      return Object.assign({}, state, {});
+    case "SCORES_POST_SUCCEEDED":
+      return Object.assign({}, state, {
+        currentRound: action.payload
+      });
+    case "SCORES_POST_FAILED":
+      return Object.assign({}, state, {
+        error: action.error
       });
     default:
       return state;
