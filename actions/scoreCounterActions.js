@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const postScores = (scores) => {
+module.exports.postScores = (scores) => {
 
 	return (dispatch) => {
 		dispatch({ type: 'SCORES_GETTING_POSTED'});
@@ -10,3 +10,10 @@ export const postScores = (scores) => {
 			.catch(error => dispatch({ type: 'SCORES_POST_FAILED', error: error }))    
 	};
 }
+
+module.exports.incrementPlayerScore = (playerId, holeNum) => {
+	return {
+		type: 'INCREMENT_PLAYER_SCORE',
+		payload: { playerId, holeNum }
+	};
+};

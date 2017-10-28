@@ -16,8 +16,6 @@ export default function reducer(state = {}, action) {
 
       let isScoreKeeper = myCard.score_keeper === playerId;
 
-      console.log('current round: ', action.payload.response.data, 'current card: ', myCard, 'am I scorekeeper? ', isScoreKeeper)
-
       return Object.assign({}, state, {
         currentRound: action.payload.response.data,
         currentCard: myCard,
@@ -26,6 +24,38 @@ export default function reducer(state = {}, action) {
     case 'GET_CURRENT_ROUND_FAILED':
       return Object.assign({}, state, {
         error: action.error
+      });    
+    case 'INCREMENT_PLAYER_SCORE':
+      
+      let scores = Object.assign({}, state.currentRound.scores)
+      
+      for (var key in scores) {
+        if (key === action.payload.playerId) {
+          scores[key][action.payload.holeNum]++
+        }
+      }
+
+      return Object.assign({}, state, {
+        currentRound: {
+          ...state.currentRound,
+          scores: scores
+        }
+      });
+    case 'DECREMENT_PLAYER_SCORE':
+      
+      let scores = Object.assign({}, state.currentRound.scores)
+      
+      for (var key in scores) {
+        if (key === action.payload.playerId) {
+          scores[key][action.payload.holeNum]--
+        }
+      }
+
+      return Object.assign({}, state, {
+        currentRound: {
+          ...state.currentRound,
+          scores: scores
+        }
       });
     default:
       return state;

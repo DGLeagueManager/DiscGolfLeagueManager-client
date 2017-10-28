@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { Button, Icon, List, ListItem } from "react-native-elements"; // 0.17.0
 import { Constants } from "expo";
 import ScoreCounter from "./ScoreCounter";
-import { postScores } from "../../actions/scoreCounterActions";
+import { postScores, incrementPlayerScore } from "../../actions/scoreCounterActions";
 import "@expo/vector-icons"; // 5.2.0
 
 class Scoring extends Component {
@@ -25,6 +25,7 @@ class Scoring extends Component {
   }
 
   render() {
+    this.props.incrementPlayerScore(this.props.id, 2)
     return (
       <ScrollView>
 
@@ -85,12 +86,22 @@ class Scoring extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    scores: state.scoreCounterReducer.scores
+    scores: state.scoreCounterReducer.scores,
+    id: state.auth.id,
+    isScorekeeper: state.getCurrentRoundData.isScorekeeper,
+    card: state.getCurrentRoundData.currentCard,
+    currentRound: state.getCurrentRoundData.currentRound
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
+    incrementPlayerScore: (playerId, holeNum) => {
+      dispatch(incrementPlayerScore(playerId, holeNum))
+    },
+    decrementPlayerScore: (playerId, holeNum) => {
+      dispatch(decrementPlayerScore(playerId, holeNum))
+    },
     onPostScores: scores => {
       dispatch(postScores(scores));
     }
