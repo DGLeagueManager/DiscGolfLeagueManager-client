@@ -16,14 +16,6 @@ class Scoring extends Component {
     };
   }
 
-  increment(id) {
-    console.log('incrementing score for player: ', id)
-  }
-
-  decrement(id) {
-    console.log('decrementing score for player: ', id)
-  }
-
   render() {
     return (
       <ScrollView>
@@ -32,7 +24,6 @@ class Scoring extends Component {
             return (
               <ListItem
                 roundAvatar
-                // avatar={{ uri: player.avatar_url || null }}
                 key={i}
                 subtitle={'overall round score goes here'}
                 title={player.first_name + " " + player.last_name || null}
