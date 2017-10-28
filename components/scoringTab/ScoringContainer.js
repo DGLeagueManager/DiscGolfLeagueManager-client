@@ -36,6 +36,7 @@ class ScoringContainer extends Component {
       );
     } else {
       return <HoleNavigator card={this.props.currentCard}/>
+    
     }
   }
 }

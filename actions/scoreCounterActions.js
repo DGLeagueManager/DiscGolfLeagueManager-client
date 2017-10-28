@@ -17,3 +17,10 @@ module.exports.incrementPlayerScore = (playerId, holeNum) => {
 		payload: { playerId, holeNum }
 	};
 };
+
+module.exports.decrementPlayerScore = (playerId, holeNum) => {
+	return {
+		type: 'INCREMENT_PLAYER_SCORE',
+		payload: { playerId, holeNum }
+	};
+};

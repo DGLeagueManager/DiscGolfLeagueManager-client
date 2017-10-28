@@ -43,7 +43,6 @@ export default function reducer(state = {}, action) {
       });
     case 'DECREMENT_PLAYER_SCORE':
       
-      let scores = Object.assign({}, state.currentRound.scores)
       
       for (var key in scores) {
         if (key === action.payload.playerId) {

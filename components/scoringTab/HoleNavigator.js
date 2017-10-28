@@ -3,6 +3,7 @@ import { TabNavigator, TabBarTop } from "react-navigation"; // 1.0.0-beta.15
 import { Text, View } from "react-native";
 import { holeDetails } from "./dummyData";
 import FinalizeScore from './FinalizeScore';
+import Scoring from './Scoring';
 
 class HoleNavigator extends Component {
   constructor(props) {
@@ -11,7 +12,7 @@ class HoleNavigator extends Component {
 
   generateScreen(hole, card, isScoreKeeper) {
     return (
-      <SampleComponent hole={hole} card={card} isScoreKeeper={isScoreKeeper} />
+      <Scoring hole={hole} card={card} isScoreKeeper={isScoreKeeper} />
     );
   }
 

@@ -49,7 +49,7 @@ class Scoring extends Component {
                     player={player}
                     isScorekeeper={this.props.isScorekeeper}
                     scoresLocked={this.state.scoresLocked}
-                    score={this.props.scores[player._id][hole.hole_number]}
+                    score={this.props.scores[player._id][this.props.hole.hole_number]}
                   />
                 }
               />
@@ -57,7 +57,7 @@ class Scoring extends Component {
           })}
         </List>
         {this.props.isScorekeeper ? (
-          this.state.scoresLocked ? (
+          !this.state.scoresLocked ? (
             <Button
               onPress={e => {
                 // dispatch submit scores;
