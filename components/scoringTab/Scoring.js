@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { Button, Icon, List, ListItem } from "react-native-elements"; // 0.17.0
 import { Constants } from "expo";
 import ScoreCounter from "./ScoreCounter";
-import { postScores } from "../../actions/scoreCounterActions";
+import { postScores, incrementPlayerScore, decrementPlayerScore } from "../../actions/scoreCounterActions";
 import "@expo/vector-icons"; // 5.2.0
 
 class Scoring extends Component {
@@ -27,9 +27,8 @@ class Scoring extends Component {
   render() {
     return (
       <ScrollView>
-
         <List>
-          {Object.keys(this.props.card.players).map((player, i) => {
+          {this.props.card.players.map((player, i) => {
             return (
               <ListItem
                 roundAvatar
@@ -43,23 +42,30 @@ class Scoring extends Component {
                   <ScoreCounter
                     style={{ flex: 1 }}
                     id={i}
-                    increment={() => this.increment(player._id)}
-                    decrement={() => this.decrement(player._id)}
+                    increment={() => {
+                      this.props.incrementPlayerScore(player._id, this.props.hole.hole_number)
+                    }
+                    }
+                    decrement={() => {
+                      this.props.decrementPlayerScore(player._id, this.props.hole.hole_number)
+                    }
+                    }
                     player={player}
-                    isScorekeeper={this.props.isScorekeeper}
+                    isScoreKeeper={this.props.isScoreKeeper}
                     scoresLocked={this.state.scoresLocked}
-                    score={this.props.scores[player._id][hole.hole_number]}
+                    score={this.props.scores[player._id][this.props.hole.hole_number]}
                   />
                 }
               />
             );
           })}
         </List>
-        {this.props.isScorekeeper ? (
-          this.state.scoresLocked ? (
+        {this.props.isScoreKeeper ? (
+          !this.state.scoresLocked ? (
             <Button
               onPress={e => {
-                // dispatch submit scores;
+                this.setState({ scoresLocked: !this.state.scoresLocked });
+                this.props.onPostScores(this.props.currentRound)
               }}
               color="black"
               backgroundColor="red"
@@ -67,42 +73,44 @@ class Scoring extends Component {
               buttonStyle={{ marginVertical: 20 }}
             />
           ) : (
-            <Button
-              onPress={() => {
-                this.setState({ scoresLocked: !this.state.scoresLocked });
-              }}
-              color="white"
-              backgroundColor="orange"
-              title="Update"
-              buttonStyle={{ marginVertical: 20 }}
-            />
-          )
+              <Button
+                onPress={() => {
+                  this.setState({ scoresLocked: !this.state.scoresLocked });
+                }}
+                color="white"
+                backgroundColor="orange"
+                title="Update"
+                buttonStyle={{ marginVertical: 20 }}
+              />
+            )
         ) : null}
+
       </ScrollView>
-    );
+    )
   }
 }
 
+
 const mapStateToProps = (state, ownProps) => {
   return {
-    scores: state.scoreCounterReducer.scores
+    id: state.auth.id,
+    scores: state.getCurrentRoundDataReducer.scores,
+    currentRound: state.getCurrentRoundDataReducer.currentRound
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    onPostScores: scores => {
-      dispatch(postScores(scores));
+    incrementPlayerScore: (playerId, holeNum) => {
+      dispatch(incrementPlayerScore(playerId, holeNum))
+    },
+    decrementPlayerScore: (playerId, holeNum) => {
+      dispatch(decrementPlayerScore(playerId, holeNum))
+    },
+    onPostScores: currentRound => {
+      dispatch(postScores(currentRound));
     }
   };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Scoring);
-
-
-//////////////////////////////////////////////
-// Prop Types:
-// from HoleNavigator:
-// hole={hole} card={card} isScoreKeeper={isScoreKeeper}
-// from Redux:
-// scores 

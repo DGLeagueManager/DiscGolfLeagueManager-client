@@ -35,8 +35,8 @@ class ScoringContainer extends Component {
         </View>
       );
     } else {
-      
-      return <HoleNavigator card={this.props.currentCard}/>
+      return <HoleNavigator card={this.props.currentCard} isScoreKeeper={this.props.isScoreKeeper}/>
+    
     }
   }
 }
@@ -45,6 +45,7 @@ const mapStateToProps = (state, ownProps) => {
   return {
     currentRound: state.getCurrentRoundDataReducer.currentRound,
     playerId: state.auth.id,
+    isScoreKeeper: state.getCurrentRoundDataReducer.isScoreKeeper,
     currentRoundId: state.applicationReducer.currentRoundId,
     currentCard: state.getCurrentRoundDataReducer.currentCard
   };
