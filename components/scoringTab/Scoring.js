@@ -25,12 +25,11 @@ class Scoring extends Component {
   }
 
   render() {
-    this.props.incrementPlayerScore(this.props.id, 2)
-    return (
+    console.log(this.props);
+    return(
       <ScrollView>
-
         <List>
-          {Object.keys(this.props.card.players).map((player, i) => {
+          {this.props.card.players.map((player, i) => {
             return (
               <ListItem
                 roundAvatar
@@ -47,50 +46,27 @@ class Scoring extends Component {
                     increment={() => this.increment(player._id)}
                     decrement={() => this.decrement(player._id)}
                     player={player}
-                    isScorekeeper={this.props.isScorekeeper}
+                    isScoreKeeper={this.props.isScoreKeeper}
                     scoresLocked={this.state.scoresLocked}
                     score={this.props.scores[player._id][this.props.hole.hole_number]}
                   />
-                }
+                } 
               />
             );
           })}
         </List>
-        {this.props.isScorekeeper ? (
-          !this.state.scoresLocked ? (
-            <Button
-              onPress={e => {
-                // dispatch submit scores;
-              }}
-              color="black"
-              backgroundColor="red"
-              title="Submit"
-              buttonStyle={{ marginVertical: 20 }}
-            />
-          ) : (
-            <Button
-              onPress={() => {
-                this.setState({ scoresLocked: !this.state.scoresLocked });
-              }}
-              color="white"
-              backgroundColor="orange"
-              title="Update"
-              buttonStyle={{ marginVertical: 20 }}
-            />
-          )
-        ) : null}
+
       </ScrollView>
-    );
+    )
   }
 }
 
+
 const mapStateToProps = (state, ownProps) => {
   return {
-    scores: state.scoreCounterReducer.scores,
     id: state.auth.id,
-    isScorekeeper: state.getCurrentRoundData.isScorekeeper,
-    card: state.getCurrentRoundData.currentCard,
-    currentRound: state.getCurrentRoundData.currentRound
+    scores: state.getCurrentRoundDataReducer.scores,
+    currentRound: state.getCurrentRoundDataReducer.currentRound
   };
 };
 
@@ -109,11 +85,3 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Scoring);
-
-
-//////////////////////////////////////////////
-// Prop Types:
-// from HoleNavigator:
-// hole={hole} card={card} isScoreKeeper={isScoreKeeper}
-// from Redux:
-// scores 

@@ -1,9 +1,7 @@
 export default function reducer(state = {}, action) {
   switch (action.type) {
     case 'GET_CURRENT_ROUND_STARTED':
-      return Object.assign({}, state, {
-        currentRound: null
-      });
+      return state
     case 'GET_CURRENT_ROUND_SUCCEEDED':
       let playerId = action.payload.playerId;
       let cardArray = action.payload.response.data.cards;
@@ -15,11 +13,12 @@ export default function reducer(state = {}, action) {
       });
 
       let isScoreKeeper = myCard.score_keeper === playerId;
-
+      
       return Object.assign({}, state, {
         currentRound: action.payload.response.data,
         currentCard: myCard,
-        isScoreKeeper: isScoreKeeper
+        isScoreKeeper: isScoreKeeper,
+        scores: action.payload.response.data.scores
       });
     case 'GET_CURRENT_ROUND_FAILED':
       return Object.assign({}, state, {
@@ -27,33 +26,33 @@ export default function reducer(state = {}, action) {
       });    
     case 'INCREMENT_PLAYER_SCORE':
       
-      let scores = Object.assign({}, state.currentRound.scores)
+      let newScores = Object.assign({}, state.currentRound.scores)
       
-      for (var key in scores) {
+      for (var key in newScores) {
         if (key === action.payload.playerId) {
-          scores[key][action.payload.holeNum]++
+          newScores[key][action.payload.holeNum]++
         }
       }
 
       return Object.assign({}, state, {
         currentRound: {
           ...state.currentRound,
-          scores: scores
+          scores: newScores
         }
       });
     case 'DECREMENT_PLAYER_SCORE':
       
       
-      for (var key in scores) {
+      for (var key in newScores) {
         if (key === action.payload.playerId) {
-          scores[key][action.payload.holeNum]--
+          newScores[key][action.payload.holeNum]--
         }
       }
 
       return Object.assign({}, state, {
         currentRound: {
           ...state.currentRound,
-          scores: scores
+          scores: newScores
         }
       });
     default:
