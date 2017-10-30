@@ -19,7 +19,6 @@ class Application extends Component {
     this.state = {
       isAdmin: true
     }
-    
 
     this.socket = io('http://ec2-54-165-58-14.compute-1.amazonaws.com:3000');
     this.socket.on('connect', () => {
@@ -50,11 +49,17 @@ class Application extends Component {
   }
 
   render() {
-    console.log('###########', this.props.leagueData)
-    if (this.state.isAdmin){
+    console.log('application props: ', this.props)
+    if (this.props.renderApplication && this.state.isAdmin) {
       return (<AdminView />);
-    } else {
+    } else if (this.props.renderApplication) {
       return (<NotAdminView />)
+    } else { 
+      return (
+        <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+          <Text> Fetching League Data...</Text>
+        </View>
+      )
     }
   }
 }
@@ -200,6 +205,7 @@ const mapStateToProps = (state, ownProps) => {
     //error: state.applicationReducer.error,
     id: state.auth.id,
     currentRoundId: state.applicationReducer.currentRoundId,
+    renderApplication: state.applicationReducer.renderApplication
 	}
 }
 
