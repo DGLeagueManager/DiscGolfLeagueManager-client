@@ -15,16 +15,16 @@ class ScoringContainer extends Component {
   }
 
   componentWillMount() {
-    if (this.props.currentRoundId) {
-      onGetCurrentRound(this.props.currentRoundId, this.props.playerId);
-    } else {
-      setInterval(() => {
-        this.props.onGetCurrentRound(
-          this.props.currentRoundId,
-          this.props.playerId
-        );
-      }, 10000);
-    }
+    // if (this.props.currentRoundId) {
+    //   this.props.onGetCurrentRound(this.props.currentRoundId, this.props.playerId);
+    // } else {
+    //   setInterval(() => {
+    //     this.props.onGetCurrentRound(
+    //       this.props.currentRoundId,
+    //       this.props.playerId
+    //     );
+    //   }, 10000);
+    // }
   }
 
   render() {

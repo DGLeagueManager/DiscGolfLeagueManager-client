@@ -49,7 +49,6 @@ class FinalizeScore extends Component {
   }
   
   render() {
-    console.log('THIS.PROPS IN FINALIZE SCORE: ', this.props)
     return (
       <ScrollView >
         <FinalScoreCard />
