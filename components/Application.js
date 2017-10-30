@@ -4,6 +4,7 @@ import { TabNavigator, StackNavigator, TabBarBottom } from 'react-navigation';
 import { Text, View, Button, Image } from 'react-native';
 import { Constants } from 'expo';
 import { Icon } from 'react-native-elements';
+import io from 'socket.io-client';
 import ScoringContainer from './scoringTab/ScoringContainer';
 import League from './leagueTab/League';
 import AdminStack from './adminTab/AdminStack';
