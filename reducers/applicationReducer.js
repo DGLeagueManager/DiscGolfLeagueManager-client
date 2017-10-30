@@ -17,7 +17,8 @@ export default function reducer(state = {}, action) {
         leaguePlayers: leagueData.seasons[0].players,
         currentRound: currentRound,
         currentCourse: currentRound.course,
-        currentRoundId: currentRound._id
+        currentRoundId: currentRound._id,
+        renderApplication: true
       });
     case 'GET_LEAGUE_DATA_FAILED':
       return Object.assign({}, state, {

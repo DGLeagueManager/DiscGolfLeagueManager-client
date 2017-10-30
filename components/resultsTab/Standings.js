@@ -80,19 +80,7 @@ export default class Result extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-    margin: 'auto',
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingTop: Constants.statusBarHeight,
-    backgroundColor: '#ecf0f1',
-    paddingBottom: '20%',
-  },
-  divider: {
-    backgroundColor: 'silver'
-  },
+ 
   col: {
     fontSize: 20
   },

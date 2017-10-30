@@ -1,47 +1,31 @@
-import React, { Component } from "react";
-import { Text, StyleSheet, View } from "react-native";
-import { WeekOne, WeekTwo, WeekThree } from './TempFileDeleteMe';
-import { TabNavigator, TabBarTop } from 'react-navigation';
-import SwipeALot from 'react-native-swipe-a-lot'
+import React from "react";
+import { Text, StyleSheet, View, ScrollView } from "react-native";
+import { Icon, List, ListItem, Divider } from 'react-native-elements';
 
-export default class Results extends Component {
+const Results = ({ round }) => (
+  <ScrollView style={{marginTop: 20, paddingTop: 0}}>
+    <View style={{flex: 1, flexDirection: 'row'}}>
+      <Text>Name</Text>
+      <Text>Starting Hole</Text>
+      <Text>Thru</Text>
+      <Text>Round Score</Text>
+    </View>
+    <View>
+    <Divider key={1}/>
+      <List>
+        {
+          Object.keys(round.scores).map((key) => (
+            <View>
+              <Text>{key}</Text>
+              <Text>1</Text>
+              <Text>9</Text>
+              <Text>-4</Text>
+            </View>
+          ))
+        }
+      </List>
+    </View>
+  </ScrollView>
+)
 
-  render() {
-    return (
-      // <Text>Hmmmmmmmm....results</Text>
-      <Tabs />
-    )
-  }
-}
-
-const Tabs = TabNavigator({
-  WeekOne: {
-    screen: <SwipeALot>WeekOne</SwipeALot>,
-    navigationOptions: {
-      tabBarLabel: 'Week 1'
-    }
-  },
-  WeekTwo: {
-    screen: <SwipeALot>WeekTwo</SwipeALot>,
-    navigationOptions: {
-      tabBarLabel: 'Week 2'
-    }
-  },
-  WeekThree: {
-    screen: WeekThree,
-    navigationOptions: {
-      tabBarLabel: 'Week 3'
-    }
-  }
-}, {
-  tabBarComponent: TabBarTop,
-  tabBarPosition: 'top',
-  tabBarOptions: {
-    swipeEnabled: true,
-    scrollEnabled: true,
-    showLabel: true,
-    style: {
-      backgroundColor: 'red'
-    }
-  }
-})
+export default Results;

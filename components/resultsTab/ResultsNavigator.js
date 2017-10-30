@@ -3,11 +3,12 @@ import { TabNavigator, TabBarTop } from 'react-navigation';
 import { seasonData } from './TempFileDeleteMe';
 import { Text, View } from 'react-native';
 import { connect } from 'react-redux';
+import Results from './Results';
 
 class ResultsNavigator extends Component {
 
   generateScreen(round) {
-      return <Results round={round}/>
+      return <Results round={round} />
     }
     
   generateTabs( rounds ) {
@@ -43,16 +44,17 @@ class ResultsNavigator extends Component {
   }
 }
 
-const Results = ({ round }) => (
-  <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-    <Text> Round Number: {round.round_number} </Text>
-    <Text> Number of players: {round.players.length}</Text>
-  </View>
-);
+// const Results = ({ round }) => (
+//   <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+//     <Text> Round Number: {round.round_number} </Text>
+//     <Text> Number of players: {round.players.length}</Text>
+//   </View>
+// );
 
 const mapStateToProps = (state, ownProps) => {
   return {
-     currentSeason: state.applicationReducer.currentSeason
+     currentSeason: state.applicationReducer.currentSeason,
+     leaguePlayers: state.applicationReducer.leaguePlayers
   }
 }
 

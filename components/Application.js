@@ -4,30 +4,62 @@ import { TabNavigator, StackNavigator, TabBarBottom } from 'react-navigation';
 import { Text, View, Button, Image } from 'react-native';
 import { Constants } from 'expo';
 import { Icon } from 'react-native-elements';
+import io from 'socket.io-client';
 import ScoringContainer from './scoringTab/ScoringContainer';
 import League from './leagueTab/League';
 import AdminStack from './adminTab/AdminStack';
-import { getLeagueData } from '../actions/applicationActions'
+import { getLeagueData } from '../actions/applicationActions';
+import { getCurrentRoundData } from '../actions/getCurrentRoundDataActions';
 import HoleNavigator from './scoringTab/HoleNavigator';
 import ResultsNavigator from './resultsTab/ResultsNavigator';
 
 class Application extends Component {
-  constructor(props){
-    super(props);
-    this.state={
-      isAdmin: (this.props.id === this.props.id)
+  constructor(props) {
+    super(props)
+    this.state = {
+      isAdmin: true
     }
+
+    this.socket = io('http://ec2-54-165-58-14.compute-1.amazonaws.com:3000');
+    this.socket.on('connect', () => {
+      console.log('connection established');
+      //this.props.onGetCurrentRoundData(playerId, roundId)
+    })
   }
+  
   componentWillMount() {
     this.props.onGetLeagueData(this.props.id)
-	}
+  }
+  
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.currentRoundId) {
+      let payload = {
+        id: nextProps.currentRoundId
+      }
+      this.socket.emit('test', payload)
+    }
+
+    this.socket.on('test', (payload) => {
+      if (payload.id === nextProps.currentRoundId) {
+        alert('GAME STARTED')
+        console.log('PAYLOAD DOT BODY: ', payload.body)
+        this.props.onGetCurrentRound(payload.body, this.props.id)
+      }
+    })
+  }
 
   render() {
-    console.log('###########', this.props.leagueData)
-    if (this.state.isAdmin){
+    console.log('application props: ', this.props)
+    if (this.props.renderApplication && this.state.isAdmin) {
       return (<AdminView />);
-    } else {
+    } else if (this.props.renderApplication) {
       return (<NotAdminView />)
+    } else { 
+      return (
+        <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+          <Text> Fetching League Data...</Text>
+        </View>
+      )
     }
   }
 }
@@ -170,9 +202,10 @@ const AdminView = StackNavigator({
 const mapStateToProps = (state, ownProps) => {
 	return {
     token: state.auth.token,
-    error: state.applicationReducer.error,
+    //error: state.applicationReducer.error,
     id: state.auth.id,
-    leagueData: state.applicationReducer.leagueData,
+    currentRoundId: state.applicationReducer.currentRoundId,
+    renderApplication: state.applicationReducer.renderApplication
 	}
 }
 
@@ -180,6 +213,9 @@ const mapDispatchToProps = dispatch => {
   return {
     onGetLeagueData: (id) => {
       dispatch(getLeagueData(id));
+    },
+    onGetCurrentRound: (currentRoundObject, playedId) => {
+      dispatch(getCurrentRoundData(currentRoundObject, playedId));
     }
   }
 }

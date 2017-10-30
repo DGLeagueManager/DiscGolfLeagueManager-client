@@ -7,6 +7,7 @@ import {
   postNewRound,
   addScoreKeeper
 } from "../../actions/scoreKeeperSelectionActions";
+import io from 'socket.io-client';
 import axios from 'axios';
 
 class ScoreKeeperSelection extends Component {
@@ -16,6 +17,8 @@ class ScoreKeeperSelection extends Component {
     this.state = {
       selected: 1
     };
+
+    this.socket = io('http://ec2-54-165-58-14.compute-1.amazonaws.com:3000')
   }
 
   generatePopulatedCards() {
@@ -46,11 +49,19 @@ class ScoreKeeperSelection extends Component {
   }
 
   handleSubmit() {
+
     let newRound = this.props.newRound;
-  
-    newRound.current_season = this.props.currentSeason._id;
     newRound.id = this.props.currentRound._id;
-    this.props.onSubmitNewRound(this.props.newRound)
+    newRound.current_season = this.props.currentSeason._id;
+  
+    let payload = {
+      body: newRound,
+      id: newRound.id,
+      type: 'START ROUND'
+    }
+
+    console.log('OBJECT GETTNG SENT IN ADMIN STACK: ', payload)
+    this.socket.emit('test', payload)
   }
 
   allCardsHaveScorekeepers() {
