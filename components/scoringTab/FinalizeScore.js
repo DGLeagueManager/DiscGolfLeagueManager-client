@@ -3,63 +3,53 @@ import { Text, ScrollView, View, StyleSheet } from "react-native";
 import { Card, Button, Divider } from "react-native-elements";
 import { connect } from 'react-redux';
 import FinalScoreCard from './FinalScoreCard';
+import { submitFinalizedCard } from '../../actions/finalizeScoreActions';
+import io from 'socket.io-client';
 
 class FinalizeScore extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-
+      disabled: false
     };
 
+    this.sockets = io('http://ec2-54-165-58-14.compute-1.amazonaws.com:3000');
   }
 
-  generateFinalScoreCards() {
-    //Follow pattern below:
-      //Generate 1 "final score card" for every player on the current card
-      //pass down all score information associated with that individual player
-      //map and render individual scores
-
-
-    // populatedCards = this.props.cards;
-    // let cards = [];
-
-    // Object.keys(populatedCards).forEach((key, index) => {
-    //   let players = populatedCards[key].players;
-    //   let hole = populatedCards[key].startingHole;
-    //   let card = populatedCards[key];
-
-    //   cards.push(
-    //     <FinalScoreCard
-    //       players={players}
-    //       index={index}
-    //       selected={this.state.selected}
-    //       hole={hole}
-    //       handleSelectScoreKeeper={this.handleScoreKeeperSelection.bind(this)}
-    //       card={card}
-    //     />
-    //   );
-    // });
-    // return cards;
-
-  }
-  
   handleSubmit() {
     //Post finalized score card
+    this.props.currentCard.is_completed = true;
+
+    let payload = {
+      type: 'FINISH CARD',
+      body: this.props.currentRound,
+      id: this.props.currentRound._id
+    }
+
+
+    this.sockets.emit('test', payload)
+    //this.props.onSubmitFinalizedCard(this.props.currentRound)
   }
-  
+
   render() {
     return (
       <ScrollView >
-        <FinalScoreCard />
+        {this.props.currentCard.players.map((player, i) =>
+          <FinalScoreCard key={i} player={player} scores={this.props.currentRound.scores[player._id]} />
+        )}
         <Button
           backgroundColor="red"
           buttonStyle={{
             marginTop: 20,
             marginBottom: 20
           }}
-          title="Submit Final Scores"
-          onPress={() => { this.handleSubmit() }}
+          disabled={this.state.disabled}
+          title={this.state.disabled ? "Scores have been submitted" : "Submit Final Scores"}
+          onPress={() => {
+            this.handleSubmit()
+            this.setState({ disabled: !this.state.disabled })
+          }}
         />
       </ScrollView>
     );
@@ -103,5 +93,3 @@ const mapDispatchToProps = dispatch => {
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(FinalizeScore);
-
-// {this.generateFinalScoreCards().map(card => card)}
