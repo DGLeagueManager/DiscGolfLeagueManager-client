@@ -6,15 +6,18 @@ import { connect } from 'react-redux';
 import Results from './Results';
 
 class ResultsNavigator extends Component {
+  constructor(props) {
+    super(props)
+  }
 
   generateScreen(round) {
-      return <Results round={round} />
+      return <Results round={round} players={this.props.leaguePlayers}/>
     }
     
   generateTabs( rounds ) {
     return rounds.reduce((result, round) => {
       result[round.round_number] = {
-        screen: this.generateScreen.bind(null, round),
+        screen: this.generateScreen.bind(this, round),
         navigationOptions: {
           lazy: true,
           tabBarLabel: "Round " + round.round_number
