@@ -32,6 +32,7 @@ class Application extends Component {
   }
   
   componentWillReceiveProps(nextProps) {
+    
     if (nextProps.currentRoundId) {
       let payload = {
         id: nextProps.currentRoundId
@@ -40,10 +41,20 @@ class Application extends Component {
     }
 
     this.socket.on('test', (payload) => {
-      if (payload.id === nextProps.currentRoundId) {
-        alert('GAME STARTED')
-        console.log('PAYLOAD DOT BODY: ', payload.body)
-        this.props.onGetCurrentRound(payload.body, this.props.id)
+      console.log('THIS IS THE PAYLOAD: ', payload)
+      if (payload.id === nextProps.currentRoundId && payload.type === 'FINISH ROUND CLIENT') {
+        alert('game finished');
+      }
+
+      if (payload.id === nextProps.currentRoundId && payload.type === 'UPDATE SCORE CLIENT') {
+        alert('SCORE UPDATED');
+        this.props.onGetCurrentRound(payload.body, this.props.id);
+      }
+
+      if (payload.id === nextProps.currentRoundId && payload.type === 'START ROUND CLIENT') {
+        alert('GAME STARTED');
+        console.log('PAYLOAD DOT BODY: ', payload.body);
+        this.props.onGetCurrentRound(payload.body, this.props.id);
       }
     })
   }
@@ -53,7 +64,7 @@ class Application extends Component {
     if (this.props.renderApplication && this.state.isAdmin) {
       return (<AdminView />);
     } else if (this.props.renderApplication) {
-      return (<NotAdminView />)
+      return (<NotAdminView />);
     } else { 
       return (
         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>

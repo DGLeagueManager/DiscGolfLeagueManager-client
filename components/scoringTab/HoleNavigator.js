@@ -39,9 +39,9 @@ class HoleNavigator extends Component {
       Object.assign(this.generateTabs(holeDetails), FinalizeScoreTab), {
       tabBarComponent: TabBarTop,
       tabBarPosition: "top",
+      swipeEnabled: true,
       tabBarOptions: {
         scrollEnabled: true,
-        swipeEnabled: true,
         showLabel: true,
         style: {
           backgroundColor: "red"
