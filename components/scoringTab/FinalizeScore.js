@@ -27,7 +27,6 @@ class FinalizeScore extends Component {
       id: this.props.currentRound._id
     }
 
-
     this.sockets.emit('test', payload)
   }
 

@@ -4,8 +4,7 @@ export default function reducer(state = {}, action) {
       return Object.assign({}, state, {});
     case "POST_NEW_ROUND_SUCCEEDED":
       return Object.assign({}, state, {
-        currentRoundData: action.payload,
-        roundInProgress: action.payload.data.in_progress
+        roundInProgress: true
       });
     case "POST_NEW_ROUND_FAILED":
       return Object.assign({}, state, {

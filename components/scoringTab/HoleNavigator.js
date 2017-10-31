@@ -4,6 +4,7 @@ import { Text, View } from "react-native";
 import { holeDetails } from "./dummyData";
 import FinalizeScore from './FinalizeScore';
 import Scoring from './Scoring';
+import { connect } from 'react-redux';
 
 class HoleNavigator extends Component {
   constructor(props) {
@@ -35,7 +36,12 @@ class HoleNavigator extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    return false
+    console.log('THIS DOT PROPS AND NEXT PROPS IN HOLENAVIAGTOR: ', this.props, nextProps)
+    if(nextProps.currentRoundInProgress === false) {
+      return true
+    } else { 
+      return false
+    }
   }
 
   render() {
@@ -78,4 +84,10 @@ const FinalizeScoreTab = {
   }
 };
 
-export default HoleNavigator;
+const mapStateToProps = (state, ownProps) => {
+  return {
+    currentRoundInProgress: state.getCurrentRoundDataReducer.currentRoundInProgress
+  };
+};
+
+export default connect(mapStateToProps)(HoleNavigator);

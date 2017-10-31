@@ -44,7 +44,7 @@ class Application extends Component {
         payload.id === nextProps.currentRoundId &&
         payload.type === "FINISH ROUND CLIENT"
       ) {
-        alert("game finished");
+        this.props.onGetCurrentRound(payload.body, this.props.id)
       }
 
       if (
@@ -75,7 +75,7 @@ class Application extends Component {
           style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
         >
           <ActivityIndicator animating />
-          <Text> Fetching League Data...</Text>
+          <Text> Fetching League Data... </Text>
         </View>
       );
     }

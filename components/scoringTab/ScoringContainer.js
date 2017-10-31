@@ -14,8 +14,17 @@ class ScoringContainer extends Component {
     this.state = {};
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log('THIS DOT PROPS AND NEXT PROPS IN SCORING CONTAINER: ', this.props, nextProps)
+    if (nextProps.currentRoundInProgress === false || nextProps.currenRoundInProgress === undefined) {
+      return true
+    } else {
+      return false
+    }
+  }
+
   render() {
-    console.log('CURRENT ROUND IN PROGRESS: ', this.props.currentRoundInProgress)
+    console.log('SCORING CONTAINER PROPS: ', this.props)
     if (!this.props.currentRoundInProgress) {
       return (
         <View style={{ flex: 1, alignItems: "center" }}>
