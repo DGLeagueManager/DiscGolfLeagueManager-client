@@ -25,36 +25,42 @@ export default function reducer(state = {}, action) {
       return Object.assign({}, state, {
         error: action.error
       });    
-    case 'INCREMENT_PLAYER_SCORE':
+    case 'INCREMENT_PLAYER_SCORE': 
+      const scoresObj = Object.assign({}, state.currentRound.scores)
       
-      let incrementScores = Object.assign({}, state.currentRound.scores)
-      
-      for (var key in incrementScores) {
+      for (var key in scoresObj) {
         if (key === action.payload.playerId) {
-          incrementScores[key][action.payload.holeNum]++
+          if (scoresObj[key][action.payload.holeNum].score === null) {
+            scoresObj[key][action.payload.holeNum].score = scoresObj[key][action.payload.holeNum].par;
+          }
+          scoresObj[key][action.payload.holeNum].score++;
+          scoresObj[key][action.payload.holeNum].scoreRelativeToPar = scoresObj[key][action.payload.holeNum].score - scoresObj[key][action.payload.holeNum].par;
         }
       }
-
+      
       return Object.assign({}, state, {
         currentRound: {
           ...state.currentRound,
-          scores: incrementScores
+          scores: scoresObj
         }
       });
-    case 'DECREMENT_PLAYER_SCORE':
+      case 'DECREMENT_PLAYER_SCORE':
+      scoresObj = Object.assign({}, state.currentRound.scores)
       
-      let decrementScores = Object.assign({}, state.currentRound.scores)
-      
-      for (var key in decrementScores) {
+      for (var key in scoresObj) {
         if (key === action.payload.playerId) {
-          decrementScores[key][action.payload.holeNum]--
+          if (scoresObj[key][action.payload.holeNum].score === null) {
+            scoresObj[key][action.payload.holeNum].score = scoresObj[key][action.payload.holeNum].par;
+          }
+          scoresObj[key][action.payload.holeNum].score--;
+          scoresObj[key][action.payload.holeNum].scoreRelativeToPar = scoresObj[key][action.payload.holeNum].score - scoresObj[key][action.payload.holeNum].par;
         }
       }
 
       return Object.assign({}, state, {
         currentRound: {
           ...state.currentRound,
-          scores: decrementScores
+          scores: scoresObj
         }
       });
     case "SCORES_GETTING_POSTED":

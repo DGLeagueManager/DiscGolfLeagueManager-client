@@ -20,8 +20,6 @@ class Scoring extends Component {
     this.socket.on('connect', () => {
       console.log('connection established');
     })
-
-
   }
 
   onSubmit(currentRoundObj) {
@@ -31,11 +29,9 @@ class Scoring extends Component {
       id: this.props.currentRound._id,
       body: currentRoundObj
     }
-
     this.socket.emit('test', payload)
   } 
   
-
   render() {
     return (
       <ScrollView>
@@ -64,7 +60,7 @@ class Scoring extends Component {
                     player={player}
                     isScoreKeeper={this.props.isScoreKeeper}
                     scoresLocked={this.state.scoresLocked}
-                    score={this.props.scores[player._id][this.props.hole.hole_number]}
+                    score={this.props.scores[player._id][this.props.hole.hole_number].score || this.props.hole.par}
                   />
                 }
               />
