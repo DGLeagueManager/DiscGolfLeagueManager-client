@@ -14,19 +14,6 @@ class ScoringContainer extends Component {
     this.state = {};
   }
 
-  componentWillMount() {
-    // if (this.props.currentRoundId) {
-    //   this.props.onGetCurrentRound(this.props.currentRoundId, this.props.playerId);
-    // } else {
-    //   setInterval(() => {
-    //     this.props.onGetCurrentRound(
-    //       this.props.currentRoundId,
-    //       this.props.playerId
-    //     );
-    //   }, 10000);
-    // }
-  }
-
   render() {
     console.log('CURRENT ROUND IN PROGRESS: ', this.props.currentRoundInProgress)
     if (!this.props.currentRoundInProgress) {

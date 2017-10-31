@@ -34,6 +34,10 @@ class HoleNavigator extends Component {
     }, {});
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    return false
+  }
+
   render() {
     const TabNav = TabNavigator(
       Object.assign(this.generateTabs(holeDetails), FinalizeScoreTab), {

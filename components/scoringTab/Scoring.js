@@ -76,7 +76,6 @@ class Scoring extends Component {
             <Button
               onPress={e => {
                 this.setState({ scoresLocked: !this.state.scoresLocked });
-                //this.props.onPostScores(this.props.currentRound)
                 this.onSubmit(this.props.currentRound)
               }}
               color="black"

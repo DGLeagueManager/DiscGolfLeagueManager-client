@@ -40,7 +40,6 @@ class Application extends Component {
     }
 
     this.socket.on("test", payload => {
-      console.log("THIS IS THE PAYLOAD: ", payload);
       if (
         payload.id === nextProps.currentRoundId &&
         payload.type === "FINISH ROUND CLIENT"
@@ -52,7 +51,6 @@ class Application extends Component {
         payload.id === nextProps.currentRoundId &&
         payload.type === "UPDATE SCORE CLIENT"
       ) {
-        alert("SCORE UPDATED");
         this.props.onGetCurrentRound(payload.body, this.props.id);
       }
 
@@ -60,8 +58,6 @@ class Application extends Component {
         payload.id === nextProps.currentRoundId &&
         payload.type === "START ROUND CLIENT"
       ) {
-        alert("GAME STARTED");
-        console.log("PAYLOAD DOT BODY: ", payload.body);
         this.props.onGetCurrentRound(payload.body, this.props.id);
       }
     });
