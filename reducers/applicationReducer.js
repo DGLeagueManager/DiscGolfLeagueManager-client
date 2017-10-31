@@ -11,6 +11,8 @@ export default function reducer(state = {}, action) {
         return round.completed === false;
       })
       
+
+      console.log('CURRENT ROUND: ', action.payload.data)
       return Object.assign({}, state, {
         currentSeason: leagueData.seasons[0],
         leagueData: leagueData,
@@ -21,6 +23,7 @@ export default function reducer(state = {}, action) {
         renderApplication: true
       });
     case 'GET_LEAGUE_DATA_FAILED':
+      console.log('IN GET LEAGUE DATA FAILED: ', action.error)
       return Object.assign({}, state, {
         error: action.error
       });

@@ -43,7 +43,7 @@ const NewRoundAdminStack = StackNavigator({
 class AdminStack extends Component {
 
   render() {
-    if (this.props.roundInProgress) {
+    if (this.props.currentRoundInProgress) {
       return (<LeagueRoundInProgress />);
     } else {
       return (<NewRoundAdminStack />);
@@ -56,7 +56,7 @@ class AdminStack extends Component {
 const mapStateToProps = (state, ownProps) => {
   //TODO: Round in progress should be dependant on response from server after post new round or timed interval from get currentRound
   return {
-    roundInProgress: state.scoreKeeperSelectionReducer.roundInProgress
+    currentRoundInProgress: state.getCurrentRoundDataReducer.currentRoundInProgress
   };
 };
 

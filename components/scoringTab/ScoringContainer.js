@@ -14,21 +14,18 @@ class ScoringContainer extends Component {
     this.state = {};
   }
 
-  componentWillMount() {
-    // if (this.props.currentRoundId) {
-    //   this.props.onGetCurrentRound(this.props.currentRoundId, this.props.playerId);
-    // } else {
-    //   setInterval(() => {
-    //     this.props.onGetCurrentRound(
-    //       this.props.currentRoundId,
-    //       this.props.playerId
-    //     );
-    //   }, 10000);
-    // }
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log('THIS DOT PROPS AND NEXT PROPS IN SCORING CONTAINER: ', this.props, nextProps)
+    if (nextProps.currentRoundInProgress === false || nextProps.currenRoundInProgress === undefined) {
+      return true
+    } else {
+      return false
+    }
   }
 
   render() {
-    if (!this.props.currentRound) {
+    console.log('SCORING CONTAINER PROPS: ', this.props)
+    if (!this.props.currentRoundInProgress) {
       return (
         <View style={{ flex: 1, alignItems: "center" }}>
           <Text> You are not currently in a game </Text>
@@ -43,7 +40,7 @@ class ScoringContainer extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    currentRound: state.getCurrentRoundDataReducer.currentRound,
+    currentRoundInProgress: state.getCurrentRoundDataReducer.currentRoundInProgress,
     playerId: state.auth.id,
     isScoreKeeper: state.getCurrentRoundDataReducer.isScoreKeeper,
     currentRoundId: state.applicationReducer.currentRoundId,
