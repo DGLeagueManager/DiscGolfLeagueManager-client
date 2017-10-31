@@ -2,7 +2,7 @@ import React from "react";
 import { Text, StyleSheet, View, ScrollView } from "react-native";
 import { Icon, List, ListItem, Divider } from "react-native-elements";
 
-const Results = ({ round }) => (
+const Results = ({ round, players }) => (
   <ScrollView style={{ paddingTop: 20 }}>
     <View style={{ flex: 1, flexDirection: "row" }}>
       <Text style={styles.name}>PLAYER</Text>
@@ -17,7 +17,8 @@ const Results = ({ round }) => (
         {Object.keys(round.scores).map(key => (
           <ListItem
             key={key}
-            title={key}
+            /** TODO: fix this. we don't have the index of the player in currentPlayers */
+            title={players[0].first_name}
             label={
               <View style={{ flex: 1, flexDirection: "row" }}>
                 <Text style={{ flex: 1, marginLeft: 10 }}>1</Text>
