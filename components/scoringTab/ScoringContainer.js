@@ -28,7 +28,8 @@ class ScoringContainer extends Component {
   }
 
   render() {
-    if (!this.props.currentRound) {
+    console.log('CURRENT ROUND IN PROGRESS: ', this.props.currentRoundInProgress)
+    if (!this.props.currentRoundInProgress) {
       return (
         <View style={{ flex: 1, alignItems: "center" }}>
           <Text> You are not currently in a game </Text>
@@ -43,7 +44,7 @@ class ScoringContainer extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    currentRound: state.getCurrentRoundDataReducer.currentRound,
+    currentRoundInProgress: state.getCurrentRoundDataReducer.currentRoundInProgress,
     playerId: state.auth.id,
     isScoreKeeper: state.getCurrentRoundDataReducer.isScoreKeeper,
     currentRoundId: state.applicationReducer.currentRoundId,
