@@ -12,15 +12,14 @@ export default class ScoreKeeperCard extends Component {
 
   render() {
     console.log('SCORE KEEPER CARD PROPS', this.props)
-    return ( 
-    <Card>
-      <Text style={{ flex: 3 }}>{this.props.player.first_name}</Text>
-        <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
-          {Object.keys(this.props.scores).map( (hole, i) => (
-            <Text key={i}>{hole} : {this.props.scores[hole]} | </Text>
-          ))}
+    return <Card>
+        <Text style={{ flex: 3 }}>{this.props.player.first_name}</Text>
+        <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
+          {Object.keys(this.props.scores).map((hole, i) => 
+            <Text key={i}>
+              {hole} : {this.props.scores[hole].score} |{" "}
+            </Text>)}
         </View>
-    </Card>
-    );
+      </Card>;
   };
 };
