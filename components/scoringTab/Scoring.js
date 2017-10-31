@@ -6,6 +6,7 @@ import { Constants } from "expo";
 import ScoreCounter from "./ScoreCounter";
 import { postScores, incrementPlayerScore, decrementPlayerScore } from "../../actions/scoreCounterActions";
 import "@expo/vector-icons"; // 5.2.0
+import io from 'socket.io-client';
 
 class Scoring extends Component {
   constructor(props) {
@@ -14,7 +15,26 @@ class Scoring extends Component {
     this.state = {
       scoresLocked: false
     };
+
+    this.socket = io('http://ec2-54-165-58-14.compute-1.amazonaws.com:3000');
+    this.socket.on('connect', () => {
+      console.log('connection established');
+    })
+
+
   }
+
+  onSubmit(currentRoundObj) {
+
+    payload = {
+      type: 'UPDATE SCORE',
+      id: this.props.currentRound._id,
+      body: currentRoundObj
+    }
+
+    this.socket.emit('test', payload)
+  } 
+  
 
   render() {
     return (
@@ -56,7 +76,8 @@ class Scoring extends Component {
             <Button
               onPress={e => {
                 this.setState({ scoresLocked: !this.state.scoresLocked });
-                this.props.onPostScores(this.props.currentRound)
+                //this.props.onPostScores(this.props.currentRound)
+                this.onSubmit(this.props.currentRound)
               }}
               color="black"
               backgroundColor="red"
