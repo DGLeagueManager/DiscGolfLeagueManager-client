@@ -20,9 +20,13 @@ export default class AdminSelectionBoxes extends React.Component {
         checked={this.state.amChecked}
         onPress={ ()=>{
           this.setState({ proChecked: false})
-          this.props.handleAmDivisionSelect(this.props.value);
-          this.setState({ amChecked: !this.state.amChecked})
-          } }
+          this.state.amChecked ?
+          (this.props.handleRemovePlayer(this.props.value), 
+          this.setState({ amChecked: !this.state.amChecked }))
+          :
+          (this.props.handleAmDivisionSelect(this.props.value),
+          this.setState({ amChecked: !this.state.amChecked}))
+          }}
       />
       <CheckBox style={{backgroundColor:"#ecf0f1"}}
         title='PRO'
@@ -30,9 +34,13 @@ export default class AdminSelectionBoxes extends React.Component {
         checked={this.state.proChecked}
         onPress={ ()=>{
           this.setState({amChecked: false})
-          this.props.handleProDivisionSelect(this.props.value);
-          this.setState({proChecked: !this.state.proChecked})
-       } }
+          this.state.proChecked ?
+            (this.props.handleRemovePlayer(this.props.value),
+              this.setState({ proChecked: !this.state.proChecked }))
+            :
+            (this.props.handleProDivisionSelect(this.props.value),
+              this.setState({ proChecked: !this.state.proChecked }))
+        }}
       />
     </View>
     )

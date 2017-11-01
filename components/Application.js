@@ -64,7 +64,6 @@ class Application extends Component {
   }
 
   render() {
-    console.log("application props: ", this.props);
     if (this.props.renderApplication && this.state.isAdmin) {
       return <AdminView />;
     } else if (this.props.renderApplication) {

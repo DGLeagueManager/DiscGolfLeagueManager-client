@@ -16,7 +16,7 @@ class ScoringContainer extends Component {
 
   shouldComponentUpdate(nextProps, nextState) {
     console.log('THIS DOT PROPS AND NEXT PROPS IN SCORING CONTAINER: ', this.props, nextProps)
-    if (nextProps.currentRoundInProgress === false || nextProps.currenRoundInProgress === undefined) {
+    if (nextProps.currentRoundInProgress === false) {
       return true
     } else {
       return false
@@ -24,7 +24,7 @@ class ScoringContainer extends Component {
   }
 
   render() {
-    console.log('SCORING CONTAINER PROPS: ', this.props)
+    console.log('CURRENT ROUND IN PROGRESS: ', this.props.currentRoundInProgress)
     if (!this.props.currentRoundInProgress) {
       return (
         <View style={{ flex: 1, alignItems: "center" }}>
