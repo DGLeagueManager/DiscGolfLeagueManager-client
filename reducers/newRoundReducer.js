@@ -18,6 +18,22 @@ export default function reducer(state = {}, action) {
           }
         }
       });
+    case 'REMOVE_PLAYER_FROM_ROUND':
+
+      let playersPresent = state.newRound.playersPresent;
+
+      for(var key in playersPresent) {
+        if (action.payload === key) {
+          delete playersPresent[key]
+        }
+      }
+
+      return Object.assign({}, state, {
+        newRound: {
+          ...state.newRound,
+          playersPresent: playersPresent
+        }
+      });
     case "ADD_EMPTY_CARDS_TO_NEW_ROUND":
       return Object.assign({}, state, {
         newRound: {

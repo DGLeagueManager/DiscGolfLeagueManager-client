@@ -7,7 +7,6 @@ import Scoring from './Scoring';
 import { getCurrentRoundData } from '../../actions/getCurrentRoundDataActions';
 import FinalizeScore from './FinalizeScore';
 import HoleNavigator from './HoleNavigator';
-import axios from 'axios';
 
 class ScoringContainer extends Component {
   constructor(props) {
@@ -15,25 +14,17 @@ class ScoringContainer extends Component {
     this.state = {};
   }
 
-  componentWillMount() {
-    if(this.props.currentRoundInProgress) {
-      axios.get('http://ec2-54-165-58-14.compute-1.amazonaws.com:3000/getPlayerRoundById/' + id)
-      .then((response) => { dispatch({ type: 'GET_LEAGUE_DATA_SUCCEEDED', payload: response })})
-    }
-  }
-
   shouldComponentUpdate(nextProps, nextState) {
     console.log('THIS DOT PROPS AND NEXT PROPS IN SCORING CONTAINER: ', this.props, nextProps)
-    if (nextProps.currentRoundInProgress === false || nextProps.currenRoundInProgress === undefined) {
+    if (nextProps.currentRoundInProgress === false) {
       return true
     } else {
-
       return false
     }
   }
 
   render() {
-    console.log('SCORING CONTAINER PROPS: ', this.props)
+    console.log('CURRENT ROUND IN PROGRESS: ', this.props.currentRoundInProgress)
     if (!this.props.currentRoundInProgress) {
       return (
         <View style={{ flex: 1, alignItems: "center" }}>
@@ -61,9 +52,6 @@ const mapDispatchToProps = dispatch => {
   return {
     onGetCurrentRound: (playerId, roundId) => {
       dispatch(getCurrentRoundData(playerId, roundId));
-    },
-    onGetPlayerRoundById: (playerId) => {
-      dispatch(getPlayerRoundById(playerId))
     }
   };
 };
