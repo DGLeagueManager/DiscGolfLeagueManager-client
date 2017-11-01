@@ -22,10 +22,10 @@ const Results = ({ round }) => {
               label={
                 <View style={{ flex: 1, flexDirection: "row" }}>
                   <Text style={{ flex: 1, marginLeft: 10 }}>
-                    {round.scores[key].startingHole}
+                    {!round.completed ? round.scores[key].startingHole : null}
                   </Text>
                   <Text style={styles.col}>
-                    {round.scores[key].thru}
+                    {!round.completed ? round.scores[key].thru : null}
                   </Text>
                   <Text style={styles.col}>
                     {round.scores[key].scoreRelativeToPar}

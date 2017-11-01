@@ -44,7 +44,7 @@ class Application extends Component {
         payload.id === nextProps.currentRoundId &&
         payload.type === "FINISH ROUND CLIENT"
       ) {
-        this.props.onGetCurrentRound(payload.body, this.props.id)
+        this.props.onGetLeagueData(this.props.id)
       }
 
       if (
