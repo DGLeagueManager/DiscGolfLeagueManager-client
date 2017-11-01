@@ -3,22 +3,31 @@ export default function reducer(state = {}, action) {
     case 'GET_CURRENT_ROUND_STARTED':
       return state
     case 'GET_CURRENT_ROUND_SUCCEEDED':
-      console.log('GET CURRENT ROUND SUCCESS: ', action.payload.response);
       let playerId = action.payload.playerId;
-      let cardArray = action.payload.response.cards;
+      let cardsObject = action.payload.response.cards;
+    
+    // let myCard = Object.keys(cardObject).find((key) => {
+    //   return cardObject[key].players.find((player) => {
+    //     return player._id === playerId
+    //   });
+    // });
 
-      let myCard = cardArray.find((card) => {
-        return card.players.find((player) => {
-          return player._id === playerId
-        });
-      });
+      let myCard = null;
 
-      let isScoreKeeper = myCard.score_keeper === playerId;
-      
+      for(var key in cardsObject) {
+        for(var player of cardsObject[key].players) {
+          if (player._id === playerId) {
+            myCard = cardsObject[key]
+            break;
+          }
+        }
+      }
+    
+      let isScoreKeeper = myCard ? myCard.score_keeper === playerId : false
       return Object.assign({}, state, {
         currentRoundInProgress: action.payload.response.in_progress,
         currentRound: action.payload.response,
-        currentCard: myCard,
+        currentCard: myCard || null,
         isScoreKeeper: isScoreKeeper,
         scores: action.payload.response.scores
       });
