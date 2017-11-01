@@ -4,7 +4,7 @@ import { Button, Icon, List, ListItem, CheckBox, Header } from 'react-native-ele
 import { Constants } from 'expo';
 import AdminSelectionBoxes from './AdminSelectionBoxes';
 import { connect } from 'react-redux';
-import { addPlayersToRound, addPlayerToRound, addEmptyCards } from '../../actions/adminRoundConfigStartActions'
+import { addPlayersToRound, addPlayerToRound, addEmptyCards, removePlayer } from '../../actions/adminRoundConfigStartActions'
 
 import "@expo/vector-icons"; // 5.2.0
 
@@ -34,6 +34,10 @@ class AdminRoundConfigStart extends Component {
     player.division = "PRO";
     this.props.onAddPlayer(player)
 
+  }
+
+  handleRemovePlayer = (playerId) => {
+    this.props.removePlayer(playerId)
   }
 
   handleSubmit = () => {
@@ -78,6 +82,7 @@ class AdminRoundConfigStart extends Component {
                       value={ele._id}
                       handleAmDivisionSelect={this.handleAmDivisionSelect.bind(this)}
                       handleProDivisionSelect={this.handleProDivisionSelect.bind(this)}
+                      handleRemovePlayer={this.handleRemovePlayer.bind(this)}
                       i={i}
                     />
                   }
@@ -139,6 +144,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     onSubmit: (cards) => {
       dispatch(addEmptyCards(cards))
+    },
+    removePlayer: (playerId) => {
+      dispatch(removePlayer(playerId))
     }
   };
 };

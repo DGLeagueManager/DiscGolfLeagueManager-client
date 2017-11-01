@@ -27,30 +27,36 @@ class FinalizeScore extends Component {
       id: this.props.currentRound._id
     }
 
-
     this.sockets.emit('test', payload)
-    //this.props.onSubmitFinalizedCard(this.props.currentRound)
   }
 
   render() {
     return (
       <ScrollView >
         {this.props.currentCard.players.map((player, i) =>
-          <FinalScoreCard key={i} player={player} scores={this.props.currentRound.scores[player._id]} />
+          <FinalScoreCard 
+            key={i} 
+            player={player} 
+            scores={this.props.currentRound.scores[player._id]} 
+          />
         )}
-        <Button
-          backgroundColor="red"
-          buttonStyle={{
-            marginTop: 20,
-            marginBottom: 20
-          }}
-          disabled={this.state.disabled}
-          title={this.state.disabled ? "Scores have been submitted" : "Submit Final Scores"}
-          onPress={() => {
-            this.handleSubmit()
-            this.setState({ disabled: !this.state.disabled })
-          }}
-        />
+        {this.props.isScoreKeeper ? 
+          <Button
+            backgroundColor="red"
+            buttonStyle={{
+              marginTop: 20,
+              marginBottom: 20
+            }}
+            disabled={this.state.disabled}
+            title={this.state.disabled ? "Scores have been submitted" : "Submit Final Scores"}
+            onPress={() => {
+              this.handleSubmit()
+              this.setState({ disabled: !this.state.disabled })
+            }}
+          />
+        :
+        null
+        }
       </ScrollView>
     );
   }
@@ -79,7 +85,8 @@ const mapStateToProps = (state, ownProps) => {
   return {
     currentRound: state.getCurrentRoundDataReducer.currentRound,
     playerId: state.auth.id,
-    currentCard: state.getCurrentRoundDataReducer.currentCard
+    currentCard: state.getCurrentRoundDataReducer.currentCard,
+    isScoreKeeper: state.getCurrentRoundDataReducer.isScoreKeeper,
   }
 }
 
@@ -93,3 +100,4 @@ const mapDispatchToProps = dispatch => {
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(FinalizeScore);
+

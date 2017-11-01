@@ -40,19 +40,17 @@ class Application extends Component {
     }
 
     this.socket.on("test", payload => {
-      console.log("THIS IS THE PAYLOAD: ", payload);
       if (
         payload.id === nextProps.currentRoundId &&
         payload.type === "FINISH ROUND CLIENT"
       ) {
-        alert("game finished");
+        this.props.onGetCurrentRound(payload.body, this.props.id)
       }
 
       if (
         payload.id === nextProps.currentRoundId &&
         payload.type === "UPDATE SCORE CLIENT"
       ) {
-        alert("SCORE UPDATED");
         this.props.onGetCurrentRound(payload.body, this.props.id);
       }
 
@@ -60,15 +58,12 @@ class Application extends Component {
         payload.id === nextProps.currentRoundId &&
         payload.type === "START ROUND CLIENT"
       ) {
-        alert("GAME STARTED");
-        console.log("PAYLOAD DOT BODY: ", payload.body);
         this.props.onGetCurrentRound(payload.body, this.props.id);
       }
     });
   }
 
   render() {
-    console.log("application props: ", this.props);
     if (this.props.renderApplication && this.state.isAdmin) {
       return <AdminView />;
     } else if (this.props.renderApplication) {
@@ -79,7 +74,7 @@ class Application extends Component {
           style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
         >
           <ActivityIndicator animating />
-          <Text> Fetching League Data...</Text>
+          <Text> Fetching League Data... </Text>
         </View>
       );
     }

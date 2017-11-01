@@ -23,3 +23,10 @@ module.exports.addEmptyCards = ( cards ) => {
     payload: cards
   }
 }
+
+module.exports.removePlayer = (playerId) => {
+  return {
+    type: 'REMOVE_PLAYER_FROM_ROUND',
+    payload: playerId
+  }
+}

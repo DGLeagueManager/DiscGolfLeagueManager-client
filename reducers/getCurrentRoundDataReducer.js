@@ -16,6 +16,7 @@ export default function reducer(state = {}, action) {
       let isScoreKeeper = myCard.score_keeper === playerId;
       
       return Object.assign({}, state, {
+        currentRoundInProgress: action.payload.response.in_progress,
         currentRound: action.payload.response,
         currentCard: myCard,
         isScoreKeeper: isScoreKeeper,

@@ -62,6 +62,7 @@ class ScoreKeeperSelection extends Component {
 
     console.log('OBJECT GETTNG SENT IN ADMIN STACK: ', payload)
     this.socket.emit('test', payload)
+    this.props.onSubmitNewRound(newRound)
   }
 
   allCardsHaveScorekeepers() {
