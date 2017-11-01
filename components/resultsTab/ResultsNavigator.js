@@ -11,7 +11,7 @@ class ResultsNavigator extends Component {
   }
 
   generateScreen(round) {
-      return <Results round={round} players={this.props.leaguePlayers}/>
+      return <Results round={round} />
     }
     
   generateTabs( rounds ) {
@@ -28,9 +28,8 @@ class ResultsNavigator extends Component {
   }
 
   render( ) {
-    console.log('current seeeeson: ', this.props.currentSeason)
     const TabNav = TabNavigator(
-      this.generateTabs(seasonData.seasons[0].rounds), 
+      this.generateTabs(this.props.currentSeason.rounds), 
       {
         tabBarComponent: TabBarTop,
         tabBarPosition: "top",
