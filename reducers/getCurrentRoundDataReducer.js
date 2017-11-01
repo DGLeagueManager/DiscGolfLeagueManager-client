@@ -1,7 +1,8 @@
 export default function reducer(state = {}, action) {
   switch (action.type) {
     case 'GET_CURRENT_ROUND_STARTED':
-      return state
+      return state;
+
     case 'GET_CURRENT_ROUND_SUCCEEDED':
       console.log('GET CURRENT ROUND SUCCESS: ', action.payload.response);
       let playerId = action.payload.playerId;
@@ -13,8 +14,8 @@ export default function reducer(state = {}, action) {
         });
       });
 
-      let isScoreKeeper = myCard.score_keeper === playerId;
-      
+      let isScoreKeeper = (myCard.score_keeper === playerId);
+
       return Object.assign({}, state, {
         currentRoundInProgress: action.payload.response.in_progress,
         currentRound: action.payload.response,
@@ -25,10 +26,10 @@ export default function reducer(state = {}, action) {
     case 'GET_CURRENT_ROUND_FAILED':
       return Object.assign({}, state, {
         error: action.error
-      });    
-    case 'INCREMENT_PLAYER_SCORE': 
+      });
+    case 'INCREMENT_PLAYER_SCORE':
       const scoresObj = Object.assign({}, state.currentRound.scores)
-      
+
       for (var key in scoresObj) {
         if (key === action.payload.playerId) {
           if (scoresObj[key][action.payload.holeNum].score === null) {
@@ -38,7 +39,7 @@ export default function reducer(state = {}, action) {
           scoresObj[key][action.payload.holeNum].scoreRelativeToPar = scoresObj[key][action.payload.holeNum].score - scoresObj[key][action.payload.holeNum].par;
         }
       }
-      
+
       return Object.assign({}, state, {
         currentRound: {
           ...state.currentRound,
@@ -47,7 +48,7 @@ export default function reducer(state = {}, action) {
       });
       case 'DECREMENT_PLAYER_SCORE':
       scoresObj = Object.assign({}, state.currentRound.scores)
-      
+
       for (var key in scoresObj) {
         if (key === action.payload.playerId) {
           if (scoresObj[key][action.payload.holeNum].score === null) {
