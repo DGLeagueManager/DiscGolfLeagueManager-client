@@ -22,7 +22,7 @@ export default function reducer(state = {}, action) {
           }
         }
       }
-    
+      console.log('ROUND IN PROGRESS IN REDUCER: ', action.payload.response.in_progress)
       let isScoreKeeper = myCard ? myCard.score_keeper === playerId : false
       return Object.assign({}, state, {
         currentRoundInProgress: action.payload.response.in_progress,

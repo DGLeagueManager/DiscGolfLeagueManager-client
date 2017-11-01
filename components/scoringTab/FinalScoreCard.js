@@ -17,7 +17,7 @@ export default class ScoreKeeperCard extends Component {
         <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
           {Object.keys(this.props.scores).map((hole, i) => 
             <Text key={i}>
-              {hole} : {this.props.scores[hole].score} |{" "}
+            {hole} : {this.props.scores[hole].score}
             </Text>)}
         </View>
       </Card>;
