@@ -4,13 +4,12 @@ import { Icon, List, ListItem, Divider } from "react-native-elements";
 
 const Results = ({ round }) => {
   console.log(' round ****** ', round)
-  return (
-    <ScrollView style={{ paddingTop: 20 }}>
+  return <ScrollView style={{ paddingTop: 20 }}>
       <View style={{ flex: 1, flexDirection: "row" }}>
-        <Text style={styles.name}>PLAYER</Text>
+        <Text style={!round.completed ? styles.name : styles.completed}>PLAYER</Text>
         <View style={{ flex: 1, flexDirection: "row" }}>
-          <Text style={styles.col}>START</Text>
-          <Text style={styles.col}>THRU</Text>
+          {!round.completed ? <Text style={styles.col}>START</Text> : null}
+          {!round.completed ? <Text style={styles.col}>THRU</Text> : null}
           <Text style={styles.col}>ROUND</Text>
         </View>
       </View>
@@ -19,13 +18,18 @@ const Results = ({ round }) => {
           {Object.keys(round.scores).map(key => (
             <ListItem
               key={key}
-              /** TODO: fix this. we don't have the index of the player in currentPlayers */
               title={round.scores[key].player_name}
               label={
                 <View style={{ flex: 1, flexDirection: "row" }}>
-                  <Text style={{ flex: 1, marginLeft: 10 }}>1</Text>
-                  <Text style={styles.col}>1</Text>
-                  <Text style={styles.col}>{round.scores[key].scoreRelativeToPar}</Text>
+                  <Text style={{ flex: 1, marginLeft: 10 }}>
+                    {!round.completed ? round.scores[key].startingHole : null}
+                  </Text>
+                  <Text style={styles.col}>
+                    {!round.completed ? round.scores[key].thru : null}
+                  </Text>
+                  <Text style={styles.col}>
+                    {round.scores[key].scoreRelativeToPar}
+                  </Text>
                 </View>
               }
               hideChevron
@@ -33,13 +37,17 @@ const Results = ({ round }) => {
           ))}
         </List>
       </View>
-    </ScrollView>
-  )
+    </ScrollView>;
 };
 
 const styles = StyleSheet.create({
   name: {
     flex: 1,
+    fontSize: 14,
+    paddingLeft: 10
+  },
+  completed: {
+    flex: 3,
     fontSize: 14,
     paddingLeft: 10
   },

@@ -16,7 +16,7 @@ class ScoringContainer extends Component {
 
   shouldComponentUpdate(nextProps, nextState) {
     console.log('THIS DOT PROPS AND NEXT PROPS IN SCORING CONTAINER: ', this.props, nextProps)
-    if (nextProps.currentRoundInProgress === false) {
+    if (nextProps.currentRoundInProgress !== this.props.currentRoundInProgress) {
       return true
     } else {
       return false
