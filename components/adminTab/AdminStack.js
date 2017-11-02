@@ -83,7 +83,6 @@ class AdminStack extends Component {
 
 
 const mapStateToProps = (state, ownProps) => {
-  //TODO: Round in progress should be dependant on response from server after post new round or timed interval from get currentRound
   return {
     currentRoundInProgress: state.getCurrentRoundDataReducer.currentRoundInProgress
   };
