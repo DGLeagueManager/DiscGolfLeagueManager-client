@@ -12,6 +12,10 @@ class ResultsNavigator extends Component {
   }
 
   shouldComponentUpdate(nextProps) {
+    // We are expecting nextProps to have the new currentRound ID when a round ends 
+    // but it's coming in as the same as this.props.currentRound 
+    // console.log("^^^^^^^%%%%%%%%", nextProps.currentRound._id !== this.props.currentRound._id)
+    // console.log("&*&*&*&*&*&*& nextProps round id: ", nextProps.currentRound._id, "this props round id :", this.props.currentRound._id)
     return nextProps.currentRound._id !== this.props.currentRound._id;
   }
 
@@ -25,7 +29,6 @@ class ResultsNavigator extends Component {
     
   generateTabs( rounds ) {
     let completedRounds = rounds.filter((round) => round.completed === true);
-    console.log('completed rounds ??????? ', completedRounds)
     let completedRoundTabs = completedRounds.reduce((result, round) => {
       result[round.round_number] = {
         screen: this.generateCompletedScreens.bind(this, round),
@@ -36,9 +39,7 @@ class ResultsNavigator extends Component {
       };
       return result;
     }, {});
-    console.log(completedRoundTabs)
     let currentRound = rounds.find((round) => round.in_progress === true);
-    console.log('current round hee hee', currentRound)
     let currentRoundTab = {};
     if (currentRound) {
       currentRoundTab = { 
