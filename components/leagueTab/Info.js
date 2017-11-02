@@ -30,7 +30,8 @@ export default class Info extends Component {
         >
         <Icon
           name='md-rainy'
-          type='ionicons'
+          type='ionicon'
+          size={30}
           color={palette.accent}
         />
         <Text>Due to inclimate weather, we will postpone this Tuesday's game to Wednesday 11/20</Text>
