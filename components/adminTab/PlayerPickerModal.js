@@ -4,7 +4,7 @@ import Modal from 'react-native-modal';
 import { Button } from 'react-native-elements';
 
 
-const PlayerPickerModal = (props) => ( 
+const PlayerPickerModal = (props) => (
   <Modal
     isVisible={props.isVisible}
     onRequestClose={() => {
@@ -26,7 +26,7 @@ const PlayerPickerModal = (props) => (
           </TouchableHighlight>
         );
       })}
-      <Button onPress={() => props.toggleModal(null)} title="Close" />
+      <Button onPress={() => props.hideModal(null)} title="Close" />
     </View>
   </Modal>
 )

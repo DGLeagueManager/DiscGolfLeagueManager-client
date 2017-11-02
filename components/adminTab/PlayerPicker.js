@@ -7,7 +7,7 @@ const PlayerPicker = (props) => {
   if (!player) {
   return (
     <Button
-      onPress={() => props.toggleModal(props.cardKey)}
+      onPress={() => props.showModal(props.cardKey)}
       buttonStyle={{ marginTop: 20 }}
       backgroundColor="grey"
       title="Select Player..."
