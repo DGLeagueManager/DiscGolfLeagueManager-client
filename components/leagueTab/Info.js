@@ -9,7 +9,7 @@ export default class Info extends Component {
     return (
       <ScrollView style={{backgroundColor: palette.background}}>
         <Card
-          containerStyle={{backgroundColor: palette.secondary}}
+          containerStyle={{backgroundColor: palette.secondary, borderColor: '#fff'}}
           title='AUSTIN DISC GOLF CLUB'
           image={{uri: 'http://eagleoutside.com/wp-content/uploads/2015/06/fairgrounds-disc-golf-course.jpg'}}>
           <Text style={{ marginBottom: 10 }}>
@@ -23,7 +23,7 @@ export default class Info extends Component {
         </Card>
 
         <Card
-          containerStyle={{ backgroundColor: palette.secondary }}
+          containerStyle={{ backgroundColor: palette.secondary, borderColor: '#fff' }}
           title='TIME CHANGE THIS COMING WEEK (11/19)'
           titleStyle={{color: 'red'}}
         >
