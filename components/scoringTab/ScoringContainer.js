@@ -16,7 +16,6 @@ class ScoringContainer extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    console.log('THIS DOT PROPS AND NEXT PROPS IN SCORING CONTAINER: ', this.props, nextProps)
     if (nextProps.currentRoundInProgress !== this.props.currentRoundInProgress) {
       return true
     } else {
@@ -25,8 +24,7 @@ class ScoringContainer extends Component {
   }
 
   render() {
-    console.log('CURRENT ROUND IN PROGRESS: ', this.props.currentRoundInProgress)
-    if (!this.props.currentRoundInProgress) {
+    if (!this.props.currentRoundInProgress || !this.props.currentRound.players.includes(this.props.playerId)) {
       return (
         <NotInRound />
       );
