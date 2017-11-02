@@ -4,7 +4,8 @@ import { Card, Button, Divider } from 'react-native-elements';
 import AdminStack from './AdminStack';
 import { addPlayerToCard, changeStartingHole } from '../../actions/playerSelectionActions';
 import PlayerPicker from './PlayerPicker';
-import Modal from 'react-native-modal'
+import Modal from 'react-native-modal';
+import { palette } from '../../colorPalette';
 
 class PlayerSelectionCard extends Component {
   componentWillMount() {
@@ -14,12 +15,13 @@ class PlayerSelectionCard extends Component {
   }
 
   render() {
-    return <Card>
+    return (
+      <Card containerStyle={{borderColor: '#555', backgroundColor: palette.primary}}>
         <View style={{ flexDirection: "row", justifyContent: "space-between", marginBottom: 20 }}>
-          <Text style={{ flex: 1, fontSize: 20}}>
+          <Text style={{ color: palette.text, flex: 1, fontSize: 20}}>
             Starting Hole:
           </Text>
-          <Text style={{ fontSize: 25}}>
+          <Text style={{ color: palette.accent, fontSize: 25}}>
             {this.props.startingHole}
           </Text>
         </View>
@@ -29,7 +31,8 @@ class PlayerSelectionCard extends Component {
         <PlayerPicker player={this.props.card.players[2]} showModal={this.props.showModal} cardKey={this.props.cardKey}/>
         <PlayerPicker player={this.props.card.players[3]} showModal={this.props.showModal} cardKey={this.props.cardKey} />
 
-      </Card>;
+      </Card>
+    )
   }
 }
 

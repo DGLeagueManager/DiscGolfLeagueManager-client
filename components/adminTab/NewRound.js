@@ -12,7 +12,7 @@ class NewRound extends Component {
   
   render() {
     return (
-      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: palette.background}}>
         <Button
           buttonStyle={{padding: 40, backgroundColor: palette.accent}}
           onPress={ () => {
