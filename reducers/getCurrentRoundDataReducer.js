@@ -5,24 +5,25 @@ export default function reducer(state = {}, action) {
     case "GET_CURRENT_ROUND_SUCCEEDED":
       console.log('get current round succeeded payload: ', action.payload)
       let playerId = action.payload.playerId;
-      let cardsObject = action.payload.response.cards;
+      let cardsArray = action.payload.response.cards;
 
-      // let myCard = Object.keys(cardObject).find((key) => {
-      //   return cardObject[key].players.find((player) => {
-      //     return player._id === playerId
-      //   });
-      // });
+      let myCard = cardsArray.find((card) => {
+        return card.players.find((player) => {
+          return player._id === playerId
+        });
+      });
 
-      let myCard = null;
+      // let myCard = null;
 
-      for (var key in cardsObject) {
-        for (var player of cardsObject[key].players) {
-          if (player._id === playerId) {
-            myCard = cardsObject[key];
-            break;
-          }
-        }
-      }
+      // for (var key in cardsObject) {
+      //   for (var player of cardsObject[key].players) {
+      //     if (player._id === playerId) {
+      //       myCard = cardsObject[key];
+      //       break;
+      //     }
+      //   }
+      // }
+      
       console.log("ROUND IN PROGRESS IN REDUCER: ", action.payload.response.in_progress);
       let isScoreKeeper = myCard ? myCard.score_keeper === playerId : false;
       return Object.assign({}, state, {

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Text, ScrollView, View, StyleSheet, Picker, FlatList, TouchableHighlight, } from 'react-native';
 import { Card, Button, Divider } from 'react-native-elements';
-import { connect } from 'react-redux';
 import AdminStack from './AdminStack';
 import { addPlayerToCard, changeStartingHole } from '../../actions/playerSelectionActions';
 import PlayerPicker from './PlayerPicker';
@@ -50,15 +49,4 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapDispatchToProps = dispatch => {
-  return {
-    onPlayerSelect: (player, cardIndex) => {
-      dispatch(addPlayerToCard(player, cardIndex));
-    },
-    onHoleSelect: (cardIndex, hole) => {
-      dispatch(changeStartingHole(cardIndex, hole));
-    }
-  }
-}
-
-export default connect(null, mapDispatchToProps)(PlayerSelectionCard)
+export default PlayerSelectionCard;
