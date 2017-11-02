@@ -12,9 +12,9 @@ class ResultsNavigator extends Component {
   }
 
   shouldComponentUpdate(nextProps) {
-    return nextProps.currentRound !== this.props.currentRound;
+    return nextProps.currentRound._id !== this.props.currentRound._id;
   }
-  
+
   generateCurrentScreen() {
     return <CurrentRoundResults />
   }
