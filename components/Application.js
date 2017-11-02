@@ -12,6 +12,7 @@ import { getLeagueData } from "../actions/applicationActions";
 import { getCurrentRoundData } from "../actions/getCurrentRoundDataActions";
 import HoleNavigator from "./scoringTab/HoleNavigator";
 import ResultsNavigator from "./resultsTab/ResultsNavigator";
+import { palette } from '../colorPalette';
 
 class Application extends Component {
   constructor(props) {
@@ -128,7 +129,7 @@ const Tab = TabNavigator(
     tabBarPosition: "bottom",
     swipeEnabled: false,
     tabBarOptions: {
-      activeTintColor: "red",
+      activeTintColor: palette.primary,
       showIcon: true,
       showLabel: true,
       style: {
@@ -143,7 +144,7 @@ const Tab = TabNavigator(
         color: "#fff"
       },
       headerStyle: {
-        backgroundColor: "#2196f3",
+        backgroundColor: palette.primary,
         height: 50,
         paddingLeft: 15
       }
@@ -182,7 +183,7 @@ const adminTab = TabNavigator(
     tabBarPosition: "bottom",
     swipeEnabled: false,
     tabBarOptions: {
-      activeTintColor: "red",
+      activeTintColor: palette.primary,
       showIcon: true,
       showLabel: true,
       style: {
