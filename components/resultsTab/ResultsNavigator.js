@@ -11,6 +11,10 @@ class ResultsNavigator extends Component {
     super(props)
   }
 
+  shouldComponentUpdate(nextProps) {
+    return nextProps.currentRound !== this.props.currentRound;
+  }
+  
   generateCurrentScreen() {
     return <CurrentRoundResults />
   }
@@ -47,7 +51,6 @@ class ResultsNavigator extends Component {
         }
       }
     }
-    console.log(Object.assign({}, completedRoundTabs, currentRoundTab));
     return Object.assign({}, completedRoundTabs, currentRoundTab);
   }
 
@@ -80,7 +83,8 @@ class ResultsNavigator extends Component {
 const mapStateToProps = (state, ownProps) => {
   return {
      currentSeason: state.applicationReducer.currentSeason,
-     leaguePlayers: state.applicationReducer.leaguePlayers
+     leaguePlayers: state.applicationReducer.leaguePlayers,
+     currentRound: state.getCurrentRoundDataReducer.currentRound
   }
 }
 

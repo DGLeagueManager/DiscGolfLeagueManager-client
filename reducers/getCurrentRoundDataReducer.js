@@ -3,7 +3,6 @@ export default function reducer(state = {}, action) {
     case "GET_CURRENT_ROUND_STARTED":
       return state;
     case "GET_CURRENT_ROUND_SUCCEEDED":
-      console.log('get current round succeeded payload: ', action.payload)
       let playerId = action.payload.playerId;
       let cardsArray = action.payload.response.cards;
 
@@ -12,19 +11,7 @@ export default function reducer(state = {}, action) {
           return player._id === playerId
         });
       });
-
-      // let myCard = null;
-
-      // for (var key in cardsObject) {
-      //   for (var player of cardsObject[key].players) {
-      //     if (player._id === playerId) {
-      //       myCard = cardsObject[key];
-      //       break;
-      //     }
-      //   }
-      // }
       
-      console.log("ROUND IN PROGRESS IN REDUCER: ", action.payload.response.in_progress);
       let isScoreKeeper = myCard ? myCard.score_keeper === playerId : false;
       return Object.assign({}, state, {
         currentRoundInProgress: action.payload.response.in_progress,
@@ -36,10 +23,9 @@ export default function reducer(state = {}, action) {
     case "GET_CURRENT_ROUND_FAILED":
       return Object.assign({}, state, { error: action.error });
     case "INCREMENT_PLAYER_SCORE":
-      console.log('increment player scores payload: ', action.payload)
+
       const scoresObj = Object.assign({}, state.currentRound.scores);
       const holeNumber = action.payload.holeNum;
-      console.log('currentRound.scores: ', scoresObj)
 
       for (var key in scoresObj) {
         if (key === action.payload.playerId) {
