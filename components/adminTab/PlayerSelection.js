@@ -46,19 +46,23 @@ class PlayerSelection extends Component {
 
   }
 
-  toggleModal(key) {
-    this.setState({ modalVisible: !this.state.modalVisible, activeCard: key });
+
+  showModal(key) {
+    this.setState({ modalVisible: true, activeCard: key });
+  }
+  hideModal(key) {
+    this.setState({ modalVisible: false, activeCard: key });
   }
 
   render() {
     return (
       <View>
-      <PlayerPickerModal 
-        isVisible={this.state.modalVisible} 
-        activeCard={this.state.activeCard} 
+      <PlayerPickerModal
+        isVisible={this.state.modalVisible}
+        activeCard={this.state.activeCard}
         unassignedPlayers={this.state.unassignedPlayers}
         handleSelectPlayer={this.handleSelectPlayer.bind(this)}
-        toggleModal={this.toggleModal.bind(this)}
+        hideModal={this.hideModal.bind(this)}
       />
         <ScrollView>
           <Text style={{ marginTop: 20, marginLeft: 20, fontSize: 20 }}>
@@ -83,7 +87,7 @@ class PlayerSelection extends Component {
                   card={card}
                   unassignedPlayers={this.state.unassignedPlayers}
                   handleSelectPlayer={this.handleSelectPlayer.bind(this)}
-                  toggleModal={this.toggleModal.bind(this)}
+                  showModal={this.showModal.bind(this)}
                   modalVisible={this.state.modalVisible}
                 />
               </View>
