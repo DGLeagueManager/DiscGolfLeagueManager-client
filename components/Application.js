@@ -26,11 +26,16 @@ class Application extends Component {
       //this.props.onGetCurrentRoundData(playerId, roundId)
     });
   }
+
   shouldComponentUpdate(nextProps) {
     if (nextProps.currentRound) {
       this.props.onGetCurrentRound(nextProps.currentRound, this.props.id)
+      return true
+    } else {
+      return false
     }
   }
+  
   componentWillMount() {
     this.props.onGetLeagueData(this.props.id);
   }
