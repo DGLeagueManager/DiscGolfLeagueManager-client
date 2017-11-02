@@ -3,21 +3,28 @@ import { TabNavigator, TabBarTop } from 'react-navigation';
 import { seasonData } from './TempFileDeleteMe';
 import { Text, View } from 'react-native';
 import { connect } from 'react-redux';
-import Results from './Results';
+import CurrentRoundResults from './CurrentRoundResults';
+import CompletedRoundResults from './CompletedRoundResults';
 
 class ResultsNavigator extends Component {
   constructor(props) {
     super(props)
   }
 
-  generateScreen(round) {
-      return <Results round={round} />
-    }
+  generateCurrentScreen() {
+    return <CurrentRoundResults />
+  }
+  
+  generateCompletedScreens(round) {
+    return <CompletedRoundResults round={round} />
+  }
     
   generateTabs( rounds ) {
-    return rounds.reduce((result, round) => {
+    let completedRounds = rounds.filter((round) => round.completed === true);
+    console.log('completed rounds ??????? ', completedRounds)
+    let completedRoundTabs = completedRounds.reduce((result, round) => {
       result[round.round_number] = {
-        screen: this.generateScreen.bind(this, round),
+        screen: this.generateCompletedScreens.bind(this, round),
         navigationOptions: {
           lazy: true,
           tabBarLabel: "Round " + round.round_number
@@ -25,6 +32,20 @@ class ResultsNavigator extends Component {
       };
       return result;
     }, {});
+    console.log(completedRoundTabs)
+    let currentRound = rounds.find((round) => round.in_progress === true);
+    console.log('current round hee hee', currentRound)
+    let currentRoundTab = { 
+      [currentRound.round_number]: {
+        screen: this.generateCurrentScreen.bind(this),
+        navigationOptions: {
+          lazy: true,
+          tabBarLabel: "Round " + currentRound.round_number
+        }
+      }
+    }
+    console.log(Object.assign({}, completedRoundTabs, currentRoundTab));
+    return Object.assign({}, completedRoundTabs, currentRoundTab);
   }
 
   render( ) {

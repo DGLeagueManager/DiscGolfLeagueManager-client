@@ -2,8 +2,7 @@ import React from "react";
 import { Text, StyleSheet, View, ScrollView } from "react-native";
 import { Icon, List, ListItem, Divider } from "react-native-elements";
 
-const Results = ({ round }) => {
-  console.log(" round ****** ", round);
+const CompletedRoundResults = ({ round }) => {
   return (
     <ScrollView style={{ paddingTop: 20 }}>
       <View style={{ flex: 1, flexDirection: "row" }}>
@@ -65,4 +64,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Results;
+export default CompletedRoundResults;
