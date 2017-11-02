@@ -24,10 +24,10 @@ class PlayerSelectionCard extends Component {
           </Text>
         </View>
 
-        <PlayerPicker player={this.props.card.players[0]} toggleModal={this.props.toggleModal} cardKey={this.props.cardKey} />
-        <PlayerPicker player={this.props.card.players[1]} toggleModal={this.props.toggleModal} cardKey={this.props.cardKey} />
-        <PlayerPicker player={this.props.card.players[2]} toggleModal={this.props.toggleModal} cardKey={this.props.cardKey}/>
-        <PlayerPicker player={this.props.card.players[3]} toggleModal={this.props.toggleModal} cardKey={this.props.cardKey} />
+        <PlayerPicker player={this.props.card.players[0]} showModal={this.props.showModal} cardKey={this.props.cardKey} />
+        <PlayerPicker player={this.props.card.players[1]} showModal={this.props.showModal} cardKey={this.props.cardKey} />
+        <PlayerPicker player={this.props.card.players[2]} showModal={this.props.showModal} cardKey={this.props.cardKey}/>
+        <PlayerPicker player={this.props.card.players[3]} showModal={this.props.showModal} cardKey={this.props.cardKey} />
 
       </Card>;
   }
