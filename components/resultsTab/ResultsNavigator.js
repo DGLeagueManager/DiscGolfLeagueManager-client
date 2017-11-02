@@ -67,7 +67,10 @@ class ResultsNavigator extends Component {
           swipeEnabled: true,
           showLabel: true,
           style: {
-            backgroundColor: palette.secondary
+            backgroundColor: palette.primary
+          },
+          indicatorStyle: {
+            backgroundColor: palette.accent
           }
         }
       });

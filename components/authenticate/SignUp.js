@@ -8,7 +8,8 @@ import { connect } from "react-redux";
 const SignUp = (props) => {
   return (
       <View style={styles.container}>
-        <Text style={styles.paragraph}> Create an account </Text>
+        <Text style={styles.paragraph}> SIGN UP </Text>
+
         <View style={styles.formView}>
 
           <FormLabel>First Name: </FormLabel>
@@ -81,14 +82,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     paddingTop: Constants.statusBarHeight,
-    backgroundColor: "#ecf0f1",
-    paddingBottom: "20%"
+    backgroundColor: "#ecf0f1"
   },
   paragraph: {
     margin: 24,
     fontWeight: "bold",
-    textAlign: "center",
-    color: "#34495e"
+    textAlign: "center"
   },
   input: {
     width: 250
