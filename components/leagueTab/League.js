@@ -36,13 +36,14 @@ const Tabs = TabNavigator({
     swipeEnabled: true,
     showLabel: true,
     style: {
-      backgroundColor: 'white'
+      backgroundColor: palette.primary
     },
     labelStyle: {
-      color: palette.primary
+      color: palette.primary,
+      color: palette.text
     },
     indicatorStyle: {
-      backgroundColor: palette.primary
+      backgroundColor: palette.accent
     }
   }
 })

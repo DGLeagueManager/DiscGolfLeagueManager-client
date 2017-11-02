@@ -12,7 +12,7 @@ export default function reducer(state = {}, action) {
       })
       
 
-      console.log('CURRENT ROUND: ', action.payload.data)
+      console.log('CURRENT ROUND: ', currentRound)
       return Object.assign({}, state, {
         currentSeason: leagueData.seasons[0],
         leagueData: leagueData,

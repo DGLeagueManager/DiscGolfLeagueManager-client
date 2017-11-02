@@ -29,40 +29,4 @@ const ScoreCounter = (props) => (
   </View>
 );
 
-
-const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-    margin: 'auto',
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingTop: Constants.statusBarHeight,
-    backgroundColor: '#ecf0f1',
-    paddingBottom: '20%'
-  },
-  paragraph: {
-    margin: 24,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    color: '#34495e',
-  },
-  input: {
-    width: 250
-  },
-  formView: {
-    backgroundColor: '#fefefe'
-  },
-  listItem: {
-    color: 'black'
-  },
-  header: {
-    fontSize: 20,
-    backgroundColor: '#dbdbdb',
-    width: '100%',
-    textAlign: 'center',
-    padding: 10,
-  }
-});
-
 export default ScoreCounter;

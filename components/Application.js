@@ -69,6 +69,7 @@ class Application extends Component {
         payload.type === "START ROUND CLIENT"
       ) {
         this.props.onGetCurrentRound(payload.body, this.props.id);
+        this.props.onGetLeagueData(this.props.id);
       }
     });
   }
@@ -133,13 +134,16 @@ const Tab = TabNavigator(
       showIcon: true,
       showLabel: true,
       style: {
-        height: 60,
+        height: 50,
         backgroundColor: palette.primary
+      },
+      labelStyle: {
+        marginBottom: 5
       }
     },
     navigationOptions: {
       lazy: true,
-      headerTitle: "DG League Manager",
+      headerTitle: "DGLM",
       headerTitleStyle: {
         color: "#fff",
         alignSelf: 'center'
@@ -187,8 +191,9 @@ const adminTab = TabNavigator(
       showIcon: true,
       showLabel: true,
       style: {
-        height: 50
-      }
+        height: 50,
+        paddingBottom: 10
+      },
     },
     navigationOptions: {
       lazy: true,

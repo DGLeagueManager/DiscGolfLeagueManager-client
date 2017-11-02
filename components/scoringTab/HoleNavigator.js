@@ -56,7 +56,10 @@ class HoleNavigator extends Component {
         scrollEnabled: true,
         showLabel: true,
         style: {
-          backgroundColor: palette.secondary
+          backgroundColor: palette.primary
+        },
+        indicatorStyle: {
+          backgroundColor: palette.accent
         }
       }
     });
@@ -81,7 +84,7 @@ const FinalizeScoreTab = {
   FinalizeScore: {
     screen: FinalizeScore,
     navigationOptions: {
-      tabBarLabel: "FinalizeScore"
+      tabBarLabel: "Final"
     }
   }
 };
