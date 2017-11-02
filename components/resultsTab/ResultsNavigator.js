@@ -35,12 +35,15 @@ class ResultsNavigator extends Component {
     console.log(completedRoundTabs)
     let currentRound = rounds.find((round) => round.in_progress === true);
     console.log('current round hee hee', currentRound)
-    let currentRoundTab = { 
-      [currentRound.round_number]: {
-        screen: this.generateCurrentScreen.bind(this),
-        navigationOptions: {
-          lazy: true,
-          tabBarLabel: "Round " + currentRound.round_number
+    let currentRoundTab = {};
+    if (currentRound) {
+      currentRoundTab = { 
+        [currentRound.round_number]: {
+          screen: this.generateCurrentScreen.bind(this),
+          navigationOptions: {
+            lazy: true,
+            tabBarLabel: "Round " + currentRound.round_number
+          }
         }
       }
     }
