@@ -30,14 +30,14 @@ class Scoring extends Component {
       body: currentRoundObj
     }
     this.socket.emit('test', payload)
-  } 
-  
+  }
+
   render() {
     return (
       <ScrollView>
         <List>
-          {this.props.card.players.sort((a, b) => 
-            (this.props.scores[a._id].totalStrokes > this.props.scores[b._id].totalStrokes))         
+          {this.props.card.players.sort((a, b) =>
+            (this.props.scores[a._id].totalStrokes > this.props.scores[b._id].totalStrokes))
             .map((player, i) => {
             return (
               <ListItem
