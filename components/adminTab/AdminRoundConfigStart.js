@@ -73,7 +73,6 @@ class AdminRoundConfigStart extends Component {
                   roundAvatar
                   /* avatar={{ uri: ele.avatar_url }} */
                   key={i}
-                  subtitle={-2}
                   title={ele.first_name + ' ' + ele.last_name}
                   rightTitleStyle={null}
                   label={
@@ -102,29 +101,6 @@ class AdminRoundConfigStart extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-    margin: 'auto',
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingTop: Constants.statusBarHeight,
-    backgroundColor: '#ecf0f1',
-    paddingBottom: '20%'
-  },
-  listItem: {
-    color: 'black'
-  },
-  header: {
-    fontSize: 20,
-    backgroundColor: '#dbdbdb',
-    width: '100%',
-    textAlign: 'center',
-    padding: 10,
-  }
-});
 
 const mapStateToProps = (state, ownProps) => {
   return {
