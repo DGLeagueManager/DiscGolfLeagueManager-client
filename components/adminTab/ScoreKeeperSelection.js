@@ -9,6 +9,7 @@ import {
 } from "../../actions/scoreKeeperSelectionActions";
 import io from 'socket.io-client';
 import axios from 'axios';
+import { palette } from '../../colorPalette';
 
 class ScoreKeeperSelection extends Component {
   constructor(props) {
@@ -96,10 +97,10 @@ class ScoreKeeperSelection extends Component {
   render() {
 
     return (
-      <ScrollView>
+      <ScrollView style={{backgroundColor: palette.background}}>
         {this.generatePopulatedCards().map(card => card)}
         <Button
-          backgroundColor="red"
+          backgroundColor={palette.accent}
           disabled={!this.state.readyToStart}
           buttonStyle={{
             marginTop: 20,

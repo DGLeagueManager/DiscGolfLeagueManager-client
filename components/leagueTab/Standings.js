@@ -43,7 +43,7 @@ export default class Result extends Component {
           points: 641
         },
       ]
-    };
+    }
 
   }
 

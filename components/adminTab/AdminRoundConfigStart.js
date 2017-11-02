@@ -4,7 +4,8 @@ import { Button, Icon, List, ListItem, CheckBox, Header } from 'react-native-ele
 import { Constants } from 'expo';
 import AdminSelectionBoxes from './AdminSelectionBoxes';
 import { connect } from 'react-redux';
-import { addPlayersToRound, addPlayerToRound, addEmptyCards, removePlayer } from '../../actions/adminRoundConfigStartActions'
+import { addPlayersToRound, addPlayerToRound, addEmptyCards, removePlayer } from '../../actions/adminRoundConfigStartActions';
+import { palette } from '../../colorPalette';
 
 import "@expo/vector-icons"; // 5.2.0
 
@@ -64,7 +65,7 @@ class AdminRoundConfigStart extends Component {
 
   render() {
     return (
-      <ScrollView style={{ marginTop: 20, paddingTop: 0 }}>
+      <ScrollView style={{ marginTop: 20, paddingTop: 0}}>
         <List style={{ marginBottom: 20 }}>
           {
             this.props.leaguePlayers.map((ele, i) => (
@@ -95,7 +96,7 @@ class AdminRoundConfigStart extends Component {
           buttonStyle={{marginBottom: 20}}
           onPress={this.handleSubmit}
           color='black'
-          backgroundColor="#dbdbdb"
+          backgroundColor={palette.accent}
           title='Next'
         />
       </ScrollView>
