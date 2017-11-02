@@ -13,8 +13,8 @@ export default class AdminSelectionBoxes extends React.Component {
   }
   render() {
     return (
-    <View style={{flex: 1, flexDirection: 'row'}}>
-      <CheckBox style={{backgroundColor:"#ecf0f1"}}
+    <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center'}}>
+    <CheckBox containerStyle={{ backgroundColor: 'transparent' }}
         title='AM'
         checkedColor= {'red'}
         checked={this.state.amChecked}
@@ -28,7 +28,7 @@ export default class AdminSelectionBoxes extends React.Component {
           this.setState({ amChecked: !this.state.amChecked}))
           }}
       />
-      <CheckBox style={{backgroundColor:"#ecf0f1"}}
+      <CheckBox containerStyle={{ backgroundColor: 'transparent' }}
         title='PRO'
         checkedColor= {'red'}
         checked={this.state.proChecked}
@@ -46,3 +46,4 @@ export default class AdminSelectionBoxes extends React.Component {
     )
   }
 }
+

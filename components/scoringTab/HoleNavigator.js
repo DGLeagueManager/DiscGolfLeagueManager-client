@@ -46,6 +46,7 @@ class HoleNavigator extends Component {
 
   render() {
     const TabNav = TabNavigator(
+      //TODO: map holeDetails to props from round.course instead of using this dummy data import
       Object.assign(this.generateTabs(holeDetails), FinalizeScoreTab), {
       tabBarComponent: TabBarTop,
       tabBarPosition: "top",

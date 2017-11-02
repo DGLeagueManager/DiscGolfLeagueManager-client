@@ -27,11 +27,24 @@ class Application extends Component {
     });
   }
 
+  shouldComponentUpdate(nextProps) {
+    if (nextProps.currentRound) {
+      this.props.onGetCurrentRound(nextProps.currentRound, this.props.id)
+      return true
+    } else {
+      return false
+    }
+  }
+
   componentWillMount() {
-    this.props.onGetLeagueData(this.props.id);
+    this.props.onGetLeagueData(this.props.id)
   }
 
   componentWillReceiveProps(nextProps) {
+    if (nextProps.currentRound) {
+      //this.props.onGetCurrentRound(nextProps.currentRound);
+    }
+
     if (nextProps.currentRoundId) {
       let payload = {
         id: nextProps.currentRoundId
@@ -216,7 +229,8 @@ const mapStateToProps = (state, ownProps) => {
     //error: state.applicationReducer.error,
     id: state.auth.id,
     currentRoundId: state.applicationReducer.currentRoundId,
-    renderApplication: state.applicationReducer.renderApplication
+    renderApplication: state.applicationReducer.renderApplication,
+    currentRound: state.getCurrentRoundDataReducer.currentRound
   };
 };
 
