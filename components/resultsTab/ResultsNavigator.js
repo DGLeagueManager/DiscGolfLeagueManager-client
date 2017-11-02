@@ -17,7 +17,8 @@ class ResultsNavigator extends Component {
     // but it's coming in as the same as this.props.currentRound
     // console.log("^^^^^^^%%%%%%%%", nextProps.currentRound._id !== this.props.currentRound._id)
     // console.log("&*&*&*&*&*&*& nextProps round id: ", nextProps.currentRound._id, "this props round id :", this.props.currentRound._id)
-    return nextProps.currentRound._id !== this.props.currentRound._id;
+    return (nextProps.currentRound._id !== this.props.currentRound._id) ||
+      (nextProps.initialCurrentRound !== this.props.initialCurrentRound);
   }
 
   generateCurrentScreen() {
@@ -98,7 +99,8 @@ const mapStateToProps = (state, ownProps) => {
   return {
      currentSeason: state.applicationReducer.currentSeason,
      leaguePlayers: state.applicationReducer.leaguePlayers,
-     currentRound: state.getCurrentRoundDataReducer.currentRound
+     currentRound: state.getCurrentRoundDataReducer.currentRound,
+     initialCurrentRound: state.applicationReducer.currentRound
   }
 }
 

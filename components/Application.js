@@ -69,7 +69,7 @@ class Application extends Component {
         payload.type === "START ROUND CLIENT"
       ) {
         this.props.onGetCurrentRound(payload.body, this.props.id);
-        // this.props.onGetLeagueData(this.props.id);
+        this.props.onGetLeagueData(this.props.id);
       }
     });
   }
