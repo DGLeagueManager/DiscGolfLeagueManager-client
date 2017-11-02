@@ -41,10 +41,6 @@ class Application extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.currentRound) {
-      //this.props.onGetCurrentRound(nextProps.currentRound);
-    }
-
     if (nextProps.currentRoundId) {
       let payload = {
         id: nextProps.currentRoundId
