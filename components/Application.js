@@ -23,7 +23,7 @@ class Application extends Component {
 
     this.socket = io("http://ec2-54-165-58-14.compute-1.amazonaws.com:3000");
     this.socket.on("connect", () => {
-      console.log("connection established");
+      console.log("connection established Application");
       //this.props.onGetCurrentRoundData(playerId, roundId)
     });
   }
@@ -42,12 +42,12 @@ class Application extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.currentRoundId) {
-      let payload = {
-        id: nextProps.currentRoundId
-      };
-      this.socket.emit("test", payload);
-    }
+    // if (nextProps.currentRoundId) {
+    //   let payload = {
+    //     id: nextProps.currentRoundId
+    //   };
+    //   this.socket.emit("test", payload);
+    // }
 
     this.socket.on("test", payload => {
       if (
