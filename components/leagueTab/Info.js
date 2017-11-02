@@ -23,7 +23,7 @@ export default class Info extends Component {
         </Card>
 
         <Card
-          containerStyle={{ backgroundColor: palette.secondary, borderColor: '#fff' }}
+          containerStyle={{ backgroundColor: palette.secondary }}
           title='TIME CHANGE THIS COMING WEEK (11/19)'
           titleStyle={{color: 'red'}}
         >

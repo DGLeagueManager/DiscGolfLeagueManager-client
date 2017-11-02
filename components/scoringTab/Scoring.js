@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { ScrollView, Text, StyleSheet, View } from "react-native";
+import {Text, StyleSheet, View } from "react-native";
 import { connect } from "react-redux";
 import { Button, Icon, List, ListItem } from "react-native-elements"; // 0.17.0
 import { Constants } from "expo";
@@ -35,7 +35,7 @@ class Scoring extends Component {
 
   render() {
     return (
-      <ScrollView style={{backgroundColor: palette.background}}>
+      <View style={{height: '100%', backgroundColor: palette.background}}>
         <List>
           {this.props.card.players.sort((a, b) =>
             (this.props.scores[a._id].scoreRelativeToPar > this.props.scores[b._id].scoresRelativeToPar))
@@ -47,7 +47,9 @@ class Scoring extends Component {
                 subtitle={this.props.scores[player._id].scoreRelativeToPar}
                 title={player.first_name + " " + player.last_name || null}
                 hideChevron
-                /* style={{backgroundColor: palette.secondary}} */
+                subtitleStyle={{color: palette.secondary, fontSize: 18}}
+                style={{backgroundColor: palette.primary}}
+                titleStyle={{fontSize: 20, fontWeight: 'bold', color: palette.text}}
                 label={
                   <ScoreCounter
                     style={{ flex: 1 }}
@@ -95,7 +97,7 @@ class Scoring extends Component {
             )
         ) : null}
 
-      </ScrollView>
+      </View>
     )
   }
 }
