@@ -7,6 +7,7 @@ import Scoring from './Scoring';
 import { getCurrentRoundData } from '../../actions/getCurrentRoundDataActions';
 import FinalizeScore from './FinalizeScore';
 import HoleNavigator from './HoleNavigator';
+import NotInRound from './NotInRound';
 
 class ScoringContainer extends Component {
   constructor(props) {
@@ -27,9 +28,7 @@ class ScoringContainer extends Component {
     console.log('CURRENT ROUND IN PROGRESS: ', this.props.currentRoundInProgress)
     if (!this.props.currentRoundInProgress) {
       return (
-        <View style={{ flex: 1, alignItems: "center" }}>
-          <Text> You are not currently in a game </Text>
-        </View>
+        <NotInRound />
       );
     } else {
       return <HoleNavigator card={this.props.currentCard} isScoreKeeper={this.props.isScoreKeeper}/>
