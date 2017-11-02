@@ -36,23 +36,54 @@ export default function reducer(state = {}, action) {
     case "GET_CURRENT_ROUND_FAILED":
       return Object.assign({}, state, { error: action.error });
     case "INCREMENT_PLAYER_SCORE":
+      console.log('increment player scores payload: ', action.payload)
       const scoresObj = Object.assign({}, state.currentRound.scores);
       const holeNumber = action.payload.holeNum;
+      console.log('currentRound.scores: ', scoresObj)
 
       for (var key in scoresObj) {
         if (key === action.payload.playerId) {
-          const playerScores = scoresObj[key];
+          var playerScores = scoresObj[key];
         }
       }
 
-      if (playerScores[holeNumber].score === null) {
-        playerScores[holeNumber].score = playerScores[holeNumber].par;
+      if (playerScores.scores[holeNumber].score === null) {
+        playerScores.scores[holeNumber].score = playerScores.scores[holeNumber].par;
       }
       
-      playerScores[holeNumber].score++;
-      playerScores[holeNumber].scoreRelativeToPar = playerScores[holeNumber].score - playerScores[holeNumber].par;
-   
+      playerScores.scores[holeNumber].score++;
+      playerScores.scores[holeNumber].scoreRelativeToPar = playerScores.scores[holeNumber].score - playerScores.scores[holeNumber].par;
 
+      playerScores.totalStrokes = Object.keys(playerScores.scores).reduce((totalStrokes, key) => {
+        return totalStrokes += playerScores.scores[key].score;
+      }, 0);
+
+      var scoreRelativeToPar = Object.keys(playerScores.scores).reduce(
+        (scoreRelativeToPar, key) => {
+          if (playerScores.scores[key].scoreRelativeToPar){
+           return (scoreRelativeToPar += playerScores.scores[key].scoreRelativeToPar);
+          } else {
+            return scoreRelativeToPar;
+          }      
+        }, 0);
+
+      if (scoreRelativeToPar === 0) {
+        playerScores.scoreRelativeToPar = 'E'
+      } else if (scoreRelativeToPar > 0) {
+        playerScores.scoreRelativeToPar = '+' + scoreRelativeToPar.toString();
+      } else {
+        playerScores.scoreRelativeToPar = scoreRelativeToPar.toString();
+      }
+
+      playerScores.thru = Object.keys(playerScores.scores).reduce((thru, key) =>{
+        if (playerScores.scores[key].score) {
+          return thru++
+        } else {
+          return thru;
+        }
+      })
+
+      console.log('************ !!!!!!!!!!! ', scoresObj)
       return Object.assign({}, state, {
         currentRound: {
           ...state.currentRound,
@@ -61,16 +92,57 @@ export default function reducer(state = {}, action) {
       });
     case "DECREMENT_PLAYER_SCORE":
       scoresObj = Object.assign({}, state.currentRound.scores);
+      holeNumber = action.payload.holeNum;
 
       for (var key in scoresObj) {
         if (key === action.payload.playerId) {
-          if (scoresObj[key][action.payload.holeNum].score === null) {
-            scoresObj[key][action.payload.holeNum].score = scoresObj[key][action.payload.holeNum].par;
-          }
-          scoresObj[key][action.payload.holeNum].score--;
-          scoresObj[key][action.payload.holeNum].scoreRelativeToPar = scoresObj[key][action.payload.holeNum].score - scoresObj[key][action.payload.holeNum].par;
+          var playerScores = scoresObj[key];
         }
       }
+
+      if (playerScores.scores[holeNumber].score === null) {
+        playerScores.scores[holeNumber].score = playerScores.scores[holeNumber].par;
+      }
+
+      playerScores.scores[holeNumber].score--;
+      playerScores.scores[holeNumber].scoreRelativeToPar = playerScores.scores[holeNumber].score - playerScores.scores[holeNumber].par;
+
+      playerScores.totalStrokes = Object.keys(playerScores.scores).reduce(
+        (totalStrokes, key) => {
+          return (totalStrokes += playerScores.scores[key].score);
+        },
+        0
+      );
+
+      var scoreRelativeToPar = Object.keys(playerScores.scores).reduce(
+        (scoreRelativeToPar, key) => {
+          if (playerScores.scores[key].scoreRelativeToPar) {
+            return (scoreRelativeToPar +=
+              playerScores.scores[key].scoreRelativeToPar);
+          } else {
+            return scoreRelativeToPar;
+          }
+        },
+        0
+      );
+
+      if (scoreRelativeToPar === 0) {
+        playerScores.scoreRelativeToPar = "E";
+      } else if (scoreRelativeToPar > 0) {
+        playerScores.scoreRelativeToPar = "+" + scoreRelativeToPar.toString();
+      } else {
+        playerScores.scoreRelativeToPar = scoreRelativeToPar.toString();
+      }
+
+      playerScores.thru = Object.keys(playerScores.scores).reduce(
+        (thru, key) => {
+          if (playerScores.scores[key].score) {
+            return thru++;
+          } else {
+            return thru;
+          }
+        }
+      );
 
       return Object.assign({}, state, {
         currentRound: {
