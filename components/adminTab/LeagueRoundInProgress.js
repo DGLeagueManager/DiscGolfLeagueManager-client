@@ -2,19 +2,22 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Card, Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
+import { palette } from '../../colorPalette';
 
 export default class LeagueRoundInProgress extends Component {
 
   render() {
     return (
-      <View style={{marginTop: '50%'}}>
+      <View style={styles.container}>
         <Card title="League Round In Progress">
 
           <View>
             <Icon
-            name='account-alert'
-            type='material-community'
-            size={65}/>
+              name='account-alert'
+              type='material-community'
+              size={65}
+              color={palette.accent}
+            />
             <Text>You will be able to start a new round after the</Text>
             <Text style={styles.subText}>current round has ended</Text>
           </View>
@@ -29,6 +32,12 @@ const styles = StyleSheet.create({
    marginRight: '20%',
    width: '60%'
  },
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: palette.background
+  },
 });
 
 
