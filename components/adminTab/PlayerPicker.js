@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, Modal } from "react-native";
+import { View, Text, Button } from "react-native";
 import { palette } from '../../colorPalette';
 
 const PlayerPicker = (props) => {
