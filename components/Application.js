@@ -26,7 +26,11 @@ class Application extends Component {
       //this.props.onGetCurrentRoundData(playerId, roundId)
     });
   }
-
+  shouldComponentUpdate(nextProps) {
+    if (nextProps.currentRound) {
+      this.props.onGetCurrentRound(nextProps.currentRound, this.props.id)
+    }
+  }
   componentWillMount() {
     this.props.onGetLeagueData(this.props.id);
   }
@@ -216,7 +220,8 @@ const mapStateToProps = (state, ownProps) => {
     //error: state.applicationReducer.error,
     id: state.auth.id,
     currentRoundId: state.applicationReducer.currentRoundId,
-    renderApplication: state.applicationReducer.renderApplication
+    renderApplication: state.applicationReducer.renderApplication,
+    currentRound: state.getCurrentRoundDataReducer.currentRound
   };
 };
 
