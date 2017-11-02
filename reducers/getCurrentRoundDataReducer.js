@@ -37,16 +37,21 @@ export default function reducer(state = {}, action) {
       return Object.assign({}, state, { error: action.error });
     case "INCREMENT_PLAYER_SCORE":
       const scoresObj = Object.assign({}, state.currentRound.scores);
+      const holeNumber = action.payload.holeNum;
 
       for (var key in scoresObj) {
         if (key === action.payload.playerId) {
-          if (scoresObj[key][action.payload.holeNum].score === null) {
-            scoresObj[key][action.payload.holeNum].score = scoresObj[key][action.payload.holeNum].par;
-          }
-          scoresObj[key][action.payload.holeNum].score++;
-          scoresObj[key][action.payload.holeNum].scoreRelativeToPar = scoresObj[key][action.payload.holeNum].score - scoresObj[key][action.payload.holeNum].par;
+          const playerScores = scoresObj[key];
         }
       }
+
+      if (playerScores[holeNumber].score === null) {
+        playerScores[holeNumber].score = playerScores[holeNumber].par;
+      }
+      
+      playerScores[holeNumber].score++;
+      playerScores[holeNumber].scoreRelativeToPar = playerScores[holeNumber].score - playerScores[holeNumber].par;
+   
 
       return Object.assign({}, state, {
         currentRound: {
