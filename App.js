@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 import { View } from 'react-native';
 import store from './store';
 import Root from './components/Root'
+import { Constants } from 'expo';
 
 export default class App extends Component {
 
@@ -18,7 +19,9 @@ export default class App extends Component {
       <Provider store={store}>
         <Root />
       </Provider>
-    );
+    )
   }
-
 }
+
+// Uncomment this line to disable yellow Expo warnings
+console.disableYellowBox = true;

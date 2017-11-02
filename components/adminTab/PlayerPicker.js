@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { View, Text, Modal } from "react-native";
-import { Button, List, ListItem } from "react-native-elements";
+import { palette } from '../../colorPalette';
 
 const PlayerPicker = (props) => {
   const player = props.player;
@@ -9,15 +9,15 @@ const PlayerPicker = (props) => {
     <Button
       onPress={() => props.showModal(props.cardKey)}
       buttonStyle={{ marginTop: 20 }}
-      backgroundColor="grey"
+      backgroundColor={palette.accent}
       title="Select Player..."
     />
   );
   } else {
     return (
-      <List>
-        <ListItem title={player.first_name + " " + player.last_name} />
-      </List>
+      <View style={{padding: 5}}>
+        <Text style={{ fontSize: 20, fontWeight: 'bold', textAlign: 'center', color: palette.text }}>{player.first_name + " " + player.last_name}</Text>
+      </View >
     )
   }
 }

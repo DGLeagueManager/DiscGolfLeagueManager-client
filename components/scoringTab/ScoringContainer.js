@@ -40,7 +40,8 @@ const mapStateToProps = (state, ownProps) => {
     playerId: state.auth.id,
     isScoreKeeper: state.getCurrentRoundDataReducer.isScoreKeeper,
     currentRoundId: state.applicationReducer.currentRoundId,
-    currentCard: state.getCurrentRoundDataReducer.currentCard
+    currentCard: state.getCurrentRoundDataReducer.currentCard,
+    currentRound: state.getCurrentRoundDataReducer.currentRound
   };
 };
 

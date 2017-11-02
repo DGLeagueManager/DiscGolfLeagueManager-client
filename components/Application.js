@@ -12,6 +12,7 @@ import { getLeagueData } from "../actions/applicationActions";
 import { getCurrentRoundData } from "../actions/getCurrentRoundDataActions";
 import HoleNavigator from "./scoringTab/HoleNavigator";
 import ResultsNavigator from "./resultsTab/ResultsNavigator";
+import { palette } from '../colorPalette';
 
 class Application extends Component {
   constructor(props) {
@@ -41,10 +42,6 @@ class Application extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.currentRound) {
-      //this.props.onGetCurrentRound(nextProps.currentRound);
-    }
-
     if (nextProps.currentRoundId) {
       let payload = {
         id: nextProps.currentRoundId
@@ -72,6 +69,7 @@ class Application extends Component {
         payload.type === "START ROUND CLIENT"
       ) {
         this.props.onGetCurrentRound(payload.body, this.props.id);
+        this.props.onGetLeagueData(this.props.id);
       }
     });
   }
@@ -132,26 +130,28 @@ const Tab = TabNavigator(
     tabBarPosition: "bottom",
     swipeEnabled: false,
     tabBarOptions: {
-      activeTintColor: "red",
+      activeTintColor: palette.accent,
       showIcon: true,
       showLabel: true,
       style: {
-        height: 50
+        height: 50,
+        backgroundColor: palette.primary
+      },
+      labelStyle: {
+        marginBottom: 5
       }
     },
     navigationOptions: {
       lazy: true,
-      headerLeft: <Icon name="menu" color="#fff" />,
-      headerTitle: "DISC GOLF LEAGUE MANAGER",
+      headerTitle: "DGLM",
       headerTitleStyle: {
-        color: "#fff"
+        color: "#fff",
+        alignSelf: 'center'
       },
-      // headerStyle: {
-      //   backgroundColor: "#2196f3",
-      //   height: 50,
-      //   paddingLeft: 15
-      // }
-      header: <ImageHeader />
+      headerStyle: {
+        backgroundColor: palette.primary,
+        paddingTop: Constants.statusBarHeight
+      }
     }
   }
 );
@@ -187,12 +187,13 @@ const adminTab = TabNavigator(
     tabBarPosition: "bottom",
     swipeEnabled: false,
     tabBarOptions: {
-      activeTintColor: "red",
+      activeTintColor: palette.accent,
       showIcon: true,
       showLabel: true,
       style: {
-        height: 50
-      }
+        height: 50,
+        paddingBottom: 10
+      },
     },
     navigationOptions: {
       lazy: true,
@@ -201,12 +202,10 @@ const adminTab = TabNavigator(
       headerTitleStyle: {
         color: "#fff"
       },
-      // headerStyle: {
-      //   backgroundColor: "#2196f3",
-      //   height: 50,
-      //   paddingLeft: 15
-      // }
-      header: <ImageHeader />
+      headerStyle: {
+        backgroundColor: palette.primary,
+        paddingTop: Constants.statusBarHeight
+      }
     }
   }
 );
@@ -224,16 +223,6 @@ const AdminView = StackNavigator({
     screen: AdminStack
   }
 });
-
-const ImageHeader = props => (
-  <View style={{ backgroundColor: '#eee' }}>
-    <Image
-      style={StyleSheet.absoluteFill}
-      source={{ uri: 'https://upload.wikimedia.org/wikipedia/commons/3/36/Hopetoun_falls.jpg' }}
-    />
-    <Header style={{ backgroundColor: 'transparent' }} />
-  </View>
-);
 
 const mapStateToProps = (state, ownProps) => {
   return {

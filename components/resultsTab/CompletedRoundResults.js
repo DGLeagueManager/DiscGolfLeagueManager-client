@@ -2,12 +2,11 @@ import React from "react";
 import { Text, StyleSheet, View, ScrollView } from "react-native";
 import { Icon, List, ListItem, Divider } from "react-native-elements";
 
-const Results = ({ round }) => {
-  console.log(" round ****** ", round);
+const CompletedRoundResults = ({ round }) => {
   return (
     <ScrollView style={{ paddingTop: 20 }}>
       <View style={{ flex: 1, flexDirection: "row" }}>
-        <Text style={!round.completed ? styles.name : styles.completed}>
+        <Text style={styles.name}>
           PLAYER
         </Text>
         <View style={{ flex: 1, flexDirection: "row" }}>
@@ -17,26 +16,16 @@ const Results = ({ round }) => {
         </View>
       </View>
       <View>
-        <List>
+        <List containerStyle={{flex: 1}}>
           {round.scores
             ? Object.keys(round.scores).map(key => (
                 <ListItem
                   key={key}
                   title={round.scores[key].player_name}
                   label={
-                    <View style={{ flex: 1, flexDirection: "row" }}>
-                      <Text style={{ flex: 1, marginLeft: 10 }}>
-                        {!round.completed
-                          ? round.scores[key].startingHole
-                          : null}
-                      </Text>
-                      <Text style={styles.col}>
-                        {!round.completed ? round.scores[key].thru : null}
-                      </Text>
-                      <Text style={styles.col}>
-                        {round.scores[key].scoreRelativeToPar}
-                      </Text>
-                    </View>
+                    <Text style={styles.col}>
+                      {round.scores[key].scoreRelativeToPar}
+                    </Text>
                   }
                   hideChevron
                 />
@@ -50,19 +39,15 @@ const Results = ({ round }) => {
 
 const styles = StyleSheet.create({
   name: {
-    flex: 1,
-    fontSize: 14,
-    paddingLeft: 10
-  },
-  completed: {
     flex: 3,
     fontSize: 14,
-    paddingLeft: 10
+    paddingLeft: 20
   },
   col: {
     flex: 1,
-    fontSize: 14
+    fontSize: 14,
+    justifyContent: 'space-between'
   }
 });
 
-export default Results;
+export default CompletedRoundResults;

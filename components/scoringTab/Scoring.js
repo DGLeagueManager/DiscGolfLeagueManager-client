@@ -30,18 +30,20 @@ class Scoring extends Component {
       body: currentRoundObj
     }
     this.socket.emit('test', payload)
-  } 
-  
+  }
+
   render() {
     return (
       <ScrollView>
         <List>
-          {this.props.card.players.map((player, i) => {
+          {this.props.card.players.sort((a, b) =>
+            (this.props.scores[a._id].totalStrokes > this.props.scores[b._id].totalStrokes))
+            .map((player, i) => {
             return (
               <ListItem
                 roundAvatar
                 key={i}
-                subtitle={'overall round score goes here'}
+                subtitle={this.props.scores[player._id].scoreRelativeToPar}
                 title={player.first_name + " " + player.last_name || null}
                 containerStyle={{ height: 80 }}
                 hideChevron
@@ -60,7 +62,7 @@ class Scoring extends Component {
                     player={player}
                     isScoreKeeper={this.props.isScoreKeeper}
                     scoresLocked={this.state.scoresLocked}
-                    score={this.props.scores[player._id][this.props.hole.hole_number].score || this.props.hole.par}
+                    score={this.props.scores[player._id].scores[this.props.hole.hole_number].score || this.props.hole.par}
                   />
                 }
               />

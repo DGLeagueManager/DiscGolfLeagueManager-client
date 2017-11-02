@@ -12,6 +12,7 @@ import PlayerSelectionCard from "./PlayerSelectionCard";
 import { connect } from "react-redux";
 import { addPlayerToCard } from "../../actions/playerSelectionActions";
 import PlayerPickerModal from './PlayerPickerModal';
+import { palette } from '../../colorPalette';
 
 class PlayerSelection extends Component {
   constructor(props) {
@@ -56,57 +57,54 @@ class PlayerSelection extends Component {
 
   render() {
     return (
-      <View>
-      <PlayerPickerModal
-        isVisible={this.state.modalVisible}
-        activeCard={this.state.activeCard}
-        unassignedPlayers={this.state.unassignedPlayers}
-        handleSelectPlayer={this.handleSelectPlayer.bind(this)}
-        hideModal={this.hideModal.bind(this)}
-      />
-        <ScrollView>
-          <Text style={{ marginTop: 20, marginLeft: 20, fontSize: 20 }}>
-            Unassigned Players: {this.state.unassignedPlayers.length}
-          </Text>
+      <View style={{flex: 1, backgroundColor: palette.background}}>
+        <PlayerPickerModal
+          isVisible={this.state.modalVisible}
+          activeCard={this.state.activeCard}
+          unassignedPlayers={this.state.unassignedPlayers}
+          handleSelectPlayer={this.handleSelectPlayer.bind(this)}
+          hideModal={this.hideModal.bind(this)}
+        />
+          <ScrollView>
+            <Text style={{ marginTop: 20, marginLeft: 20, fontSize: 20, textAlign: 'center', color: palette.text }}>
+              Unassigned Players: {this.state.unassignedPlayers.length}
+            </Text>
 
-          <Button
-            onPress={this.handleRandom}
-            buttonStyle={{ marginTop: 20 }}
-            backgroundColor="red"
-            title="Randomize All"
-          />
+            {/* <Button
+              onPress={this.handleRandom}
+              buttonStyle={{ marginTop: 20 }}
+              backgroundColor="red"
+              title="Randomize All"
+            /> */}
 
-          {Object.keys(this.props.cards).map((key, i) => {
-            let card = this.props.cards[key];
-            return (
-              <View>
-                <PlayerSelectionCard
-                  key={key}
-                  cardKey={key}
-                  startingHole={card.startingHole}
-                  card={card}
-                  unassignedPlayers={this.state.unassignedPlayers}
-                  handleSelectPlayer={this.handleSelectPlayer.bind(this)}
-                  showModal={this.showModal.bind(this)}
-                  modalVisible={this.state.modalVisible}
-                />
-              </View>
-            );
-          })}
+            {Object.keys(this.props.cards).map((key, i) => {
+              let card = this.props.cards[key];
+              return (
+                <View >
+                  <PlayerSelectionCard
+                    key={key}
+                    cardKey={key}
+                    startingHole={card.startingHole}
+                    card={card}
+                    unassignedPlayers={this.state.unassignedPlayers}
+                    handleSelectPlayer={this.handleSelectPlayer.bind(this)}
+                    showModal={this.showModal.bind(this)}
+                    modalVisible={this.state.modalVisible}
+                  />
+                </View>
+              );
+            })}
 
-          <Button
-            backgroundColor="red"
-            disabled={this.state.unassignedPlayers.length !== 0}
-            buttonStyle={{
-              marginTop: 20,
-              marginBottom: 20
-            }}
-            onPress={() =>
-              this.props.navigation.navigate("ScoreKeeperSelection")}
-            title="Next"
-          />
-        </ScrollView>
-      </View>
+            <Button
+              backgroundColor={palette.accent}
+              disabled={this.state.unassignedPlayers.length !== 0}
+              buttonStyle={{ marginVertical: 20 }}
+              onPress={() =>
+                this.props.navigation.navigate("ScoreKeeperSelection")}
+              title="Next"
+            />
+          </ScrollView>
+        </View>
     );
   }
 }

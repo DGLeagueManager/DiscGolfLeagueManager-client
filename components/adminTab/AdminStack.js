@@ -9,33 +9,55 @@ import PlayerSelection from './PlayerSelection';
 import ScoreKeeperSelection from './ScoreKeeperSelection';
 import LeagueRoundInProgress from './LeagueRoundInProgress';
 import { connect } from 'react-redux'
+import { palette } from '../../colorPalette';
 
 const NewRoundAdminStack = StackNavigator({
   NewRound: { 
     screen: NewRound,
     navigationOptions: {
-      headerTitle: 'New Round',
-      headerStyle: {
-        // backgroundColor: 'red'
-      }
-    }  
+      header: null
+    }
   },
   AdminRoundConfigStart: { 
     screen: AdminRoundConfigStart,
     navigationOptions: {
       headerTitle: 'Choose Participants',
+      headerStyle: {
+        backgroundColor: palette.secondary
+      },
+      headerTitleStyle: {
+        color: palette.text,
+        alignSelf: 'center',
+        marginRight: 70
+      }
     }
-   },
+  },
   PlayerSelection: { 
     screen: PlayerSelection,
     navigationOptions: {
       headerTitle: 'Assign Cards',
+      headerStyle: {
+        backgroundColor: palette.secondary
+      },
+      headerTitleStyle: {
+        color: palette.text,
+        alignSelf: 'center',
+        marginRight: 70
+      }
     } 
   },
   ScoreKeeperSelection: { 
     screen: ScoreKeeperSelection,
     navigationOptions: {
       headerTitle: 'Select a Scorekeeper',
+      headerStyle: {
+        backgroundColor: palette.secondary
+      },
+      headerTitleStyle: {
+        color: palette.text,
+        alignSelf: 'center',
+        marginRight: 70
+      }
     }
   }
 });
@@ -54,7 +76,6 @@ class AdminStack extends Component {
 
 
 const mapStateToProps = (state, ownProps) => {
-  //TODO: Round in progress should be dependant on response from server after post new round or timed interval from get currentRound
   return {
     currentRoundInProgress: state.getCurrentRoundDataReducer.currentRoundInProgress
   };
