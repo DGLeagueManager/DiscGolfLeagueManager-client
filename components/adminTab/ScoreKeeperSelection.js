@@ -13,12 +13,27 @@ import axios from 'axios';
 class ScoreKeeperSelection extends Component {
   constructor(props) {
     super(props);
-    
+
     this.state = {
-      selected: 1
+      selected: 1,
+      readyToStart: false
     };
 
     this.socket = io('http://ec2-54-165-58-14.compute-1.amazonaws.com:3000')
+  }
+
+  componentWillReceiveProps() {
+    console.log("Here are the new cards", this.props.cards);
+    let readyToStart = true;
+    for(var cardkey in this.props.cards) {
+      if (!this.props.cards[cardkey].scoreKeeper){
+        console.log('There is not scoreKeeper in ',cardkey);
+        readyToStart = false;
+      }
+    }
+    this.setState({
+      readyToStart :readyToStart
+    })
   }
 
   generatePopulatedCards() {
@@ -53,7 +68,7 @@ class ScoreKeeperSelection extends Component {
     let newRound = this.props.newRound;
     newRound.id = this.props.currentRound._id;
     newRound.current_season = this.props.currentSeason._id;
-  
+
     let payload = {
       body: newRound,
       id: newRound.id,
@@ -85,7 +100,7 @@ class ScoreKeeperSelection extends Component {
         {this.generatePopulatedCards().map(card => card)}
         <Button
           backgroundColor="red"
-          disabled={this.allCardsHaveScorekeepers()}
+          disabled={!this.state.readyToStart}
           buttonStyle={{
             marginTop: 20,
             marginBottom: 20
