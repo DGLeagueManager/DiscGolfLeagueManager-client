@@ -20,5 +20,7 @@ export default class App extends Component {
       </Provider>
     );
   }
-
 }
+
+// Uncomment this line to disable yellow Expo warnings
+console.disableYellowBox = true;
