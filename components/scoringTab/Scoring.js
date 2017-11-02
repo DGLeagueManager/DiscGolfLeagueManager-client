@@ -62,7 +62,7 @@ class Scoring extends Component {
                     player={player}
                     isScoreKeeper={this.props.isScoreKeeper}
                     scoresLocked={this.state.scoresLocked}
-                    score={this.props.scores[player._id][this.props.hole.hole_number].score || this.props.hole.par}
+                    score={this.props.scores[player._id].scores[this.props.hole.hole_number].score || this.props.hole.par}
                   />
                 }
               />
