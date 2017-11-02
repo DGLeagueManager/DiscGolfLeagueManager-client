@@ -15,15 +15,8 @@ const NewRoundAdminStack = StackNavigator({
   NewRound: { 
     screen: NewRound,
     navigationOptions: {
-      headerTitle: 'New Round',
-      headerStyle: {
-        backgroundColor: palette.secondary
-      },
-      headerTitleStyle: {
-        color: palette.accentText,
-        alignSelf: 'center',
-      }
-    }  
+      header: null
+    }
   },
   AdminRoundConfigStart: { 
     screen: AdminRoundConfigStart,
@@ -47,7 +40,7 @@ const NewRoundAdminStack = StackNavigator({
         backgroundColor: palette.secondary
       },
       headerTitleStyle: {
-        color: palette.accentText,
+        color: palette.text,
         alignSelf: 'center',
         marginRight: 70
       }
@@ -61,7 +54,7 @@ const NewRoundAdminStack = StackNavigator({
         backgroundColor: palette.secondary
       },
       headerTitleStyle: {
-        color: palette.accentText,
+        color: palette.text,
         alignSelf: 'center',
         marginRight: 70
       }
