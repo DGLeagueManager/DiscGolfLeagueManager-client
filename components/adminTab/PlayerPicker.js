@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { View, Text, Modal } from "react-native";
-import { Button } from "react-native-elements";
+import { Button, List, ListItem } from "react-native-elements";
 
 const PlayerPicker = (props) => {
   const player = props.player;
@@ -15,9 +15,9 @@ const PlayerPicker = (props) => {
   );
   } else {
     return (
-      <View>
-        <Text>{player.first_name + " " + player.last_name}</Text>
-      </View>
+      <List>
+        <ListItem title={player.first_name + " " + player.last_name} />
+      </List>
     )
   }
 }

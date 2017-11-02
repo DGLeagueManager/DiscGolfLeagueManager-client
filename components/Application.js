@@ -146,11 +146,12 @@ const Tab = TabNavigator(
       headerTitleStyle: {
         color: "#fff"
       },
-      headerStyle: {
-        backgroundColor: "#2196f3",
-        height: 50,
-        paddingLeft: 15
-      }
+      // headerStyle: {
+      //   backgroundColor: "#2196f3",
+      //   height: 50,
+      //   paddingLeft: 15
+      // }
+      header: <ImageHeader />
     }
   }
 );
@@ -200,11 +201,12 @@ const adminTab = TabNavigator(
       headerTitleStyle: {
         color: "#fff"
       },
-      headerStyle: {
-        backgroundColor: "#2196f3",
-        height: 50,
-        paddingLeft: 15
-      }
+      // headerStyle: {
+      //   backgroundColor: "#2196f3",
+      //   height: 50,
+      //   paddingLeft: 15
+      // }
+      header: <ImageHeader />
     }
   }
 );
@@ -222,6 +224,16 @@ const AdminView = StackNavigator({
     screen: AdminStack
   }
 });
+
+const ImageHeader = props => (
+  <View style={{ backgroundColor: '#eee' }}>
+    <Image
+      style={StyleSheet.absoluteFill}
+      source={{ uri: 'https://upload.wikimedia.org/wikipedia/commons/3/36/Hopetoun_falls.jpg' }}
+    />
+    <Header style={{ backgroundColor: 'transparent' }} />
+  </View>
+);
 
 const mapStateToProps = (state, ownProps) => {
   return {
