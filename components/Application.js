@@ -198,9 +198,8 @@ const adminTab = TabNavigator(
         color: "#fff"
       },
       headerStyle: {
-        backgroundColor: "#2196f3",
-        height: 50,
-        paddingTop: 200
+        backgroundColor: palette.primary,
+        paddingTop: Constants.statusBarHeight
       }
     }
   }
