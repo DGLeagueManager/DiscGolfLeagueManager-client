@@ -129,11 +129,11 @@ const Tab = TabNavigator(
     tabBarPosition: "bottom",
     swipeEnabled: false,
     tabBarOptions: {
-      activeTintColor: palette.primary,
+      activeTintColor: palette.accent,
       showIcon: true,
       showLabel: true,
       style: {
-        height: 50
+        height: 60
       }
     },
     navigationOptions: {
@@ -145,7 +145,7 @@ const Tab = TabNavigator(
       },
       headerStyle: {
         backgroundColor: palette.primary,
-        height: 50
+        paddingTop: Constants.statusBarHeight
       }
     }
   }
@@ -199,7 +199,7 @@ const adminTab = TabNavigator(
       headerStyle: {
         backgroundColor: "#2196f3",
         height: 50,
-        paddingLeft: 15
+        paddingTop: 200
       }
     }
   }

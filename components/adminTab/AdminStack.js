@@ -33,7 +33,7 @@ const NewRoundAdminStack = StackNavigator({
         backgroundColor: palette.secondary
       },
       headerTitleStyle: {
-        color: palette.accentText,
+        color: palette.text,
         alignSelf: 'center',
         marginRight: 70
       }
