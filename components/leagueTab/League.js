@@ -4,6 +4,7 @@ import { Icon } from 'react-native-elements';
 import { TabNavigator, TabBarTop } from 'react-navigation';
 import Info from './Info';
 import Standings from './Standings';
+import { palette } from '../../colorPalette';
 
 export default class League extends Component {
 
@@ -35,7 +36,13 @@ const Tabs = TabNavigator({
     swipeEnabled: true,
     showLabel: true,
     style: {
-      backgroundColor: 'red'
+      backgroundColor: 'white'
+    },
+    labelStyle: {
+      color: palette.primary
+    },
+    indicatorStyle: {
+      backgroundColor: palette.primary
     }
   }
 })

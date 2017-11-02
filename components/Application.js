@@ -138,15 +138,14 @@ const Tab = TabNavigator(
     },
     navigationOptions: {
       lazy: true,
-      headerLeft: <Icon name="menu" color="#fff" />,
-      headerTitle: "DISC GOLF LEAGUE MANAGER",
+      headerTitle: "DG League Manager",
       headerTitleStyle: {
-        color: "#fff"
+        color: "#fff",
+        alignSelf: 'center'
       },
       headerStyle: {
         backgroundColor: palette.primary,
-        height: 50,
-        paddingLeft: 15
+        height: 50
       }
     }
   }

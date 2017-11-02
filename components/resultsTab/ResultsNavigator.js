@@ -5,6 +5,7 @@ import { Text, View } from 'react-native';
 import { connect } from 'react-redux';
 import CurrentRoundResults from './CurrentRoundResults';
 import CompletedRoundResults from './CompletedRoundResults';
+import { palette } from '../../colorPalette';
 
 class ResultsNavigator extends Component {
   constructor(props) {
@@ -66,7 +67,7 @@ class ResultsNavigator extends Component {
           swipeEnabled: true,
           showLabel: true,
           style: {
-            backgroundColor: "red"
+            backgroundColor: palette.secondary
           }
         }
       });

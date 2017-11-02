@@ -9,6 +9,7 @@ import PlayerSelection from './PlayerSelection';
 import ScoreKeeperSelection from './ScoreKeeperSelection';
 import LeagueRoundInProgress from './LeagueRoundInProgress';
 import { connect } from 'react-redux'
+import { palette } from '../../colorPalette';
 
 const NewRoundAdminStack = StackNavigator({
   NewRound: { 
@@ -16,7 +17,11 @@ const NewRoundAdminStack = StackNavigator({
     navigationOptions: {
       headerTitle: 'New Round',
       headerStyle: {
-        // backgroundColor: 'red'
+        backgroundColor: palette.secondary
+      },
+      headerTitleStyle: {
+        color: palette.accentText,
+        alignSelf: 'center',
       }
     }  
   },
@@ -24,18 +29,42 @@ const NewRoundAdminStack = StackNavigator({
     screen: AdminRoundConfigStart,
     navigationOptions: {
       headerTitle: 'Choose Participants',
+      headerStyle: {
+        backgroundColor: palette.secondary
+      },
+      headerTitleStyle: {
+        color: palette.accentText,
+        alignSelf: 'center',
+        marginRight: 70
+      }
     }
-   },
+  },
   PlayerSelection: { 
     screen: PlayerSelection,
     navigationOptions: {
       headerTitle: 'Assign Cards',
+      headerStyle: {
+        backgroundColor: palette.secondary
+      },
+      headerTitleStyle: {
+        color: palette.accentText,
+        alignSelf: 'center',
+        marginRight: 70
+      }
     } 
   },
   ScoreKeeperSelection: { 
     screen: ScoreKeeperSelection,
     navigationOptions: {
       headerTitle: 'Select a Scorekeeper',
+      headerStyle: {
+        backgroundColor: palette.secondary
+      },
+      headerTitleStyle: {
+        color: palette.accentText,
+        alignSelf: 'center',
+        marginRight: 70
+      }
     }
   }
 });

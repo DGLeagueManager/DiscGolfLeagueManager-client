@@ -97,10 +97,7 @@ class PlayerSelection extends Component {
           <Button
             backgroundColor="red"
             disabled={this.state.unassignedPlayers.length !== 0}
-            buttonStyle={{
-              marginTop: 20,
-              marginBottom: 20
-            }}
+            buttonStyle={{ marginVertical: 20 }}
             onPress={() =>
               this.props.navigation.navigate("ScoreKeeperSelection")}
             title="Next"

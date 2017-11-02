@@ -5,6 +5,7 @@ import { holeDetails } from "./dummyData";
 import FinalizeScore from './FinalizeScore';
 import Scoring from './Scoring';
 import { connect } from 'react-redux';
+import { palette } from '../../colorPalette';
 
 class HoleNavigator extends Component {
   constructor(props) {
@@ -55,7 +56,7 @@ class HoleNavigator extends Component {
         scrollEnabled: true,
         showLabel: true,
         style: {
-          backgroundColor: "red"
+          backgroundColor: palette.secondary
         }
       }
     });

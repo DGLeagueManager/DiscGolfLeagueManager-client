@@ -92,6 +92,7 @@ class AdminRoundConfigStart extends Component {
           }
         </List>
         <Button
+          buttonStyle={{marginBottom: 20}}
           onPress={this.handleSubmit}
           color='black'
           backgroundColor="#dbdbdb"

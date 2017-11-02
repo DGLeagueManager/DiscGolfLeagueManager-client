@@ -3,26 +3,24 @@ import { View, Text, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { Button } from 'react-native-elements';
 import { createNewRound } from '../../actions/NewRoundActions';
+import { palette } from '../../colorPalette';
 
 class NewRound extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      
-    }
   }
   
   render() {
     return (
-      <View style={{marginTop: 50}}>
+      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
         <Button
-          buttonStyle={styles.button}
+          buttonStyle={{padding: 40, backgroundColor: palette.accent}}
           onPress={ () => {
               this.props.createRound(this.props.currentCourse);
               this.props.navigation.navigate('AdminRoundConfigStart')
             }
           }
-          raised={false}
+          raised
           title="New Round"
           textStyle={{fontSize: 30}}
            />
@@ -30,15 +28,6 @@ class NewRound extends Component {
     )
   }
 }
-
-const styles = StyleSheet.create({
-  button: {
-    paddingTop: 75,
-    paddingBottom: 75,
-    width: '80%',
-    margin: '10%'
-  },
-});
 
 const mapStateToProps = (state, ownProps) => {
   return {

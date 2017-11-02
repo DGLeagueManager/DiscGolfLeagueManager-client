@@ -7,7 +7,7 @@ export default class LeagueRoundInProgress extends Component {
 
   render() {
     return (
-      <View style={{ marginTop: '50%' }}>
+      <View style={styles.container}>
         <Card title="Not Currently In A Round">
 
           <View>
@@ -24,6 +24,11 @@ export default class LeagueRoundInProgress extends Component {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
+  }, 
   subText: {
     fontStyle: 'italic',
     textAlign: 'center'
