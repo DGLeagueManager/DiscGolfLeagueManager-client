@@ -46,7 +46,7 @@ class FinalizeScore extends Component {
             buttonStyle={{
               marginTop: 20,
               marginBottom: 20,
-              backgroundColor: palette.accent2
+              backgroundColor: palette.accent
             }}
             disabled={this.state.disabled}
             title={this.state.disabled ? "Scores have been submitted" : "Submit Final Scores"}
@@ -54,9 +54,7 @@ class FinalizeScore extends Component {
               this.handleSubmit()
               this.setState({ disabled: !this.state.disabled })
             }}
-          />
-        :
-        null
+          /> : null
         }
       </ScrollView>
     );

@@ -96,7 +96,7 @@ class PlayerSelection extends Component {
             })}
 
             <Button
-              backgroundColor={palette.accent}
+              backgroundColor={palette.accent2}
               disabled={this.state.unassignedPlayers.length !== 0}
               buttonStyle={{ marginVertical: 20 }}
               onPress={() =>

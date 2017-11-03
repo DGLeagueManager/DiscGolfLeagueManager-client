@@ -13,38 +13,27 @@ export default class ScoreKeeperCard extends Component {
     console.log("SCORE KEEPER CARD props: scores: ", this.props.scores);
     return <Card title={null}>
         <View style={styles.titleContainer}>
-          <Text style={styles.title}>
-            {(this.props.player.first_name +
-              " " +
-              this.props.player.last_name
-            ).toUpperCase()}
-          </Text>
-          <Text style={styles.score}>
-            {this.props.scores.scoreRelativeToPar} ({this.props.scores.totalStrokes})
-          </Text>
+          <View>
+            <Text 
+              style={styles.title}
+              numberOfLines={1}
+              ellipsizeMode={'tail'}
+            >
+              {(this.props.player.first_name +
+                " " +
+                this.props.player.last_name
+              ).toUpperCase()}
+            </Text>
+          </View>
+          <View>
+            <Text style={styles.score}>
+              {this.props.scores.scoreRelativeToPar} ({this.props.scores.totalStrokes})
+            </Text>
+          </View>
         </View>
 
-        {/*<View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-          <View style={{flex: 1, flexDirection: "row", justifyContent: 'center', alignItems: 'center'}}>
-            <Text style={styles.label}>Strokes:</Text>
-            <Text style={styles.value}>
-              {this.props.scores.totalStrokes}
-            </Text>
-          </View>
-          <View style={{flex: 1, flexDirection: "row", justifyContent: 'center', alignItems: 'center'}}>
-            <Text style={styles.label}>Score:</Text>
-            <Text style={styles.value}>
-              {this.props.scores.scoreRelativeToPar}
-            </Text>
-          </View>
-          
-          {Object.keys(this.props.scores).map((hole, i) => 
-          <Text key={i}>
-          {hole}
-        </Text>)} 
-        </View> */}
-
         <Button raised icon={{ name: "assignment" }} title="Review Hole Scores" buttonStyle={{ backgroundColor: palette.accent2, color: palette.secondary }} />
+
       </Card>;
   }
 }
@@ -52,16 +41,17 @@ export default class ScoreKeeperCard extends Component {
 const styles = StyleSheet.create({
   title: {
     fontSize: 18,
-    fontWeight: 'bold'
+    flex: 1
   },
   titleContainer: {
     padding: 10,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    flex: 1
+    flex: 1,
+    alignItems: 'center'
   },
   score: {
-    fontSize: 22,
+    fontSize: 24,
     fontWeight: 'bold',
     flex: 1,
     color: palette.accent
