@@ -3,10 +3,11 @@ import { ScrollView, Text, StyleSheet, View, InteractionManager } from 'react-na
 import { Button, Icon, List, ListItem, CheckBox, Header, Divider, Card } from 'react-native-elements'; // 0.17.0
 import { Constants } from 'expo';
 import { palette } from '../../colorPalette';
+import { connect } from 'react-redux';
 
 import "@expo/vector-icons"; // 5.2.0
 
-export default class Result extends Component {
+class Standings extends Component {
   constructor(props) {
     super(props);
 
@@ -58,7 +59,8 @@ export default class Result extends Component {
   render() {
     if(!this.state.ready) {
       return (<View><Text>Loading......</Text></View>);
-    }
+    } 
+    
     return (
       <ScrollView style={{flex: 1, backgroundColor: palette.background}}>
         <Card>
@@ -67,54 +69,46 @@ export default class Result extends Component {
             <Text style={styles.col} style={{flex: 2}}>Weeks Played</Text>
             <Text style={styles.col} style={{flex: 1}}>Points</Text>
           </View>
-          <View style={{width: '100%'}}>
-          <Divider style={styles.divider} />
-            <List style={styles.listStyle}>
-              {
-                this.state.list.map((ele, i) => (
-                  <View key={'view'+i} style={{height: 40, flex: 1, flexDirection: 'row'}}>
-                    <Text key={'text1' + i} style={{marginLeft: 15}}>{(i+1)}</Text>
-                    <Text key={'text2' + i} style={{marginLeft: 20,fontSize: 15, flex: 3}}>{ele.name}</Text>
-                    <Text key={'text3' + i} style={{flex: 2}}>{ele.weeksPlayed}</Text>
-                    <Text key={'text4' + i} style={{flex: 1}}>{ele.points}</Text>
-                  </View>
-                ))
+          <View>
+            <List containerStyle={{ flex: 1 }}>
+              {this.props.leaguePlayers.map((player, i) => (
+                <ListItem
+                  key={i}
+                  title={player.first_name}
+                  label={
+                    <Text style={styles.col}>
+                      2
+                    </Text>
+                  }
+                  hideChevron
+                />
+              ))
               }
-          </List>
+            </List>
           </View>
-        </Card>
-      </ScrollView>
-    );
+          </Card>
+        </ScrollView>
+      );
+    }
   }
-}
 
-const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-    margin: 'auto',
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingTop: Constants.statusBarHeight,
-    backgroundColor: '#ecf0f1',
-    paddingBottom: '20%',
-  },
-  divider: {
-    backgroundColor: 'silver'
-  },
-  col: {
-    fontSize: 20
-  },
-  header: {
-    marginLeft: 43,
-    fontWeight: 'bold',
-    fontSize: 20,
-    flex: 2
-  },
-  listStyle: {
-    marginBottom: 20
-  },
-  colText: {
-    fontSize: 15
-  },
-});
+  const styles = StyleSheet.create({
+    name: {
+      flex: 3,
+      fontSize: 14,
+      paddingLeft: 20
+    },
+    col: {
+      flex: 1,
+      fontSize: 14,
+      justifyContent: 'space-between'
+    }
+  });
+
+  const mapStateToProps = (state, ownProps) => {
+    return {
+      leaguePlayers: state.applicationReducer.leaguePlayers,
+    }
+  }
+
+  export default connect(mapStateToProps)(Standings);
