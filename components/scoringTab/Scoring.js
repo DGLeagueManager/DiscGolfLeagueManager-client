@@ -45,11 +45,11 @@ class Scoring extends Component {
                 roundAvatar
                 key={i}
                 subtitle={this.props.scores[player._id].scoreRelativeToPar}
-                title={player.first_name + " " + player.last_name || null}
+                title={(player.first_name + " " + player.last_name).toUpperCase() || null}
                 hideChevron
-                subtitleStyle={{color: palette.secondary, fontSize: 18}}
+                subtitleStyle={{color: palette.accent2, fontSize: 18}}
                 style={{backgroundColor: palette.primary}}
-                titleStyle={{fontSize: 20, fontWeight: 'bold', color: palette.text}}
+                titleStyle={{fontSize: 20, color: palette.text}}
                 label={
                   <ScoreCounter
                     style={{ flex: 1 }}
@@ -79,7 +79,7 @@ class Scoring extends Component {
                 this.setState({ scoresLocked: !this.state.scoresLocked });
                 this.onSubmit(this.props.currentRound)
               }}
-              color="black"
+              color="white"
               backgroundColor={palette.accent2}
               title="Submit"
               buttonStyle={{ marginVertical: 20 }}
@@ -90,7 +90,7 @@ class Scoring extends Component {
                   this.setState({ scoresLocked: !this.state.scoresLocked });
                 }}
                 color="white"
-                backgroundColor={palette.accent2}
+                backgroundColor={palette.accent}
                 title="Update"
                 buttonStyle={{ marginVertical: 20 }}
               />

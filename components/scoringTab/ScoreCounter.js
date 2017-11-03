@@ -5,27 +5,35 @@ import { Constants } from "expo";
 import { palette } from '../../colorPalette';
 
 const ScoreCounter = (props) => (
-  <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center' }}>
+  <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center'}}>
     {!props.scoresLocked && props.isScoreKeeper ?
       <Icon
-        size={20}
+        size={35}
         color={palette.accent}
         onPress={props.decrement}
         type='entypo'
         name='circle-with-minus' /> : null}
-    <Badge
-      containerStyle={{ margin: 10, height: 60, width: 60, borderRadius: 50, backgroundColor: palette.text}}
-      value={props.score}
-      textStyle={{color: 'black', fontSize: 35 }}
-    />
+    {!props.scoresLocked ? 
+      <Badge
+        containerStyle={{ margin: 20, height: 50, width: 50, borderRadius: 50, backgroundColor: palette.text}}
+        value={props.score}
+        textStyle={{color: 'black', fontSize: 30 }}
+      /> :
+       <Badge
+        containerStyle={{ margin: 20, marginLeft: 80, height: 50, width: 50, borderRadius: 50, backgroundColor: palette.accent2}}
+        value={props.score}
+        textStyle={{fontSize: 30 }}
+      />
+    }
     {!props.scoresLocked && props.isScoreKeeper ?
       <Icon
         /* containerStyle={{ height: 80, width: 40 }} */
-        size={20}
-        color={palette.accent2}
+        size={35}
+        color={palette.accent}
         onPress={props.increment}
         type='entypo'
-        name='circle-with-plus' /> : null}
+        name='circle-with-plus' /> : null
+    }
   </View>
 );
 
