@@ -127,7 +127,8 @@ export default function reducer(state = {}, action) {
           } else {
             return thru;
           }
-        }
+        }, 
+        0
       );
 
       return Object.assign({}, state, {
