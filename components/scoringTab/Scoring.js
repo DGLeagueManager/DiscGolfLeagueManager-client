@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { ScrollView, Text, StyleSheet, View } from "react-native";
+import {Text, StyleSheet, View } from "react-native";
 import { connect } from "react-redux";
 import { Button, Icon, List, ListItem } from "react-native-elements"; // 0.17.0
 import { Constants } from "expo";
@@ -7,6 +7,7 @@ import ScoreCounter from "./ScoreCounter";
 import { postScores, incrementPlayerScore, decrementPlayerScore } from "../../actions/scoreCounterActions";
 import "@expo/vector-icons"; // 5.2.0
 import io from 'socket.io-client';
+import { palette } from '../../colorPalette';
 
 class Scoring extends Component {
   constructor(props) {
@@ -18,7 +19,7 @@ class Scoring extends Component {
 
     this.socket = io('http://ec2-54-165-58-14.compute-1.amazonaws.com:3000');
     this.socket.on('connect', () => {
-      console.log('connection established');
+      console.log('connection established from sc0ring');
     })
   }
 
@@ -34,10 +35,10 @@ class Scoring extends Component {
 
   render() {
     return (
-      <ScrollView>
+      <View style={{height: '100%', backgroundColor: palette.background}}>
         <List>
           {this.props.card.players.sort((a, b) =>
-            (this.props.scores[a._id].totalStrokes > this.props.scores[b._id].totalStrokes))
+            (this.props.scores[a._id].scoreRelativeToPar > this.props.scores[b._id].scoresRelativeToPar))
             .map((player, i) => {
             return (
               <ListItem
@@ -45,8 +46,10 @@ class Scoring extends Component {
                 key={i}
                 subtitle={this.props.scores[player._id].scoreRelativeToPar}
                 title={player.first_name + " " + player.last_name || null}
-                containerStyle={{ height: 80 }}
                 hideChevron
+                subtitleStyle={{color: palette.secondary, fontSize: 18}}
+                style={{backgroundColor: palette.primary}}
+                titleStyle={{fontSize: 20, fontWeight: 'bold', color: palette.text}}
                 label={
                   <ScoreCounter
                     style={{ flex: 1 }}
@@ -72,12 +75,12 @@ class Scoring extends Component {
         {this.props.isScoreKeeper ? (
           !this.state.scoresLocked ? (
             <Button
-              onPress={e => {
+              onPress={ () => {
                 this.setState({ scoresLocked: !this.state.scoresLocked });
                 this.onSubmit(this.props.currentRound)
               }}
               color="black"
-              backgroundColor="red"
+              backgroundColor={palette.accent2}
               title="Submit"
               buttonStyle={{ marginVertical: 20 }}
             />
@@ -87,14 +90,14 @@ class Scoring extends Component {
                   this.setState({ scoresLocked: !this.state.scoresLocked });
                 }}
                 color="white"
-                backgroundColor="orange"
+                backgroundColor={palette.accent2}
                 title="Update"
                 buttonStyle={{ marginVertical: 20 }}
               />
             )
         ) : null}
 
-      </ScrollView>
+      </View>
     )
   }
 }

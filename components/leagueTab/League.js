@@ -32,8 +32,8 @@ const Tabs = TabNavigator({
   tabBarComponent: TabBarTop,
   tabBarPosition: 'top',
   lazy: true,
+  swipeEnabled: true,
   tabBarOptions: {
-    swipeEnabled: true,
     showLabel: true,
     style: {
       backgroundColor: palette.primary

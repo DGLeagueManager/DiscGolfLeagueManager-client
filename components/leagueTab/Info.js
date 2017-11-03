@@ -23,13 +23,14 @@ export default class Info extends Component {
         </Card>
 
         <Card
-          containerStyle={{ backgroundColor: palette.secondary, borderColor: '#fff' }}
+          containerStyle={{ backgroundColor: palette.secondary }}
           title='TIME CHANGE THIS COMING WEEK (11/19)'
           titleStyle={{color: 'red'}}
         >
         <Icon
-          name='weather-lightning-rainy'
-          type='MaterialCommunityIcons'
+          name='md-rainy'
+          type='ionicon'
+          size={30}
           color={palette.accent}
         />
         <Text>Due to inclimate weather, we will postpone this Tuesday's game to Wednesday 11/20</Text>
