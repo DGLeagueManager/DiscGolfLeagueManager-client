@@ -1,14 +1,15 @@
 {
   "expo": {
-    "name": "Disc Golf League Manager",
-    "version": "0.1.0",
+    "name": "DGLM",
+    "icon": "../icon.png",
+    "version": "1.0.0",
     "slug": "disc-golf-league-manager",
+    "sdkVersion": "21.0.0",
     "ios": {
-      "bundleIdentifier": "com.dboyz.DiscGolfLeagueManager"
+      "bundleIdentifier": "com.dboys.dglm"
     },
     "android": {
-      "package": "com.dboys.DiscGolfLeagueManager"
-    },
-    "sdkVersion": "21.0.0"
+      "package": "com.dboys.dglm"
+    }
   }
 }
