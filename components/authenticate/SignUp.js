@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, View, StyleSheet, ScrollView, Alert } from "react-native";
+import { Text, View, KeyboardAvoidingView, StyleSheet, ScrollView, Alert } from "react-native";
 import { FormLabel, FormInput, Button, Icon } from "react-native-elements"; // 0.17.0
 import { Constants } from "expo";
 import { connect } from "react-redux";
@@ -8,7 +8,7 @@ import { palette } from '../../colorPalette';
 
 const SignUp = (props) => {
   return (
-    <View style={styles.mainContainer}>
+    <KeyboardAvoidingView behavior='position' style={styles.mainContainer}>
         <Text style={styles.paragraph}> SIGN UP </Text>
 
         <View style={styles.formView}>
@@ -74,7 +74,7 @@ const SignUp = (props) => {
         {props.error ? (
           <Text>Email or Password not valid</Text>
         ) : null}
-      </View>
+      </KeyboardAvoidingView>
   )
 } 
 
