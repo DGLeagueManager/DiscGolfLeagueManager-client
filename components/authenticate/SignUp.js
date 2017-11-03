@@ -54,7 +54,6 @@ const SignUp = (props) => {
 
         <Button
           onPress={props.userSignUp}
-          raised
           title="Submit"
           icon={{ name: "check", type: "" }}
           backgroundColor={palette.accent}
@@ -69,7 +68,6 @@ const SignUp = (props) => {
         />
           <Button
           onPress={props.toggleShowSignUp}
-          raised
           buttonStyle={styles.goToLogin}
           title="Go to Login"
         />
