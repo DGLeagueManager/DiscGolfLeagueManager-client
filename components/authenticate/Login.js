@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import { Text, View, StyleSheet, ScrollView, Alert, Image } from "react-native";
+import { Text, View, KeyboardAvoidingView, StyleSheet, ScrollView, Alert, Image } from "react-native";
 import { FormLabel, FormInput, Button, Icon } from "react-native-elements"; // 0.17.0
 import { Constants } from "expo";
 import { palette } from '../../colorPalette';
 
 const Login = (props) => {
   return (
-      <View style={styles.mainContainer}>
+      <KeyboardAvoidingView behavior='padding' style={styles.mainContainer}>
         <Text style={styles.paragraph}> LOGIN </Text>
         <View style={styles.formView}>
 
@@ -53,7 +53,7 @@ const Login = (props) => {
           {props.error ? (
             <Text>Email or Password not valid</Text>
           ) : null}
-      </View>
+      </KeyboardAvoidingView>
   );
 }
 const styles = StyleSheet.create({
