@@ -3,6 +3,7 @@ import SignUp from "./SignUp";
 import Login from "./Login";
 import { connect } from "react-redux";
 import { signUp, login } from '../../actions/auth';
+import { palette } from '../../colorPalette';
 
 class Authenticate extends Component {
   constructor(props) {

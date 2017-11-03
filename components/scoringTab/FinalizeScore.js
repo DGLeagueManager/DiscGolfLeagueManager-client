@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import FinalScoreCard from './FinalScoreCard';
 import { submitFinalizedCard } from '../../actions/finalizeScoreActions';
 import io from 'socket.io-client';
+import { palette } from '../../colorPalette';
 
 class FinalizeScore extends Component {
   constructor(props) {
@@ -32,7 +33,7 @@ class FinalizeScore extends Component {
 
   render() {
     return (
-      <ScrollView >
+      <ScrollView contentContainerStyle={styles.container}>
         {this.props.currentCard.players.map((player, i) =>
           <FinalScoreCard 
             key={i} 
@@ -42,10 +43,10 @@ class FinalizeScore extends Component {
         )}
         {this.props.isScoreKeeper ? 
           <Button
-            backgroundColor="red"
             buttonStyle={{
               marginTop: 20,
-              marginBottom: 20
+              marginBottom: 20,
+              backgroundColor: palette.accent2
             }}
             disabled={this.state.disabled}
             title={this.state.disabled ? "Scores have been submitted" : "Submit Final Scores"}
@@ -64,21 +65,10 @@ class FinalizeScore extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    width: "100%",
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#ecf0f1",
+    backgroundColor: palette.background,
     padding: 20
   },
-  header: {
-    fontSize: 30
-  },
-  button: {
-    marginTop: 5
-  },
-  view: {
-    paddingTop: 20
-  }
+
 });
 
 const mapStateToProps = (state, ownProps) => {
