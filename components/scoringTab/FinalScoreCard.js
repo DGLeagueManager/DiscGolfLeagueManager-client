@@ -11,7 +11,7 @@ export default class ScoreKeeperCard extends Component {
 
   render() {
     console.log("SCORE KEEPER CARD props: scores: ", this.props.scores);
-    return <Card title={null} containerStyle={{ borderColor: "transparent" }} wrapperStyle={{ padding: 10, paddingTop: 0 }}>
+    return <Card title={null}>
         <View style={styles.titleContainer}>
           <Text style={styles.title}>
             {(this.props.player.first_name +
@@ -51,17 +51,19 @@ export default class ScoreKeeperCard extends Component {
 
 const styles = StyleSheet.create({
   title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: palette.accent
+    fontSize: 18,
+    fontWeight: 'bold'
   },
   titleContainer: {
     padding: 10,
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    flex: 1
   },
   score: {
-    fontSize: 25,
-    fontWeight: 'bold'
+    fontSize: 22,
+    fontWeight: 'bold',
+    flex: 1,
+    color: palette.accent
   },
 });
