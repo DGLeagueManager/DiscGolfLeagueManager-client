@@ -82,12 +82,11 @@ class Application extends Component {
     } else {
       return (
         <View
-          style={{flex: 1, alignItems: "center", justifyContent: "center" }}
+          style={{backgroundColor: "#292929", flex: 1, alignItems: "center", justifyContent: "center" }}
         >
-        <div>
-          <ActivityIndicator size="large" animating />
-          <Text> Fetching League Data... </Text>
-        </div>
+        <Image source={require("./1299-200.png")} style={{width: 100, height: 100, marginBottom: 50}} />
+          <ActivityIndicator size="large" color='#00D6A1' animating />
+          <Text style={{color: 'white'}}> Fetching League Data... </Text>
         </View>
       );
     }
