@@ -33,7 +33,6 @@ const Login = (props) => {
         </View>
           <Button
             onPress={props.userLogin}
-            raised
             title="Submit"
             icon={{ name: "check", buttonStyle: styles.submitButton}}
             backgroundColor={palette.accent}
@@ -48,7 +47,6 @@ const Login = (props) => {
           />
           <Button
             onPress={props.toggleShowSignUp}
-            raised
             buttonStyle={ styles.createButton }
             title="Create an Account"
           />
