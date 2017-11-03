@@ -82,10 +82,12 @@ class Application extends Component {
     } else {
       return (
         <View
-          style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
+          style={{flex: 1, alignItems: "center", justifyContent: "center" }}
         >
-          <ActivityIndicator animating />
+        <div>
+          <ActivityIndicator size="large" animating />
           <Text> Fetching League Data... </Text>
+        </div>
         </View>
       );
     }
