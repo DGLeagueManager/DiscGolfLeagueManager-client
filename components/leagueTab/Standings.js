@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, Text, StyleSheet, View } from 'react-native';
+import { ScrollView, Text, StyleSheet, View, InteractionManager } from 'react-native';
 import { Button, Icon, List, ListItem, CheckBox, Header, Divider, Card } from 'react-native-elements'; // 0.17.0
 import { Constants } from 'expo';
 import { palette } from '../../colorPalette';
@@ -11,6 +11,7 @@ export default class Result extends Component {
     super(props);
 
     this.state={
+      ready: false,
       isOpen: true,
       checked: false,
       holeData: {
@@ -48,7 +49,16 @@ export default class Result extends Component {
 
   }
 
+  componentDidMount() {
+    InteractionManager.runAfterInteractions(() => {
+      this.setState({ ready: true});
+    });
+  }
+
   render() {
+    if(!this.state.ready) {
+      return (<View><Text>Loading......</Text></View>);
+    }
     return (
       <ScrollView style={{flex: 1, backgroundColor: palette.background}}>
         <Card>

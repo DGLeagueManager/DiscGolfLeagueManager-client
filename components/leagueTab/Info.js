@@ -1,15 +1,30 @@
 import React, { Component } from "react";
-import { ScrollView, Text, Image, StyleSheet } from 'react-native';
+import { ScrollView, Text, View, Image, StyleSheet, InteractionManager } from 'react-native';
 import { Card, ListItem, Button } from 'react-native-elements';
 import { palette } from '../../colorPalette';
 import { Icon } from 'react-native-elements';
 
 export default class Info extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state  = { ready: false};
+  }
+
+  componentDidMount() {
+    InteractionManager.runAfterInteractions(() => {
+      this.setState({ ready: true});
+    });
+  }
+
   render() {
-    return <ScrollView style={{ backgroundColor: palette.background }}>
-        <Card containerStyle={{ backgroundColor: palette.secondary }} 
-          title="AUSTIN DISC GOLF CLUB" 
-          titleStyle={{ color: palette.accent }} 
+    if(!this.state.ready) {
+      return (<View><Text>Loading......</Text></View>);
+    }
+    return (<ScrollView style={{ backgroundColor: palette.background }}>
+        <Card containerStyle={{ backgroundColor: palette.secondary }}
+          title="AUSTIN DISC GOLF CLUB"
+          titleStyle={{ color: palette.accent }}
           image={{ uri: "http://eagleoutside.com/wp-content/uploads/2015/06/fairgrounds-disc-golf-course.jpg" }}
         >
           <Text style={{ marginBottom: 10 }}>
@@ -17,9 +32,9 @@ export default class Info extends Component {
             will be posted here. We meet Tuesday nights starting 11/12 at 6
             pm, don't be afraid to invite friends!
           </Text>
-          <Button 
-            icon={{ name: "code" }} 
-            backgroundColor={palette.accent2} 
+          <Button
+            icon={{ name: "code" }}
+            backgroundColor={palette.accent2}
             buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0 }} title="Course Information Here" />
         </Card>
 
@@ -30,7 +45,7 @@ export default class Info extends Component {
             to Wednesday 11/20
           </Text>
         </Card>
-      </ScrollView>;
+      </ScrollView>);
   }
 }
 
