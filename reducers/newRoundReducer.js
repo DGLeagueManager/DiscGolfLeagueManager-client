@@ -1,75 +1,83 @@
 export default function reducer(state = {}, action) {
-  switch (action.type) {
-    case "CREATE_NEW_ROUND":
-      return Object.assign({}, state, {
-        newRound: {
-          course: action.payload,
-          playersPresent: {}
-        }
-      });
-    case "ADD_PLAYER_TO_ROUND":
-      let player = action.payload
-      return Object.assign({}, state, {
-        newRound: {
-          ...state.newRound,
-          playersPresent: {
-            ...state.newRound.playersPresent,
-            [player._id]: player
-          }
-        }
-      });
-    case 'REMOVE_PLAYER_FROM_ROUND':
+	switch (action.type) {
+	case 'CREATE_NEW_ROUND':
+		return Object.assign({}, state, {
+			newRound: {
+				course: action.payload,
+				playersPresent: {}
+			}
+		})
+	case 'ADD_PLAYER_TO_ROUND': {
+		let player = action.payload
+		return Object.assign({}, state, {
+			newRound: {
+				...state.newRound,
+				playersPresent: {
+					...state.newRound.playersPresent,
+					[player._id]: player
+				}
+			}
+		})
+	}
 
-      let playersPresent = state.newRound.playersPresent;
+	case 'REMOVE_PLAYER_FROM_ROUND': {
 
-      for(var key in playersPresent) {
-        if (action.payload === key) {
-          delete playersPresent[key]
-        }
-      }
+		let playersPresent = state.newRound.playersPresent
 
-      return Object.assign({}, state, {
-        newRound: {
-          ...state.newRound,
-          playersPresent: playersPresent
-        }
-      });
-    case "ADD_EMPTY_CARDS_TO_NEW_ROUND":
-      return Object.assign({}, state, {
-        newRound: {
-          ...state.newRound,
-          cards: action.payload
-        }
-      });
-    case "ADD_PLAYER_TO_CARD":
-      const card = action.payload.card;
-      card.players.push(action.payload.player);
-      return Object.assign({}, state, {
-          newRound: {
-            ...state.newRound,
-            cards: {
-              ...state.newRound.cards,
-              [card.startingHole]: card
-            }
-          }
-        })
-      case "ADD_SCOREKEEPER_TO_CARD":
-        card = action.payload.card
-        const playerId = action.payload.player._id
+		for(var key in playersPresent) {
+			if (action.payload === key) {
+				delete playersPresent[key]
+			}
+		}
 
-        // add playerId to card object as scorekeeper
-        card.scoreKeeper = playerId;
+		return Object.assign({}, state, {
+			newRound: {
+				...state.newRound,
+				playersPresent: playersPresent
+			}
+		})
+	}
 
-        return Object.assign({}, state, {
-          newRound: {
-            ...state.newRound,
-            cards: {
-              ...state.newRound.cards,
-              [card.startingHole]: card
-            }
-          }
-        })
-    default:
-      return state;
-  }
+	case 'ADD_EMPTY_CARDS_TO_NEW_ROUND':
+		return Object.assign({}, state, {
+			newRound: {
+				...state.newRound,
+				cards: action.payload
+			}
+		})
+	case 'ADD_PLAYER_TO_CARD': {
+		let card = action.payload.card
+		card.players.push(action.payload.player)
+		return Object.assign({}, state, {
+			newRound: {
+				...state.newRound,
+				cards: {
+					...state.newRound.cards,
+					[card.startingHole]: card
+				}
+			}
+		})
+	}
+
+	case 'ADD_SCOREKEEPER_TO_CARD': {
+		let card = action.payload.card
+		let playerId = action.payload.player._id
+
+		// add playerId to card object as scorekeeper
+		card.scoreKeeper = playerId
+
+		return Object.assign({}, state, {
+			newRound: {
+				...state.newRound,
+				cards: {
+					...state.newRound.cards,
+					[card.startingHole]: card
+				}
+			}
+		})
+	}
+
+	default:
+		return state
+	}
 }
