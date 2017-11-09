@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { ScrollView, Text, StyleSheet, View } from 'react-native';
-import { Button, Icon, List, ListItem, CheckBox, Header, Divider } from 'react-native-elements'; // 0.17.0
+import { ScrollView, Text, StyleSheet, View, InteractionManager } from 'react-native';
+import { Button, Icon, List, ListItem, CheckBox, Header, Divider, Card } from 'react-native-elements'; // 0.17.0
 import { Constants } from 'expo';
+import { palette } from '../../colorPalette';
 
 import "@expo/vector-icons"; // 5.2.0
 
@@ -10,6 +11,7 @@ export default class Result extends Component {
     super(props);
 
     this.state={
+      ready: false,
       isOpen: true,
       checked: false,
       holeData: {
@@ -43,33 +45,44 @@ export default class Result extends Component {
           points: 641
         },
       ]
-    };
+    }
 
   }
 
+  componentDidMount() {
+    InteractionManager.runAfterInteractions(() => {
+      this.setState({ ready: true});
+    });
+  }
+
   render() {
+    if(!this.state.ready) {
+      return (<View><Text>Loading......</Text></View>);
+    }
     return (
-      <ScrollView style={{marginTop: 20, paddingTop: 0}}>
-        <View style={{flex: 1, flexDirection: 'row'}}>
-          <Text style={styles.header}>Name</Text>
-          <Text style={styles.col} style={{flex: 2}}>Weeks Played</Text>
-          <Text style={styles.col} style={{flex: 1}}>Points</Text>
-        </View>
-        <View style={{width: '100%'}}>
-        <Divider style={styles.divider} />
-          <List style={styles.listStyle}>
-            {
-              this.state.list.map((ele, i) => (
-                <View key={'view'+i} style={{height: 40, flex: 1, flexDirection: 'row'}}>
-                  <Text key={'text1' + i} style={{marginLeft: 15}}>{(i+1)}</Text>
-                  <Text key={'text2' + i} style={{marginLeft: 20,fontSize: 15, flex: 3}}>{ele.name}</Text>
-                  <Text key={'text3' + i} style={{flex: 2}}>{ele.weeksPlayed}</Text>
-                  <Text key={'text4' + i} style={{flex: 1}}>{ele.points}</Text>
-                </View>
-              ))
-            }
-         </List>
-        </View>
+      <ScrollView style={{flex: 1, backgroundColor: palette.background}}>
+        <Card>
+          <View style={{flex: 1, flexDirection: 'row'}}>
+            <Text style={styles.header}>Name</Text>
+            <Text style={styles.col} style={{flex: 2}}>Weeks Played</Text>
+            <Text style={styles.col} style={{flex: 1}}>Points</Text>
+          </View>
+          <View style={{width: '100%'}}>
+          <Divider style={styles.divider} />
+            <List style={styles.listStyle}>
+              {
+                this.state.list.map((ele, i) => (
+                  <View key={'view'+i} style={{height: 40, flex: 1, flexDirection: 'row'}}>
+                    <Text key={'text1' + i} style={{marginLeft: 15}}>{(i+1)}</Text>
+                    <Text key={'text2' + i} style={{marginLeft: 20,fontSize: 15, flex: 3}}>{ele.name}</Text>
+                    <Text key={'text3' + i} style={{flex: 2}}>{ele.weeksPlayed}</Text>
+                    <Text key={'text4' + i} style={{flex: 1}}>{ele.points}</Text>
+                  </View>
+                ))
+              }
+          </List>
+          </View>
+        </Card>
       </ScrollView>
     );
   }

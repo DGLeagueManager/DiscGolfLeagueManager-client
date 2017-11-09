@@ -1,66 +1,44 @@
 import React from "react";
 import { Text, StyleSheet, View, ScrollView } from "react-native";
 import { Icon, List, ListItem, Divider } from "react-native-elements";
+import { palette } from '../../colorPalette';
 
 const CompletedRoundResults = ({ round }) => {
   return (
-    <ScrollView style={{ paddingTop: 20 }}>
-      <View style={{ flex: 1, flexDirection: "row" }}>
-        <Text style={!round.completed ? styles.name : styles.completed}>
-          PLAYER
-        </Text>
-        <View style={{ flex: 1, flexDirection: "row" }}>
-          {!round.completed ? <Text style={styles.col}>START</Text> : null}
-          {!round.completed ? <Text style={styles.col}>THRU</Text> : null}
-          <Text style={styles.col}>ROUND</Text>
+    <ScrollView style={{ backgroundColor: palette.background }}>
+      <List containerStyle={{flex: 1}}>
+        <View style={{ flex: 1, flexDirection: "row", backgroundColor: palette.accent2, padding: 10 }}>
+          <Text style={styles.name}>
+            PLAYER
+          </Text>
+          <View style={{ flex: 1, flexDirection: "row" }}>
+            <Text style={styles.col}>ROUND</Text>
+          </View>
         </View>
-      </View>
-      <View>
-        <List>
-          {round.scores
-            ? Object.keys(round.scores).map(key => (
-                <ListItem
-                  key={key}
-                  title={round.scores[key].player_name}
-                  label={
-                    <View style={{ flex: 1, flexDirection: "row" }}>
-                      <Text style={{ flex: 1, marginLeft: 10 }}>
-                        {!round.completed
-                          ? round.scores[key].startingHole
-                          : null}
-                      </Text>
-                      <Text style={styles.col}>
-                        {!round.completed ? round.scores[key].thru : null}
-                      </Text>
-                      <Text style={styles.col}>
-                        {round.scores[key].scoreRelativeToPar}
-                      </Text>
-                    </View>
-                  }
-                  hideChevron
-                />
-              ))
-            : null}
-        </List>
-      </View>
+        {round.scores
+          ? Object.keys(round.scores).map(key => (
+              <ListItem
+                key={key}
+                title={round.scores[key].player_name}
+                label={<Text style={{ marginRight: 60}}>{round.scores[key].scoreRelativeToPar}</Text>}
+                hideChevron
+              />
+            ))
+          : null}
+      </List>
     </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   name: {
-    flex: 1,
-    fontSize: 14,
-    paddingLeft: 10
-  },
-  completed: {
     flex: 3,
     fontSize: 14,
-    paddingLeft: 10
+    paddingLeft: 20
   },
   col: {
     flex: 1,
-    fontSize: 14
+    fontSize: 14,
   }
 });
 

@@ -1,14 +1,51 @@
 import React, { Component } from "react";
-import { Text, StyleSheet, View } from "react-native";
+import { ScrollView, Text, View, Image, StyleSheet, InteractionManager } from 'react-native';
+import { Card, ListItem, Button } from 'react-native-elements';
+import { palette } from '../../colorPalette';
+import { Icon } from 'react-native-elements';
 
 export default class Info extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state  = { ready: false};
+  }
+
+  componentDidMount() {
+    InteractionManager.runAfterInteractions(() => {
+      this.setState({ ready: true});
+    });
+  }
+
   render() {
-    return (
-      <View style={styles.view}>
-        <Text>General League Info Goes Here</Text>
-        <Text>About Us Blurb, contact info, etc.</Text>
-      </View>
-    );
+    if(!this.state.ready) {
+      return (<View><Text>Loading......</Text></View>);
+    }
+    return (<ScrollView style={{ backgroundColor: palette.background }}>
+        <Card containerStyle={{ backgroundColor: palette.secondary }}
+          title="AUSTIN DISC GOLF CLUB"
+          titleStyle={{ color: palette.accent }}
+          image={{ uri: "http://eagleoutside.com/wp-content/uploads/2015/06/fairgrounds-disc-golf-course.jpg" }}
+        >
+          <Text style={{ marginBottom: 10 }}>
+            Welcome to the Austin Disc Golf Club. Any information or changes
+            will be posted here. We meet Tuesday nights starting 11/12 at 6
+            pm, don't be afraid to invite friends!
+          </Text>
+          <Button
+            icon={{ name: "code" }}
+            backgroundColor={palette.accent2}
+            buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0 }} title="Course Information Here" />
+        </Card>
+
+        <Card containerStyle={{ backgroundColor: palette.secondary }} title="TIME CHANGE THIS COMING WEEK (11/19)" titleStyle={{ color: palette.accent }}>
+          <Icon name="md-rainy" type="ionicon" size={30} color={palette.accent2} />
+          <Text>
+            Due to inclimate weather, we will postpone this Tuesday's game
+            to Wednesday 11/20
+          </Text>
+        </Card>
+      </ScrollView>);
   }
 }
 
@@ -16,6 +53,7 @@ const styles = StyleSheet.create({
   view: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    backgroundColor: palette.background
   }
 });

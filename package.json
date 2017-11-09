@@ -4,6 +4,10 @@
   "private": true,
   "devDependencies": {
     "eslint": "^4.10.0",
+<<<<<<< HEAD
+=======
+    "eslint-plugin-react": "^7.4.0",
+>>>>>>> master
     "jest-expo": "^21.0.2",
     "react-native-scripts": "1.5.0",
     "react-test-renderer": "16.0.0-alpha.12"

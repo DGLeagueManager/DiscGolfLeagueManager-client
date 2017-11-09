@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, StyleSheet, View } from 'react-native';
+import { Text, StyleSheet, View, InteractionManager } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { TabNavigator, TabBarTop } from 'react-navigation';
 import Info from './Info';
@@ -8,7 +8,23 @@ import { palette } from '../../colorPalette';
 
 export default class League extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      ready: false
+    }
+  }
+
+  componentDidMount() {
+    InteractionManager.runAfterInteractions(() => {
+      this.setState({ ready: true});
+  });
+
+}
   render() {
+    if(!this.state.ready) {
+      return (<View><Text>Loading......</Text></View>)
+    }
     return (
       <Tabs />
     )
@@ -31,20 +47,20 @@ const Tabs = TabNavigator({
 }, {
   tabBarComponent: TabBarTop,
   tabBarPosition: 'top',
-  lazy: true,
+  lazy: false,
+  animationEnabled: false,
+  swipeEnabled: false,
   tabBarOptions: {
-    swipeEnabled: true,
     showLabel: true,
     style: {
-      backgroundColor: 'white'
+      backgroundColor: palette.primary
     },
     labelStyle: {
-      color: palette.primary
+      color: palette.primary,
+      color: palette.text
     },
     indicatorStyle: {
-      backgroundColor: palette.primary
+      backgroundColor: palette.accent
     }
   }
 })
-
-

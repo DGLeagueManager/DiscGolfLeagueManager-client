@@ -37,7 +37,6 @@ class HoleNavigator extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    console.log('THIS DOT PROPS AND NEXT PROPS IN HOLENAVIAGTOR: ', this.props, nextProps)
     if(nextProps.currentRoundInProgress === false) {
       return true
     } else { 
@@ -49,39 +48,29 @@ class HoleNavigator extends Component {
     const TabNav = TabNavigator(
       //TODO: map holeDetails to props from round.course instead of using this dummy data import
       Object.assign(this.generateTabs(holeDetails), FinalizeScoreTab), {
-      tabBarComponent: TabBarTop,
-      tabBarPosition: "top",
-      swipeEnabled: true,
-      tabBarOptions: {
-        scrollEnabled: true,
-        showLabel: true,
-        style: {
-          backgroundColor: palette.secondary
+        tabBarComponent: TabBarTop,
+        tabBarPosition: "top",
+        swipeEnabled: true,
+        tabBarOptions: {
+          scrollEnabled: true,
+          showLabel: true,
+          style: {
+            backgroundColor: palette.primary
+          },
+          indicatorStyle: {
+            backgroundColor: palette.accent
+          }
         }
-      }
-    });
+      });
     return <TabNav />;
   }
 }
-
-const SampleComponent = ({ hole, card, isScoreKeeper }) => (
-  <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-    <Text> Par: {hole.par} </Text>
-    <Text> Length: {hole.length} </Text>
-    <Text> Player1: {card.players[0].first_name} </Text>
-    {isScoreKeeper ? (
-      <Text> I am scorekeeper </Text>
-    ) : (
-      <Text> I am NOT scorekeeper </Text>
-    )}
-  </View>
-);
 
 const FinalizeScoreTab = {
   FinalizeScore: {
     screen: FinalizeScore,
     navigationOptions: {
-      tabBarLabel: "FinalizeScore"
+      tabBarLabel: "Final"
     }
   }
 };

@@ -1,14 +1,16 @@
 import React, { Component } from "react";
-import { Text, View, StyleSheet, ScrollView, Alert } from "react-native";
+import { Text, View, KeyboardAvoidingView, StyleSheet, ScrollView, Alert } from "react-native";
 import { FormLabel, FormInput, Button, Icon } from "react-native-elements"; // 0.17.0
 import { Constants } from "expo";
 import { connect } from "react-redux";
+import { palette } from '../../colorPalette';
 
 
 const SignUp = (props) => {
   return (
-      <View style={styles.container}>
-        <Text style={styles.paragraph}> Create an account </Text>
+    <KeyboardAvoidingView behavior='position' style={styles.mainContainer}>
+        <Text style={styles.paragraph}> SIGN UP </Text>
+
         <View style={styles.formView}>
 
           <FormLabel>First Name: </FormLabel>
@@ -52,49 +54,61 @@ const SignUp = (props) => {
 
         <Button
           onPress={props.userSignUp}
-          raised
           title="Submit"
           icon={{ name: "check", type: "" }}
-          style={{ marginTop: 10, marginBottom: 20 }}
-          disabled={
+          backgroundColor={palette.accent}
+          fontWeight={'bold'}
+          buttonStyle={styles.submitButton}
+          /* disabled={
             props.first_name === "" ||
             props.last_name === "" ||
             props.email === "" ||
             props.password === ""
-          }
+          } */
         />
           <Button
           onPress={props.toggleShowSignUp}
-          raised
+          buttonStyle={styles.goToLogin}
           title="Go to Login"
         />
         {props.error ? (
           <Text>Email or Password not valid</Text>
         ) : null}
-      </View>
+      </KeyboardAvoidingView>
   )
 } 
 
 const styles = StyleSheet.create({
-  container: {
+  mainContainer: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     paddingTop: Constants.statusBarHeight,
-    backgroundColor: "#ecf0f1",
-    paddingBottom: "20%"
+    backgroundColor: palette.primary
   },
   paragraph: {
     margin: 24,
+    fontSize: 14,
     fontWeight: "bold",
     textAlign: "center",
-    color: "#34495e"
+    color: palette.text
+  },
+  submitButton: {
+    borderRadius: 10,
+    margin: 10
+  },
+  goToLogin: {
+    borderRadius: 10,
+    margin: 10
   },
   input: {
-    width: 250
+    width: 240,
+    height: 60,
+    fontSize: 30,
+    color: palette.text
   },
   formView: {
-    backgroundColor: "#fefefe"
+    backgroundColor: palette.primary,
   }
 });
 

@@ -13,21 +13,22 @@ class ResultsNavigator extends Component {
   }
 
   shouldComponentUpdate(nextProps) {
-    // We are expecting nextProps to have the new currentRound ID when a round ends 
-    // but it's coming in as the same as this.props.currentRound 
+    // We are expecting nextProps to have the new currentRound ID when a round ends
+    // but it's coming in as the same as this.props.currentRound
     // console.log("^^^^^^^%%%%%%%%", nextProps.currentRound._id !== this.props.currentRound._id)
     // console.log("&*&*&*&*&*&*& nextProps round id: ", nextProps.currentRound._id, "this props round id :", this.props.currentRound._id)
-    return nextProps.currentRound._id !== this.props.currentRound._id;
+    return (nextProps.currentRound._id !== this.props.currentRound._id) ||
+      (nextProps.initialCurrentRound !== this.props.initialCurrentRound);
   }
 
   generateCurrentScreen() {
     return <CurrentRoundResults />
   }
-  
+
   generateCompletedScreens(round) {
     return <CompletedRoundResults round={round} />
   }
-    
+
   generateTabs( rounds ) {
     let completedRounds = rounds.filter((round) => round.completed === true);
     let completedRoundTabs = completedRounds.reduce((result, round) => {
@@ -43,7 +44,7 @@ class ResultsNavigator extends Component {
     let currentRound = rounds.find((round) => round.in_progress === true);
     let currentRoundTab = {};
     if (currentRound) {
-      currentRoundTab = { 
+      currentRoundTab = {
         [currentRound.round_number]: {
           screen: this.generateCurrentScreen.bind(this),
           navigationOptions: {
@@ -56,23 +57,35 @@ class ResultsNavigator extends Component {
     return Object.assign({}, completedRoundTabs, currentRoundTab);
   }
 
-  render( ) {
-    const TabNav = TabNavigator(
-      this.generateTabs(this.props.currentSeason.rounds), 
-      {
-        tabBarComponent: TabBarTop,
-        tabBarPosition: "top",
-        tabBarOptions: {
-          scrollEnabled: true,
-          swipeEnabled: true,
-          showLabel: true,
-          style: {
-            backgroundColor: palette.secondary
+  render() {
+    if(this.props.currentSeason.rounds.some( round => round.completed || round.in_progress)) {
+      const TabNav = TabNavigator(
+        this.generateTabs(this.props.currentSeason.rounds),
+        {
+          tabBarComponent: TabBarTop,
+          tabBarPosition: "top",
+          tabBarOptions: {
+            scrollEnabled: true,
+            swipeEnabled: true,
+            showLabel: true,
+            style: {
+              backgroundColor: palette.primary
+            },
+            indicatorStyle: {
+              backgroundColor: palette.accent
+            }
           }
-        }
-      });
-    return <TabNav />;
+        });
+        return <TabNav />;
+    } else {
+      return (
+        <View style= {{ flex:1, alignItems: 'center', justifyContent: 'center'}}>
+          <Text>No Rounds have been recoreded this season</Text>
+        </View>
+      )
+    }
   }
+
 }
 
 // const Results = ({ round }) => (
@@ -86,7 +99,8 @@ const mapStateToProps = (state, ownProps) => {
   return {
      currentSeason: state.applicationReducer.currentSeason,
      leaguePlayers: state.applicationReducer.leaguePlayers,
-     currentRound: state.getCurrentRoundDataReducer.currentRound
+     currentRound: state.getCurrentRoundDataReducer.currentRound,
+     initialCurrentRound: state.applicationReducer.currentRound
   }
 }
 

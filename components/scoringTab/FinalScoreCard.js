@@ -1,25 +1,59 @@
 import React, { Component } from "react";
 import { Text, ScrollView, View, StyleSheet, Picker } from "react-native";
 import { Card, Button, Divider } from "react-native-elements";
+import { palette } from "../../colorPalette";
 
 export default class ScoreKeeperCard extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-
-    };
+    this.state = {};
   }
 
   render() {
-    console.log('SCORE KEEPER CARD PROPS', this.props)
-    return <Card>
-        <Text style={{ flex: 3 }}>{this.props.player.first_name}</Text>
-        <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
-          {Object.keys(this.props.scores).map((hole, i) => 
-            <Text key={i}>
-            {hole} : {this.props.scores[hole].score}
-            </Text>)}
+    console.log("SCORE KEEPER CARD props: scores: ", this.props.scores);
+    return <Card title={null}>
+        <View style={styles.titleContainer}>
+          <View>
+            <Text 
+              style={styles.title}
+              numberOfLines={1}
+              ellipsizeMode={'tail'}
+            >
+              {(this.props.player.first_name +
+                " " +
+                this.props.player.last_name
+              ).toUpperCase()}
+            </Text>
+          </View>
+          <View>
+            <Text style={styles.score}>
+              {this.props.scores.scoreRelativeToPar} ({this.props.scores.totalStrokes})
+            </Text>
+          </View>
         </View>
+
+        <Button raised icon={{ name: "assignment" }} title="Review Hole Scores" buttonStyle={{ backgroundColor: palette.accent2, color: palette.secondary }} />
+
       </Card>;
-  };
-};
+  }
+}
+
+const styles = StyleSheet.create({
+  title: {
+    fontSize: 18,
+    flex: 1
+  },
+  titleContainer: {
+    padding: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    flex: 1,
+    alignItems: 'center'
+  },
+  score: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    flex: 1,
+    color: palette.accent
+  },
+});

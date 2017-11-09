@@ -100,7 +100,7 @@ class ScoreKeeperSelection extends Component {
       <ScrollView style={{backgroundColor: palette.background}}>
         {this.generatePopulatedCards().map(card => card)}
         <Button
-          backgroundColor={palette.accent}
+          backgroundColor={palette.accent2}
           disabled={!this.state.readyToStart}
           buttonStyle={{
             marginTop: 20,

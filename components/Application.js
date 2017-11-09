@@ -23,7 +23,7 @@ class Application extends Component {
 
     this.socket = io("http://ec2-54-165-58-14.compute-1.amazonaws.com:3000");
     this.socket.on("connect", () => {
-      console.log("connection established");
+      console.log("connection established Application");
       //this.props.onGetCurrentRoundData(playerId, roundId)
     });
   }
@@ -42,12 +42,12 @@ class Application extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.currentRoundId) {
-      let payload = {
-        id: nextProps.currentRoundId
-      };
-      this.socket.emit("test", payload);
-    }
+    // if (nextProps.currentRoundId) {
+    //   let payload = {
+    //     id: nextProps.currentRoundId
+    //   };
+    //   this.socket.emit("test", payload);
+    // }
 
     this.socket.on("test", payload => {
       if (
@@ -69,6 +69,7 @@ class Application extends Component {
         payload.type === "START ROUND CLIENT"
       ) {
         this.props.onGetCurrentRound(payload.body, this.props.id);
+        this.props.onGetLeagueData(this.props.id);
       }
     });
   }
@@ -81,10 +82,11 @@ class Application extends Component {
     } else {
       return (
         <View
-          style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
+          style={{backgroundColor: "#292929", flex: 1, alignItems: "center", justifyContent: "center" }}
         >
-          <ActivityIndicator animating />
-          <Text> Fetching League Data... </Text>
+        <Image source={require("./1299-200.png")} style={{width: 100, height: 100, marginBottom: 50}} />
+          <ActivityIndicator size="large" color='#00D6A1' animating />
+          <Text style={{color: 'white'}}> Fetching League Data... </Text>
         </View>
       );
     }
@@ -133,13 +135,16 @@ const Tab = TabNavigator(
       showIcon: true,
       showLabel: true,
       style: {
-        height: 60,
+        height: 50,
         backgroundColor: palette.primary
+      },
+      labelStyle: {
+        marginBottom: 5
       }
     },
     navigationOptions: {
       lazy: true,
-      headerTitle: "DG League Manager",
+      headerTitle: "DGLM",
       headerTitleStyle: {
         color: "#fff",
         alignSelf: 'center'
@@ -187,8 +192,9 @@ const adminTab = TabNavigator(
       showIcon: true,
       showLabel: true,
       style: {
-        height: 50
-      }
+        height: 50,
+        paddingBottom: 10
+      },
     },
     navigationOptions: {
       lazy: true,
