@@ -5,7 +5,7 @@ const WeekOne = () => (
   <View style={styles.view}>
     <Text>Week One Results Go Here</Text>
   </View>
-);
+)
 
 //test
 
