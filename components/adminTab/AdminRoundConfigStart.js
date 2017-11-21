@@ -75,7 +75,7 @@ const AdminRoundConfigStart = (props) => {
               label={
                 <AdminSelectionBoxes
                   key={ele._id}
-                  value={ele._id}
+                  playerId={ele._id}
                   handleAmDivisionSelect={handleAmDivisionSelect}
                   handleProDivisionSelect={handleProDivisionSelect}
                   handleRemovePlayer={handleRemovePlayer}
