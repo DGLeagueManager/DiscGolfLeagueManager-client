@@ -1,11 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { View } from 'react-native';
 import { connect } from 'react-redux';
 import { Button } from 'react-native-elements';
 import { createNewRound } from '../../actions/NewRoundActions';
 import { palette } from '../../colorPalette';
 
-const NewRound = () => (
+const NewRound = props => (
   <View
     style={{
     flex: 1,
@@ -20,13 +21,8 @@ const NewRound = () => (
       backgroundColor: palette.accent,
     }}
       onPress={() => {
-      this
-        .props
-        .createRound(this.props.currentCourse);
-      this
-        .props
-        .navigation
-        .navigate('AdminRoundConfigStart');
+        props.createRound(props.currentCourse);
+        props.navigation.navigate('AdminRoundConfigStart');
     }}
       raised
       title="New Round"
@@ -46,5 +42,13 @@ const mapDispatchToProps = dispatch => (
     },
   }
 );
+
+NewRound.propTypes = ({
+  createRound: PropTypes.func.isRequired,
+  currentCourse: PropTypes.object.isRequired,
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewRound);
