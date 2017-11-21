@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Text, StyleSheet, View, ScrollView } from 'react-native';
 import { List, ListItem } from 'react-native-elements';
 import { connect } from 'react-redux';
@@ -46,7 +46,6 @@ const CurrentRoundResults = (props) => {
     </ScrollView>
   );
 };
-
 
 const styles = StyleSheet.create({
   name: {
