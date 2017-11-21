@@ -1,11 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Text, StyleSheet, View, ScrollView } from 'react-native';
 import { List, ListItem } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { palette } from '../../colorPalette';
 
 const CurrentRoundResults = (props) => {
-
   return (
     <ScrollView style={{ backgroundColor: palette.background }}>
       <List containerStyle={{ flex: 1 }}>
@@ -45,6 +45,10 @@ const CurrentRoundResults = (props) => {
       </List>
     </ScrollView>
   );
+};
+
+CurrentRoundResults.propTypes = {
+  scores: PropTypes.object.isRequired,
 };
 
 const styles = StyleSheet.create({
