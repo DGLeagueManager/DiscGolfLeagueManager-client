@@ -1,132 +1,119 @@
-import React, { Component } from 'react';
-import { ScrollView, Text, StyleSheet, View } from 'react-native';
-import { Button, Icon, List, ListItem, CheckBox, Header } from 'react-native-elements';
-import { Constants } from 'expo';
-import AdminSelectionBoxes from './AdminSelectionBoxes';
+import React from 'react';
+import { ScrollView, View } from 'react-native';
+import {
+  Button,
+  List,
+  ListItem,
+} from 'react-native-elements';
 import { connect } from 'react-redux';
-import { addPlayersToRound, addPlayerToRound, addEmptyCards, removePlayer } from '../../actions/adminRoundConfigStartActions';
+import AdminSelectionBoxes from './AdminSelectionBoxes';
+import {
+  addPlayersToRound,
+  addPlayerToRound,
+  addEmptyCards,
+  removePlayer,
+} from '../../actions/adminRoundConfigStartActions';
 import { palette } from '../../colorPalette';
 
-import "@expo/vector-icons"; // 5.2.0
+const AdminRoundConfigStart = (props) => {
 
-
-class AdminRoundConfigStart extends Component {
-  constructor(props) {
-    super(props);
-
+  const idMatches = (player) => {
+    return player._id === playerid;
   }
 
-  handleAmDivisionSelect = ( playerid ) => {
-    function idMatches( player ) {
-      return player._id === playerid
-    }
-    let player = this.props.leaguePlayers.find(idMatches);
+  const handleAmDivisionSelect = (playerid) => {
+    const player = this.props.leaguePlayers.find(idMatches);
     player.division = 'AM';
+    props.onAddPlayer(player);
+  };
 
-    this.props.onAddPlayer(player)
-  }
+  const handleProDivisionSelect = playerid => {
 
-  handleProDivisionSelect = ( playerid ) => {
-    function idMatches(player) {
-      return player._id === playerid;
-    }
-
-    let player = this.props.leaguePlayers.find(idMatches);
-    player.division = "PRO";
-    this.props.onAddPlayer(player)
-
-  }
+    const player = this.props.leaguePlayers.find(idMatches);
+    player.division = 'PRO';
+    this.props.onAddPlayer(player);
+  };
 
   handleRemovePlayer = (playerId) => {
-    this.props.removePlayer(playerId)
-  }
+    this.props.removePlayer(playerId);
+  };
 
   handleSubmit = () => {
-    let emptyCards = this.generateEmptyCards();
-    this.props.onSubmit(emptyCards)
-    this.props.navigation.navigate('PlayerSelection')
-  }
+    const emptyCards = this.generateEmptyCards();
+    this.props.onSubmit(emptyCards);
+    this.props.navigation.navigate('PlayerSelection');
+  };
 
-  generateEmptyCards() {
-    let playersTotal = Object.keys(this.props.playersPresent).length;
-    let numberOfCards = Math.ceil(playersTotal / 4);
-    let cards = {};
+  generateEmptyCards = () => {
+    const playersTotal = Object.keys(this.props.playersPresent).length;
+    const numberOfCards = Math.ceil(playersTotal / 4);
+    const cards = {};
 
     for (let i = 1; i <= numberOfCards; i++) {
       cards[i] = {
         startingHole: i,
-        players: []
-      }
+        players: [],
+      };
     }
-
-
     return cards;
-  }
+  };
 
-  render() {
-    return (
-      <ScrollView style={{ marginTop: 20, paddingTop: 0}}>
-        <List style={{ marginBottom: 20 }}>
-          {
-            this.props.leaguePlayers.map((ele, i) => (
-              <View key={'view'+i}>
-                <ListItem
-                  roundAvatar
-                  /* avatar={{ uri: ele.avatar_url }} */
-                  key={i}
-                  title={ele.first_name + ' ' + ele.last_name}
-                  rightTitleStyle={null}
-                  label={
-                    <AdminSelectionBoxes
-                      key={ele._id}
-                      value={ele._id}
-                      handleAmDivisionSelect={this.handleAmDivisionSelect.bind(this)}
-                      handleProDivisionSelect={this.handleProDivisionSelect.bind(this)}
-                      handleRemovePlayer={this.handleRemovePlayer.bind(this)}
-                      i={i}
-                    />
-                  }
-                  hideChevron
+  return (
+    <ScrollView style={{ marginTop: 20, paddingTop: 0 }}>
+      <List style={{ marginBottom: 20 }}>
+        {this.props.leaguePlayers.map((ele, i) => (
+          <View key={'view' + i}>
+            <ListItem
+              roundAvatar
+              /* avatar={{ uri: ele.avatar_url }} */
+              key={i}
+              title={`${ele.first_name  } ${  ele.last_name}`}
+              rightTitleStyle={null}
+              label={
+                <AdminSelectionBoxes
+                  key={ele._id}
+                  value={ele._id}
+                  handleAmDivisionSelect={this.handleAmDivisionSelect.bind(this,)}
+                  handleProDivisionSelect={this.handleProDivisionSelect.bind(this,)}
+                  handleRemovePlayer={this.handleRemovePlayer.bind(this)}
+                  i={i}
                 />
-              </View>
-            ))
-          }
-        </List>
-        <Button
-          buttonStyle={{marginBottom: 20}}
-          onPress={this.handleSubmit}
-          color='black'
-          backgroundColor={palette.accent}
-          title='Next'
-        />
-      </ScrollView>
-    );
-  }
-}
+              }
+              hideChevron
+            />
+          </View>
+        ))}
+      </List>
+      <Button
+        buttonStyle={{ marginBottom: 20 }}
+        onPress={this.handleSubmit}
+        color="black"
+        backgroundColor={palette.accent}
+        title="Next"
+      />
+    </ScrollView>
+  );
+};
 
-const mapStateToProps = (state, ownProps) => {
-  return {
+const mapStateToProps = (state, ownProps) => ({
     newRound: state.newRoundReducer.newRound,
     leaguePlayers: state.applicationReducer.leaguePlayers,
     playersPresent: state.newRoundReducer.newRound.playersPresent
-  };
-};
+  });
 
-const mapDispatchToProps = (dispatch) => {
-  return {
+const mapDispatchToProps = (dispatch) => ({
     onSubmitPlayers: (amPlayers, proPlayers, emptyCards) => {
       dispatch(addPlayersToRound(emptyCards));
     },
-    onAddPlayer: (player) => {
-      dispatch(addPlayerToRound(player))
+    onAddPlayer: player => {
+      dispatch(addPlayerToRound(player));
     },
-    onSubmit: (cards) => {
-      dispatch(addEmptyCards(cards))
+    onSubmit: cards => {
+      dispatch(addEmptyCards(cards));
     },
-    removePlayer: (playerId) => {
-      dispatch(removePlayer(playerId))
+    removePlayer: playerId => {
+      dispatch(removePlayer(playerId));
     }
-  };
-};
+  });
 
-export default connect( mapStateToProps, mapDispatchToProps )(AdminRoundConfigStart);
+export default connect(mapStateToProps, mapDispatchToProps)(AdminRoundConfigStart,);
