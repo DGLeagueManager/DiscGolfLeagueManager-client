@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { TabNavigator, TabBarTop } from 'react-navigation';
-import { seasonData } from './TempFileDeleteMe';
 import { Text, View } from 'react-native';
 import { connect } from 'react-redux';
 import CurrentRoundResults from './CurrentRoundResults';
