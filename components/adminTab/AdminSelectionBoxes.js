@@ -3,7 +3,7 @@ import { ScrollView, Text, StyleSheet, View } from 'react-native';
 import { Button, Icon, List, ListItem, CheckBox, Header } from 'react-native-elements';
 import { palette } from '../../colorPalette';
 
-export default class AdminSelectionBoxes extends React.Component {
+export default class AdminSelectionBoxes extends Component {
   constructor(props) {
     super(props);
     this.state = {
