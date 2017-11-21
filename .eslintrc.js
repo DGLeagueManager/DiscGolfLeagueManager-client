@@ -10,6 +10,7 @@ module.exports = {
         "no-use-before-define": 0,
         "linebreak-style": 0,
         "no-underscore-dangle": 0,
-        "react/forbid-prop-types": 0
+        "react/forbid-prop-types": 0,
+        "no-plusplus": 0,
     }
 };
