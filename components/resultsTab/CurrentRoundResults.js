@@ -8,7 +8,14 @@ import { palette } from '../../colorPalette';
 const CurrentRoundResults = props => (
   <ScrollView style={{ backgroundColor: palette.background }}>
     <List containerStyle={{ flex: 1 }}>
-      <View style={styles.header}>
+      <View
+        style={{
+          flex: 1,
+          flexDirection: 'row',
+          backgroundColor: palette.accent2,
+          padding: 10,
+        }}
+      >
         <Text style={styles.name}>PLAYER</Text>
         <View style={{ flex: 1, flexDirection: 'row' }}>
           <Text style={styles.col}>START</Text>
@@ -20,24 +27,22 @@ const CurrentRoundResults = props => (
         Object.keys(props.scores).map(key => (
           <ListItem
             key={key}
-            style={{ flex: 1, flexDirection: 'row' }}
             title={props.scores[key].player_name}
             label={
-              <View>
+              <View style={{ flex: 1, flexDirection: 'row' }}>
                 <Text style={styles.col}>
                   {props.scores[key].startingHole}
                 </Text>
-                <Text style={styles.col}>
-                  {props.scores[key].thru}
-                </Text>
+                <Text style={styles.col}>{props.scores[key].thru}</Text>
                 <Text style={styles.col}>
                   {props.scores[key].scoreRelativeToPar}
                 </Text>
               </View>
             }
+            hideChevron
           />
         ))
-        : null}
+      : null}
     </List>
   </ScrollView>
 );
@@ -47,12 +52,6 @@ CurrentRoundResults.propTypes = {
 };
 
 const styles = StyleSheet.create({
-  header: {
-    flex: 1,
-    flexDirection: 'row',
-    backgroundColor: palette.accent2,
-    padding: 10,
-  },
   name: {
     flex: 1,
     fontSize: 14,
