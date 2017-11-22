@@ -1,61 +1,38 @@
-import React, { Component } from "react";
-import { Text, ScrollView, View, StyleSheet } from "react-native";
-import { Card, Button, Divider } from "react-native-elements";
-import ScoreKeeperCard from "./ScoreKeeperCard";
-import { connect } from "react-redux";
-import {
-  postNewRound,
-  addScoreKeeper
-} from "../../actions/scoreKeeperSelectionActions";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import io from 'socket.io-client';
-import axios from 'axios';
+import { ScrollView } from 'react-native';
+import { Button } from 'react-native-elements';
+import ScoreKeeperCard from './ScoreKeeperCard';
+import { postNewRound, addScoreKeeper } from '../../actions/scoreKeeperSelectionActions';
 import { palette } from '../../colorPalette';
 
 class ScoreKeeperSelection extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      selected: 1,
-      readyToStart: false
-    };
-
-    this.socket = io('http://ec2-54-165-58-14.compute-1.amazonaws.com:3000')
-  }
-
-  componentWillReceiveProps() {
-    console.log("Here are the new cards", this.props.cards);
-    let readyToStart = true;
-    for(var cardkey in this.props.cards) {
-      if (!this.props.cards[cardkey].scoreKeeper){
-        console.log('There is not scoreKeeper in ',cardkey);
-        readyToStart = false;
-      }
-    }
-    this.setState({
-      readyToStart :readyToStart
-    })
+    this.socket = io('http://ec2-54-165-58-14.compute-1.amazonaws.com:3000');
+    this.handleScoreKeeperSelection = this.handleScoreKeeperSelection.bind(this);
   }
 
   generatePopulatedCards() {
-    populatedCards = this.props.cards;
-    let cards = [];
+    const populatedCards = this.props.cards;
+    const cards = [];
 
     Object.keys(populatedCards).forEach((key, index) => {
-      let players = populatedCards[key].players;
-      let hole = populatedCards[key].startingHole;
-      let card = populatedCards[key];
-
-      cards.push(
+      const { players } = populatedCards[key];
+      const hole = populatedCards[key].startingHole;
+      const card = populatedCards[key];
+      const scoreKeeperCard = (
         <ScoreKeeperCard
+          key={card.startingHole}
           players={players}
           index={index}
-          selected={this.state.selected}
           hole={hole}
-          handleSelectScoreKeeper={this.handleScoreKeeperSelection.bind(this)}
+          handleSelectScoreKeeper={this.handleScoreKeeperSelection}
           card={card}
-        />
-      );
+        />);
+      cards.push(scoreKeeperCard);
     });
     return cards;
   }
@@ -65,96 +42,80 @@ class ScoreKeeperSelection extends Component {
   }
 
   handleSubmit() {
-
-    let newRound = this.props.newRound;
+    const { newRound } = this.props;
     newRound.id = this.props.currentRound._id;
     newRound.current_season = this.props.currentSeason._id;
 
-    let payload = {
+    const payload = {
       body: newRound,
       id: newRound.id,
-      type: 'START ROUND'
-    }
+      type: 'START ROUND',
+    };
 
-    console.log('OBJECT GETTNG SENT IN ADMIN STACK: ', payload)
-    this.socket.emit('test', payload)
-    this.props.onSubmitNewRound(newRound)
+    this.socket.emit('test', payload);
+    this.props.onSubmitNewRound(newRound);
   }
 
   allCardsHaveScorekeepers() {
-    // TODO: this isn't working, i think becuase the component does not re-render when a scorekeeper is selected?
-    var result = true;
-    let cards = this.props.cards;
+    let result = true;
+    const { cards } = this.props;
 
-    Object.keys(cards).forEach( key => {
-      if (cards[key].scoreKeeper) {
+    Object.keys(cards).forEach((key) => {
+      if (!cards[key].scoreKeeper) {
         result = false;
       }
-    })
+    });
     return result;
   }
 
   render() {
-
     return (
-      <ScrollView style={{backgroundColor: palette.background}}>
+      <ScrollView style={{ backgroundColor: palette.background }}>
         {this.generatePopulatedCards().map(card => card)}
         <Button
           backgroundColor={palette.accent2}
-          disabled={!this.state.readyToStart}
+          disabled={!this.allCardsHaveScorekeepers()}
           buttonStyle={{
             marginTop: 20,
-            marginBottom: 20
+            marginBottom: 20,
           }}
           title="Start Round!"
-          onPress={ () => {this.handleSubmit()} }
+          onPress={() => { this.handleSubmit(); }}
         />
       </ScrollView>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    width: "100%",
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#ecf0f1",
-    padding: 20
-  },
-  header: {
-    fontSize: 30
-  },
-  button: {
-    marginTop: 5
-  },
-  view: {
-    paddingTop: 20
-  }
-});
-
-const mapStateToProps = (state, ownProps) => {
-  return {
+const mapStateToProps = state => (
+  {
     currentRound: state.applicationReducer.currentRound,
     currentSeason: state.applicationReducer.currentSeason,
     cards: state.newRoundReducer.newRound.cards,
     playersPresent: state.newRoundReducer.newRound.playersPresent,
     newRound: state.newRoundReducer.newRound,
-    currentCourse: state.applicationReducer.currentCourse
-  };
-};
+    currentCourse: state.applicationReducer.currentCourse,
+  }
+);
 
-const mapDispatchToProps = dispatch => {
-  return {
+const mapDispatchToProps = dispatch => (
+  {
     onSubmitNewRound: (newRound) => {
       dispatch(postNewRound(newRound));
     },
     onSelectScoreKeeper: (player, card) => {
       dispatch(addScoreKeeper(player, card));
-    }
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(
-  ScoreKeeperSelection
+    },
+  }
 );
+
+ScoreKeeperSelection.propTypes = ({
+  cards: PropTypes.object.isRequired,
+  onSelectScoreKeeper: PropTypes.func.isRequired,
+  newRound: PropTypes.object.isRequired,
+  currentRound: PropTypes.object.isRequired,
+  currentSeason: PropTypes.object.isRequired,
+  onSubmitNewRound: PropTypes.func.isRequired,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ScoreKeeperSelection);

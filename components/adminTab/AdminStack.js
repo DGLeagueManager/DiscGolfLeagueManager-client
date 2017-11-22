@@ -1,85 +1,81 @@
-import React, { Component } from 'react';
-import { Constants } from 'expo';
+import React from 'react';
 import { StackNavigator } from 'react-navigation';
-import { Text, View, Button, Image } from 'react-native';
-import { Icon } from 'react-native-elements';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import NewRound from './NewRound';
 import AdminRoundConfigStart from './AdminRoundConfigStart';
 import PlayerSelection from './PlayerSelection';
 import ScoreKeeperSelection from './ScoreKeeperSelection';
 import LeagueRoundInProgress from './LeagueRoundInProgress';
-import { connect } from 'react-redux'
 import { palette } from '../../colorPalette';
 
 const NewRoundAdminStack = StackNavigator({
-  NewRound: { 
+  NewRound: {
     screen: NewRound,
     navigationOptions: {
-      header: null
-    }
+      header: null,
+    },
   },
-  AdminRoundConfigStart: { 
+  AdminRoundConfigStart: {
     screen: AdminRoundConfigStart,
     navigationOptions: {
       headerTitle: 'Choose Participants',
       headerStyle: {
-        backgroundColor: palette.secondary
+        backgroundColor: palette.secondary,
       },
       headerTitleStyle: {
         color: palette.text,
         alignSelf: 'center',
-        marginRight: 70
-      }
-    }
+        marginRight: 70,
+      },
+    },
   },
-  PlayerSelection: { 
+  PlayerSelection: {
     screen: PlayerSelection,
     navigationOptions: {
       headerTitle: 'Assign Cards',
       headerStyle: {
-        backgroundColor: palette.secondary
+        backgroundColor: palette.secondary,
       },
       headerTitleStyle: {
         color: palette.text,
         alignSelf: 'center',
-        marginRight: 70
-      }
-    } 
+        marginRight: 70,
+      },
+    },
   },
-  ScoreKeeperSelection: { 
+  ScoreKeeperSelection: {
     screen: ScoreKeeperSelection,
     navigationOptions: {
       headerTitle: 'Select a Scorekeeper',
       headerStyle: {
-        backgroundColor: palette.secondary
+        backgroundColor: palette.secondary,
       },
       headerTitleStyle: {
         color: palette.text,
         alignSelf: 'center',
-        marginRight: 70
-      }
-    }
-  }
+        marginRight: 70,
+      },
+    },
+  },
 });
 
-class AdminStack extends Component {
-
-  render() {
-    if (this.props.currentRoundInProgress) {
-      return (<LeagueRoundInProgress />);
-    } else {
-      return (<NewRoundAdminStack />);
-    }
+const AdminStack = (props) => {
+  if (props.currentRoundInProgress) {
+    return <LeagueRoundInProgress />;
   }
-}
-
-
-
-const mapStateToProps = (state, ownProps) => {
-  return {
-    currentRoundInProgress: state.getCurrentRoundDataReducer.currentRoundInProgress
-  };
+  return <NewRoundAdminStack />;
 };
+
+const mapStateToProps = state => (
+  {
+    currentRoundInProgress: state.getCurrentRoundDataReducer.currentRoundInProgress,
+  }
+);
+
+AdminStack.propTypes = ({
+  currentRoundInProgress: PropTypes.bool.isRequired,
+});
 
 export default connect(mapStateToProps)(AdminStack);
 
