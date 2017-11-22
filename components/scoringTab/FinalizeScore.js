@@ -64,7 +64,7 @@ class FinalizeScore extends Component {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: palette.background,
-    padding: 20
+    height: '100%',
   },
 
 });

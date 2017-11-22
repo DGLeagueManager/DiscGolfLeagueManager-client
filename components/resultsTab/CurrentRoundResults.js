@@ -6,7 +6,13 @@ import { connect } from 'react-redux';
 import { palette } from '../../colorPalette';
 
 const CurrentRoundResults = props => (
-  <ScrollView style={{ backgroundColor: palette.background }}>
+  <ScrollView style={
+    {
+      backgroundColor: palette.background,
+      marginTop: -20,
+    }
+  }
+  >
     <List containerStyle={{ flex: 1 }}>
       <View
         style={{

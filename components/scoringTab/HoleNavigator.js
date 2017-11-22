@@ -12,9 +12,22 @@ class HoleNavigator extends Component {
     super(props);
   }
 
-  generateScreen(hole, card, isScoreKeeper) {
+  shouldComponentUpdate(nextProps, nextState) {
+    if(nextProps.currentRoundInProgress === false) {
+      return true
+    } else {
+      return false
+    }
+  }
+  
+  generateScreen(hole, card, isScoreKeeper, onSubmit) {
     return (
-      <Scoring hole={hole} card={card} isScoreKeeper={isScoreKeeper} />
+      <Scoring
+        hole={hole}
+        card={card}
+        isScoreKeeper={isScoreKeeper}
+        onSubmit={onSubmit}
+      />
     );
   }
 
@@ -26,7 +39,8 @@ class HoleNavigator extends Component {
           null,
           hole,
           this.props.card,
-          this.props.isScoreKeeper
+          this.props.isScoreKeeper,
+          this.props.onSubmit
         ),
         navigationOptions: {
           tabBarLabel: "Hole " + key
@@ -36,13 +50,6 @@ class HoleNavigator extends Component {
     }, {});
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    if(nextProps.currentRoundInProgress === false) {
-      return true
-    } else { 
-      return false
-    }
-  }
 
   render() {
     const TabNav = TabNavigator(
