@@ -5,7 +5,13 @@ import { List, ListItem } from 'react-native-elements';
 import { palette } from '../../colorPalette';
 
 const CompletedRoundResults = ({ round }) => (
-  <ScrollView style={{ backgroundColor: palette.background }}>
+  <ScrollView style={
+    {
+      backgroundColor: palette.background,
+      marginTop: -20,
+    }
+  }
+  >
     <List containerStyle={{ flex: 1 }}>
       <View style={{
         flex: 1, flexDirection: 'row', backgroundColor: palette.accent2, padding: 10,
