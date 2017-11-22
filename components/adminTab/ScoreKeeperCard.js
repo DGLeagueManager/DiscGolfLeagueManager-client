@@ -30,7 +30,7 @@ export default class ScoreKeeperCard extends Component {
               this.setState({ open: 0 });
               this.props.handleSelectScoreKeeper(this.props.players[0], this.props.card);
             }}
-            title={`${this.props.players[2].first_name} ${this.props.players[2].last_name}`}
+            title={`${this.props.players[0].first_name} ${this.props.players[0].last_name}`}
           /> : null}
 
         {this.props.players[1] ?
@@ -41,7 +41,7 @@ export default class ScoreKeeperCard extends Component {
               this.setState({ open: 1 });
               this.props.handleSelectScoreKeeper(this.props.players[1], this.props.card);
             }}
-            title={`${this.props.players[2].first_name} ${this.props.players[2].last_name}`}
+            title={`${this.props.players[1].first_name} ${this.props.players[1].last_name}`}
           /> : null}
 
         {this.props.players[2] ?
@@ -63,7 +63,7 @@ export default class ScoreKeeperCard extends Component {
               this.setState({ open: 3 });
               this.props.handleSelectScoreKeeper(this.props.players[3], this.props.card);
             }}
-            title={`${this.props.players[2].first_name} ${this.props.players[2].last_name}`}
+            title={`${this.props.players[3].first_name} ${this.props.players[3].last_name}`}
           /> : null}
       </Card>
     );
