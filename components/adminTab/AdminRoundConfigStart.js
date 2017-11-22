@@ -65,11 +65,9 @@ const AdminRoundConfigStart = (props) => {
     <ScrollView style={{ marginTop: 20, paddingTop: 0 }}>
       <List style={{ marginBottom: 20 }}>
         {props.leaguePlayers.map((ele, i) => (
-          <View>
+          <View key={ele._id}>
             <ListItem
               roundAvatar
-              /* avatar={{ uri: ele.avatar_url }} */
-              key={ele._id}
               title={`${ele.first_name} ${ele.last_name}`}
               rightTitleStyle={null}
               label={
@@ -124,7 +122,7 @@ AdminRoundConfigStart.propTypes = ({
   onAddPlayer: PropTypes.func.isRequired,
   removePlayer: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
-  playersPresent: PropTypes.array.isRequired,
+  playersPresent: PropTypes.object.isRequired,
   navigation: PropTypes.shape({
     navigate: PropTypes.func,
   }).isRequired,

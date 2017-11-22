@@ -86,7 +86,7 @@ class PlayerSelection extends Component {
           {Object.keys(this.props.cards).map((key) => {
             const card = this.props.cards[key];
             return (
-              <View >
+              <View key={key}>
                 <PlayerSelectionCard
                   key={key}
                   cardKey={key}
@@ -132,8 +132,8 @@ const mapStateToProps = state => (
 );
 
 PlayerSelection.propTypes = ({
-  playersPresent: PropTypes.array.isRequired,
-  cards: PropTypes.array.isRequired,
+  playersPresent: PropTypes.object.isRequired,
+  cards: PropTypes.object.isRequired,
   updateCard: PropTypes.func.isRequired,
   navigation: PropTypes.shape({
     navigate: PropTypes.func.isRequired,

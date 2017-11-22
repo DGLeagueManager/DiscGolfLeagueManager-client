@@ -32,7 +32,7 @@ export default class ScoreKeeperCard extends Component {
           </View>
         </View>
 
-        <Button raised icon={{ name: "assignment" }} title="Review Hole Scores" buttonStyle={{ backgroundColor: palette.accent2, color: palette.secondary }} />
+        <Button raised icon={{ name: "assignment" }} title="Review Hole Scores" buttonStyle={{ backgroundColor: palette.accent2 }} />
 
       </Card>;
   }

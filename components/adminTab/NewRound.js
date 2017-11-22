@@ -45,7 +45,7 @@ const mapDispatchToProps = dispatch => (
 
 NewRound.propTypes = ({
   createRound: PropTypes.func.isRequired,
-  currentCourse: PropTypes.object.isRequired,
+  currentCourse: PropTypes.string.isRequired,
   navigation: PropTypes.shape({
     navigate: PropTypes.func.isRequired,
   }).isRequired,

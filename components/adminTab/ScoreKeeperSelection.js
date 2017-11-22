@@ -25,6 +25,7 @@ class ScoreKeeperSelection extends Component {
       const card = populatedCards[key];
       const scoreKeeperCard = (
         <ScoreKeeperCard
+          key={card.startingHole}
           players={players}
           index={index}
           hole={hole}

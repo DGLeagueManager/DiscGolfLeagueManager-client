@@ -33,12 +33,11 @@ const PlayerPicker = ({ player, showModal, cardKey }) => {
 
 PlayerPicker.propTypes = ({
   player: PropTypes.object,
-  showModal: PropTypes.bool,
-  cardKey: PropTypes.number.isRequired,
+  showModal: PropTypes.func.isRequired,
+  cardKey: PropTypes.string.isRequired,
 });
 
 PlayerPicker.defaultProps = ({
   player: null,
-  showModal: false,
 });
 export default PlayerPicker;
