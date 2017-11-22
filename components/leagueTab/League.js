@@ -1,33 +1,31 @@
 import React, { Component } from 'react';
-import { Text, StyleSheet, View, InteractionManager } from 'react-native';
-import { Icon } from 'react-native-elements';
+import { Text, View, InteractionManager } from 'react-native';
 import { TabNavigator, TabBarTop } from 'react-navigation';
 import Info from './Info';
 import Standings from './Standings';
 import { palette } from '../../colorPalette';
 
 export default class League extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
-      ready: false
-    }
+      ready: false,
+    };
   }
 
   componentDidMount() {
     InteractionManager.runAfterInteractions(() => {
-      this.setState({ ready: true});
-  });
+      this.setState({ ready: true });
+    });
+  }
 
-}
   render() {
-    if(!this.state.ready) {
-      return (<View><Text>Loading......</Text></View>)
+    if (!this.state.ready) {
+      return (<View><Text>Loading......</Text></View>);
     }
     return (
       <Tabs />
-    )
+    );
   }
 }
 
@@ -35,15 +33,15 @@ const Tabs = TabNavigator({
   Info: {
     screen: Info,
     navigationOptions: {
-      tabBarLabel: 'Info'
-    }
+      tabBarLabel: 'Info',
+    },
   },
   Standings: {
     screen: Standings,
     navigationOptions: {
-      tabBarLabel: 'Standings'
-    }
-  }
+      tabBarLabel: 'Standings',
+    },
+  },
 }, {
   tabBarComponent: TabBarTop,
   tabBarPosition: 'top',
@@ -53,14 +51,13 @@ const Tabs = TabNavigator({
   tabBarOptions: {
     showLabel: true,
     style: {
-      backgroundColor: palette.primary
+      backgroundColor: palette.primary,
     },
     labelStyle: {
-      color: palette.primary,
-      color: palette.text
+      color: palette.text,
     },
     indicatorStyle: {
-      backgroundColor: palette.accent
-    }
-  }
-})
+      backgroundColor: palette.accent,
+    },
+  },
+});
