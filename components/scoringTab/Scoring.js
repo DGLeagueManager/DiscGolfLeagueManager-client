@@ -19,20 +19,6 @@ class Scoring extends Component {
     this.state = {
       scoresLocked: false,
     };
-
-    this.socket = io('http://ec2-54-165-58-14.compute-1.amazonaws.com:3000');
-    this.socket.on('connect', () => {
-      console.log('connection established from sc0ring');
-    });
-  }
-
-  onSubmit(currentRoundObj) {
-    const payload = {
-      type: 'UPDATE SCORE',
-      id: this.props.currentRound._id,
-      body: currentRoundObj,
-    };
-    this.socket.emit('test', payload);
   }
 
   render() {
@@ -112,7 +98,7 @@ class Scoring extends Component {
             <Button
               onPress={() => {
                   this.setState({ scoresLocked: !this.state.scoresLocked });
-                  this.onSubmit(this.props.currentRound);
+                  this.props.onSubmit(this.props.currentRound);
                 }}
               backgroundColor={palette.accent2}
               title="SUBMIT"
