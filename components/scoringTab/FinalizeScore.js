@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { Text, ScrollView, View, StyleSheet } from "react-native";
-import { Card, Button, Divider } from "react-native-elements";
+import PropTypes from 'prop-types';
+import { ScrollView, StyleSheet } from 'react-native';
+import { Button } from 'react-native-elements';
 import { connect } from 'react-redux';
+import io from 'socket.io-client';
 import FinalScoreCard from './FinalScoreCard';
 import { submitFinalizedCard } from '../../actions/finalizeScoreActions';
-import io from 'socket.io-client';
 import { palette } from '../../colorPalette';
 
 class FinalizeScore extends Component {
@@ -12,23 +13,23 @@ class FinalizeScore extends Component {
     super(props);
 
     this.state = {
-      disabled: false
+      disabled: false,
     };
 
     this.sockets = io('http://ec2-54-165-58-14.compute-1.amazonaws.com:3000');
   }
 
   handleSubmit() {
-    //Post finalized score card
+    // Post finalized score card
     this.props.currentCard.is_completed = true;
 
-    let payload = {
+    const payload = {
       type: 'FINISH CARD',
       body: this.props.currentRound,
-      id: this.props.currentRound._id
-    }
+      id: this.props.currentRound._id,
+    };
 
-    this.sockets.emit('test', payload)
+    this.sockets.emit('test', payload);
   }
 
   render() {
@@ -46,13 +47,13 @@ class FinalizeScore extends Component {
             buttonStyle={{
               marginTop: 20,
               marginBottom: 20,
-              backgroundColor: palette.accent
+              backgroundColor: palette.accent,
             }}
             disabled={this.state.disabled}
-            title={this.state.disabled ? "Scores have been submitted" : "Submit Final Scores"}
+            title={this.state.disabled ? 'Scores have been submitted' : 'Submit Final Scores'}
             onPress={() => {
-              this.handleSubmit()
-              this.setState({ disabled: !this.state.disabled })
+              this.handleSubmit();
+              this.setState({ disabled: !this.state.disabled });
             }}
           /> : null
         }
@@ -66,25 +67,31 @@ const styles = StyleSheet.create({
     backgroundColor: palette.background,
     height: '100%',
   },
-
 });
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    currentRound: state.getCurrentRoundDataReducer.currentRound,
-    playerId: state.auth.id,
-    currentCard: state.getCurrentRoundDataReducer.currentCard,
-    isScoreKeeper: state.getCurrentRoundDataReducer.isScoreKeeper,
-  }
-}
+FinalizeScore.propTypes = {
+  currentRound: PropTypes.object,
+  currentCard: PropTypes.object,
+  isScoreKeeper: PropTypes.bool,
+};
 
-const mapDispatchToProps = dispatch => {
-  return {
-    onSubmitFinalizedCard: finalizedCard => {
-      dispatch(submitFinalizedCard(finalizedCard));
-    }
-  }
-}
+FinalizeScore.defaultProps = {
+  currentRound: {},
+  currentCard: {},
+};
+
+const mapStateToProps = state => ({
+  currentRound: state.getCurrentRoundDataReducer.currentRound,
+  playerId: state.auth.id,
+  currentCard: state.getCurrentRoundDataReducer.currentCard,
+  isScoreKeeper: state.getCurrentRoundDataReducer.isScoreKeeper,
+});
+
+const mapDispatchToProps = dispatch => ({
+  onSubmitFinalizedCard: finalizedCard => (
+    dispatch(submitFinalizedCard(finalizedCard))
+  ),
+});
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(FinalizeScore);
