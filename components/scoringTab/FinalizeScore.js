@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { ScrollView, StyleSheet } from 'react-native';
 import { Button } from 'react-native-elements';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import io from 'socket.io-client';
 import FinalScoreCard from './FinalScoreCard';
 import { submitFinalizedCard } from '../../actions/finalizeScoreActions';
@@ -35,14 +35,13 @@ class FinalizeScore extends Component {
   render() {
     return (
       <ScrollView contentContainerStyle={styles.container}>
-        {this.props.currentCard.players.map((player, i) =>
-          <FinalScoreCard 
-            key={i} 
-            player={player} 
-            scores={this.props.currentRound.scores[player._id]} 
-          />
-        )}
-        {this.props.isScoreKeeper ? 
+        {this.props.currentCard.players.map(player =>
+          (<FinalScoreCard
+            key={player._id}
+            player={player}
+            scores={this.props.currentRound.scores[player._id]}
+          />))}
+        {this.props.isScoreKeeper ?
           <Button
             buttonStyle={{
               marginTop: 20,
@@ -69,29 +68,25 @@ const styles = StyleSheet.create({
   },
 });
 
-FinalizeScore.propTypes = {
-  currentRound: PropTypes.object,
-  currentCard: PropTypes.object,
-  isScoreKeeper: PropTypes.bool,
-};
-
-FinalizeScore.defaultProps = {
-  currentRound: {},
-  currentCard: {},
-};
+FinalizeScore.propTypes = ({
+  currentRound: PropTypes.object.isRequired,
+  currentCard: PropTypes.object.isRequired,
+  isScoreKeeper: PropTypes.bool.isRequired,
+});
 
 const mapStateToProps = state => ({
   currentRound: state.getCurrentRoundDataReducer.currentRound,
-  playerId: state.auth.id,
   currentCard: state.getCurrentRoundDataReducer.currentCard,
   isScoreKeeper: state.getCurrentRoundDataReducer.isScoreKeeper,
 });
 
-const mapDispatchToProps = dispatch => ({
-  onSubmitFinalizedCard: finalizedCard => (
-    dispatch(submitFinalizedCard(finalizedCard))
-  ),
-});
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onSubmitFinalizedCard: finalizedCard => {
+      dispatch(submitFinalizedCard(finalizedCard));
+    }
+  }
+}
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(FinalizeScore);
