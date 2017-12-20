@@ -21,8 +21,9 @@ const NewRoundAdminStack = StackNavigator({
     navigationOptions: {
       headerTitle: 'Choose Participants',
       headerStyle: {
-        backgroundColor: palette.secondary,
+        backgroundColor: palette.primary,
       },
+      headerTintColor: palette.accent,
       headerTitleStyle: {
         color: palette.text,
         alignSelf: 'center',
@@ -35,8 +36,9 @@ const NewRoundAdminStack = StackNavigator({
     navigationOptions: {
       headerTitle: 'Assign Cards',
       headerStyle: {
-        backgroundColor: palette.secondary,
+        backgroundColor: palette.primary,
       },
+      headerTintColor: palette.accent,
       headerTitleStyle: {
         color: palette.text,
         alignSelf: 'center',
@@ -49,8 +51,9 @@ const NewRoundAdminStack = StackNavigator({
     navigationOptions: {
       headerTitle: 'Select a Scorekeeper',
       headerStyle: {
-        backgroundColor: palette.secondary,
+        backgroundColor: palette.primary,
       },
+      headerTintColor: palette.accent,
       headerTitleStyle: {
         color: palette.text,
         alignSelf: 'center',

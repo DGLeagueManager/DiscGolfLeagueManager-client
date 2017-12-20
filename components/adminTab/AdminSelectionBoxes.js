@@ -36,7 +36,7 @@ export default class AdminSelectionBoxes extends Component {
           containerStyle={{ backgroundColor: 'transparent' }}
           title="PRO"
           checkedColor={palette.accent}
-          checked={this.state.amChecked}
+          checked={this.state.proChecked}
           onPress={() => {
             this.setState({ amChecked: false });
             if (this.state.popChecked) {
